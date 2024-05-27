@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- header style 적용 -->
+  <link rel="stylesheet" type="text/css" th:href="@{/headerStyle.css}">
+  
+  <!-- 구글폰트 - Noto Sans Korean -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@100..900&family=Roboto:wght@400;900&display=swap"
+      rel="stylesheet">
+  
+  <!-- cdnjs의 font-awesome 적용 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  
+  <title>header</title>
+</head>
+<body>
+<div class="header_container">
+  <div class="header_wrap">
+    <!-- header 왼쪽 -->
+    <div class="header_left_box">
+      <!-- header logo box -->
+      <a href="/" class="logo_box text"></a>
+      <!-- header nav바 -->
+      <nav class="header_nav">
+        <ul>
+          <li class="H_nav text H_nav-1">
+            <a href="/chart/list">차트 목록</a>
+          </li>
+          <li class="H_nav text H_nav-2">
+            <a href="#">커뮤니티</a>
+          </li>
+          <li class="H_nav text H_nav-3">
+            <a href="#">스튜디오</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    
+    <!-- header 오른쪽 -->
+    <div class="header_right_box">
+      <!-- 검색창 -->
+      <div class="header_search_box">
+        <form>
+          <div class="header_search_input-group">
+            <input type="text" name="kw" class="header_form-control" placeholder="검색어" th:value="${param.kw}">
+            <button class="btn_icon" type="button">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+      
+      <!-- 로그인/회원가입, 로그아웃/마이페이지 -->
+      <div class="header_profile_box">
+        <!-- 해시 태그 -->
+        <div class="header_widget_hashTag text">
+          <ul class="widget_hashTag_bannerList">
+            <!-- 나중에 th:each부분을 회원의 개수만큼으로 수정하여 작성할 것 -->
+            <li th:each="member, iterStat : ${members}" class="widget_hashTag_banner text">
+              <!-- th:href는 #hashTag의 경로로 이동되도록 구현할 것 -->
+              <!-- th:text는 member에서 hashTag의 정보를 불러옴 -->
+              <a th:href="@{'#' + member.hashTag}">
+                <span th:text="'#' + ${member.hashTag}"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- 회원 -->
+        <div class="header_member">
+          <div class="header_isAnonymous text">
+            <a sec:authorize="isAnonymous()" href="/member/login" class="header_login">로그인</a>
+            <a sec:authorize="isAnonymous()" href="/member/signup" class="header_signup">회원가입</a>
+          </div>
+          <div class="header_isAuthenticated text">
+            <a sec:authorize="isAuthenticated()" href="/member/logout">로그아웃</a>
+            <a sec:authorize="isAuthenticated()" href="/member/mypage">마이페이지</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
