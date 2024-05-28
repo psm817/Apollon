@@ -24,6 +24,12 @@ public class HomeController {
         int num2;
         int num3;
         int num4;
+        int num5;
+        int num6;
+        int num7;
+        int num8;
+        int num9;
+
 
 
         return "3조 화이팅!!!!!!!!슈루루루룽1번째 슈루루루룽2번째ㅋㅋㅋ";
