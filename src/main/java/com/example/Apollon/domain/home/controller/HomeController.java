@@ -10,6 +10,7 @@ public class HomeController {
     @ResponseBody
     public String test() {
         String title;
+        String body;
 
         return "3조 화이팅!!!";
     }
