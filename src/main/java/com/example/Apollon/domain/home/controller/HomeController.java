@@ -11,11 +11,13 @@ public class HomeController {
     public String test() {
         String title;
         String body;
+        String body1;
+        String body2;
+        String body3;
+        String body4;
+        String body5;
+        String body6;
 
-        return "3조 화이팅!!!!!!!!슈루루루룽";
-
-
-
-
+        return "3조 화이팅!!!!!!!!!!!!!!!!!!!!!!!!!!";
     }
 }
