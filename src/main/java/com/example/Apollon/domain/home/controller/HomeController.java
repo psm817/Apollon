@@ -26,6 +26,9 @@ public class HomeController {
         int num4;
         int num5;
         int num6;
+        int num7;
+        int num8;
+        int num9;
 
 
 
