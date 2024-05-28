@@ -18,6 +18,9 @@ public class HomeController {
         String body5;
         String body6;
 
-        return "3조 화이팅!!!!!!!!!!!!!!!!!!!!!!!!!!";
+
+        return "3조 화이팅!!!!!!!!슈루루루룽1번째 슈루루루룽2번째ㅋㅋㅋ";
+
+
     }
 }
