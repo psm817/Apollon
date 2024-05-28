@@ -17,6 +17,13 @@ public class HomeController {
         String body4;
         String body5;
         String body6;
+        String body7;
+        String body8;
+        String body9;
+        int num1;
+        int num2;
+        int num3;
+        int num4;
 
 
         return "3조 화이팅!!!!!!!!슈루루루룽1번째 슈루루루룽2번째ㅋㅋㅋ";
