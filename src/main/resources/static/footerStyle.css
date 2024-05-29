@@ -33,12 +33,17 @@ input: focus {
 /* 푸터 컨테이너 커스텀 */
 .footer_container {
     margin-left: auto; margin-right: auto;
-    width: 1800px; height: 90px;
+    width: 1800px; height: 480px;
     display: flex;
     flex-direction: column;
-    position: relative;
-    bottom: 0;
+    position: fixed;
+    bottom: -400px;
     left: 0; right: 0;
+    transition: bottom 0.3s ease;
+}
+
+.footer_container.open {
+  bottom: -20px;
 }
 
 /* 음악 플레이바 */
@@ -60,7 +65,6 @@ input: focus {
     width: 30px; height: 25px;
     display: flex;
     margin-left: 900px;
-    position: relative; /* 부모 엘리먼트 위치 기준 */
 }
 
 /* 확장버튼 */
@@ -73,22 +77,22 @@ input: focus {
     display: none;
 }
 
+/*
 .absolute {
   background-color: #808080;
   width: 100%;
   height: 400%;
   left: 0;
   position: absolute;
-  top: 100%; /* 부모 엘리먼트 아래에 위치 */
-  display: none; /* 기본적으로 숨김 처리 */
+  top: 100%;
+  display: none;
 }
+*/
 
 /* 음악 플레이바 디테일 */
 .footer_play_detail {
     display: flex;
-
 }
-
 /* 음악 플레이바 왼쪽 */
 .footer_play_playBar {
     margin-left: 50px;

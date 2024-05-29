@@ -86,7 +86,7 @@
     </div>
     <!-- 내 플레이 리스트 보기 -->
     <div class="absolute show_myPlayList" id="myPlayList">
-    
+      <li>음악</li>
     </div>
     <!-- 내 플레이 리스트 보기 끝 -->
   </div>
@@ -94,19 +94,19 @@
 <!-- 재생목록 표출시 자바스크립트가 작성되어 있지 않은 상태에선 동작 안함 -->
   <script>
     function togglePlaylist() {
-      var playlist = document.getElementById('myPlayList');
-      var angleUpIcon = document.querySelector('.fa-angle-up');
-      var angleDownIcon = document.querySelector('.fa-angle-down');
+      var footerContainer = document.querySelector('.footer_container');
+      var upIcon = document.querySelector('.fa-angle-up');
+      var downIcon = document.querySelector('.fa-angle-down');
   
-      if (playlist.style.display === 'none' || playlist.style.display === '') {
-        playlist.style.display = 'block';
-        angleUpIcon.style.display = 'none';
-        angleDownIcon.style.display = 'block';
+      if (footerContainer.classList.contains('open')) {
+        upIcon.style.display = 'block';
+        downIcon.style.display = 'none';
       } else {
-        playlist.style.display = 'none';
-        angleUpIcon.style.display = 'block';
-        angleDownIcon.style.display = 'none';
+        upIcon.style.display = 'none';
+        downIcon.style.display = 'block';
       }
+  
+      footerContainer.classList.toggle('open');
     }
   </script>
   <!-- 재생목록 표출시 자바스크립트가 작성되어 있지 않은 상태에선 동작 안함 -->
