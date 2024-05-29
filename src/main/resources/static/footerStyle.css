@@ -77,22 +77,13 @@ input: focus {
     display: none;
 }
 
-/*
-.absolute {
-  background-color: #808080;
-  width: 100%;
-  height: 400%;
-  left: 0;
-  position: absolute;
-  top: 100%;
-  display: none;
-}
-*/
-
 /* 음악 플레이바 디테일 */
 .footer_play_detail {
     display: flex;
+    border-bottom: 0.5px solid #3D3D3D;
 }
+
+
 /* 음악 플레이바 왼쪽 */
 .footer_play_playBar {
     margin-left: 50px;
@@ -212,3 +203,9 @@ input: focus {
     display: inline-block;
 }
 
+/* 내 재생 목록 */
+.show_myPlayList {
+    color: #FFF;
+    display: none;
+    font-size: 24px;
+}
