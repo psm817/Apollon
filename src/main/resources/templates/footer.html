@@ -18,8 +18,8 @@
             </div>
             <!-- 재생 아이콘 -->
             <div class="growSet playMusic_icon">
-              <i class="fa-solid fa-play fa-lg"></i>
-              <i class="fa-solid fa-pause fa-lg"></i>
+              <i class="fa-solid fa-play fa-lg" onclick="togglePlayPause()"></i>
+              <i class="fa-solid fa-pause fa-lg" onclick="togglePlayPause()"></i>
             </div>
             <!-- 이후 곡 아이콘 -->
             <div class="growSet afterMusic_icon">
@@ -27,11 +27,11 @@
             </div>
             <!-- 셔플 아이콘 -->
             <div class="growSet shuffleMusic_icon">
-              <i class="fa-solid fa-shuffle fa-lg"></i>
+              <i class="fa-solid fa-shuffle fa-lg" onclick="toggleShuffle()"></i>
             </div>
             <!-- 반복 아이콘 -->
             <div class="growSet loopMusic_icon">
-              <i class="fa-solid fa-repeat fa-lg"></i>
+              <i class="fa-solid fa-repeat fa-lg" onclick="toggleLoop()"></i>
             </div>
           </div>
         </div>
@@ -56,7 +56,7 @@
             <!-- 곡 정보 썸네일 이미지 -->
             <div class="info_thumbnail">
               <div class="info_info_thumbnail_frame">
-<!--                <img th:src="@{|/file/${music.thumnailImg}|}" alt="">-->
+                <!-- <img th:src="@{|/file/${music.thumnailImg}|}" alt="">-->
               </div>
             </div>
             <!-- 곡 정보 제목, 올린 사람 -->
@@ -104,14 +104,18 @@
     </div>
   </div>
   
-<!-- 재생목록 표출시 html, css로 구현 가능한데 코드가 길어져서 자바스크립트 추가 -->
+  <!-- 재생목록 표출시 html, css로 구현 가능한데 코드가 길어져서 자바스크립트 추가 -->
   <script>
+    var isShuffle = false; // 셔플 상태를 저장하는 변수
+    var isLoop = false; // 반복 상태를 저장하는 변수
+  
+    <!-- 재생목록 열기/닫기 -->
     function togglePlaylist() {
       var footerContainer = document.querySelector('.footer_container');
       var upIcon = document.querySelector('.fa-angle-up');
       var downIcon = document.querySelector('.fa-angle-down');
       var showMyPlayList = document.querySelector('.show_myPlayList');
-  
+
       if (footerContainer.classList.contains('open')) {
         upIcon.style.display = 'block';
         downIcon.style.display = 'none';
@@ -119,11 +123,62 @@
       } else {
         upIcon.style.display = 'none';
         downIcon.style.display = 'block';
+        downIcon.style.transform = 'transform 0.3s ease-in-out';
         showMyPlayList.style.display = 'block';
       }
-  
       footerContainer.classList.toggle('open');
     }
+    
+    <!-- 음악 재생/일시정지 -->
+    function togglePlayPause() {
+      var playIcon = document.querySelector('.fa-play');
+      var pauseIcon = document.querySelector('.fa-pause');
+
+      // 재생 중인 음악이 있을 때
+      if (pauseIcon.style.display === 'block') {
+      // 재생 중인 음악을 일시 정지하고 아이콘 변경
+      pauseIcon.style.display = 'none';
+      playIcon.style.display = 'block';
+      // 여기에 음악 일시 정지하는 코드를 추가
+    }
+    // 재생 중인 음악이 없을 때
+    else {
+    // 음악을 재생하고 아이콘 변경
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = 'block';
+    // 여기에 음악을 재생하는 코드를 추가
+    }
+  }
+  
+  <!-- 셔플 -->
+   function toggleShuffle() {
+      var shuffleIcon = document.querySelector('.fa-shuffle');
+      if (!isShuffle) {
+         shuffleIcon.style.color = 'orange'; // 연한 보라색으로 변경
+         // 재생목록을 무작위로 재배치하는 코드를 여기에 추가
+      } else {
+        shuffleIcon.style.color = 'white'; // 원래 색상으로 변경
+        // 이전에 재배치된 순서로 재생되도록 하는 코드를 여기에 추가
+      }
+      isShuffle = !isShuffle; // 셔플 상태를 토글
+   }
+
+  <!-- 반복 -->
+  function toggleLoop() {
+    var loopIcon = document.querySelector('.fa-repeat');
+    if (!isLoop) {
+      loopIcon.style.color = 'skyblue'; // 하늘색으로 변경
+      // 재생목록을 순서대로 반복 재생하는 코드를 여기에 추가
+    } else {
+      loopIcon.style.color = 'white'; // 원래 색상으로 변경
+      // 반복 재생을 중지하는 코드를 여기에 추가
+    }
+    isLoop = !isLoop; // 반복 상태를 토글
+  }
+  
   </script>
   <!-- 재생목록 표출시 html, css로 구현 가능한데 코드가 길어져서 자바스크립트 추가 -->
+  
+  
+
 </nav>
