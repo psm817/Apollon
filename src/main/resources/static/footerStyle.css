@@ -1,0 +1,39 @@
+/* 노멀라이즈 */
+body, ul, li {
+    margin: 0; padding: 0;
+    list-style: none;
+}
+
+a, input {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input {
+    line-height: normal;
+    outline: none;
+}
+
+button {
+  border: 0;
+  background-color: transparent;
+}
+
+input: focus {
+    outline: none;
+}
+
+/* 페이지가 1025px 이상일때만 반응형으로 작동 */
+@media (min-width: 1025px) {
+  .header_wrap {
+    max-width: 1480px;
+  }
+}
+
+/* 푸터 컨테이너 커스텀 */
+.footer_container {
+    background-color: #111111;
+    width: 100%; height: px;
+    display: flex;
+    justify-content: center;
+}
