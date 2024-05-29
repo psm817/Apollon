@@ -1,21 +1,4 @@
-<!doctype html>
-
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  
-  <!-- footer style 적용 -->
-  <link rel="stylesheet" type="text/css" th:href="@{/footerStyle.css}">
-  
-  <title></title>
-</head>
-
-
-<body>
-<div th:fragment="footerFragment" class="footer">
+<nav th:fragment="footerFragment" class="footer">
   <div class="footer_player_box">
     <!-- 플레이바 왼쪽 박스 -->
     <div class="footer_player_playerBar">
@@ -26,7 +9,4 @@
     <!-- 플레이바 오른쪽 박스 -->
     <div class="footer_player_musicInformation"></div>
   </div>
-</div>
-</body>
-
-</html>
+</nav>
