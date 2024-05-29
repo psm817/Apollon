@@ -33,28 +33,182 @@ input: focus {
 /* 푸터 컨테이너 커스텀 */
 .footer_container {
     margin-left: auto; margin-right: auto;
-    width: 1800px; height: 60px;
+    width: 1800px; height: 90px;
     display: flex;
     flex-direction: column;
     position: fixed;
-    left: 0;
-    right: 0;
     bottom: 0;
+    left: 0; right: 0;
 }
 
 /* 음악 플레이바 */
 .footer_play_box {
-    height: 60px;
     background-color: #111111;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    width: 100%; height: 100%;
+}
+
+.footer_play_set {
+    display: flex;
+}
+
+
+/* 확장 버튼 부모격 */
+.music_myPlayList_box {
+    width: 30px; height: 25px;
+    display: flex;
+    margin-left: 900px;
+}
+
+/* 확장버튼 */
+.myPlayList-btn_icon i {
+    color: #808080;
+}
+
+.myPlayList-btn_icon > .fa-angle-up > .absolute {
+  background-color: orange;
+  width: 100%; height: 100%;
+  left: 0; top: 100%;
+  position: absolute;
+  display: none;
+}
+
+/* 확장버튼을 클릭하면 내 재생목록이 보여짐 */
+.myPlayList-btn_icon > .fa-angle-up:active > .absolute {
+    position: absolute;
+    display: block;
+}
+
+.myPlayList-btn_icon > .fa-angle-up:active > .absolute:hover {
+    display: block;
+}
+
+
+/* 음악 플레이바 디테일 */
+.footer_play_detail {
+    display: flex;
+
+}
+
+/* 음악 플레이바 왼쪽 */
+.footer_play_playBar {
+    margin-left: 50px;
+    margin-bottom: 10px;
+    width: 240px;
+}
+
+.playSetting {
+    display: flex;
+    height: 40px;
+}
+
+.growSet {
+    flex-grow: 1; flex-basis: 0;
+    display: flex;
     align-items: center;
 }
 
-/* 내 재생목록 */
-.footer_myPlayList_box {
-    height: 500px;
-    background-color: #F3F3F3;
+.fa-solid {
+    color: #FFF;
+    cursor: pointer;
 }
+
+/* 나중에 재생 아이콘 누르면 일시정지 아이콘이 보여짐 */
+/* 재생과 일시정지 아이콘 번갈아가며 보여지고 꺼지고 */
+.growSet > .fa-pause {
+    display: none;
+}
+
+/* 음악 플레이바 중간 */
+.footer_play_musicMiddle {
+    flex-grow: 1;
+    display: flex;
+}
+
+/* 타임라인 */
+.musicMiddle_column {
+    width: 740px;
+}
+
+.music_timeLine {
+    height: 20px;
+    border: 1px solid red;
+    margin-top: 10px;
+}
+
+/* 볼륨 */
+.volume {
+    flex-grow: 1;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.volume > .vol_icon {
+    margin-left: auto; margin-right: auto;
+}
+
+/* 음악 플레이바 오른쪽 */
+.footer_play_musicInformation {
+    width: 630px; height: 60px;
+    margin-right: 50px;
+    display:flex;
+    justify-content: flex-end;
+}
+
+.footer_play_musicInfo {
+    display: flex;
+    align-items: center;
+}
+
+/* 플레이바 오른쪽 곡 썸네일 */
+.info_thumbnail {
+    width: 170px; height: 60px;
+    display: flex;
+    justify-content: center;
+}
+.info_info_thumbnail_frame {
+    width: 120px; height: 50px;
+    margin-bottom: 10px;
+    border: 1px solid red;
+}
+
+
+/* 플레이바 오른쪽 곡 정보 */
+.info_box {
+    width: 300px; height: 50px;
+    border: 1px solid orange;
+    display: flex; flex-direction: column;
+    margin-bottom: 10px;
+}
+.info_uploadUser {
+    height: 20px;
+}
+
+.info_musicTitle {
+    height: 30px;
+}
+
+.info_uploadUser a,
+.info_musicTitle a {
+    color: #FFF;
+}
+
+/* 플레이바 오른쪽 아이콘 */
+.info_icon {
+    width: 160px; height: 60px;
+    display: flex;
+    text-align: end;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.info_icon > .growSet {
+    display: inline-block;
+}
+

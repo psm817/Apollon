@@ -72,6 +72,14 @@ button {
 /* 헤더 왼쪽 박스 > 로고 박스 */
 .logo_box {
     width: 210px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 메인 로고 */
+.main_logo {
+    width: 180px; height: 40px;
 }
 
 /* 헤더 왼쪽 박스 > nav */
