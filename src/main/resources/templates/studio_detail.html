@@ -1,0 +1,22 @@
+<html layout:decorate="~{layout}">
+    <div layout:fragment="content">
+        <div class="top-section">
+            <div class="welcome-box">
+                <span>#musician nickname 님의 스튜디오에 오신 것을 환영합니다.</span>
+            </div>
+            <div class="search-box">
+                <form>
+                    <div class="search-input-box">
+                        <input type="text" name="kw" class="form-control" placeholder="스튜디오 닉네임 검색" th:value="${param.kw}">
+                        <button type="button">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="introduce-box">
+
+        </div>
+    </div>
+</html>
