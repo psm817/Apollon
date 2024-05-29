@@ -16,7 +16,29 @@
             </div>
         </div>
         <div class="introduce-box">
-
+            <div class="profile-box">
+                <img src="https://thumb.mt.co.kr/06/2016/07/2016071814312232941_1.jpg" alt="1234">
+            </div>
+            <div class="text-box">
+                <div class="common-margin nickname-box">
+                    <h2>#musician nickname</h2>
+                </div>
+                <div class="common-margin email-box">
+                    <span>이메일 : </span>
+                    <span th:text="${'musician@gmail.com'}"></span>
+                </div>
+                <div class="common-margin total_music-box">
+                    <span>총 업로드 음악 수 : </span>
+                    <span th:text="100"></span>
+                </div>
+                <div class="common-margin like-box">
+                    <span>좋아요</span>
+                    <span th:text="24"></span>
+                    <button type="button">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </html>
