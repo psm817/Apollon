@@ -16,6 +16,8 @@
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
     <!-- headerStyle.css(헤더 설정) -->
     <link rel="stylesheet" type="text/css" th:href="@{/headerStyle.css}">
+    <!-- footerStyle.css(푸터 설정) -->
+    <link rel="stylesheet" type="text/css" th:href="@{/footerStyle.css}">
     <!-- 스튜디오 화면 CSS   -->
     <link rel="stylesheet" type="text/css" th:href="@{/studio.css}">
 
@@ -31,10 +33,10 @@
     <nav th:replace="~{header :: headerFragment}"></nav>
 
     <!-- 각 페이지마다 들어가는 내용들 -->
-<!--    <th:block layout:fragment="content"></th:block>-->
+    <th:block layout:fragment="content"></th:block>
     <!-- 기본 템플릿 안에 삽입될 내용 끝 -->
 
     <!-- 하단 footer(플레이 바) -->
-<!--    <nav th:insert="~{footer :: footerFragment}"></nav>-->
+    <nav th:replace="~{footer :: footerFragment}"></nav>
 </body>
 </html>
