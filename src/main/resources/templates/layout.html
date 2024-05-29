@@ -28,7 +28,7 @@
 </head>
 <body>
     <!-- 상단 header(메뉴 내비바) -->
-    <nav th:insert="~{header :: headerFragment}"></nav>
+    <nav th:replace="~{header :: headerFragment}"></nav>
 
     <!-- 각 페이지마다 들어가는 내용들 -->
 <!--    <th:block layout:fragment="content"></th:block>-->
