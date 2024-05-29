@@ -1,0 +1,66 @@
+/* 상단 환영 인사 및 검색창 */
+.top-section {
+    display: flex;
+}
+
+/* 환영 인사 */
+.top-section > .welcome-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    flex-grow: 2.5;
+    flex-basis: 0;
+}
+
+.top-section > .welcome-box > span {
+    font-weight: 700;
+    font-size: 23px;
+}
+
+/* 검색창 */
+.top-section > .search-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.search-input-box {
+    position: relative;
+}
+
+.search-input-box > input {
+    margin-top: auto; margin-bottom: auto;
+    padding-left: 12px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #999999;
+    border-width: 0;
+    background-color: #D9D9D9;
+    width: 300px; height: 35px;
+    border-radius: 6px;
+}
+
+.search-input-box > button {
+    width: 30px; height: 26px;
+    position: absolute;
+    background-color:transparent;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 88%;
+    font-size: 18px;
+}
+
+.search-input-box > button:hover {
+    cursor: pointer;
+}
+
+/* 스튜디오 현황 */
+.introduce-box {
+    width: auto;
+    height: 330px;
+    background-color: #36454F;
+}
