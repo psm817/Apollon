@@ -32,8 +32,29 @@ input: focus {
 
 /* 푸터 컨테이너 커스텀 */
 .footer_container {
+    margin-left: auto; margin-right: auto;
+    width: 1800px; height: 60px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* 음악 플레이바 */
+.footer_play_box {
+    height: 60px;
     background-color: #111111;
-    width: 100%; height: px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+/* 내 재생목록 */
+.footer_myPlayList_box {
+    height: 500px;
+    background-color: #F3F3F3;
 }

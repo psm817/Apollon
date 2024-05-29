@@ -4,20 +4,64 @@
       <!-- 플레이바 왼쪽 박스 -->
       <div class="footer_play_playBar">
         <!-- 이전 곡, 재생, 이후 곡, 셔플, 반복 -->
-        <div class="playSetting"></div>
+        <div class="playSetting">
+          <!-- 이전 곡 아이콘 -->
+          <div class="BeforeMusic_icon">
+            <i class="fa-solid fa-backward-step"></i>
+          </div>
+          <!-- 재생 아이콘 -->
+          <div class="playMusic_icon">
+            <i class="fa-solid fa-play"></i>
+          </div>
+          <!-- 이후 곡 아이콘 -->
+          <div class="afterMusic_icon">
+            <i class="fa-solid fa-forward-step"></i>
+          </div>
+          <!-- 셔플 아이콘 -->
+          <div class="shuffleMusic_icon">
+            <i class="fa-solid fa-shuffle"></i>
+          </div>
+          <!-- 반복 아이콘 -->
+          <div class="loopMusic_icon">
+          
+          </div>
+        </div>
         <!-- 곡 타임라인 -->
-        <div class="timeLine"></div>
+        <div class="timeLine">
+          <div class="timeLine_bar"></div>
+        </div>
         <!-- 볼륨 -->
-        <div class="volume"></div>
+        <div class="volume">
+          <div class="vol_icon">
+            <i class="fa-solid fa-volume-low"></i>
+          </div>
+        </div>
       </div>
       <!-- 플레이바 오른쪽 박스 -->
       <div class="footer_play_musicInformation">
         <!-- 곡 정보 썸네일 이미지 -->
-        <div class="info_thumbnail"></div>
-        <!-- 곡 정보 제목, 올린 사람 이미지 -->
-        <div class="info_box"></div>
+        <div class="info_thumbnail">
+          <div class="info_info_thumbnail_frame">
+<!--          <img th:src="@{|/file/${music.thumnailImg}|}" alt="">-->
+          </div>
+        </div>
+        <!-- 곡 정보 제목, 올린 사람 -->
+        <div class="info_box">
+          <div class="info_uploadUser"></div>
+          <div class="info_musicTitle"></div>
+        </div>
         <!-- 재생목록 추가/삭제, 스튜디오, 좋아요 아이콘 -->
-        <div class="info_icon"></div>
+        <div class="info_icon">
+          <div class="info_library_icon">
+            <i class="fa-solid fa-list-check"></i>
+          </div>
+          <div class="info_studio_icon">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div class="info_hit_icon">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+        </div>
       </div>
     </div>
   </div>
