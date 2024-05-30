@@ -1,6 +1,32 @@
-body {
-  font-family: Arial, sans-serif;
+
+/* 노멀라이즈 */
+body, ul, li, a, span {
+    margin: 0; padding: 0;
+    list-style: none;
+    font: inherit;
+    vertical-align: baseline;
 }
+
+a, input {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input {
+    line-height: normal;
+    outline: none;
+}
+
+button {
+  border: 0;
+  background-color: transparent;
+}
+
+input: focus {
+    outline: none;
+}
+
+/* 커스텀 */
 
 .mainPage_slide_container {
   width: 1480px; /* 슬라이드 컨테이너의 너비를 1480px로 고정 */
@@ -59,4 +85,39 @@ body {
 
 .left_btn:hover, .right_btn:hover {
   background-color: rgba(0,0,0,0.8);
+}
+
+/* 메인 */
+.mainPage_main_container {
+    width: 1200px; height: 600px;
+}
+
+/* 추가 내용(이스터에그) */
+.p_container {
+    min-height: 140px;
+    padding: 0 20px;
+    margin: 0 auto;
+    background-color: #FFF;
+    width: 1008px;
+    height: auto;
+}
+
+p span {
+    color: #909090;
+    display: inline-block;
+    padding: 0 8px 0 8px;
+}
+
+p span.p_first {
+    background: 0;
+    padding-left: 0;
+}
+
+p {
+    margin: 19px 0 54px;
+    font-size: 11px;
+    line-height: 20px;
+    color: #909090;
+    font-family: "돋움", Dotum, "맑은 고딕", "Malgun Gothic", "Apple Gothic", sans-serif;
+    letter-spacing: -0.5px;
 }
