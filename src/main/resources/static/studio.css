@@ -112,13 +112,8 @@ a {
 }
 
 /* 좋아요 부분 */
-.introduce-box > .text-box > .like-box > a {
-    background-color: #36454F;
+.introduce-box > .text-box > .like-box > .btn {
     cursor: pointer;
-}
-
-.introduce-box > .text-box > .like-box > button > i {
-    color: #fff;
 }
 
 /* 스튜디오 음악 목록 */
@@ -174,6 +169,8 @@ a {
     margin-top: 10px;
     box-sizing: border-box;
     width: 100%;
+    overflow-y: auto;
+    max-height: 80%;
 }
 
 .detail-box > .myMusic-box > ul > li {
@@ -222,6 +219,7 @@ a {
     width: 32%;
 }
 
+/* 코멘트 박스 - 상단(타이틀, 버튼) */
 .detail-box > .comment-box > .top-box {
     border: 1px solid green;
     display: flex;
@@ -251,4 +249,43 @@ a {
     border: 1px solid red;
     line-height: 50px;
     font-weight: bold;
+}
+
+/* 코멘트 박스 - 하단(목록) */
+.detail-box > .comment-box > .comment-list {
+    border: 1px solid green;
+    padding-left: 20px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    overflow-y: auto;
+    max-height: 80%;
+}
+
+.detail-box > .comment-box > ul > li {
+    display: flex;
+    padding-top: 10px;
+    height: 30px;
+    border-bottom: 1px solid #8d8d8d;
+    align-items: center;
+}
+
+.detail-box > .comment-box > ul > .comment-detail:hover {
+    background-color: #d1d1d1;
+    cursor: pointer;
+}
+
+.detail-box > .comment-box > ul > .comment-detail {
+    height: 30px;
+    border: 1px solid blue;
+}
+
+.detail-box > .comment-box > ul > li > .number {
+    width: 15%;
+    text-align: center;
+}
+
+.detail-box > .comment-box > ul > li > .comment-title {
+    width: 85%;
+    margin-left: 30px;
 }
