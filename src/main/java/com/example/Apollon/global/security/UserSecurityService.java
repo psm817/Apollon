@@ -1,6 +1,5 @@
 package com.example.Apollon.global.security;
 
-
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
