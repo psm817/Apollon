@@ -56,13 +56,13 @@
             
             <!-- 회원 -->
             <div class="header_member">
-              <div id="anonymousSection" class="header_isAnonymous text">
-                <a sec:authorize="isAnonymous()" href="/member/login" class="header_login">로그인</a>
-                <a sec:authorize="isAnonymous()" href="/member/signup" class="header_signup">회원가입</a>
+              <div class="header_isAnonymous text" sec:authorize="isAnonymous()">
+                <a href="/member/login" class="header_login">로그인</a>
+                <a href="/member/signup" class="header_signup">회원가입</a>
               </div>
-              <div id="authenticatedSection" class="header_isAuthenticated text">
-                <a sec:authorize="isAuthenticated()" href="/member/logout">로그아웃</a>
-                <a sec:authorize="isAuthenticated()" href="/member/mypage">마이페이지</a>
+              <div class="header_isAuthenticated text" sec:authorize="isAuthenticated()">
+                <a href="/member/logout" class="header_logout">로그아웃</a>
+                <a href="/member/mypage" class="header_mypage">마이페이지</a>
               </div>
             </div>
           </div>
@@ -70,19 +70,7 @@
       </div>
     </div>
   <script>
-    // 로그인/회원가입, 로그아웃/마이페이지 전환
-    const isLoggedIn = false;
 
-    const anonymousSection = document.getElementById('anonymousSection');
-    const authenticatedSection = document.getElementById('authenticatedSection');
-
-    if (isLoggedIn) {
-      authenticatedSection.classList.add('hidden');
-      anonymousSection.classList.remove('hidden');
-    } else {
-      authenticatedSection.classList.remove('hidden');
-      anonymousSection.classList.add('hidden');
-    }
   </script>
 </nav>
 
