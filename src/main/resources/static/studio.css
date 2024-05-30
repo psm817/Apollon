@@ -81,7 +81,11 @@ a {
     display: flex;
     padding-left: 18%;
 }
+<<<<<<< HEAD
 /* 개인 프로필 사진 */
+=======
+
+>>>>>>> 29dc3d5 (충돌방지1)
 .introduce-box > .profile-box {
     width: 280px;
 }
@@ -114,6 +118,7 @@ a {
 }
 
 /* 좋아요 부분 */
+<<<<<<< HEAD
 .introduce-box > .text-box > .like-box > .btn {
     cursor: pointer;
 }
@@ -272,6 +277,8 @@ a {
     margin-left: 30px;
 }
 
+=======
+>>>>>>> 29dc3d5 (충돌방지1)
 .introduce-box > .text-box > .like-box > button {
     background-color: #36454F;
     cursor: pointer;
@@ -280,3 +287,7 @@ a {
 .introduce-box > .text-box > .like-box > button > i {
     color: #fff;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 29dc3d5 (충돌방지1)
