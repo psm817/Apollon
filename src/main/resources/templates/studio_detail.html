@@ -32,13 +32,24 @@
                     <span th:text="100"></span>
                 </div>
                 <div class="common-margin like-box">
-                    <span>좋아요</span>
-                    <span th:text="24"></span>
-                    <button type="button">
+                <!--  좋아요 개수 추가해야됨  -->
+                    <a onclick="return confirm('추천하시겠습니까?');" class="btn btn-sm btn-outline-secondary">
+                        좋아요
                         <i class="fa-regular fa-heart"></i>
-                    </button>
+                    </a>
                 </div>
             </div>
+        </div>
+        <div class="detail-box">
+            <div class="myMusic-box">
+                <div class="top-box">
+                    <div class="title">
+                        <span>My Music</span>
+                    </div>
+                    <div class="user-menu"></div>
+                </div>
+            </div>
+            <div class="comment-box"></div>
         </div>
     </div>
 </html>
