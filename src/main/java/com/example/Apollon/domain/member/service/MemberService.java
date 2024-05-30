@@ -22,7 +22,7 @@ public class MemberService {
                 .username(username)
                 .password(passwordEncoder.encode(password))
                 .nickname(nickname)
-               // .email(email)
+                .email(email)
                 .build();
 
         return memberRepository.save(member);
