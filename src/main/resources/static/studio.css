@@ -65,6 +65,10 @@ a {
     font-size: 18px;
 }
 
+.search-input-box > button > i {
+    color: #000;
+}
+
 .search-input-box > button:hover {
     cursor: pointer;
 }

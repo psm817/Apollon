@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class StudioController {
     @GetMapping("/")
-    public String mine() {
+    public String detail() {
 
         return "studio_detail";
     }
