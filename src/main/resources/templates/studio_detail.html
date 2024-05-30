@@ -32,9 +32,9 @@
                     <span th:text="100"></span>
                 </div>
                 <div class="common-margin like-box">
-                <!--  좋아요 개수 추가해야됨  -->
-                    <a onclick="return confirm('추천하시겠습니까?');" class="btn btn-sm btn-outline-secondary">
+                    <a onclick="return confirm('스튜디오를 좋아요 하나 줄까요?');" class="btn btn-sm btn-outline-secondary">
                         좋아요
+                        <!--  좋아요 개수 추가해야됨  -->
                         <i class="fa-regular fa-heart"></i>
                     </a>
                 </div>
@@ -44,12 +44,69 @@
             <div class="myMusic-box">
                 <div class="top-box">
                     <div class="title">
-                        <span>My Music</span>
+                        <span>음악 목록</span>
                     </div>
-                    <div class="user-menu"></div>
+                    <div class="user-menu">
+                        <a class="btn music-plus-btn" href="/music/create"
+                           th:text="등록">
+                            <!--  멤버인증 나중에 추가   -->
+                            <!--  sec:authorize="isAuthenticated()"-->
+                            <!--  th:if="${studio.member != null and #authentication.getPrincipal().getUsername() == studio.member.nickname}"-->
+                        </a>
+
+                        <a href="/music/modify" class="btn music-modify-btn"
+                           th:text="수정">
+                            <!--  멤버인증 나중에 추가   -->
+                            <!--  sec:authorize="isAuthenticated()"-->
+                            <!--  th:if="${studio.member != null and #authentication.getPrincipal().getUsername() == studio.member.nickname}"-->
+                        </a>
+
+                        <a onclick="return confirm('선택한 음악을 정말 삭제하시겠습니까?')" href="/music/delete"
+                           class="btn music-delete-btn"
+                           th:text="삭제">
+                            <!--  멤버인증 나중에 추가   -->
+                            <!--  sec:authorize="isAuthenticated()"-->
+                            <!--  th:if="${studio.member != null and #authentication.getPrincipal().getUsername() == studio.member.nickname}"-->
+                        </a>
+                    </div>
+                </div>
+                <ul class="music-list">
+                    <!-- 타임리프? 체크 박스 전체 선택할 수 있도록 해야함 -->
+                    <li>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault"></label>
+                        </div>
+                        <span class="number">번호</span>
+                        <span class="music-title">곡 제목</span>
+                        <span class="like">좋아요</span>
+                        <span class="create-date">등록날짜</span>
+                    </li>
+                    <!-- 타임리프 적용해서 목록 출력해야됨 -->
+                    <li class="music-detail">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault"></label>
+                        </div>
+                        <span class="number" th:text="1"></span>
+                        <div class="music-title">
+                            <img src="https://image.bugsm.co.kr/album/images/500/201238/20123812.jpg" alt="사진없음">
+                            <span th:text="그리워하다"></span>
+                        </div>
+                        <span class="like" th:text="200"></span>
+                        <span class="create-date" th:text="2024-05-30"></span></li>
+                </ul>
+            </div>
+            <div class="comment-box">
+                <div class="top-box">
+                    <div class="title">
+                        <span>방명록</span>
+                    </div>
+                    <div class="user-menu">
+                        <a class="comment-plus-btn" href="/studio/comment/create" th:text="작성"></a>
+                    </div>
                 </div>
             </div>
-            <div class="comment-box"></div>
         </div>
     </div>
 </html>
