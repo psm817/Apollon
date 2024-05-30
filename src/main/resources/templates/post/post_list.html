@@ -1,9 +1,11 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content">
 
-    <div>
-       [[${postList}]]
-    </div>
+
+<tr th:each="post : ${postList}">
+    <td th:text="${post.content}"></td>
+    <td th:text="${post.createDate}"></td>
+</tr>
 
 </div>
 </html>
