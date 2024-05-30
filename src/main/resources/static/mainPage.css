@@ -4,9 +4,10 @@ body {
 
 .mainPage_slide_container {
   width: 1480px; /* 슬라이드 컨테이너의 너비를 1480px로 고정 */
-  height: 280px; /* 슬라이드 컨테이너의 높이를 280px로 고정 */
+  height: 300px; /* 슬라이드 컨테이너의 높이를 280px로 고정 */
   margin: auto;
   overflow: hidden;
+  top: 20px;
   position: relative;
 }
 
@@ -23,12 +24,16 @@ body {
 
 .inner {
   width: 1480px; /* 슬라이드 페이지의 너비를 1480px로 고정 */
-  height: 280px; /* 슬라이드 페이지의 높이를 280px로 고정 */
+  height: 300px; /* 슬라이드 페이지의 높이를 280px로 고정 */
   box-sizing: border-box;
-  padding: 20px;
   text-align: center;
   background-color: #f2f2f2;
   border: 1px solid #ddd;
+}
+
+.inner img {
+    width: 100%;
+    height: auto;
 }
 
 .slide_button {
