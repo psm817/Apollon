@@ -1,5 +1,6 @@
 package com.example.Apollon.global.initData;
 
+
 import com.example.Apollon.domain.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
@@ -23,3 +24,7 @@ public class Dev {
         };
     }
 }
+
+
+
+

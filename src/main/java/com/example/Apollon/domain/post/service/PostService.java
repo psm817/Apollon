@@ -5,10 +5,15 @@ import com.example.Apollon.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +32,7 @@ public class PostService {
                 .build();
         postRepository.save(post);
     }
+
 
     public Post getPost(Long id) {
         Optional<Post> op = postRepository.findById(id);

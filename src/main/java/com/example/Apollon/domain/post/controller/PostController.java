@@ -25,6 +25,7 @@ public class PostController {
         return "post/post_list";
     }
 
+
     @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable("id") Long id) {
 
@@ -34,4 +35,5 @@ public class PostController {
 
         return "post/post_detail";
     }
+
 }

@@ -8,7 +8,10 @@
           <a href="/" class="logo_box text">
             <img th:src="@{/images/ApollonLogo.png}" alt="" class="main_logo logo-size">
           </a>
+<<<<<<< HEAD
           <a href="/" class="logo_box text"></a>
+=======
+>>>>>>> 61bcec65c88939ccd01e02a04ff4d622651fabbc
           <!-- header nav바 -->
           <nav class="header_nav">
             <ul>
@@ -58,6 +61,7 @@
             
             <!-- 회원 -->
             <div class="header_member">
+<<<<<<< HEAD
               <div class="header_isAnonymous text" sec:authorize="isAnonymous()">
                 <a href="/member/login" class="header_login">로그인</a>
                 <a href="/member/signup" class="header_signup">회원가입</a>
@@ -66,10 +70,24 @@
                 <a href="/member/logout" class="header_logout">로그아웃</a>
                 <a href="/member/mypage" class="header_mypage">마이페이지</a>
               </div>
+=======
+              <div class="header_isAnonymous text">
+                <a sec:authorize="isAnonymous()" href="/member/login" class="header_login">로그인</a>
+                <a sec:authorize="isAnonymous()" href="/member/signup" class="header_signup">회원가입</a>
+              </div>
+              <div class="header_isAuthenticated text">
+                <a sec:authorize="isAuthenticated()" href="/member/logout">로그아웃</a>
+                <a sec:authorize="isAuthenticated()" href="/member/mypage">마이페이지</a>
+>>>>>>> 61bcec65c88939ccd01e02a04ff4d622651fabbc
               </div>
             </div>
           </div>
         </div>
       </div>
+<<<<<<< HEAD
+=======
+    </div>
+  
+>>>>>>> 61bcec65c88939ccd01e02a04ff4d622651fabbc
 </nav>
 
