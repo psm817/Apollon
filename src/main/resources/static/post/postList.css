@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.header {
+    text-align: center;
+    background-color: yellow;
+}
+
+.middle {
+    display: flex;
+    height: 500px;
+    background-color: blue;
+}
+
+.column {
+    display:flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: lightblue;
+    border: 1px solid white;
+}
+.middle .column:nth-child(2){
+  flex-grow:2;
+}
+.section {
+    flex: 1;
+    background-color: lightgreen;
+    border: 1px solid white;
+}
+.middle .column:nth-child(2) .section:nth-child(2){
+  flex-grow:0.2
+
+}
+.middle .column:nth-child(2) .section:nth-child(3){
+  flex-grow:2
+
+}
