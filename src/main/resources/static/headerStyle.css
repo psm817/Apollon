@@ -23,13 +23,6 @@ input: focus {
     outline: none;
 }
 
-/* 폰트 적용 */
-/*
-body {
-    font-family: "Noto Sans KR", sans-serif;
-}
-*/
-
 /* 커스텀 */
 .text {
     font-size: 16px;
