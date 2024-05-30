@@ -1,26 +1,52 @@
-.mainPage_container {
-    display:flex;
+body {
+  font-family: Arial, sans-serif;
 }
 
-.outer {
-  border: 6px solid royalblue;
-  width: 300px;
-  height: 200px;
-  margin: 0 auto;
-  overflow-x: hidden;
+.mainPage_slide_container {
+  width: 1480px; /* 슬라이드 컨테이너의 너비를 1480px로 고정 */
+  height: 280px; /* 슬라이드 컨테이너의 높이를 280px로 고정 */
+  margin: auto;
+  overflow: hidden;
+  position: relative;
 }
 
-.inner-list {
+.banner_inner_section {
   display: flex;
-  transition: .3s ease-out;
+  align-items: center;
   height: 100%;
 }
 
-.inner {
-  border: 6px solid olive;
-  padding: 0 16px;
+.banner_inner_list {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
 }
 
-.button-list {
+.inner {
+  width: 1480px; /* 슬라이드 페이지의 너비를 1480px로 고정 */
+  height: 280px; /* 슬라이드 페이지의 높이를 280px로 고정 */
+  box-sizing: border-box;
+  padding: 20px;
   text-align: center;
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+}
+
+.slide_button {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.left_btn, .right_btn {
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.left_btn:hover, .right_btn:hover {
+  background-color: rgba(0,0,0,0.8);
 }
