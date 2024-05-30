@@ -120,7 +120,6 @@ a {
 
 /* 스튜디오 음악 목록 */
 .detail-box {
-    border: 1px solid red;
     display: flex;
     height: 100%;
 }
@@ -133,17 +132,12 @@ a {
 
 /* 음악 리스트 박스 - 상단(타이틀, 버튼) */
 .detail-box > .myMusic-box > .top-box {
-    border: 1px solid green;
     display: flex;
     height: 50px;
     padding-left: 180px;
     margin-top: 10px;
     box-sizing: border-box;
     justify-content: space-between;
-}
-
-.detail-box > .myMusic-box > .top-box > .title {
-    border: 1px solid blue;
 }
 
 .detail-box > .myMusic-box > .top-box > .title > span {
@@ -153,12 +147,10 @@ a {
 }
 
 .detail-box > .myMusic-box > .top-box > .user-menu {
-    border: 1px solid blue;
     padding-right: 50px;
 }
 
 .detail-box > .myMusic-box > .top-box > .user-menu > .btn {
-    border: 1px solid red;
     margin-right: 20px;
     line-height: 50px;
     font-weight: bold;
@@ -166,7 +158,6 @@ a {
 
 /* 음악 리스트 박스 - 하단(목록) */
 .detail-box > .myMusic-box > ul {
-    border: 1px solid green;
     padding-left: 180px;
     margin-top: 10px;
     box-sizing: border-box;
@@ -185,7 +176,6 @@ a {
 
 .detail-box > .myMusic-box > ul > .music-detail {
     height: 70px;
-    border: 1px solid blue;
 }
 
 .detail-box > .myMusic-box > ul > li > .number {
@@ -217,23 +207,17 @@ a {
 
 /* 코멘트 박스 */
 .detail-box > .comment-box {
-    border: 1px solid orange;
     width: 32%;
 }
 
 /* 코멘트 박스 - 상단(타이틀, 버튼) */
 .detail-box > .comment-box > .top-box {
-    border: 1px solid green;
     display: flex;
     height: 50px;
     padding-left: 40px;
     margin-top: 10px;
     box-sizing: border-box;
     justify-content: space-between;
-}
-
-.detail-box > .comment-box > .top-box > .title {
-    border: 1px solid blue;
 }
 
 .detail-box > .comment-box > .top-box > .title > span {
@@ -243,19 +227,16 @@ a {
 }
 
 .detail-box > .comment-box > .top-box > .user-menu {
-    border: 1px solid blue;
     padding-right: 130px;
 }
 
 .detail-box > .comment-box > .top-box > .user-menu > .comment-plus-btn {
-    border: 1px solid red;
     line-height: 50px;
     font-weight: bold;
 }
 
 /* 코멘트 박스 - 하단(목록) */
 .detail-box > .comment-box > .comment-list {
-    border: 1px solid green;
     padding-left: 20px;
     margin-top: 10px;
     box-sizing: border-box;
@@ -279,7 +260,6 @@ a {
 
 .detail-box > .comment-box > ul > .comment-detail {
     height: 30px;
-    border: 1px solid blue;
 }
 
 .detail-box > .comment-box > ul > li > .number {
