@@ -91,9 +91,12 @@
                         <span class="number" th:text="1"></span>
                         <div class="music-title">
                             <img src="https://image.bugsm.co.kr/album/images/500/201238/20123812.jpg" alt="사진없음">
-                            <span th:text="그리워하다"></span>
+                            <span th:text="'비투비' +  ' - ' + '그리워하다'"></span>
                         </div>
-                        <span class="like" th:text="200"></span>
+                        <div class="like">
+                            <span><i class="fa-regular fa-heart"></i></span>
+                            <span th:text="200"></span>
+                        </div>
                         <span class="create-date" th:text="2024-05-30"></span></li>
                 </ul>
             </div>

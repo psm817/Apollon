@@ -198,6 +198,7 @@ a {
     width: 57%;
     margin-left: 30px;
     display: flex;
+    align-items: center;
 }
 
 .detail-box > .myMusic-box > ul > li > .music-title > img {
