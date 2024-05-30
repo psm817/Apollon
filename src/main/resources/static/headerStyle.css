@@ -157,6 +157,10 @@ button {
     cursor: pointer;
 }
 
+.header_search_input-group > button i {
+    color: #000;
+}
+
 /* 해시태그, 로그인/회원가입 */
 .header_profile_box {
     display: flex;
@@ -207,11 +211,11 @@ button {
     width: 100%;
 }
 
-.header_profile_box > .header_member > .header_isAnonymous {
+.header_profile_box > .header_member > .text {
     display: flex;
 }
 
-.header_profile_box > .header_member > .header_isAnonymous > a {
+.header_profile_box > .header_member > .text > a {
     flex-grow: 1;
     flex-basis: 0;
     font-weight: 400;
@@ -229,9 +233,11 @@ button {
     text-align: center;
 }
 
-/* 로그아웃, 마이페이지 텍스트를 숨김
-   나중에 member 기능 추가되고 memberService 기능 추가되어 정상적으로 대체될 때가 되면 삭제
- */
-.header_profile_box > .header_member > .header_isAuthenticated {
-    display: none;
+.header_profile_box > .header_member > .header_isAuthenticated > .header_logout {
+    text-align: center;
 }
+
+.header_profile_box > .header_member > .header_isAuthenticated > .header_mypage {
+    text-align: center;
+}
+
