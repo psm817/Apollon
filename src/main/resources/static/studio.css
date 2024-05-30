@@ -99,7 +99,7 @@
 }
 
 /* 좋아요 부분 */
-.introduce-box > .text-box > .like-box > button {
+.introduce-box > .text-box > .like-box > a {
     background-color: #36454F;
     cursor: pointer;
 }
