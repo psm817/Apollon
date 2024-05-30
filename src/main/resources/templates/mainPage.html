@@ -1,4 +1,24 @@
-<nav th:fragment="mainPageFragment" class="mainPage">
+<html layout:decorate="~{layout}">
+<div layout:fragment="content">
   <div class="mainPage_container">
+<!--  슬라이드 컨테이너  -->
+    <div class="mainPage_slide_container">
+      <div class="banner_inner_section">
+        <div class="banner_inner_list">
+          <div class="inner"></div>
+        </div>
+<!--    슬라이드 버튼    -->
+        <div class="slide_button">
+          <button class="left_btn">&lt;</button>
+          <button class="right_btn">&lt;</button>
+        </div>
+      </div>
+    </div>
+<!--  블럭, 사이드 컨테이너  -->
+    <div class="mainPage_main_container">
+      <div class="mainPage_block_container"></div>
+      <div class="mainPage_side_container"></div>
+    </div>
   </div>
-</nav>
+</div>
+</html>
