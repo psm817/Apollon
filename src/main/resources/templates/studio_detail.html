@@ -74,8 +74,8 @@
                     <!-- 타임리프? 체크 박스 전체 선택할 수 있도록 해야함 -->
                     <li>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault"></label>
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckAll">
+                            <label class="form-check-label" for="flexCheckAll"></label>
                         </div>
                         <span class="number">번호</span>
                         <span class="music-title">곡 제목</span>
@@ -113,3 +113,12 @@
         </div>
     </div>
 </html>
+
+<script>
+    document.getElementById('flexCheckAll').addEventListener('change', function() {
+        let checkboxes = document.querySelectorAll('#flexCheckDefault');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
+        });
+    });
+</script>
