@@ -30,7 +30,6 @@ body {
 }
 */
 
-
 /* 커스텀 */
 .text {
     font-size: 16px;
@@ -53,7 +52,7 @@ button {
 
 /* 헤더 컨테이너 커스텀 */
 .header_container {
-    background-color: #3D3D3D;
+    background-color: #36454F;
     width: 100%; height: 48px;
     display: flex;
     justify-content: center;
@@ -73,7 +72,16 @@ button {
 /* 헤더 왼쪽 박스 > 로고 박스 */
 .logo_box {
     width: 210px;
-    background-color: #111111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+}
+
+/* 메인 로고 */
+.logo-size {
+    height: 46px;
+    width: 200px;
 }
 
 /* 헤더 왼쪽 박스 > nav */
