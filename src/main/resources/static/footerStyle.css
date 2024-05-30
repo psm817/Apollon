@@ -44,11 +44,7 @@ input: focus {
 
 .footer_container.open {
   bottom: -20px;
-<<<<<<< HEAD
   }
-=======
-}
->>>>>>> 61bcec65c88939ccd01e02a04ff4d622651fabbc
 
 /* 음악 플레이바 */
 .footer_play_box {
