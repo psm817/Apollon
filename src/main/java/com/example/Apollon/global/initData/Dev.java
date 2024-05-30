@@ -1,12 +1,23 @@
-package com.example.Apollon.global.initData;
-
+import com.example.Apollon.domain.member.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @Profile("dev")
-// 여기는 테스트 데이터 만드는 곳
-// 시작되자마자 데이터 생성이 되고, 모두가 같은 조건의 데이터를 사용하기 위해서 TestApplication 대신 이곳에 테스트 데이터 생성하기
 public class Dev {
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
+    @Bean
+    public ApplicationRunner init(MemberService memberService) {
+        return args -> {
+            memberService.signup("admin", "admin", "admin", "admin@test.com");
+            memberService.signup("user1", "user1", "user1", "user1@test.com");
+            memberService.signup("user2", "user2", "user2", "user2@test.com");
+        };
+    }
 }
