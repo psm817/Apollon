@@ -77,7 +77,6 @@ a {
     display: flex;
     padding-left: 18%;
 }
-
 /* 개인 프로필 사진 */
 .introduce-box > .profile-box {
     width: 280px;
@@ -90,7 +89,6 @@ a {
     object-fit: cover;
 }
 
-/* 현황 텍스트 */
 .introduce-box > .text-box {
     display: flex;
     flex-direction: column;
@@ -288,4 +286,13 @@ a {
 .detail-box > .comment-box > ul > li > .comment-title {
     width: 85%;
     margin-left: 30px;
+}
+
+.introduce-box > .text-box > .like-box > button {
+    background-color: #36454F;
+    cursor: pointer;
+}
+
+.introduce-box > .text-box > .like-box > button > i {
+    color: #fff;
 }
