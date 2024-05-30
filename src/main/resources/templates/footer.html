@@ -1,0 +1,183 @@
+<nav th:fragment="footerFragment" class="footer">
+  <div class="footer_container">
+    <div class="footer_play_box">
+      <div class="music_myPlayList_box">
+        <div class="myPlayList-btn_icon">
+          <i class="fa-solid fa-angle-up fa-2x" onclick="togglePlaylist()"></i>
+          <i class="fa-solid fa-angle-down fa-2x" onclick="togglePlaylist()"></i>
+        </div>
+      </div>
+      <div class="footer_play_detail">
+        <!-- 플레이바 왼쪽 박스 -->
+        <div class="footer_play_playBar">
+          <!-- 이전 곡, 재생, 이후 곡, 셔플, 반복 -->
+          <div class="playSetting">
+            <!-- 이전 곡 아이콘 -->
+            <div class="growSet BeforeMusic_icon">
+              <i class="fa-solid fa-backward-step fa-lg"></i>
+            </div>
+            <!-- 재생 아이콘 -->
+            <div class="growSet playMusic_icon">
+              <i class="fa-solid fa-play fa-lg" onclick="togglePlayPause()"></i>
+              <i class="fa-solid fa-pause fa-lg" onclick="togglePlayPause()"></i>
+            </div>
+            <!-- 이후 곡 아이콘 -->
+            <div class="growSet afterMusic_icon">
+              <i class="fa-solid fa-forward-step fa-lg"></i>
+            </div>
+            <!-- 셔플 아이콘 -->
+            <div class="growSet shuffleMusic_icon">
+              <i class="fa-solid fa-shuffle fa-lg" onclick="toggleShuffle()"></i>
+            </div>
+            <!-- 반복 아이콘 -->
+            <div class="growSet loopMusic_icon">
+              <i class="fa-solid fa-repeat fa-lg" onclick="toggleLoop()"></i>
+            </div>
+          </div>
+        </div>
+        <!-- 플레이바 중간 박스 -->
+        <div class="footer_play_musicMiddle">
+          <div class="musicMiddle_column">
+            <!-- 곡 타임라인 -->
+            <div class="music_timeLine">
+              <div class="timeLine_bar"></div>
+            </div>
+          </div>
+          <!-- 볼륨 -->
+          <div class="volume">
+            <div class="vol_icon">
+              <i class="fa-solid fa-volume-low fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <!-- 플레이바 오른쪽 박스 -->
+        <div class="footer_play_musicInformation">
+          <div class="footer_play_musicInfo">
+            <!-- 곡 정보 썸네일 이미지 -->
+            <div class="info_thumbnail">
+              <div class="info_info_thumbnail_frame">
+                <!-- <img th:src="@{|/file/${music.thumnailImg}|}" alt="">-->
+              </div>
+            </div>
+            <!-- 곡 정보 제목, 올린 사람 -->
+            <div class="info_box">
+              <div class="info_uploadUser">
+                <a href="#" th:each="music : ${playlist}" th:text="${music.user}">업로드한 사람</a>
+              </div>
+              <div class="info_musicTitle">
+                <a href="#" th:each="music : ${playlist}" th:text="${music.title}">업로드된 곡 제목</a>
+              </div>
+            </div>
+            <!-- 재생목록 추가/삭제, 스튜디오, 좋아요 아이콘 -->
+            <div class="info_icon">
+              <div class="growSet info_library_icon">
+                <i class="fa-solid fa-plus fa-lg"></i>
+              </div>
+              <div class="growSet info_studio_icon">
+                <i class="fa-solid fa-user fa-lg"></i>
+              </div>
+              <div class="growSet info_hit_icon">
+                <i class="fa-solid fa-heart fa-lg"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 내 플레이 리스트 보기 -->
+      <nav class="show_myPlayList" id="myPlayList">
+        <ul>
+          <!--            나중에 ul에 추가-->
+          <!--th:each="music: ${myAllPlayList}"-->
+          <li>
+            <!--              <a th:text="${myAllPlayList.id}" th:href="@{|/music/myPlayList/${myAllPlayList.id}|}"></a>-->
+            <span>나중에 음악 추가되고 자동으로 재생목록 불러오게 되면 이 텍스트는 지울 것</span>
+          </li>
+          <li>
+            <span>저녁 메뉴 추천 받아요</span>
+          </li>
+          <li>
+            <span>이곳은 재생 목록 표출해주는 곳이야</span>
+          </li>
+        </ul>
+      </nav>
+      <!-- 내 플레이 리스트 보기 끝 -->
+    </div>
+  </div>
+  
+  <!-- 재생목록 표출시 html, css로 구현 가능한데 코드가 길어져서 자바스크립트 추가 -->
+  <script>
+    var isShuffle = false; // 셔플 상태를 저장하는 변수
+    var isLoop = false; // 반복 상태를 저장하는 변수
+  
+    <!-- 재생목록 열기/닫기 -->
+    function togglePlaylist() {
+      var footerContainer = document.querySelector('.footer_container');
+      var upIcon = document.querySelector('.fa-angle-up');
+      var downIcon = document.querySelector('.fa-angle-down');
+      var showMyPlayList = document.querySelector('.show_myPlayList');
+
+      if (footerContainer.classList.contains('open')) {
+        upIcon.style.display = 'block';
+        downIcon.style.display = 'none';
+        showMyPlayList.style.display = 'none';
+      } else {
+        upIcon.style.display = 'none';
+        downIcon.style.display = 'block';
+        showMyPlayList.style.display = 'block';
+      }
+      footerContainer.classList.toggle('open');
+    }
+    
+    <!-- 음악 재생/일시정지 -->
+    function togglePlayPause() {
+      var playIcon = document.querySelector('.fa-play');
+      var pauseIcon = document.querySelector('.fa-pause');
+
+      // 재생 중인 음악이 있을 때
+      if (pauseIcon.style.display === 'block') {
+      // 재생 중인 음악을 일시 정지하고 아이콘 변경
+      pauseIcon.style.display = 'none';
+      playIcon.style.display = 'block';
+      // 여기에 음악 일시 정지하는 코드를 추가
+    }
+    // 재생 중인 음악이 없을 때
+    else {
+    // 음악을 재생하고 아이콘 변경
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = 'block';
+    // 여기에 음악을 재생하는 코드를 추가
+    }
+  }
+  
+  <!-- 셔플 -->
+   function toggleShuffle() {
+      var shuffleIcon = document.querySelector('.fa-shuffle');
+      if (!isShuffle) {
+         shuffleIcon.style.color = 'orange'; // 연한 보라색으로 변경
+         // 재생목록을 무작위로 재배치하는 코드를 여기에 추가
+      } else {
+        shuffleIcon.style.color = 'white'; // 원래 색상으로 변경
+        // 이전에 재배치된 순서로 재생되도록 하는 코드를 여기에 추가
+      }
+      isShuffle = !isShuffle; // 셔플 상태를 토글
+   }
+
+  <!-- 반복 -->
+  function toggleLoop() {
+    var loopIcon = document.querySelector('.fa-repeat');
+    if (!isLoop) {
+      loopIcon.style.color = 'skyblue'; // 하늘색으로 변경
+      // 재생목록을 순서대로 반복 재생하는 코드를 여기에 추가
+    } else {
+      loopIcon.style.color = 'white'; // 원래 색상으로 변경
+      // 반복 재생을 중지하는 코드를 여기에 추가
+    }
+    isLoop = !isLoop; // 반복 상태를 토글
+  }
+  
+  </script>
+  <!-- 재생목록 표출시 html, css로 구현 가능한데 코드가 길어져서 자바스크립트 추가 -->
+  
+  
+
+</nav>
