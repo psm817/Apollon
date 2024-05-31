@@ -2,7 +2,7 @@
     <div layout:fragment="content" class="box">
         <div class="top-section">
             <div class="welcome-box">
-                <span>#musician nickname 님의 스튜디오에 오신 것을 환영합니다.</span>
+                <span th:text="'#' + ${studio.member.username} + '님의 스튜디오에 오신 것을 환영합니다.'"></span>
             </div>
             <div class="search-box">
                 <form>
@@ -21,11 +21,11 @@
             </div>
             <div class="text-box">
                 <div class="common-margin nickname-box">
-                    <h2>#musician nickname</h2>
+                    <h2 th:text="'#' + ${studio.member.username}"></h2>
                 </div>
                 <div class="common-margin email-box">
                     <span>이메일 : </span>
-                    <span th:text="${'musician@gmail.com'}"></span>
+                    <span th:text="${studio.member.email}"></span>
                 </div>
                 <div class="common-margin total_music-box">
                     <span>총 업로드 음악 수 : </span>
@@ -33,14 +33,14 @@
                 </div>
                 <div class="common-margin total_visit-box">
                     <span>총 방문자 수 : </span>
-                    <span th:text="59"></span>
+                    <span th:text="${studio.visit} + ' 명'"></span>
                 </div>
                 <div class="common-margin like-box">
                     <a onclick="return confirm('방문하신 스튜디오를 추천하시겠습니까?');" class="btn like-plus-btn"
                        th:href="@{|/studio/like/${studio.id}|}">
                         좋아요
-                        <i class="fa-regular fa-heart"></i>
                         <span th:text="${#lists.size(studio.likers)}"></span>
+                        <i class="fa-regular fa-heart"></i>
                     </a>
                 </div>
             </div>

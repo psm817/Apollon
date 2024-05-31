@@ -5,7 +5,9 @@ import com.example.Apollon.domain.member.service.MemberService;
 import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.domain.studio.service.StudioService;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,12 +24,13 @@ public class StudioController {
     private final MemberService memberService;
 
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("/{id}")
-    public String detail(Model model, @PathVariable("id") Long id, Principal principal) {
-        Studio studio = this.studioService.getStudio(id);
+    @GetMapping("/{username}")
+    public String detail(Model model, @PathVariable("username") String username) {
+        Studio studio = this.studioService.getStudioByMemberUsername(username);
 
         if (studio != null) {
             model.addAttribute("studio", studio);
+
             return "studio_detail";
         }
 
@@ -42,6 +45,6 @@ public class StudioController {
 
         this.studioService.like(studio, member);
 
-        return "redirect:/studio/%d".formatted(id);
+        return "redirect:/studio/%s".formatted(studio.getMember().getUsername());
     }
 }

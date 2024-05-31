@@ -185,6 +185,11 @@ body {
     height: 70px;
 }
 
+.detail-box > .myMusic-box > ul > .music-detail:hover {
+    background-color: #e6f5ff;
+    cursor: pointer;
+}
+
 .detail-box > .myMusic-box > ul > li > .number {
     width: 7%;
     text-align: center;
@@ -262,7 +267,7 @@ body {
 }
 
 .detail-box > .comment-box > ul > .comment-detail:hover {
-    background-color: #d1d1d1;
+    background-color: #e6f5ff;
     cursor: pointer;
 }
 
