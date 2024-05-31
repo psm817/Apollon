@@ -8,7 +8,7 @@ import jakarta.persistence.GenerationType;
 @Entity
 public class Music extends BaseEntity {
 
-    private String title;
+    private String musicTitle;
     private String user;
 
 }
