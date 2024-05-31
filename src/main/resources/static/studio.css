@@ -9,10 +9,13 @@ a {
     text-decoration: none;
 }
 
+<<<<<<< HEAD
 body {
     overflow: hidden;
 }
 
+=======
+>>>>>>> dc63c738b0a0f1fc54f76ef6df1baa5694ceb581
 /* 상단 환영 인사 및 검색창 */
 .top-section {
     display: flex;
@@ -169,13 +172,20 @@ body {
     box-sizing: border-box;
     width: 100%;
     overflow-y: auto;
+<<<<<<< HEAD
     max-height: 60%;
+=======
+    max-height: 80%;
+>>>>>>> dc63c738b0a0f1fc54f76ef6df1baa5694ceb581
 }
 
 .detail-box > .myMusic-box > ul > li {
     display: flex;
     padding-top: 10px;
+<<<<<<< HEAD
     padding-bottom: 10px;
+=======
+>>>>>>> dc63c738b0a0f1fc54f76ef6df1baa5694ceb581
     height: 30px;
     border-bottom: 1px solid #8d8d8d;
     align-items: center;
@@ -185,11 +195,14 @@ body {
     height: 70px;
 }
 
+<<<<<<< HEAD
 .detail-box > .myMusic-box > ul > .music-detail:hover {
     background-color: #e6f5ff;
     cursor: pointer;
 }
 
+=======
+>>>>>>> dc63c738b0a0f1fc54f76ef6df1baa5694ceb581
 .detail-box > .myMusic-box > ul > li > .number {
     width: 7%;
     text-align: center;
@@ -254,20 +267,31 @@ body {
     box-sizing: border-box;
     width: 100%;
     overflow-y: auto;
+<<<<<<< HEAD
     max-height: 50%;
+=======
+    max-height: 80%;
+>>>>>>> dc63c738b0a0f1fc54f76ef6df1baa5694ceb581
 }
 
 .detail-box > .comment-box > ul > li {
     display: flex;
     padding-top: 10px;
+<<<<<<< HEAD
     padding-bottom: 10px;
+=======
+>>>>>>> dc63c738b0a0f1fc54f76ef6df1baa5694ceb581
     height: 30px;
     border-bottom: 1px solid #8d8d8d;
     align-items: center;
 }
 
 .detail-box > .comment-box > ul > .comment-detail:hover {
+<<<<<<< HEAD
     background-color: #e6f5ff;
+=======
+    background-color: #d1d1d1;
+>>>>>>> dc63c738b0a0f1fc54f76ef6df1baa5694ceb581
     cursor: pointer;
 }
 
@@ -283,4 +307,8 @@ body {
 .detail-box > .comment-box > ul > li > .comment-title {
     width: 85%;
     margin-left: 30px;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> dc63c738b0a0f1fc54f76ef6df1baa5694ceb581
