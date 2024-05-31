@@ -1,6 +1,8 @@
 package com.example.Apollon.global.initData;
 
+import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.service.MemberService;
+import com.example.Apollon.domain.studio.service.StudioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
@@ -15,11 +17,15 @@ public class Dev {
     PasswordEncoder passwordEncoder;
 
     @Bean
-    public ApplicationRunner init(MemberService memberService) {
+    public ApplicationRunner init(MemberService memberService, StudioService studioService) {
         return args -> {
-            memberService.signup("admin", "admin", "admin", "admin@test.com");
-            memberService.signup("user1", "user1", "user1", "user1@test.com");
-            memberService.signup("user2", "user2", "user2", "user2@test.com");
+            Member m1 = memberService.signup("admin", "admin", "admin", "admin@test.com");
+            Member m2 = memberService.signup("user1", "user1", "user1", "user1@test.com");
+            Member m3 = memberService.signup("user2", "user2", "user2", "user2@test.com");
+
+            studioService.create(m1, 55,1);
+            studioService.create(m2, 12,1);
+            studioService.create(m3, 5,1);
         };
     }
 }

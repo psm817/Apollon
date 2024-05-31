@@ -22,7 +22,7 @@ public class BaseEntity {
     // 각자 엔티티 만들 때, id, createDate, modifyDate는 따로 적용할 필요가 없음
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    public long id;
 
     @CreatedDate
     private LocalDateTime createDate;

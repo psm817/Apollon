@@ -26,6 +26,7 @@ import java.util.Set;
 public class Studio extends BaseEntity {
     // 스튜디오 주인(회원)
     @OneToOne
+    @JoinColumn(name = "member_id")
     private Member member;
 
     // 스튜디오에 등록된 노래 리스트
