@@ -89,14 +89,22 @@ input: focus {
 
 /* 메인 */
 .mainPage_main_container {
-    width: 1200px; height: 600px;
+    margin-top: 40px;
+    margin-left: auto; margin-right: auto;
+    width: 1480px; height: 600px;
     border: 1px solid red;
+    display: flex;
 }
 
 .mainPage_block_container {
     border: 1px solid orange;
+    width: 1200px;
 }
 
+.mainPage_side_container {
+    border: 1px solid yellow;
+    flex-grow: 1;
+}
 
 
 /* 추가 내용 */
