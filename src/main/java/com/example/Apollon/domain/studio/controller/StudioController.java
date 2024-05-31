@@ -23,7 +23,7 @@ public class StudioController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/")
-    public String detail() {
+    public String detail(Model model) {
 
         return "studio_detail";
     }
