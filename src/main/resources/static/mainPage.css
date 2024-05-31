@@ -90,9 +90,16 @@ input: focus {
 /* 메인 */
 .mainPage_main_container {
     width: 1200px; height: 600px;
+    border: 1px solid red;
 }
 
-/* 추가 내용(이스터에그) */
+.mainPage_block_container {
+    border: 1px solid orange;
+}
+
+
+
+/* 추가 내용 */
 .p_container {
     min-height: 140px;
     padding: 0 20px;
