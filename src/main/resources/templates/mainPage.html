@@ -29,40 +29,39 @@
       <div class="mainPage_main_container">
         <div class="mainPage_block_container">
           <div class="block_track_box-1">
-            <div class="block_title_link">
-              <a href="#">최신 음악 +</a>
+            <div class="block_title_link">최신 음악</div>
+            <div class="block_track_section">
+              <div class="block_track block_track_1">
+                <a href="#">최신 음악 1</a></div>
+              <div class="block_track block_track_2">
+                <a href="#">최신 음악 2</a></div>
+              <div class="block_track block_track_3">
+                <a href="#">최신 음악 3</a></div>
+              <div class="block_track block_track_4">
+                <a href="#">최신 음악 4</a></div>
             </div>
-            <div class="block_track_1">
-              <a href="">최신 음악 1</a></div>
-            <div class="block_track_2">
-              <a href="">최신 음악 2</a></div>
-            <div class="block_track_3">
-              <a href="">최신 음악 3</a></div>
-            <div class="block_track_4">
-              <a href="">최신 음악 4</a></div>
           </div>
           <div class="block_track_box-2">
-            <div class="block_title_link">
-              <a href="#">추천 음악 +</a>
+            <div class="block_title_link">추천 음악</div>
+            <div class="block_track_section">
+              <div class="block_track block_track_1">
+                <a href="#">추천 음악 1</a></div>
+              <div class="block_track block_track_2">
+                <a href="#">추천 음악 2</a></div>
+              <div class="block_track block_track_3">
+                <a href="#">추천 음악 3</a></div>
+              <div class="block_track block_track_4">
+                <a href="#">추천 음악 4</a></div>
             </div>
-            <div class="block_track_1">
-              <a href="">추천 음악 1</a></div>
-            <div class="block_track_2">
-              <a href="">추천 음악 2</a></div>
-            <div class="block_track_3">
-              <a href="">추천 음악 3</a></div>
-            <div class="block_track_4">
-              <a href="">추천 음악 4</a></div>
           </div>
         </div>
         <div class="mainPage_side_container">
           <div class="body_side_notice">
-            <div class="side_notice"></div>
-            <div class="notice_box"></div>
-          </div>
-          <div class="body_side_newsBanner">
-            <div class="side_news"></div>
-            <div class="news_box"></div>
+            <div class="side_notice">Notice</div>
+            <ul class="notice_box">
+              <li><a href="/post/list">[자주 찾는 질문] 비밀번호 찾기 어떻게 하나요?</a></li>
+              <li><a href="/post/list">[자주 찾는 질문] 비회원은 노래 전체 듣기 불가능 하나요?</a></li>
+            </ul>
           </div>
         </div>
       </div>
@@ -125,6 +124,55 @@
     });
   
     leftButton.addEventListener('click', () => {
+      showPrevSlide();
+      resetAutoSlide();
+    });
+  
+    // 초기 자동 슬라이드 시작
+    startAutoSlide();
+  });
+  
+    // 뉴스 자동 슬라이드 배너
+  document.addEventListener('DOMContentLoaded', () => {
+    const n_slide = document.querySelector('.n_banner_sec');
+    const n_slides = document.querySelectorAll('.n_inner');
+    const n_leftButton = document.querySelector('.n_left_btn');
+    const n_rightButton = document.querySelector('.n_right_btn');
+    
+    let currentIndex = 0;
+    const totalSlides = n_slides.length;
+    const slideInterval = 5000; // 5초
+    let intervalId;
+  
+    const updateSlidePosition = () => {
+      n_slide.style.transform = `translateX(-${currentIndex * 230}px)`;
+    };
+  
+    const showNextSlide = () => {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateSlidePosition();
+    };
+  
+    const showPrevSlide = () => {
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateSlidePosition();
+    };
+  
+    const startAutoSlide = () => {
+      intervalId = setInterval(showNextSlide, slideInterval);
+    };
+  
+    const resetAutoSlide = () => {
+      clearInterval(intervalId);
+      startAutoSlide();
+    };
+  
+    n_rightButton.addEventListener('click', () => {
+      showNextSlide();
+      resetAutoSlide();
+    });
+  
+    n_leftButton.addEventListener('click', () => {
       showPrevSlide();
       resetAutoSlide();
     });
