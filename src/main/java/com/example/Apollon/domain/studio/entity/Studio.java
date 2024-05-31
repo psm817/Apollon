@@ -12,6 +12,7 @@ import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -34,7 +35,7 @@ public class Studio extends BaseEntity {
 
     // 좋아요
     @ManyToMany
-    Set<Member> like = new LinkedHashSet<>();
+    Set<Member> likers = new LinkedHashSet<>();
 
     // 방문자
     @Column(columnDefinition = "Integer default 0", nullable = false)
@@ -43,7 +44,11 @@ public class Studio extends BaseEntity {
     // 활성화 상태
     private Integer active;
 
-    public void addVoter(Member liker) {
-        like.add(liker);
+    public void addLike(Member liker) {
+        if (this.likers == null) {
+            this.likers = new HashSet<>();
+        }
+
+        this.likers.add(liker);
     }
 }

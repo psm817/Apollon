@@ -22,9 +22,26 @@ public class StudioController {
     private final MemberService memberService;
 
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("/")
-    public String detail(Model model) {
+    @GetMapping("/{id}")
+    public String detail(Model model, @PathVariable("id") Long id, Principal principal) {
+        Studio studio = this.studioService.getStudio(id);
 
-        return "studio_detail";
+        if (studio != null) {
+            model.addAttribute("studio", studio);
+            return "studio_detail";
+        }
+
+        return "redirect:/";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/like/{id}")
+    public String studioLike(Principal principal, @PathVariable("id") Long id) {
+        Studio studio = this.studioService.getStudio(id);
+        Member member = this.memberService.getMember(principal.getName());
+
+        this.studioService.like(studio, member);
+
+        return "redirect:/studio/%d".formatted(id);
     }
 }

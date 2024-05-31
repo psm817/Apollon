@@ -36,8 +36,12 @@
                     <span th:text="59"></span>
                 </div>
                 <div class="common-margin like-box">
-                    <span th:text="'좋아요' + ' 25 '"></span>
-                    <span class="btn like-plus-btn " onclick="return confirm('스튜디오를 좋아요 하나 줄까요?');"><i class="fa-regular fa-heart"></i></span>
+                    <a onclick="return confirm('방문하신 스튜디오를 추천하시겠습니까?');" class="btn like-plus-btn"
+                       th:href="@{|/studio/like/${studio.id}|}">
+                        좋아요
+                        <i class="fa-regular fa-heart"></i>
+                        <span th:text="${#lists.size(studio.likers)}"></span>
+                    </a>
                 </div>
             </div>
         </div>
