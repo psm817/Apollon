@@ -12,8 +12,6 @@ spring:
             authorization-grant-type: authorization_code
             redirect-uri: 'http://localhost:8030/{action}/oauth2/code/{registrationId}'
           naver:
-            client-id: HtxJC9eBN7ipa68zU7PF
-            client-secret: WDmSjGT9UH
             scope:
               - name
               - email
