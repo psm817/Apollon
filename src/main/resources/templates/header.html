@@ -1,5 +1,4 @@
 <nav th:fragment="headerFragment" class="header">
-
   <div class="header_container">
     <div class="header_wrap">
       <!-- header 왼쪽 -->
@@ -19,12 +18,13 @@
               <a href="/post/list">커뮤니티</a>
             </li>
             <li class="H_nav text H_nav-3">
-              <a href="/studio/">스튜디오</a>
+              <a th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{'/studio/' + ${#authentication.principal.username}}">스튜디오</a>
+              <a th:if="${#authorization.expression('isAnonymous()')}" onclick="return confirm('로그인이 필요한 서비스입니다.');" th:href="@{/member/login}">스튜디오</a>
             </li>
           </ul>
         </nav>
       </div>
-      
+
       <!-- header 오른쪽 -->
       <div class="header_right_box">
         <!-- 검색창 -->
@@ -39,7 +39,7 @@
           </form>
 
         </div>
-        
+
         <!-- 로그인/회원가입, 로그아웃/마이페이지 -->
         <div class="header_profile_box">
           <!-- 해시 태그 -->
@@ -55,7 +55,7 @@
               </li>
             </ul>
           </div>
-          
+
           <!-- 회원 -->
           <div class="header_member">
             <div class="header_isAnonymous text" sec:authorize="isAnonymous()">

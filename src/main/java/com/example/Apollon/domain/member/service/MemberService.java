@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.repository.MemberRepository;
+import com.example.Apollon.global.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -44,4 +45,12 @@ public class MemberService {
         return memberRepository.findByusername(username);
     }
 
+    public Member getMember(String username) {
+        Optional<Member> member = this.memberRepository.findByusername(username);
+        if (member.isPresent()) {
+            return member.get();
+        } else {
+            throw new DataNotFoundException("member not found");
+        }
+    }
 }
