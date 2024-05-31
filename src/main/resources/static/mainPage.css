@@ -91,29 +91,85 @@ input: focus {
 .mainPage_main_container {
     margin-top: 40px;
     margin-left: auto; margin-right: auto;
-    width: 1480px; height: 600px;
-    border: 1px solid red;
+    width: 1480px;
     display: flex;
 }
 
 /* 블럭 */
 .mainPage_block_container {
-    border: 1px solid orange;
     width: 1200px;
 }
 
-          <div class="block_track_box-1">
-            <div class="block_title_link">
-              <a href="#">최신 음악 +</a>
-            </div>
-            <div class="block_track_1">
-              <a href="">최신 음악 1</a></div>
+/* 블럭 박스 1, 2 */
+.block_track_box-1,
+.block_track_box-2 {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    justify-content: space-between;
+}
 
+.block_title_link {
+    width: 300px; height: 25px;
+    margin-left: 33px;
+    color: #111;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.block_track_section {
+    display: flex;
+    height: 250px;
+}
+
+.block_track {
+    width: 235px; height: auto;
+    margin-left: auto; margin-right: auto;
+    background-color: rgba(221, 153, 221, 0.2);
+}
+
+.block_track > a {
+    width: 235px; height: 100%;
+    display: inline-block;
+}
 
 /* 사이드 */
 .mainPage_side_container {
-    border: 1px solid yellow;
     flex-grow: 1;
+    height: 560px;
+    border-left: 1px solid rgba(0,0,0, 0.2)
+}
+
+.body_side_notice {
+    width: 270px; height: 240px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.side_notice, .side_news {
+    width: 150px; height: 30px;
+    display: flex;
+    align-items: center;
+    color: #111;
+    font-size: 22px;
+    font-weight: 500;
+    margin-left: 20px;
+}
+
+.notice_box {
+    margin-left: 20px;
+    width: 230px; height: 200px;
+}
+
+.notice_box > li {
+    color: #111;
+    font-size: 14px;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 
@@ -122,7 +178,6 @@ input: focus {
     min-height: 140px;
     padding: 0 20px;
     margin: 0 auto;
-    background-color: #FFF;
     width: 1008px;
     height: auto;
 }
