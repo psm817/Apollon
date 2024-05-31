@@ -1,0 +1,243 @@
+/* 노멀라이즈 */
+body, ul, li {
+    margin: 0; padding: 0;
+    list-style: none;
+}
+
+a, input {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input {
+    line-height: normal;
+    outline: none;
+}
+
+button {
+  border: 0;
+  background-color: transparent;
+}
+
+input: focus {
+    outline: none;
+}
+
+/* 폰트 적용 */
+/*
+body {
+    font-family: "Noto Sans KR", sans-serif;
+}
+*/
+
+/* 커스텀 */
+.text {
+    font-size: 16px;
+    font-weight: 500;
+    color: #D9D9D9;
+}
+
+
+button {
+    background-color: #FFF;
+    height: 36px;
+}
+
+/* 페이지가 1025px 이상일때만 반응형으로 작동 */
+@media (min-width: 1025px) {
+  .header_wrap {
+    max-width: 1480px;
+  }
+}
+
+/* 헤더 컨테이너 커스텀 */
+.header_container {
+    background-color: #36454F;
+    width: 100%; height: 48px;
+    display: flex;
+    justify-content: center;
+}
+
+.header_wrap {
+    width: 100%; height: 100%;
+    display: flex;
+}
+
+/* 헤더 왼쪽*/
+.header_left_box {
+    width: 600px;
+    display: flex;
+}
+
+/* 헤더 왼쪽 박스 > 로고 박스 */
+.logo_box {
+    width: 210px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+}
+
+/* 메인 로고 */
+.logo-size {
+    height: 46px;
+    width: 180px;
+}
+
+/* 헤더 왼쪽 박스 > nav */
+.header_nav > ul {
+    display: flex;
+    width: 390px; height: 100%;
+}
+
+/* 헤더 nav의 후손인 li */
+.header_nav .H_nav {
+    flex-grow: 1;
+    flex-basis: 0;
+    text-align: center;
+    border-right: 1px solid #2E2E2E;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.H_nav > a {
+    font-size: 18px;
+    flex-grow: 1;
+}
+
+.H_nav > a:hover {
+    color: #FFF;
+}
+
+
+/* 헤더 오른쪽 박스 */
+.header_right_box {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.header_search_box {
+    margin-left: 24px;
+    width: 400px;
+}
+
+.header_search_input-group {
+    display: flex;
+    position: relative;
+}
+
+/* 검색란 */
+.header_search_input-group > input {
+    margin-top: auto; margin-bottom: auto;
+    padding-left: 12px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #999999;
+    border-width: 0;
+    background-color: #D9D9D9;
+    width: 380px; height: 30px;
+    border-radius: 6px;
+}
+
+/* 검색 버튼 */
+.header_search_input-group > button {
+    width: 30px; height: 26px;
+    position: absolute;
+    background-color:transparent;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 92%;
+    font-size: 18px;
+}
+
+.header_search_input-group > button:hover {
+    cursor: pointer;
+}
+
+.header_search_input-group > button i {
+    color: #000;
+}
+
+/* 해시태그, 로그인/회원가입 */
+.header_profile_box {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* 태그 위젯(롤링 배너 설정) */
+.header_profile_box > .header_widget_hashTag {
+    width: 400px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    overflow: hidden; /* 롤링 배너 영역 벗어나는 부분 숨기기 */
+}
+
+/* 해시태그 배너 리스트 */
+.widget_hashTag_banner {
+    display: flex;
+    height: 100%; /* 부모 요소에 맞게 배너 리스트 너비 조정 */
+    flex-direction: column;
+    animation: roll 10s linear infinite;
+}
+
+/* 롤링 애니메이션 정의 */
+@keyframes roll {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* 태그 위젯의 후손인 #member_hashTag */
+.header_profile_box > .header_widget_hashTag widget_hashTag_banner span {
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* 로그인/회원가입, 로그아웃/마이페이지 */
+.header_profile_box > .header_member {
+    width: 100%;
+}
+
+.header_profile_box > .header_member > .text {
+    display: flex;
+}
+
+.header_profile_box > .header_member > .text > a {
+    flex-grow: 1;
+    flex-basis: 0;
+    font-weight: 400;
+}
+
+.header_profile_box > .header_member > .header_isAnonymous > a:hover {
+    color: #FFF;
+}
+
+.header_profile_box > .header_member > .header_isAnonymous > .header_login {
+    text-align: center;
+}
+
+.header_profile_box > .header_member > .header_isAnonymous > .header_signup {
+    text-align: center;
+}
+
+.header_profile_box > .header_member > .header_isAuthenticated > .header_logout {
+    text-align: center;
+}
+
+.header_profile_box > .header_member > .header_isAuthenticated > .header_mypage {
+    text-align: center;
+}
+
