@@ -1,0 +1,81 @@
+<html layout:decorate="~{layout}">
+  <div layout:fragment="content">
+    <div class="mainPage_container">
+      <div class="mainPage_slide_container">
+        <div class="banner_inner_section">
+          <div class="banner_inner_list">
+            <!-- 슬라이드 페이지들 -->
+            <div class="inner">
+              <img src="" alt="">
+            </div>
+            <div class="inner">Page 2</div>
+            <div class="inner">Page 3</div>
+          </div>
+          <!-- 슬라이드 버튼 -->
+          <div class="slide_button">
+            <button class="left_btn">&lt;</button>
+            <button class="right_btn">&gt;</button>
+          </div>
+        </div>
+      </div>
+  <!--  블럭, 사이드 컨테이너  -->
+      <div class="mainPage_main_container">
+        <div class="mainPage_block_container"></div>
+        <div class="mainPage_side_container"></div>
+      </div>
+    </div>
+  </div>
+  
+
+</html>
+<script>
+  // 자동 슬라이드 배너
+  document.addEventListener('DOMContentLoaded', () => {
+    const slideContainer = document.querySelector('.banner_inner_list');
+    const slides = document.querySelectorAll('.inner');
+    const leftButton = document.querySelector('.left_btn');
+    const rightButton = document.querySelector('.right_btn');
+    
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    const slideInterval = 5000; // 5초
+    let intervalId;
+  
+    const updateSlidePosition = () => {
+      slideContainer.style.transform = `translateX(-${currentIndex * 1480}px)`;
+    };
+  
+    const showNextSlide = () => {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateSlidePosition();
+    };
+  
+    const showPrevSlide = () => {
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateSlidePosition();
+    };
+  
+    const startAutoSlide = () => {
+      intervalId = setInterval(showNextSlide, slideInterval);
+    };
+  
+    const resetAutoSlide = () => {
+      clearInterval(intervalId);
+      startAutoSlide();
+    };
+  
+    rightButton.addEventListener('click', () => {
+      showNextSlide();
+      resetAutoSlide();
+    });
+  
+    leftButton.addEventListener('click', () => {
+      showPrevSlide();
+      resetAutoSlide();
+    });
+  
+    // 초기 자동 슬라이드 시작
+    startAutoSlide();
+  });
+
+</script>
