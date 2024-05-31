@@ -17,8 +17,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Getter
 @SuperBuilder
