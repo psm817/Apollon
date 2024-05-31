@@ -18,12 +18,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString
 public class BaseEntity {
-<<<<<<< HEAD
     // 전체 DB 테이블(엔티티)에 포함된 id, createDate, modifyDate의 어노테이션을 관리하는 곳이라고 생각하면 좋음
     // 각자 엔티티 만들 때, id, createDate, modifyDate는 따로 적용할 필요가 없음
     // 조인때문에 id는 public으로 바꿈
-=======
->>>>>>> 8cd20c9 (충돌방지1)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
