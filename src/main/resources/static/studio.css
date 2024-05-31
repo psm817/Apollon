@@ -94,6 +94,7 @@ a {
     object-fit: cover;
 }
 
+/* 현황 텍스트 */
 .introduce-box > .text-box {
     display: flex;
     flex-direction: column;
