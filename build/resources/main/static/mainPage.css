@@ -1,0 +1,52 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.mainPage_slide_container {
+  width: 1480px; /* 슬라이드 컨테이너의 너비를 1480px로 고정 */
+  height: 280px; /* 슬라이드 컨테이너의 높이를 280px로 고정 */
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.banner_inner_section {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.banner_inner_list {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.inner {
+  width: 1480px; /* 슬라이드 페이지의 너비를 1480px로 고정 */
+  height: 280px; /* 슬라이드 페이지의 높이를 280px로 고정 */
+  box-sizing: border-box;
+  padding: 20px;
+  text-align: center;
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+}
+
+.slide_button {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.left_btn, .right_btn {
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.left_btn:hover, .right_btn:hover {
+  background-color: rgba(0,0,0,0.8);
+}
