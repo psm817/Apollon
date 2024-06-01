@@ -8,3 +8,7 @@
 html > body {
     font-family: 'Pretendard-Regular';
 }
+
+.non-cursor {
+    cursor: none;
+}

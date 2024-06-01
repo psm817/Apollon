@@ -34,6 +34,7 @@ input: focus {
   overflow: hidden;
   top: 20px;
   position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
 }
 
 .banner_inner_section {
@@ -79,7 +80,7 @@ input: focus {
   background-color: rgba(0,0,0,0.5);
   color: white;
   padding: 10px;
-  cursor: pointer;
+  cursor: none;
 }
 
 .left_btn:hover, .right_btn:hover {

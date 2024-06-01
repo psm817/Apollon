@@ -70,7 +70,7 @@ input: focus {
 /* 확장버튼 */
 .myPlayList-btn_icon i {
     color: #808080;
-    cursor: pointer; /* 클릭 가능한 커서 추가 */
+    cursor: none;
 }
 
 .fa-angle-up {
@@ -119,7 +119,7 @@ input: focus {
 
 .fa-solid {
     color: #FFF;
-    cursor: pointer;
+    cursor: none;
 }
 .fa-backward-step {
     transition: transform 0.3s ease-in-out;
