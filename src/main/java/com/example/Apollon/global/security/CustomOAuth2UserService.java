@@ -1,4 +1,9 @@
 package com.example.Apollon.global.security;
+
+
+
+//
+//
 //
 //import com.example.Apollon.domain.member.entity.Member;
 //import com.example.Apollon.domain.member.service.MemberService;
@@ -38,8 +43,10 @@ package com.example.Apollon.global.security;
 //        } else if (providerTypeCode.equals("NAVER")) {
 //            log.info("네이버 로그인");
 //            return processNaverLogin(oAuth2User);
+//        } else if (providerTypeCode.equals("GOOGLE")) { // 수정된 부분
+//            log.info("구글 로그인"); // 수정된 부분
+//            return processGoogleLogin(oAuth2User); // 수정된 부분
 //        }
-//
 //
 //        // 다른 소셜 미디어 타입 처리 가능
 //
@@ -70,6 +77,17 @@ package com.example.Apollon.global.security;
 //        return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
 //    }
 //
+//    private OAuth2User processGoogleLogin(OAuth2User oAuth2User) {
+//        Map<String, Object> attributes = oAuth2User.getAttributes();
+//        String oauthId = (String) attributes.get("sub");
+//        String nickname = (String) attributes.get("name");
+//        String email = (String) attributes.get("email");
+//        String providerTypeCode = "GOOGLE";
+//        String username = providerTypeCode + "__%s".formatted(oauthId);
+//        Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname);
+//        List<GrantedAuthority> authorityList = new ArrayList<>();
+//        return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
+//    }
 //
 //    class CustomOAuth2User extends User implements OAuth2User {
 //
@@ -88,11 +106,6 @@ package com.example.Apollon.global.security;
 //        }
 //    }
 //}
-
-
-
-
-
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -131,9 +144,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         } else if (providerTypeCode.equals("NAVER")) {
             log.info("네이버 로그인");
             return processNaverLogin(oAuth2User);
-        } else if (providerTypeCode.equals("GOOGLE")) { // 수정된 부분
-            log.info("구글 로그인"); // 수정된 부분
-            return processGoogleLogin(oAuth2User); // 수정된 부분
+        } else if (providerTypeCode.equals("GOOGLE")) {
+            log.info("구글 로그인");
+            return processGoogleLogin(oAuth2User);
         }
 
         // 다른 소셜 미디어 타입 처리 가능
@@ -148,19 +161,21 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         String nickname = (String) attributesProperties.get("nickname");
         String providerTypeCode = "KAKAO";
         String username = providerTypeCode + "__%s".formatted(oauthId);
-        Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname);
+        String email = (String) attributes.get("kakao_account.email");
+        Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
         List<GrantedAuthority> authorityList = new ArrayList<>();
         return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
     }
 
     private OAuth2User processNaverLogin(OAuth2User oAuth2User) {
-        // 네이버 로그인 처리 추가
-        // 네이버 사용자 정보 가져오기
-        String nickname = oAuth2User.getAttribute("nickname");
-        String providerTypeCode = "NAVER";
         String oauthId = oAuth2User.getAttribute("id");
+        Map<String, Object> attributes = oAuth2User.getAttributes();
+        Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+        String nickname = (String) response.get("nickname");
+        String email = (String) response.get("email");
+        String providerTypeCode = "NAVER";
         String username = providerTypeCode + "__%s".formatted(oauthId);
-        Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname);
+        Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
         List<GrantedAuthority> authorityList = new ArrayList<>();
         return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
     }
@@ -172,7 +187,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         String email = (String) attributes.get("email");
         String providerTypeCode = "GOOGLE";
         String username = providerTypeCode + "__%s".formatted(oauthId);
-        Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname);
+        Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
         List<GrantedAuthority> authorityList = new ArrayList<>();
         return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
     }
