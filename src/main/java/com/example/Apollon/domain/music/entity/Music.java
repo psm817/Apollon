@@ -3,6 +3,8 @@ package com.example.Apollon.domain.music.entity;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.global.jpa.BaseEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,5 +30,11 @@ public class Music extends BaseEntity {
     @Getter
     private Long musicPlayCount;
 
-    //나중에 좋아요 넣을 것
+    @ManyToMany
+    @JoinTable(
+            name = "music_member_likes",
+            joinColumns = @JoinColumn(name = "music_id"),
+            inverseJoinColumns = @JoinColumn(name = "member_id")
+    )
+    private Set<Member> likedByMembers = new LinkedHashSet<>();
 }
