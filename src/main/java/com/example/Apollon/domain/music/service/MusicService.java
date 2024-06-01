@@ -1,5 +1,7 @@
 package com.example.Apollon.domain.music.service;
 
+import com.example.Apollon.domain.member.entity.Member;
+import com.example.Apollon.domain.member.repository.MemberRepository;
 import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.domain.music.repository.MusicRepository;
 import com.example.Apollon.domain.post.entity.Post;
@@ -18,6 +20,33 @@ import java.util.Optional;
 public class MusicService {
 
     private final MusicRepository musicRepository;
+    private final MemberRepository memberRepository;
+
+    // 좋아요 추가
+    public void likeMusic(Long musicId, Long memberId) {
+        Music music = getMusic(musicId);
+        Member member = getMemberId(memberId);
+
+        music.getLikedByMembers().add(member);
+        musicRepository.save(music);
+    }
+
+    // 좋아요 제거
+    public void unlikeMusic(Long musicId, Long memberId) {
+        Music music = getMusic(musicId);
+        Member member = getMemberId(memberId);
+
+        music.getLikedByMembers().remove(member);
+        musicRepository.save(music);
+    }
+
+    // 해당 음악에 대한 좋아요 여부 확인
+    public boolean isMusicLikedByMember(Long musicId, Long memberId) {
+        Music music = getMusic(musicId);
+        Member member = getMemberId(memberId);
+
+        return music.getLikedByMembers().contains(member);
+    }
 
     // TOP100 가져옴(전체 음악중 재생한 count가 많은 순으로 정렬)
     public List<Music> getTOP100List() {
@@ -44,6 +73,11 @@ public class MusicService {
         if ( op.isPresent() == false ) {throw new DateTimeException("music not found");}
 
         return op.get();
+    }
+
+    private Member getMemberId(Long memberId) {
+        Optional<Member> memberOptional = memberRepository.findById(memberId);
+        return memberOptional.orElseThrow(() -> new DateTimeException("Member not found with ID: " + memberId));
     }
 
 
