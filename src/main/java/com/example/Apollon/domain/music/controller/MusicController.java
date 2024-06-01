@@ -30,7 +30,7 @@ public class MusicController {
     }
 
 
-    // 곡 정보
+    // 곡 정보 상세보기
     @GetMapping("/musicDetail/{id}")
     public String musicDetail(Model model, @PathVariable("id") Long id) {
 
