@@ -147,7 +147,7 @@ button {
 }
 
 .header_search_input-group > button:hover {
-    cursor: pointer;
+    cursor: none;
 }
 
 .header_search_input-group > button i {

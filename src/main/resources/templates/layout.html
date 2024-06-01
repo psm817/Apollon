@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" class="non-cursor">
 <head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
@@ -12,6 +12,61 @@
 
     <!--Bootstrap JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+    <!-- 포인터 변경 -->
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener("DOMContentLoaded", function() {
+        var urlPrefix = "http://localhost:8030/";
+        var currentPageUrl = window.location.href;
+        
+        if (currentPageUrl.startsWith(urlPrefix)) {
+            // Set custom cursor
+            document.body.style.cursor = "none"; // Hide default cursor
+
+            // Create custom cursor element
+            var customCursor = document.createElement("div");
+            customCursor.style.width = "4px";
+            customCursor.style.height = "4px";
+            customCursor.style.borderRadius = "50%";
+            customCursor.style.backgroundColor = "#adc8ff";
+            customCursor.style.position = "fixed";
+            customCursor.style.pointerEvents = "none"; // Ensure the cursor doesn't interfere with pointer events
+            document.body.appendChild(customCursor);
+
+            // Add afterimage effect
+            document.addEventListener("mousemove", function(event) {
+                var posX = event.clientX;
+                var posY = event.clientY;
+
+                // Set custom cursor position
+                customCursor.style.left = posX + "px";
+                customCursor.style.top = posY + "px";
+
+                // Create afterimage element
+                var afterimage = document.createElement("div");
+                afterimage.style.width = "4px";
+                afterimage.style.height = "4px";
+                afterimage.style.borderRadius = "50%";
+                afterimage.style.backgroundColor = "#adc8ff";
+                afterimage.style.position = "fixed";
+                afterimage.style.left = posX + "px";
+                afterimage.style.top = posY + "px";
+                afterimage.style.pointerEvents = "none"; // Ensure the afterimage doesn't interfere with pointer events
+                afterimage.style.transition = "opacity 0.5s ease"; // Add fade-out effect
+                document.body.appendChild(afterimage);
+
+                // Remove afterimage after a short delay
+                setTimeout(function() {
+                    afterimage.style.opacity = "0";
+                    setTimeout(function() {
+                        afterimage.remove();
+                    }, 100); // Delay for fade-out effect
+                }, 50); // Delay before starting fade-out effect
+            });
+        }
+    });
+    /*]]>*/
+  </script>
 
     <!-- static 아래의 style.css 연결(폰트 설정) -->
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
@@ -25,6 +80,8 @@
     <link rel="stylesheet" type="text/css" th:href="@{/studio.css}">
     <!-- 커뮤니티메인 CSS   -->
     <link rel="stylesheet" type="text/css" th:href="@{/post/postList.css}">
+    <!-- TOP100 CSS   -->
+    <link rel="stylesheet" type="text/css" th:href="@{/chart/TOP100.css}">
 
 
 
