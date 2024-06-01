@@ -18,7 +18,11 @@ spring:
             client-name: Naver
             authorization-grant-type: authorization_code
             redirect-uri: 'http://localhost:8030/login/oauth2/code/naver'
-
+          google:
+            scope:
+              - email
+              - profile
+            redirect-uri: 'http://localhost:8030/login/oauth2/code/google'
         provider:
           kakao:
             authorization-uri: https://kauth.kakao.com/oauth/authorize
