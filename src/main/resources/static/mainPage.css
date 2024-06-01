@@ -27,6 +27,13 @@ input: focus {
 }
 
 /* 커스텀 */
+.mainPage_container {
+    /* footer에 가려지지 않기 위함 */
+    height: calc(100vh - 50px);
+    margin-bottom: 500px;
+    overflow-y: auto;
+}
+
 .mainPage_slide_container {
   width: 1480px; /* 슬라이드 컨테이너의 너비를 1480px로 고정 */
   height: 280px; /* 슬라이드 컨테이너의 높이를 280px로 고정 */
