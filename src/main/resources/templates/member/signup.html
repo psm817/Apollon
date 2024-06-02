@@ -6,23 +6,18 @@
         .error {
             color: red;
         }
-<<<<<<< HEAD
+
         .success {
             color: green;
         }
-=======
-
->>>>>>> ca73099f21b482bf535788c7d5b9bc14d51f7e22
     </style>
     <script>
         function validateForm() {
             const signupError = document.getElementById("signupError");
             const submitButton = document.getElementById("submitButton");
             const usernameInput = document.getElementById("username");
-
             // Get the value of the username input field
             const username = usernameInput.value.trim();
-
             // Check if the username is not empty
             if (username !== "") {
                 // Send an AJAX request to the server to check for duplicate username
@@ -46,7 +41,6 @@
                     });
             }
         }
-
         document.addEventListener("DOMContentLoaded", function() {
             validateForm();
         });
