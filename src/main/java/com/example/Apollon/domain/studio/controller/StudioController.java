@@ -13,8 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/studio")
@@ -25,16 +27,27 @@ public class StudioController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/{username}")
-    public String detail(Model model, @PathVariable("username") String username) {
+    public String detail(Model model, @PathVariable("username") String username, Principal principal, @RequestParam(value= "kw", defaultValue = "") String kw ) {
         Studio studio = this.studioService.getStudioByMemberUsername(username);
+
+        String loginedUsername = principal.getName();
+        this.studioService.incrementVisit(username, loginedUsername);
 
         if (studio != null) {
             model.addAttribute("studio", studio);
+            model.addAttribute("kw", kw);
 
-            return "studio_detail";
+            return "studio/studio_detail";
         }
 
         return "redirect:/";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/search")
+    public String search(@RequestParam(value="kw", defaultValue = "") String kw) {
+
+        return "redirect:/studio/%s".formatted(kw);
     }
 
     @PreAuthorize("isAuthenticated()")
