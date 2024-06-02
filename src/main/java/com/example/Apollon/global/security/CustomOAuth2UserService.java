@@ -1,71 +1,4 @@
 package com.example.Apollon.global.security;
-
-//
-//import com.example.Apollon.domain.member.entity.Member;
-//import com.example.Apollon.domain.member.service.MemberService;
-//import lombok.RequiredArgsConstructor;
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.userdetails.User;
-//import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
-//import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-//import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-//import org.springframework.security.oauth2.core.user.OAuth2User;
-//import org.springframework.stereotype.Service;
-//import org.springframework.transaction.annotation.Transactional;
-//
-//import java.util.ArrayList;
-//import java.util.Collection;
-//import java.util.List;
-//import java.util.Map;
-//
-//@Service
-//@Transactional(readOnly = true)
-//@RequiredArgsConstructor
-//public class CustomOAuth2UserService extends DefaultOAuth2UserService {
-//    private final MemberService memberService;
-//
-//    // 카카오톡 로그인이 성공할 때 마다 이 함수가 실행된다.
-//    @Override
-//    @Transactional
-//    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-//        OAuth2User oAuth2User = super.loadUser(userRequest);
-//
-//        String oauthId = oAuth2User.getName();
-//        Map<String, Object> attributes = oAuth2User.getAttributes();
-//
-//        Map attributesProperties = (Map) attributes.get("properties");
-//        String nickname = (String) attributesProperties.get("nickname");
-//
-//        String providerTypeCode = userRequest.getClientRegistration().getRegistrationId().toUpperCase();
-//
-//        String username = providerTypeCode + "__%s".formatted(oauthId);
-//
-//        Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname);
-//
-//        List<GrantedAuthority> authorityList = new ArrayList<>();
-//
-//        return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
-//    }
-//}
-//
-//class CustomOAuth2User extends User implements OAuth2User {
-//
-//    public CustomOAuth2User(String username, String password, Collection<? extends GrantedAuthority> authorities) {
-//        super(username, password, authorities);
-//    }
-//
-//    @Override
-//    public Map<String, Object> getAttributes() {
-//        return null;
-//    }
-//
-//    @Override
-//    public String getName() {
-//        return getUsername();
-//    }
-//}
-
-
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -104,9 +37,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         } else if (providerTypeCode.equals("NAVER")) {
             log.info("네이버 로그인");
             return processNaverLogin(oAuth2User);
+        } else if (providerTypeCode.equals("GOOGLE")) {
+            log.info("구글 로그인");
+            return processGoogleLogin(oAuth2User);
         }
-
-        // 다른 소셜 미디어 타입 처리 가능
 
         return null;
     }
@@ -118,21 +52,53 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         String nickname = (String) attributesProperties.get("nickname");
         String providerTypeCode = "KAKAO";
         String username = providerTypeCode + "__%s".formatted(oauthId);
-        Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname);
-        List<GrantedAuthority> authorityList = new ArrayList<>();
-        return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
+        String email = (String) ((Map<String, Object>) attributes.get("kakao_account")).get("email");
+
+        try {
+            Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
+            List<GrantedAuthority> authorityList = new ArrayList<>();
+            return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
+        } catch (IllegalStateException e) {
+            log.error("Email already exists: " + email, e);
+            throw new OAuth2AuthenticationException("Email already exists");
+        }
     }
 
     private OAuth2User processNaverLogin(OAuth2User oAuth2User) {
-        // 네이버 로그인 처리 추가
-        // 네이버 사용자 정보 가져오기
-        String nickname = oAuth2User.getAttribute("nickname");
-        String providerTypeCode = "NAVER";
         String oauthId = oAuth2User.getAttribute("id");
+        Map<String, Object> attributes = oAuth2User.getAttributes();
+        Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+        String nickname = (String) response.get("nickname");
+        String email = (String) response.get("email");
+        String providerTypeCode = "NAVER";
         String username = providerTypeCode + "__%s".formatted(oauthId);
-        Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname);
-        List<GrantedAuthority> authorityList = new ArrayList<>();
-        return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
+
+        try {
+            Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
+            List<GrantedAuthority> authorityList = new ArrayList<>();
+            return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
+        } catch (IllegalStateException e) {
+            log.error("Email already exists: " + email, e);
+            throw new OAuth2AuthenticationException("Email already exists");
+        }
+    }
+
+    private OAuth2User processGoogleLogin(OAuth2User oAuth2User) {
+        Map<String, Object> attributes = oAuth2User.getAttributes();
+        String oauthId = (String) attributes.get("sub");
+        String nickname = (String) attributes.get("name");
+        String email = (String) attributes.get("email");
+        String providerTypeCode = "GOOGLE";
+        String username = providerTypeCode + "__%s".formatted(oauthId);
+
+        try {
+            Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
+            List<GrantedAuthority> authorityList = new ArrayList<>();
+            return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
+        } catch (IllegalStateException e) {
+            log.error("Email already exists: " + email, e);
+            throw new OAuth2AuthenticationException("Email already exists");
+        }
     }
 
     class CustomOAuth2User extends User implements OAuth2User {
@@ -152,3 +118,4 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         }
     }
 }
+

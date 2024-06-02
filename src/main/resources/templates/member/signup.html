@@ -1,6 +1,32 @@
-<div>회원가입</div>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>회원가입</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const signupError = document.getElementById("signupError");
+            const submitButton = document.getElementById("submitButton");
 
-<form th:action="@{/member/signup}" method="POST">
+            if (signupError.innerText !== "") {
+                submitButton.disabled = true;
+            } else {
+                submitButton.disabled = false;
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            validateForm();
+        });
+    </script>
+</head>
+<body>
+<div>회원가입</div>
+<form th:action="@{/member/signup}" method="POST" th:onchange="validateForm()">
     <div>
         <span>유저 아이디</span>
         <input type="text" name="username" placeholder="아이디">
@@ -22,6 +48,11 @@
         <input type="email" name="email" placeholder="이메일">
     </div>
     <div>
-        <button type="submit">회원가입</button>
+        <div id="signupError" th:text="${signupError}" class="error"></div>
+    </div>
+    <div>
+        <button type="submit" id="submitButton">회원가입</button>
     </div>
 </form>
+</body>
+</html>
