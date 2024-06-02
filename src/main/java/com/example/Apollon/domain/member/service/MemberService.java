@@ -27,7 +27,8 @@ public class MemberService {
     }
     public Member signup(String username, String password, String nickname, String email) {
         // Check for duplicate username
-        if (memberRepository.findByUsername(username).isPresent()) {
+        if (memberRepository.findByusername(username).isPresent()) {
+
             throw new IllegalStateException("Username already exists");
         }
 

@@ -7,9 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
+
     Optional<Member> findByUsername(String username);
     Optional<Member> findByEmail(String email);
     boolean existsByUsername(String username); // 중복된 아이디 확인 메서드 추가
+
 }

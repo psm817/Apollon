@@ -6,40 +6,12 @@
         .error {
             color: red;
         }
-        .success {
-            color: green;
-        }
+
     </style>
     <script>
         function validateForm() {
             const signupError = document.getElementById("signupError");
             const submitButton = document.getElementById("submitButton");
-            const usernameInput = document.getElementById("username");
-
-            // Get the value of the username input field
-            const username = usernameInput.value.trim();
-
-            // Check if the username is not empty
-            if (username !== "") {
-                // Send an AJAX request to the server to check for duplicate username
-                fetch("/member/check-username?username=" + username)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.exists) {
-                            signupError.innerText = "중복된 아이디";
-                            signupError.classList.remove("success");
-                            signupError.classList.add("error");
-                            submitButton.disabled = true;
-                        } else {
-                            signupError.innerText = "사용 가능한 아이디";
-                            signupError.classList.remove("error");
-                            signupError.classList.add("success");
-                            submitButton.disabled = false;
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
             }
         }
 
