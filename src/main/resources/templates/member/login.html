@@ -74,10 +74,16 @@
             background-color: #0056b3; /* hover 시 밝은 파란색 */
         }
 
+        .links {
+            margin-top: 20px; /* 로그인 링크들과의 간격 설정 */
+        }
+
         .links a {
-            margin-right: 10px;
+            display: block; /* 블록 레벨 요소로 설정하여 세로로 정렬 */
+            text-align: center; /* 가운데 정렬 */
             text-decoration: none;
             color: #007bff; /* 파란색 */
+            margin-bottom: 10px; /* 링크 간격 설정 */
         }
 
         .links a:hover {
@@ -103,12 +109,13 @@
         <div class="form-group">
             <button type="submit">로그인</button>
         </div>
-        <div class="links">
-            <a href="/oauth2/authorization/kakao">카카오 로그인</a>
-            <a href="/oauth2/authorization/naver">네이버 로그인</a>
-            <a href="/oauth2/authorization/google">구글 로그인</a>
-        </div>
     </form>
+
+    <div class="links">
+        <a href="/oauth2/authorization/kakao">카카오 로그인</a>
+        <a href="/oauth2/authorization/naver">네이버 로그인</a>
+        <a href="/oauth2/authorization/google">구글 로그인</a>
+    </div>
 </div>
 </body>
 </html>
