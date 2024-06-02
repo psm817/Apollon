@@ -7,7 +7,9 @@ import com.example.Apollon.domain.studio.repository.StudioRepository;
 import com.example.Apollon.global.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,7 +21,9 @@ public class StudioService {
     public Studio getStudio(Long id) {
         Optional<Studio> studio = this.studioRepository.findById(id);
 
-        if(studio.isEmpty()) throw new DataNotFoundException("question not found");
+        if(studio.isEmpty()) {
+            throw new DataNotFoundException("question not found");
+        }
 
         return studio.get();
     }
@@ -41,5 +45,15 @@ public class StudioService {
 
     public Studio getStudioByMemberUsername(String username) {
         return this.studioRepository.findByMemberUsername(username);
+    }
+
+    @Transactional
+    public void incrementVisit(String username, String loginedUsername) {
+        Studio studio = this.studioRepository.findByMemberUsername(username);
+
+        if(studio != null && !studio.getMember().getUsername().equals(loginedUsername)) {
+            studio.setVisit(studio.getVisit() + 1);
+            this.studioRepository.save(studio);
+        }
     }
 }
