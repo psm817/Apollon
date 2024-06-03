@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -43,6 +44,8 @@ public class Studio extends BaseEntity {
     // 활성화 상태
     // 기본값은 1(활성화), 0은 비활성화
     private Integer active = 1;
+
+    private LocalDateTime createDate;
 
     public void addLike(Member liker) {
         if (this.likers == null) {

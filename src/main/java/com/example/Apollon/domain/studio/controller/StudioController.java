@@ -45,7 +45,19 @@ public class StudioController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/search")
-    public String search(@RequestParam(value="kw", defaultValue = "") String kw) {
+    public String search(Model model, Principal principal, @RequestParam(value="kw", defaultValue = "") String kw) {
+        if (!kw.isEmpty()) {
+            Studio studio = this.studioService.getStudioByMemberUsername(kw);
+
+            if (studio == null || !kw.equals(studio.getMember().getUsername())) {
+                String loginedUsername = principal.getName();
+                Studio loginedUserStudio = this.studioService.getStudioByMemberUsername(loginedUsername);
+
+                model.addAttribute("studio", loginedUserStudio);
+                model.addAttribute("errorMessage", "검색하신 스튜디오는 존재하지 않습니다.");
+                return "studio/studio_detail";
+            }
+        }
 
         return "redirect:/studio/%s".formatted(kw);
     }
@@ -59,5 +71,25 @@ public class StudioController {
         this.studioService.like(studio, member);
 
         return "redirect:/studio/%s".formatted(studio.getMember().getUsername());
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/{username}/changeActive")
+    public String changeActive(Model model, Principal principal, @PathVariable("username") String username) {
+        Studio studio = this.studioService.getStudioByMemberUsername(username);
+
+        model.addAttribute("studio", studio);
+
+        if (studio != null && studio.getActive() == 1) {
+            this.studioService.changeInActive(studio, 0);
+            model.addAttribute("message", "스튜디오가 차단 되었습니다.");
+        }
+
+        else if(studio != null && studio.getActive() == 0) {
+            this.studioService.changeActive(studio, 1);
+            model.addAttribute("message", "스튜디오가 활성화 되었습니다.");
+        }
+
+        return "studio/studio_detail";
     }
 }

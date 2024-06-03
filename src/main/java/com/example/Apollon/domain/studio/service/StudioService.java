@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -33,6 +33,7 @@ public class StudioService {
                 .member(member)
                 .visit(visit)
                 .active(active)
+                .createDate(LocalDateTime.now())
                 .build();
         return this.studioRepository.save(studio);
     }
@@ -55,5 +56,17 @@ public class StudioService {
             studio.setVisit(studio.getVisit() + 1);
             this.studioRepository.save(studio);
         }
+    }
+
+    public void changeInActive(Studio studio, Integer active) {
+        studio.setActive(active);
+
+        this.studioRepository.save(studio);
+    }
+
+    public void changeActive(Studio studio, Integer active) {
+        studio.setActive(active);
+
+        this.studioRepository.save(studio);
     }
 }
