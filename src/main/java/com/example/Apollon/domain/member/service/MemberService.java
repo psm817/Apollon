@@ -4,6 +4,7 @@ import com.example.Apollon.domain.member.repository.MemberRepository;
 import com.example.Apollon.global.DataNotFoundException;
 import com.example.Apollon.global.security.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,14 +12,22 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
+    @Autowired
+    public MemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
+        this.memberRepository = memberRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    public boolean usernameExists(String username) {
+        return memberRepository.existsByUsername(username);
+    }
     public Member signup(String username, String password, String nickname, String email) {
         // Check for duplicate username
-        if (memberRepository.findByusername(username).isPresent()) {
+        if (memberRepository.findByUsername(username).isPresent()) {
             throw new IllegalStateException("Username already exists");
         }
 
@@ -49,11 +58,11 @@ public class MemberService {
     }
 
     private Optional<Member> findByUsername(String username) {
-        return memberRepository.findByusername(username);
+        return memberRepository.findByUsername(username);
     }
 
     public Member getMember(String username) {
-        Optional<Member> member = this.memberRepository.findByusername(username);
+        Optional<Member> member = this.memberRepository.findByUsername(username);
         if (member.isPresent()) {
             return member.get();
         } else {
