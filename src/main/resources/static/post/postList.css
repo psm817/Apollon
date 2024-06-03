@@ -8,10 +8,10 @@ body {
 .header {
   text-align: center;
 }
-
 .middle {
   display: flex;
   height: 850px;
+
 }
 
 .container {
@@ -330,3 +330,4 @@ hr {
 .postList-footer > button{
   flex-grow:1
 }
+
