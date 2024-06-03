@@ -35,10 +35,10 @@ public class MemberController {
         return "member/signup";
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/signup2")
     public String signup(@Valid SignForm signForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "member/signup";
+            return "member/signup2";
         }
 
         try {

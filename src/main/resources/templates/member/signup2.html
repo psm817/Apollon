@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>회원가입</title>
+    <style>
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const signupError = document.getElementById("signupError");
+            const submitButton = document.getElementById("submitButton");
+            const usernameInput = document.getElementById("username");
+            // Get the value of the username input field
+            const username = usernameInput.value.trim();
+            // Check if the username is not empty
+            if (username !== "") {
+                // Send an AJAX request to the server to check for duplicate username
+                fetch("/member/check-username?username=" + username)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.exists) {
+                            signupError.innerText = "중복된 아이디";
+                            signupError.classList.remove("success");
+                            signupError.classList.add("error");
+                            submitButton.disabled = true;
+                        } else {
+                            signupError.innerText = "사용 가능한 아이디";
+                            signupError.classList.remove("error");
+                            signupError.classList.add("success");
+                            submitButton.disabled = false;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            validateForm();
+        });
+    </script>
+</head>
+<body>
+<div>회원가입</div>
+<form th:action="@{/member/signup2}" method="POST" th:onchange="validateForm()">
+    <div>
+        <span>유저 아이디</span>
+        <input type="text" id="username" name="username" placeholder="아이디">
+        <!-- Add a button to check for duplicate username -->
+        <button type="button" onclick="validateForm()">아이디 중복 확인</button>
+    </div>
+    <div>
+        <span>유저 비밀번호</span>
+        <input type="password" name="password" placeholder="비밀번호">
+    </div>
+    <div>
+        <span>유저 비밀번호 확인</span>
+        <input type="password" name="password_confirm" placeholder="비밀번호 확인">
+    </div>
+    <div>
+        <span>닉네임</span>
+        <input type="text" name="nickname" placeholder="닉네임">
+    </div>
+    <div>
+        <span>이메일</span>
+        <input type="email" name="email" placeholder="이메일">
+    </div>
+    <div>
+        <div id="signupError" th:text="${signupError}" class="error"></div>
+    </div>
+    <div>
+        <button type="submit" id="submitButton">회원가입</button>
+    </div>
+</form>
+</body>
+</html>
