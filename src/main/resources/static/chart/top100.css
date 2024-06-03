@@ -29,18 +29,40 @@ input: focus {
 /* 커스텀 */
 /* 상단 nav 추가 */
 .chartList_nav {
+    width: 1920px; height: 48px;
+    background-color: #FFF;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
 
+.chartList_nav_sec {
+    display: flex;
+    margin-left: 430px;
+    width: 650px;
+    height: 100%;
+    text-align: center;
+    align-items: center;
 }
 
 .chartList_nav_TOP100 {
+    width: 130px;
+}
 
+.chartList_nav_TOP100 > a {
+    font-size: 18px; font-weight: 700;
+    color: #111;
 }
 
 .chartList_nav_genreChart {
+    width: 130px;
+}
 
+.chartList_nav_genreChart > a {
+    font-size: 18px; font-weight: 300;
+    color: #666;
 }
 
 /* 리스트 보여주는 곳 */
 .body_chart_container {
     width: 1470px; height: 1000px;
+    border: 1px solid green;
 }

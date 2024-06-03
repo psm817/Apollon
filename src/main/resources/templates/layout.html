@@ -33,7 +33,7 @@
             customCursor.style.pointerEvents = "none"; // Ensure the cursor doesn't interfere with pointer events
             document.body.appendChild(customCursor);
     
-            // Update custom cursor position and color on mousemove
+            // Update custom cursor position on mousemove
             document.addEventListener("mousemove", function(event) {
                 var posX = event.clientX;
                 var posY = event.clientY;
@@ -41,19 +41,22 @@
                 // Set custom cursor position
                 customCursor.style.left = posX + "px";
                 customCursor.style.top = posY + "px";
-    
-                // Generate random color
-                var randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
-    
-                // Apply random color to custom cursor
-                customCursor.style.color = randomColor;
-                
-                setInterval(function() {
-                  customCursor.style.color = getRandomColor();
-                }, 5000)
             });
-          }
-        });
+    
+            // Function to generate a random color
+            function getRandomColor() {
+                return "#" + Math.floor(Math.random() * 16777215).toString(16);
+            }
+    
+            // Set initial random color
+            customCursor.style.color = getRandomColor();
+    
+            // Change the color every 5 seconds
+            setInterval(function() {
+                customCursor.style.color = getRandomColor();
+            }, 3000); // 3000 milliseconds = 3 seconds
+        }
+      });
     </script>
 
     <!-- static 아래의 style.css 연결(폰트 설정) -->
