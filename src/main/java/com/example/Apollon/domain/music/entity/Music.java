@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -37,4 +38,12 @@ public class Music extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "member_id")
     )
     private Set<Member> likedByMembers = new LinkedHashSet<>();
+
+    public void addLikedByMembers(Member liker) {
+        if (this.likedByMembers == null) {
+            this.likedByMembers = new HashSet<>();
+        }
+
+        this.likedByMembers.add(liker);
+    }
 }
