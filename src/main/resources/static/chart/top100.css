@@ -1,0 +1,46 @@
+
+/* 노멀라이즈 */
+body, ul, li, a, span {
+    margin: 0; padding: 0;
+    list-style: none;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+a, input {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input {
+    line-height: normal;
+    outline: none;
+}
+
+button {
+  border: 0;
+  background-color: transparent;
+}
+
+input: focus {
+    outline: none;
+}
+
+/* 커스텀 */
+/* 상단 nav 추가 */
+.chartList_nav {
+
+}
+
+.chartList_nav_TOP100 {
+
+}
+
+.chartList_nav_genreChart {
+
+}
+
+/* 리스트 보여주는 곳 */
+.body_chart_container {
+    width: 1470px; height: 1000px;
+}

@@ -1,9 +1,10 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" class="non-cursor">
 <head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" th:href="@{/images/My project.png}" type="image/x-icon">
 
     <!-- 여기들어간 라이브러리는 혹시 나중에 쓸 수도 있으니까 아는건 몽땅 넣어놓음   -->
     <!-- Bootstrap CSS -->
@@ -11,6 +12,46 @@
 
     <!--Bootstrap JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+    <!-- 포인터 변경 -->
+    <script th:inline="javascript">
+      document.addEventListener("DOMContentLoaded", function() {
+        var urlPrefix = "http://localhost:8030/";
+        var currentPageUrl = window.location.href;
+        
+        if (currentPageUrl.startsWith(urlPrefix)) {
+            // Set custom cursor
+            document.body.style.cursor = "none"; // Hide default cursor
+    
+            // Create custom cursor element (musical note pointer)
+            var customCursor = document.createElement("div");
+            customCursor.innerHTML = "&#9835;"; // Musical note symbol
+            customCursor.style.fontSize = "24px";
+            customCursor.style.position = "fixed";
+            customCursor.style.pointerEvents = "none"; // Ensure the cursor doesn't interfere with pointer events
+            document.body.appendChild(customCursor);
+    
+            // Update custom cursor position and color on mousemove
+            document.addEventListener("mousemove", function(event) {
+                var posX = event.clientX;
+                var posY = event.clientY;
+    
+                // Set custom cursor position
+                customCursor.style.left = posX + "px";
+                customCursor.style.top = posY + "px";
+    
+                // Generate random color
+                var randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+    
+                // Apply random color to custom cursor
+                customCursor.style.color = randomColor;
+                
+                setInterval(function() {
+                  customCursor.style.color = getRandomColor();
+                }, 5000)
+            });
+          }
+        });
+    </script>
 
     <!-- static 아래의 style.css 연결(폰트 설정) -->
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
@@ -24,6 +65,8 @@
     <link rel="stylesheet" type="text/css" th:href="@{/studio.css}">
     <!-- 커뮤니티메인 CSS   -->
     <link rel="stylesheet" type="text/css" th:href="@{/post/postList.css}">
+    <!-- TOP100 CSS   -->
+    <link rel="stylesheet" type="text/css" th:href="@{/chart/TOP100.css}">
 
 
 
@@ -37,10 +80,10 @@
     <!-- 상단 header(메뉴 내비바) -->
     <nav th:replace="~{header :: headerFragment}"></nav>
 
-
     <!-- 각 페이지마다 들어가는 내용들 -->
     <th:block layout:fragment="content"></th:block>
     <!-- 기본 템플릿 안에 삽입될 내용 끝 -->
+    
 
     <!-- 하단 footer(플레이 바) -->
     <nav th:replace="~{footer :: footerFragment}"></nav>
