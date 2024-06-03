@@ -53,11 +53,22 @@
             margin-right: 5px;
         }
 
-        .form-group label {
+        .form-group label,
+        .form-group a {
             font-size: 14px;
             color: #333333; /* 검은색 */
-            margin-right: 10px; /* 레이블 오른쪽 여백 */
+            margin-right: 0px; /* 레이블 오른쪽 여백 */
+            margin-left: 0px; /* 링크 왼쪽 여백 */
+            line-height: 20px; /* 줄 간격 설정 */
         }
+
+        .form-group label{
+        margin-right: auto; /* Move the links to the right */
+    margin-left: 0; /* Remove right margin */
+        }
+
+
+
 
         .form-group button[type="submit"] {
             width: calc(100% - 20px);
@@ -118,6 +129,8 @@
         <div class="form-group">
             <input type="checkbox" id="rememberMe">
             <label for="rememberMe">아이디 기억하기</label>
+            <a href="/password-recovery">비밀번호 찾기/</a>
+            <a href="/member/signup">회원가입</a>
         </div>
         <div class="form-group">
             <button type="submit">로그인</button>
@@ -139,3 +152,4 @@
 </div>
 </body>
 </html>
+
