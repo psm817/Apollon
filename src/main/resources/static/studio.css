@@ -22,7 +22,7 @@ body {
 .top-section > .welcome-box {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     height: 80px;
     flex-grow: 2.5;
     flex-basis: 0;
@@ -31,6 +31,17 @@ body {
 .top-section > .welcome-box > span {
     font-weight: 700;
     font-size: 23px;
+    padding-left: 25%;
+}
+
+.top-section > .welcome-box > a {
+    display: block;
+    border-radius: 5px;
+    margin-left: 30px;
+    background-color: #36454F;
+    color: #fff;
+    font-weight: 700;
+    padding: 10px;
 }
 
 /* 검색창 */
@@ -109,7 +120,7 @@ body {
 
 /* 각 박스별 공통 마진 */
 .introduce-box > .text-box > .common-margin {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 /* 닉네임 부분 */
