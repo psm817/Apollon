@@ -32,7 +32,7 @@
             </div>
             <div class="post-category box">
                 <hr>
-                <div class="board-title">===== 게시판 =====</div>
+                <div class="board-title">========= 게시판 =========</div>
                 <ul class="board-list">
                     <li class="board-item">
                         <span class="icon">📋</span>
@@ -78,38 +78,107 @@
             </div>
             <div class="postList-box box">
 
-                <div class="notice-body">
-                    <div class="notice-item">
+                <div class="postbox-body">
+                    <div class="post-item">
                         <span>자유</span>
                     </div>
-                    <div class="notice-item">
+                    <div class="post-item">
                         <span>자유</span>
                     </div>
-                    <div class="notice-item">
+                    <div class="post-item">
+                        <span>자유</span>
+                    </div>
+                    <div class="post-item">
+                        <span>자유</span>
+                    </div>
+                    <div class="post-item">
+                        <span>자유</span>
+                    </div>
+                    <div class="post-item">
+                        <span>자유</span>
+                    </div>
+                    <div class="post-item">
+                        <span>자유</span>
+                    </div>
+                    <div class="post-item">
+                        <span>자유</span>
+                    </div>
+                    <div class="post-item">
+                        <span>자유</span>
+                    </div>
+                    <div class="post-item">
                         <span>자유</span>
                     </div>
 
-                    <div class="notice-item">
-                        <span>자유</span>
-                    </div>
-                    <div class="notice-item">
-                        <span>자유</span>
-                    </div>
-                    <div class="notice-item">
-                        <span>자유</span>
-                    </div>
-
-
+                </div>
+                <div class="postList-footer">
+                    <button>=========여기자리는 글쓰기 페이징 처리할부분=====</button>
                 </div>
             </div>
         </div>
 
         <div class="container">
-            <div class="box">시계</div>
-            <div class="box">오늘의핫게시글</div>
+            <div class="box">
+                <div id="clock" class="clock1"></div>
+            </div>
+
+            <div class="todayHotpost-box box">
+                <div class="todayHotpost-header">
+                    <span>오늘의 TOP10</span>
+                </div>
+                <div class="todayHotpost-body">
+                    <div class="todayHotpost-item">
+                        <span>1</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>2</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>3</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>4</span>
+                        <div class="todayHotpost-title">지리네dsafsadfdsafsda</div>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>5</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>6</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>7</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>8</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>9</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>10</span>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
     </div>
 
 
 </div>
 </html>
+<script>
+    function updateClock() {
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  const seconds = String(now.getSeconds()).padStart(2, "0");
+  const timeString = `${hours}:${minutes}:${seconds}`;
+  document.getElementById("clock").textContent = timeString;
+}
+
+setInterval(updateClock, 1000);
+updateClock(); // initial call to display the clock immediately
+
+</script>
