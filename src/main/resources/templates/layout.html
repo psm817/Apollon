@@ -44,6 +44,10 @@
     
                 // Apply random color to custom cursor
                 customCursor.style.color = randomColor;
+                
+                setInterval(function() {
+                  customCursor.style.color = getRandomColor();
+                }, 5000)
             });
           }
         });
