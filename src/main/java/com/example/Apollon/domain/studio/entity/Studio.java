@@ -4,10 +4,7 @@ import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.global.jpa.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -19,6 +16,7 @@ import java.util.Set;
 
 @Entity
 @Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -40,10 +38,11 @@ public class Studio extends BaseEntity {
 
     // 방문자
     @Column(columnDefinition = "Integer default 0", nullable = false)
-    private Integer visit;
+    private Integer visit = 0;
 
     // 활성화 상태
-    private Integer active;
+    // 기본값은 1(활성화), 0은 비활성화
+    private Integer active = 1;
 
     public void addLike(Member liker) {
         if (this.likers == null) {
