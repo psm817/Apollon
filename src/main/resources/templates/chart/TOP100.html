@@ -8,7 +8,32 @@
       </div>
     </div>
     <div class="body_chart_container">
-    
+      <span>TOP 100</span>
+      <div class="TOP100_body">
+        <div class="TOP100_nav">
+        
+        </div>
+        <div class="TOP100_list">
+          <ul>
+<!-- 타임리프 써서 리스트 자동으로 가져올 것 -->
+            <li class="TOP100_list-1">
+              <div class="TOP100_form-check">
+                <input class="TOP100_form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="TOP100_form-check-label" for="flexCheckDefault"></label>
+              </div>
+              <span class="TOP100_number" th:text="1"></span>
+              <div class="TOP100_musicTitle">
+                <img src="https://image.bugsm.co.kr/album/images/500/201238/20123812.jpg" alt="사진없음">
+                <a href="chart/TOP100"><span th:text="'비투비' +  ' - ' + '그리워하다'"></span></a>
+              </div>
+              <div class="music_like">
+                <span><i class="fa-regular fa-heart"></i></span>
+                <span th:text="200"></span>
+              </div>
+              <span class="music_create-date" th:text="2024-05-30"></span>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
   
