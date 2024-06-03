@@ -27,16 +27,10 @@ input: focus {
 }
 
 /* 커스텀 */
-
-body {
-    padding-top: 48px; /* 고정된 내비게이션 바의 높이만큼 패딩 추가 */
-}
-
 .mainPage_slide_container {
   width: 1480px; /* 슬라이드 컨테이너의 너비를 1480px로 고정 */
   height: 280px; /* 슬라이드 컨테이너의 높이를 280px로 고정 */
-  margin-left: auto; margin-right: auto;
-  margin-top: 48px;
+  margin: auto;
   overflow: hidden;
   top: 20px;
   position: relative;
