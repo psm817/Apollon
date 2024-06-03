@@ -4,17 +4,21 @@
     <title>로그인</title>
     <style>
         /* CSS Comment */
-        body {
+        body{
             font-family: Arial, sans-serif;
             background-color: #ffffff; /* 흰색 배경 */
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        .logo {
+            display: block; /* 인라인 요소를 블록 요소로 변경하여 수평 가운데 정렬 가능 */
+            margin: 0 auto; /* 수평 가운데 정렬 */
+            margin-top: 100px; /* 하단 마진을 20px로 설정 */
+        }
         .container {
             max-width: 400px;
-            margin: 50px auto;
+            margin: 20px auto;
             background-color: #ffffff; /* 흰색 배경 */
             padding: 20px;
             border-radius: 5px;
@@ -62,13 +66,16 @@
             line-height: 20px; /* 줄 간격 설정 */
         }
 
-        .form-group label{
-        margin-right: auto; /* Move the links to the right */
-    margin-left: 0; /* Remove right margin */
+        .form-group label {
+            margin-right: auto; /* Move the links to the right */
+            margin-left: 0; /* Remove right margin */
         }
 
-
-
+        .form-group .a1,
+        .form-group .a2 {
+            margin-left: auto; /* Move the links to the right */
+            margin-right: 0; /* Remove right margin */
+        }
 
         .form-group button[type="submit"] {
             width: calc(100% - 20px);
@@ -100,7 +107,6 @@
             margin-bottom: 10px; /* 링크 간격 설정 */
         }
 
-
         .button--kakao img {
             width: 100%;
             height: auto;
@@ -109,13 +115,16 @@
             width: 100%;
             height: auto;
         }
-         .button--google img {
+        .button--google img {
             width: 100%;
             height: auto;
         }
+
+
     </style>
 </head>
 <body>
+<img src="/images/ApollonLogo.png" alt="Your Logo" class="logo">
 <div class="container">
     <h1>로그인</h1>
 
@@ -147,9 +156,7 @@
         <a href="/oauth2/authorization/google" class="button--google">
             <img src="/images/login/googlelogo.png" alt="구글 로그인">
         </a>
-
     </div>
 </div>
 </body>
 </html>
-
