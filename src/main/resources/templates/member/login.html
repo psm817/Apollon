@@ -3,17 +3,23 @@
 <head>
     <title>로그인</title>
     <style>
-        body {
+        /* CSS Comment */
+        body{
             font-family: Arial, sans-serif;
             background-color: #ffffff; /* 흰색 배경 */
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        .logo {
+            display: block; /* 인라인 요소를 블록 요소로 변경하여 수평 가운데 정렬 가능 */
+            margin: 0 auto; /* 수평 가운데 정렬 */
+            margin-top: 60px; /* 하단 마진을 20px로 설정 */
+            margin-bottom: 30px; /* 하단 마진을 20px로 설정 */
+        }
         .container {
             max-width: 400px;
-            margin: 50px auto;
+            margin: 20px auto;
             background-color: #ffffff; /* 흰색 배경 */
             padding: 20px;
             border-radius: 5px;
@@ -24,6 +30,7 @@
         .container h1 {
             font-size: 24px;
             margin-bottom: 20px;
+            margin-top: 0px;
         }
 
         .form-group {
@@ -52,15 +59,29 @@
             margin-right: 5px;
         }
 
-        .form-group label {
+        .form-group label,
+        .form-group a {
             font-size: 14px;
             color: #333333; /* 검은색 */
-            margin-right: 10px; /* 레이블 오른쪽 여백 */
+            margin-right: 0px; /* 레이블 오른쪽 여백 */
+            margin-left: 0px; /* 링크 왼쪽 여백 */
+            line-height: 20px; /* 줄 간격 설정 */
+        }
+
+        .form-group label {
+            margin-right: auto; /* Move the links to the right */
+            margin-left: 0; /* Remove right margin */
+        }
+
+        .form-group .a1,
+        .form-group .a2 {
+            margin-left: auto; /* Move the links to the right */
+            margin-right: 0; /* Remove right margin */
         }
 
         .form-group button[type="submit"] {
             width: calc(100% - 20px);
-            background-color: #007bff; /* 파란색 */
+            background-color: #36454F; /* 파란색 */
             color: #ffffff; /* 흰색 */
             padding: 10px 20px;
             font-size: 16px;
@@ -75,26 +96,40 @@
         }
 
         .links {
-            margin-top: 20px; /* 로그인 링크들과의 간격 설정 */
+            max-width: 360px; /* iPhone */
+            margin: 0 auto;
+            margin-top: 20px;
         }
 
         .links a {
             display: block; /* 블록 레벨 요소로 설정하여 세로로 정렬 */
             text-align: center; /* 가운데 정렬 */
             text-decoration: none;
-            color: #007bff; /* 파란색 */
+            color: #ffffff; /* 파란색 */
             margin-bottom: 10px; /* 링크 간격 설정 */
         }
 
-        .links a:hover {
-            text-decoration: underline;
+        .button--kakao img {
+            width: 100%;
+            height: auto;
         }
+        .button--naver img {
+            width: 100%;
+            height: auto;
+        }
+        .button--google img {
+            width: 100%;
+            height: auto;
+        }
+
+
     </style>
 </head>
 <body>
+<a href="/">
+    <img src="/images/ApollonLogo.png" alt="Your Logo" class="logo">
+</a>
 <div class="container">
-    <h1>로그인</h1>
-
     <form id="loginForm" th:action="@{/member/login}" method="POST">
         <div class="form-group">
             <input type="text" id="username" name="username" placeholder="아이디를 입력해주세요">
@@ -105,6 +140,8 @@
         <div class="form-group">
             <input type="checkbox" id="rememberMe">
             <label for="rememberMe">아이디 기억하기</label>
+            <a href="/password-recovery">비밀번호 찾기/</a>
+            <a href="/member/signup">회원가입</a>
         </div>
         <div class="form-group">
             <button type="submit">로그인</button>
@@ -112,9 +149,15 @@
     </form>
 
     <div class="links">
-        <a href="/oauth2/authorization/kakao">카카오 로그인</a>
-        <a href="/oauth2/authorization/naver">네이버 로그인</a>
-        <a href="/oauth2/authorization/google">구글 로그인</a>
+        <a href="/oauth2/authorization/kakao" class="button--kakao">
+            <img src="/images/login/kakaologin.png" alt="카카오 로그인">
+        </a>
+        <a href="/oauth2/authorization/naver" class="button--naver">
+            <img src="/images/login/naverlogin.png" alt="네이버 로그인">
+        </a>
+        <a href="/oauth2/authorization/google" class="button--google">
+            <img src="/images/login/googlelogo.png" alt="구글 로그인">
+        </a>
     </div>
 </div>
 </body>
