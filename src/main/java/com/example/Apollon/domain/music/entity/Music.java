@@ -2,16 +2,14 @@ package com.example.Apollon.domain.music.entity;
 
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.global.jpa.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -26,9 +24,16 @@ public class Music extends BaseEntity {
     private String musicContent;
     private String[] genres;
     private String uploadStudio;
+    private String thumbnailImg;
+    private String musicMp3;
 
     @Getter
     private Long musicPlayCount;
+
+    // 스튜디오 주인(회원)
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @ManyToMany
     @JoinTable(
@@ -37,4 +42,12 @@ public class Music extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "member_id")
     )
     private Set<Member> likedByMembers = new LinkedHashSet<>();
+
+    public void addLikedByMembers(Member liker) {
+        if (this.likedByMembers == null) {
+            this.likedByMembers = new HashSet<>();
+        }
+
+        this.likedByMembers.add(liker);
+    }
 }
