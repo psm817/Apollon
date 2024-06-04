@@ -154,7 +154,7 @@ button {
     color: #000;
 }
 
-/* 해시태그, 로그인/회원가입 */
+/* 회원 닉네임, 로그인/회원가입 */
 .header_profile_box {
     display: flex;
     align-items: center;
@@ -162,44 +162,11 @@ button {
     height: 100%;
 }
 
-/* 태그 위젯(롤링 배너 설정) */
-.header_profile_box > .header_widget_hashTag {
-    width: 400px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    overflow: hidden; /* 롤링 배너 영역 벗어나는 부분 숨기기 */
-}
-
-/* 해시태그 배너 리스트 */
-.widget_hashTag_banner {
-    display: flex;
-    height: 100%; /* 부모 요소에 맞게 배너 리스트 너비 조정 */
-    flex-direction: column;
-    animation: roll 10s linear infinite;
-}
-
-/* 롤링 애니메이션 정의 */
-@keyframes roll {
-    from {
-        transform: translateX(100%);
-    }
-    to {
-        transform: translateX(-100%);
-    }
-}
-
-/* 태그 위젯의 후손인 #member_hashTag */
-.header_profile_box > .header_widget_hashTag widget_hashTag_banner span {
-    color: #FFF;
-    font-size: 14px;
-    font-weight: 400;
-}
-
 /* 로그인/회원가입, 로그아웃/마이페이지 */
+.header_userName {
+    width: 400px;
+}
+
 .header_profile_box > .header_member {
     width: 100%;
 }

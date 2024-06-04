@@ -40,7 +40,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
-// oauth2
+	// oauth2
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
 	// validation - 유효성 체크

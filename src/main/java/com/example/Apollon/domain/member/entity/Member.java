@@ -1,12 +1,10 @@
 package com.example.Apollon.domain.member.entity;
 
 
+import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.global.jpa.BaseEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -42,20 +42,11 @@
 
         <!-- 로그인/회원가입, 로그아웃/마이페이지 -->
         <div class="header_profile_box">
-          <!-- 해시 태그 -->
-          <div class="header_widget_hashTag text">
-            <ul class="widget_hashTag_bannerList">
-              <!-- 나중에 th:each부분을 회원의 개수만큼으로 수정하여 작성할 것 -->
-              <li th:each="member, iterStat : ${members}" class="widget_hashTag_banner text">
-                <!-- th:href는 #hashTag의 경로로 이동되도록 구현할 것 -->
-                <!-- th:text는 member에서 hashTag의 정보를 불러옴 -->
-                <a th:href="@{'#' + member.hashTag}">
-                  <span th:text="'#' + ${member.hashTag}"></span>
-                </a>
-              </li>
-            </ul>
+          <!-- 로그인 회원 닉네임 표출 -->
+          <div class="header_userName">
+            <!-- ${studio.member.username} -->
+            <span th:text="'#' + 123"></span>
           </div>
-
           <!-- 회원 -->
           <div class="header_member">
             <div class="header_isAnonymous text" sec:authorize="isAnonymous()">
