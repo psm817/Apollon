@@ -165,6 +165,7 @@ button {
 /* 로그인/회원가입, 로그아웃/마이페이지 */
 .header_userName {
     width: 400px;
+    color: #fff;
 }
 
 .header_profile_box > .header_member {

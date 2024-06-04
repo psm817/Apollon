@@ -3,7 +3,7 @@
 
   <div>음악 업로드</div>
   
-  <form action="/music/upload" method="post">
+  <form th:action th:object="${uploadForm}" method="post">
     <h3>음악 제목</h3>
     <input type="text" name="title">
     
@@ -11,11 +11,11 @@
     <textarea name="content"></textarea>
     
     <h3>썸네일 이미지</h3>
-    <input type="file">
+    <input type="file" name="thumbnail" accept="image/png, image/gif, image/jpg">
     <button type="submit">등록</button>
-    
+
     <h3>음악 업로드</h3>
-    <input type="file">
+    <input type="file" name="musicMp3" accept="audio/mp4">
     <button type="submit">업로드</button>
   </form>
 
