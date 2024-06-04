@@ -1,6 +1,7 @@
 package com.example.Apollon.global.security;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.service.MemberService;
+import com.example.Apollon.domain.studio.service.StudioService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,7 @@ import java.util.Map;
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     private static final Logger log = LoggerFactory.getLogger(CustomOAuth2UserService.class);
     private final MemberService memberService;
+    private final StudioService studioService;
 
     @Override
     @Transactional
@@ -57,6 +59,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         try {
             Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
             List<GrantedAuthority> authorityList = new ArrayList<>();
+
+            // 스튜디오 자동 생성
+            this.studioService.create(member, 0, 1);
+
             return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
         } catch (IllegalStateException e) {
             log.error("Email already exists: " + email, e);
@@ -76,6 +82,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         try {
             Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
             List<GrantedAuthority> authorityList = new ArrayList<>();
+
+            // 스튜디오 자동 생성
+            this.studioService.create(member, 0, 1);
+
             return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
         } catch (IllegalStateException e) {
             log.error("Email already exists: " + email, e);
@@ -94,6 +104,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         try {
             Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
             List<GrantedAuthority> authorityList = new ArrayList<>();
+
+            // 스튜디오 자동 생성
+            this.studioService.create(member, 0, 1);
+
             return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
         } catch (IllegalStateException e) {
             log.error("Email already exists: " + email, e);
