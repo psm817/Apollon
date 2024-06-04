@@ -2,10 +2,7 @@ package com.example.Apollon.domain.music.entity;
 
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.global.jpa.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,9 +24,16 @@ public class Music extends BaseEntity {
     private String musicContent;
     private String[] genres;
     private String uploadStudio;
+    private String thumbnailImg;
+    private String musicMp3;
 
     @Getter
     private Long musicPlayCount;
+
+    // 스튜디오 주인(회원)
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @ManyToMany
     @JoinTable(

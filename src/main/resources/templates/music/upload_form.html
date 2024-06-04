@@ -1,0 +1,23 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content">
+
+  <div>음악 업로드</div>
+  
+  <form action="/music/upload" method="post">
+    <h3>음악 제목</h3>
+    <input type="text" name="title">
+    
+    <h3>음악 설명</h3>
+    <textarea name="content"></textarea>
+    
+    <h3>썸네일 이미지</h3>
+    <input type="file">
+    <button type="submit">등록</button>
+    
+    <h3>음악 업로드</h3>
+    <input type="file">
+    <button type="submit">업로드</button>
+  </form>
+
+</div>
+</html>
