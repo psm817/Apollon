@@ -1,82 +1,166 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
 <head>
-    <title>회원가입</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 - 약관 동의</title>
     <style>
-        .error {
-            color: red;
+        /* CSS 스타일링 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .success {
-            color: green;
+        body {
+            background-color: #ffffff;
+        }
+        .logo {
+            display: block; /* 인라인 요소를 블록 요소로 변경하여 수평 가운데 정렬 가능 */
+            margin: 0 auto; /* 수평 가운데 정렬 */
+            margin-top: 60px; /* 하단 마진을 20px로 설정 */
+            margin-bottom: 30px; /* 하단 마진을 20px로 설정 */
+        }
+
+        ul>li {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .clearfix::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        #joinForm {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        ul.join_box {
+            border: 1px solid #ddd;
+            background-color: #fff;
+        }
+
+        .checkBox,
+        .checkBox>ul {
+            position: relative;
+        }
+
+        .checkBox>ul>li {
+            float: left;
+        }
+
+        .checkBox>ul>li:first-child {
+            width: 85%;
+            padding: 15px;
+            font-weight: 600;
+            color: #888;
+        }
+
+        .checkBox>ul>li:nth-child(2) {
+            position: absolute;
+            top: 50%;
+            right: 30px;
+            margin-top: -12px;
+        }
+
+        .checkBox textarea {
+            width: 96%;
+            height: 90px;
+            margin: 0 2%;
+            background-color: #f7f7f7;
+            color: #888;
+            border: none;
+        }
+
+        .footBtwrap {
+            margin-top: 15px;
+        }
+
+        .footBtwrap>li {
+            float: left;
+            width: 50%;
+            height: 60px;
+        }
+
+        .footBtwrap>li>button {
+            display: block;
+            width: 100%;
+            height: 100%;
+            font-size: 20px;
+            text-align: center;
+            line-height: 60px;
+        }
+
+        .fpmgBt1 {
+            background-color: #fff;
+            color: #888;
+        }
+
+        .fpmgBt2 {
+            background-color: lightsalmon;
+            color: #fff;
         }
     </style>
-    <script>
-        function validateForm() {
-            const signupError = document.getElementById("signupError");
-            const submitButton = document.getElementById("submitButton");
-            const usernameInput = document.getElementById("username");
-            // Get the value of the username input field
-            const username = usernameInput.value.trim();
-            // Check if the username is not empty
-            if (username !== "") {
-                // Send an AJAX request to the server to check for duplicate username
-                fetch("/member/check-username?username=" + username)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.exists) {
-                            signupError.innerText = "중복된 아이디";
-                            signupError.classList.remove("success");
-                            signupError.classList.add("error");
-                            submitButton.disabled = true;
-                        } else {
-                            signupError.innerText = "사용 가능한 아이디";
-                            signupError.classList.remove("error");
-                            signupError.classList.add("success");
-                            submitButton.disabled = false;
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-            }
-        }
-        document.addEventListener("DOMContentLoaded", function() {
-            validateForm();
-        });
-    </script>
 </head>
+
 <body>
-<div>회원가입</div>
-<form th:action="@{/member/signup}" method="POST" th:onchange="validateForm()">
-    <div>
-        <span>유저 아이디</span>
-        <input type="text" id="username" name="username" placeholder="아이디">
-        <!-- Add a button to check for duplicate username -->
-        <button type="button" onclick="validateForm()">아이디 중복 확인</button>
-    </div>
-    <div>
-        <span>유저 비밀번호</span>
-        <input type="password" name="password" placeholder="비밀번호">
-    </div>
-    <div>
-        <span>유저 비밀번호 확인</span>
-        <input type="password" name="password_confirm" placeholder="비밀번호 확인">
-    </div>
-    <div>
-        <span>닉네임</span>
-        <input type="text" name="nickname" placeholder="닉네임">
-    </div>
-    <div>
-        <span>이메일</span>
-        <input type="email" name="email" placeholder="이메일">
-    </div>
-    <div>
-        <div id="signupError" th:text="${signupError}" class="error"></div>
-    </div>
-    <div>
-        <button type="submit" id="submitButton">회원가입</button>
+<a href="/">
+    <img src="/images/ApollonLogo.png" alt="Your Logo" class="logo">
+</a>
+<form action="/member/signup2" id="joinForm" method="POST">
+    <ul class="join_box">
+        <li class="checkBox check01">
+            <textarea name="" id="">여러분을 환영합니다. 네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.</textarea>
+            <ul class="clearfix">
+                <li>
+                    <input type="checkbox" name="chk">
+                    <label for="chk">이용약관에 동의합니다</label>
+                </li>
+            </ul>
+        </li>
+        <li class="checkBox check02">
+            <textarea name="" id="">칼국수 떡볶이 피자 탕수육 짜장면 치킨 햄버거 빙수  </textarea>
+            <ul class="clearfix">
+                <li>
+                    <input type="checkbox" name="chk">
+                    <label for="chk">개인정보 수집 및 이용에 대한 안내에 동의합니다</label>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <div class="button">
+        <button type="submit" id="submitBtn" disabled>동의</button>
     </div>
 </form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var checkboxes = document.querySelectorAll('input[name="chk"]');
+        var submitBtn = document.getElementById('submitBtn');
+
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener('change', function () {
+                var checkedCheckboxes = document.querySelectorAll('input[name="chk"]:checked');
+                submitBtn.disabled = checkedCheckboxes.length !== checkboxes.length;
+            });
+        });
+
+        // URL 검사 및 리디렉션
+        var currentPage = window.location.href;
+        if (currentPage.indexOf('signup2.html') !== -1) {
+            window.location.href = 'signup.html';
+        }
+    });
+</script>
 </body>
+
 </html>
