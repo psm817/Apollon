@@ -28,6 +28,7 @@ public class StudioService {
         return studio.get();
     }
 
+    @Transactional
     public Studio create(Member member, Integer visit, Integer active) {
         Studio studio = Studio.builder()
                 .member(member)

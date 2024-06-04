@@ -37,25 +37,53 @@ public class StudioController {
             model.addAttribute("studio", studio);
             model.addAttribute("kw", kw);
 
+            if(username.equals(loginedUsername) && studio.getActive() == 0) {
+                return "redirect:/";
+            }
+
             return "studio/studio_detail";
         }
 
-        return "redirect:/";
+        return "studio/studio_detail";
     }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/search")
     public String search(Model model, Principal principal, @RequestParam(value="kw", defaultValue = "") String kw) {
-        if (!kw.isEmpty()) {
-            Studio studio = this.studioService.getStudioByMemberUsername(kw);
+        String loginedUsername = principal.getName();
 
-            if (studio == null || !kw.equals(studio.getMember().getUsername())) {
-                String loginedUsername = principal.getName();
-                Studio loginedUserStudio = this.studioService.getStudioByMemberUsername(loginedUsername);
+        // 관리자일 때는 활성화 관계없이 모두 열람 가능
+        if(loginedUsername.equals("admin")) {
+            if (!kw.isEmpty()) {
+                Studio studio = this.studioService.getStudioByMemberUsername(kw);
 
-                model.addAttribute("studio", loginedUserStudio);
-                model.addAttribute("errorMessage", "검색하신 스튜디오는 존재하지 않습니다.");
-                return "studio/studio_detail";
+                if (studio == null || !kw.equals(studio.getMember().getUsername())) {
+                    Studio loginedUserStudio = this.studioService.getStudioByMemberUsername(loginedUsername);
+
+                    model.addAttribute("studio", loginedUserStudio);
+                    model.addAttribute("errorMessage", "검색하신 스튜디오는 존재하지 않습니다.");
+
+                    return "studio/studio_detail";
+                }
+                else if(studio.getActive() == 0) {
+                    return "redirect:/studio/%s".formatted(kw);
+                }
+            }
+        }
+
+        // 일반 사용자는 차단되어있는 스튜디오는 접근 불가
+        else {
+            if (!kw.isEmpty()) {
+                Studio studio = this.studioService.getStudioByMemberUsername(kw);
+
+                if (studio == null || !kw.equals(studio.getMember().getUsername()) || studio.getActive() == 0) {
+                    Studio loginedUserStudio = this.studioService.getStudioByMemberUsername(loginedUsername);
+
+                    model.addAttribute("studio", loginedUserStudio);
+                    model.addAttribute("errorMessage", "검색하신 스튜디오는 존재하지 않습니다.");
+
+                    return "studio/studio_detail";
+                }
             }
         }
 
