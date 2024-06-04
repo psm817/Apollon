@@ -90,15 +90,15 @@ body {
 
 /* 개인 스튜디오 전체 현황 */
 .introduce-box {
-    width: auto;
+    width: 100%;
     height: 280px;
     background-color: #36454F;
     display: flex;
-    padding-left: 18%;
 }
 /* 개인 프로필 사진 */
 .introduce-box > .profile-box {
     width: 280px;
+    padding-left: 18%;
 }
 
 .introduce-box > .profile-box > img {

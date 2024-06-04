@@ -59,20 +59,4 @@ public class MusicController {
         String referer = request.getHeader("Referer");
         return "redirect:" + (referer != null ? referer : "/");
     }
-
-    // 음악 업로드
-
-    @RequestMapping("/studio")
-    @GetMapping("/upload")
-    public String upload() {
-        return "music/upload_form";
-    }
-
-//    @RequestMapping("/studio")
-//    @PostMapping("/upload")
-//    public String upload(@RequestParam("title") String title, @RequestParam("content") String content, @PathVariable("username") Member username, @RequestParam("thumbnail") MultipartFile thumbnail, @RequestParam("musicFile") MultipartFile musicFile) {
-//        musicService.upload(title, content, username, thumbnail, musicFile);
-//
-//        return "redirect:/studio";
-//    }
 }
