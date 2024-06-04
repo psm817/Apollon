@@ -67,7 +67,7 @@
                         <span>음악 목록</span>
                     </div>
                     <div class="user-menu">
-                        <a class="btn music-plus-btn" href="/music/create"
+                        <a th:action method="post" class="btn music-plus-btn" th:href="@{|/studio/${studio.member.username}/upload|}"
                            th:text="등록">
                             <!--  멤버인증 나중에 추가   -->
                             <!--  sec:authorize="isAuthenticated()"-->

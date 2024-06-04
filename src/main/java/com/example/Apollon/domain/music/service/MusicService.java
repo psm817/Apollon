@@ -2,11 +2,8 @@ package com.example.Apollon.domain.music.service;
 
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.repository.MemberRepository;
-import com.example.Apollon.domain.member.service.MemberService;
 import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.domain.music.repository.MusicRepository;
-import com.example.Apollon.domain.post.entity.Post;
-import com.example.Apollon.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,34 +30,34 @@ public class MusicService {
     private String fileDirPath;
 
     // 음악 업로드(나중에 studio에 등록 기능 추가되면 studio로)
-//    public void upload(String title, String content, Member member, MultipartFile thumbnail, MultipartFile musicfile) {
-//        String thumbnailRelPath = "studio/" + UUID.randomUUID().toString() + ".jpg";
-//        File thumbnailFile = new File(fileDirPath + "/" + thumbnailRelPath);
-//
-//        String musicFileRelPath = "studio/" + UUID.randomUUID().toString() + ".mp3";
-//        File musicFile = new File(fileDirPath + "/" + musicFileRelPath);
-//
-//        try {
-//            thumbnail.transferTo(thumbnailFile);
-//        } catch ( IOException e ) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        try {
-//            musicfile.transferTo(musicFile);
-//        } catch ( IOException e ) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        Music music = Music.builder()
-//                .musicTitle(title)
-//                .musicContent(content)
-//                .uploadStudio(String.valueOf(member))
-//                .thumbnailImg(thumbnailRelPath)
-//                .musicMp3(musicFileRelPath)
-//                .build();
-//        musicRepository.save(music);
-//    }
+    public void upload(String title, String content, String member, MultipartFile thumbnail, MultipartFile musicfile) {
+        String thumbnailRelPath = "studio/" + UUID.randomUUID().toString() + ".jpg";
+        File thumbnailFile = new File(fileDirPath + "/" + thumbnailRelPath);
+
+        String musicFileRelPath = "studio/" + UUID.randomUUID().toString() + ".mp3";
+        File musicFile = new File(fileDirPath + "/" + musicFileRelPath);
+
+        try {
+            thumbnail.transferTo(thumbnailFile);
+        } catch ( IOException e ) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            musicfile.transferTo(musicFile);
+        } catch ( IOException e ) {
+            throw new RuntimeException(e);
+        }
+
+        Music music = Music.builder()
+                .musicTitle(title)
+                .musicContent(content)
+                .uploadStudio(member)
+                .thumbnailImg(thumbnailRelPath)
+                .musicMp3(musicFileRelPath)
+                .build();
+        musicRepository.save(music);
+    }
 
     // 좋아요 추가
     public void likeMusic(Long musicId, Long memberId) {

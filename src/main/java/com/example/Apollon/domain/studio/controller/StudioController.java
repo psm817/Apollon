@@ -2,6 +2,7 @@ package com.example.Apollon.domain.studio.controller;
 
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.service.MemberService;
+import com.example.Apollon.domain.music.service.MusicService;
 import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.domain.studio.service.StudioService;
 import lombok.RequiredArgsConstructor;
@@ -10,10 +11,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 import java.util.List;
@@ -24,6 +23,7 @@ import java.util.List;
 public class StudioController {
     private final StudioService studioService;
     private final MemberService memberService;
+    private final MusicService musicService;
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/{username}")
@@ -119,5 +119,27 @@ public class StudioController {
         }
 
         return "studio/studio_detail";
+    }
+
+    @GetMapping("/{username}/upload")
+    public String upload(Model model, Principal principal, @PathVariable("username") String username) {
+        Studio studio = this.studioService.getStudioByMemberUsername(username);
+
+        model.addAttribute("studio", studio);
+
+        return "music/upload_form";
+    }
+
+    @PostMapping("/{username}/upload")
+    public String upload(@RequestParam("title") String title,
+                         @RequestParam("content") String content,
+                         @PathVariable("username") String memberName,
+                         @RequestParam("thumbnail") MultipartFile thumbnail,
+                         @RequestParam("musicFile") MultipartFile musicFile,
+                         @PathVariable("username") String username) {
+        Studio studio = this.studioService.getStudioByMemberUsername(username);
+        musicService.upload(title, content, memberName, thumbnail, musicFile);
+
+        return "redirect:/studio/%s".formatted(studio.getMember().getUsername());
     }
 }

@@ -52,8 +52,7 @@
         <div class="header_profile_box">
           <!-- 로그인 회원 닉네임 표출 -->
           <div class="header_userName">
-            <!-- ${studio.member.username} -->
-            <span th:text="'#' + 123"></span>
+            <span sec:authorize="isAuthenticated()" th:text="'#' + ${#authentication.principal.username}"></span>
           </div>
           <!-- 회원 -->
           <div class="header_member">
