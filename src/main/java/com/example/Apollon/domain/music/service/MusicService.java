@@ -30,11 +30,11 @@ public class MusicService {
     private String fileDirPath;
 
     // 음악 업로드(나중에 studio에 등록 기능 추가되면 studio로)
-    public void upload(String title, String content, String member, MultipartFile thumbnail, MultipartFile musicfile) {
-        String thumbnailRelPath = "studio/" + UUID.randomUUID().toString() + ".jpg";
+    public void upload(String title, String content, String member, MultipartFile thumbnail, MultipartFile song) {
+        String thumbnailRelPath = UUID.randomUUID().toString() + ".jpg";
         File thumbnailFile = new File(fileDirPath + "/" + thumbnailRelPath);
 
-        String musicFileRelPath = "studio/" + UUID.randomUUID().toString() + ".mp3";
+        String musicFileRelPath = UUID.randomUUID().toString() + ".mp3";
         File musicFile = new File(fileDirPath + "/" + musicFileRelPath);
 
         try {
@@ -44,7 +44,7 @@ public class MusicService {
         }
 
         try {
-            musicfile.transferTo(musicFile);
+            song.transferTo(musicFile);
         } catch ( IOException e ) {
             throw new RuntimeException(e);
         }
