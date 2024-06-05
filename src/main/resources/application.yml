@@ -59,5 +59,9 @@ spring:
       org.hibernate.SQL: DEBUG
       org.hibernate.orm.jdbc.bind: TRACE
       org.hibernate.orm.jdbc.extract: TRACE
+  servlet:
+    multipart:
+      maxFileSize: 10MB
+      maxRequestSize: 30MB
 custom:
       fileDirPath: C:\
