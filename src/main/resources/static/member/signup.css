@@ -1,0 +1,96 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Pretendard-Regular';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul, li {
+    list-style: none;
+}
+
+.container > .logo {
+    margin-top: 60px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.container > .signup-check-box {
+    margin-top: 50px;
+}
+
+.container > .signup-check-box > form {
+    max-width: 1000px;
+    height: 590px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.signup-check-box > form > ul {
+    margin-top: 0;
+    height: 100%;
+}
+
+.signup-check-box > form > ul > .checkBox {
+    height: 50%;
+    padding-right: 40px;
+}
+
+.signup-check-box > form > ul > .check01 > .text-box {
+    border: 1px solid #000;
+    border-radius: 6px;
+    height: 62%;
+    overflow: auto;
+    padding: 10px;
+    background-color: #F4F4F5;
+}
+
+.signup-check-box > form > ul > .check01 > .text-box > span {
+    padding-left: 20px;
+}
+
+.signup-check-box > form > ul > .check01 > .chk-btn {
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.signup-check-box > form > ul > .check02 > .text-box {
+    border: 1px solid #000;
+    border-radius: 6px;
+    height: 62%;
+    overflow: auto;
+    padding: 10px;
+    background-color: #F4F4F5;
+}
+
+.signup-check-box > form > ul > .check02 > .text-box > span {
+    padding-left: 20px;
+}
+
+.signup-check-box > form > ul > .check02 > .chk-btn {
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.container > .signup-check-box > form > .button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.container > .signup-check-box > form > .button > button {
+    color: #fff;
+    font-family: 'Pretendard-Regular';
+    background-color: #36454F;
+    margin-right: 33px;
+    height: 35px;
+    width: 60px;
+    border-radius: 6px;
+    cursor: pointer;
+}

@@ -195,10 +195,6 @@ body {
     height: 70px;
 }
 
-.detail-box > .myMusic-box > ul > .music-detail > .music-title {
-    width: 60%;
-}
-
 .detail-box > .myMusic-box > ul > .music-detail:hover {
     background-color: #e6f5ff;
     cursor: pointer;
@@ -210,7 +206,7 @@ body {
 }
 
 .detail-box > .myMusic-box > ul > li > .music-title {
-    width: 53%;
+    width: 57%;
     margin-left: 30px;
     display: flex;
     align-items: center;
@@ -224,11 +220,11 @@ body {
 }
 
 .detail-box > .myMusic-box > ul > li > .like {
-    width: 15%;
+    width: 13%;
 }
 
 .detail-box > .myMusic-box > ul > li > .create-date {
-    width: 25%;
+    width: 23%;
 }
 
 /* 코멘트 박스 */
@@ -237,76 +233,91 @@ body {
     flex-basis: 0;
 }
 
-/* 코멘트 박스 - 상단(타이틀, 버튼) */
+/* 코멘트 박스 - 상단(타이틀) */
 .detail-box > .comment-box > .top-box {
-    display: flex;
     height: 50px;
     padding-left: 40px;
     margin-top: 10px;
     box-sizing: border-box;
-    justify-content: space-between;
 }
 
-.detail-box > .comment-box > .top-box > .title > span {
+.detail-box > .comment-box > .top-box > .title-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.detail-box > .comment-box > .top-box > .title-flex > span {
     font-size: 28px;
     font-weight: bold;
-    line-height: 50px;
 }
 
-.detail-box > .comment-box > .top-box > .user-menu {
+.detail-box > .comment-box > .top-box > .title-flex > .writer {
+    font-size: 16px;
+    line-height: 50px;
+    margin-right: 50px;
+}
+
+/* 코멘트 박스 - 하단(상세보기) */
+.detail-box > .comment-box > .bottom-detail-box {
+    height: 100%;
+    padding-left: 50px;
     padding-right: 50px;
+    margin-top: 25px;
 }
 
-.detail-box > .comment-box > .top-box > .user-menu > a {
-    line-height: 50px;
-    font-weight: bold;
-    margin-right: 15px;
-}
-
-.detail-box > .comment-box > .top-box > .user-menu > button {
-    line-height: 50px;
-    font-weight: bold;
-    margin-right: 15px;
-    font-size: 15px;
-    cursor: pointer;
-}
-
-/* 코멘트 박스 - 하단(목록) */
-.detail-box > .comment-box > form > ul {
-    padding-left: 20px;
-    box-sizing: border-box;
-    width: 100%;
-    overflow-y: auto;
-    max-height: 58%;
-}
-
-.detail-box > .comment-box > form > ul > li {
+.detail-box > .comment-box > .bottom-detail-box > form > .title-input {
     display: flex;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    height: 30px;
-    border-bottom: 1px solid #8d8d8d;
-    align-items: center;
+    flex-direction: column;
+    height: 90px;
 }
 
-.detail-box > .comment-box > form > ul > .comment-detail:hover {
-    background-color: #e6f5ff;
+.detail-box > .comment-box > .bottom-detail-box > form > .title-input > label {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.detail-box > .comment-box > .bottom-detail-box > form > .title-input > .title-detail {
+    border: 1px solid #000;
+    border-radius: 6px;
+    height: 50px;
+    margin-top: 15px;
+    padding: 5px 0px 5px 10px;
+    line-height: 40px;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+.detail-box > .comment-box > .bottom-detail-box > form > .content-input {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    height: 180px;
+}
+
+.detail-box > .comment-box > .bottom-detail-box > form > .content-input > label {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.detail-box > .comment-box > .bottom-detail-box > form > .content-input > .content-detail {
+    border: 1px solid #000;
+    border-radius: 6px;
+    height: 100%;
+    margin-top: 15px;
+    padding: 5px 0px 5px 10px;
+    line-height: 30px;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+.detail-box > .comment-box > .bottom-detail-box > form > input {
+    margin-top: 20px;
+    border-radius: 6px;
+    background-color: #36454F;
+    color: #fff;
     cursor: pointer;
-}
-
-.detail-box > .comment-box > form > ul > .comment-detail {
-    height: 30px;
-}
-
-.detail-box > .comment-box > form > ul > li > .number {
-    width: 15%;
-    text-align: center;
-    display: block;
-}
-
-.detail-box > .comment-box > form > ul > li > .comment-title {
-    width: 85%;
-    margin-left: 30px;
-    display: block;
+    width: 80px;
+    height: 35px;
 }
