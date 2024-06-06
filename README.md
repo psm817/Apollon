@@ -16,8 +16,8 @@
 ## ⏱️개발 기간
 
 - 전체 개발 기간 : 2024-05-27 ~ 2024-06-27
-- UI 구현 : 2022-12-09 ~ 2022-12-16
-- 기능 구현 : 2022-12-17 ~ 2022-12-31
+- UI 구현 : 2024-05-27 ~ 2024-06-27
+- 기능 구현 : 2024-05-27 ~ 2024-06-27
 
 ## ⚙ 개발 환경
 - 운영체제 : Windows 10, 11
@@ -72,7 +72,7 @@
 
 ## 🧑‍🏫 역할 분담
 
-### 🍇 박상민
+### 🍇 박상민 (조장)
 
 - **UI**
   - 페이지 : 스튜디오, 마이페이지
@@ -126,97 +126,99 @@
 
 <br>
 
-
-## 🕹 구현 기능
-- Entity 설계 (User, Item, Cart, CartItem, Board) (2022-01-14)
-- 상품 기능 구현 (CRUD) (2022-01-15)
-- 상품 CRUD 관련 html (2022-01-17)
-- 상품 리스트 페이지 검색 기능 (2022-01-19)
-- 상품 리스트 페이지 페이징 처리 (2022-01-19)
-- 판매자/구매자 프로필 페이지 구현 html (2022-01-22)
-- 장바구니 기능 구현 (2022-01-22)
-- 장바구니 페이지 html (2022-01-22)
-- 주문 관련 Entity 추가 설계 (Order, OrderItem) (2022-01-24)
-- 판매자/구매자 프로필 페이지와 연관된 회원정보수정 구현 (2022-01-25)
-- 장바구니 상품 주문 기능 구현 (2022-01-26)
-- 상품관리 페이지, 판매내역 페이지 html (2022-01-26)
-- 판매 관련 Entity 추가 설계 (Sale, SaleItem) (2022-01-27)
-- 상품 상세 페이지 렌더링 (th:if) (2022-01-28)
-- 전체 html 통일 및 완성 (타임리프) (2022-01-28)
-- 개별 상품 구매 기능 추가 (2022-01-29)
-- 주문 취소 기능 구현 (2022-01-30)
-- 기능 별 예외 처리 (2022-01-31)
-- 충전 API 추가 (2022-02-01)
-- 완성 (2022-02-05)
-
 ## 프로젝트 전체 구조
 
 ```
 ├── README.md
-├── .eslintrc.js
+├── build.gradle
 ├── .gitignore
-├── .prettierrc.json
-├── package-lock.json
-├── package.json
+├── gradlew.bat
+├── gradlew
 │
-├── public
-│    └── index.html
-└── src
-     ├── App.jsx
-     ├── index.jsx
-     ├── api
-     │     └── mandarinAPI.js
-     ├── asset
-     │     ├── fonts
-     │     ├── css_sprites.png
-     │     ├── logo-404.svg
-     │     └── logo-home.svg
-     │          .
-     │          .
-     │          .
-     ├── atoms
-     │     ├── LoginData.js
-     │     └── LoginState.js
-     ├── common
-     │     ├── alert
-     │     │     ├── Alert.jsx
-     │     │     └── Alert.Style.jsx
-     │     ├── button
-     │     ├── comment
-     │     ├── inputBox
-     │     ├── post
-     │     ├── postModal
-     │     ├── product
-     │     ├── tabMenu
-     │     ├── topBanner
-     │     └── userBanner
-     ├── pages
-     │     ├── addProduct
-     │     │     ├── AddProduct.jsx
-     │     │     └── AddProduct.Style.jsx
-     │     ├── chatList
-     │     ├── chatRoom
-     │     ├── emailLogin
-     │     ├── followerList
-     │     ├── followingList
-     │     ├── home
-     │     ├── join
-     │     ├── page404
-     │     ├── postDetail
-     │     ├── postEdit
-     │     ├── postUpload
-     │     ├── productEdit
-     │     ├── profile
-     │     ├── profileEdit
-     │     ├── profileSetting
-     │     ├── search
-     │     ├── snsLogin
-     │     └── splash
-     ├── routes
-     │     ├── privateRoutes.jsx
-     │     └── privateRoutesRev.jsx  
-     └── styles
-           └── Globalstyled.jsx
+└── src.main
+     ├── java.com.example.Apollon
+           ├── ApollonApplication.java
+           ├── domain
+                  ├── comment
+                          ├── contorller.CommentController.java
+                          ├── entity.Commnet.java
+                          ├── form.CommentForm.java
+                          ├── repository.CommentRepository.java
+                          ├── service.CommentService.java
+                  ├── email
+                        ├── EmailController.java
+                        ├── EmailMessage.java
+                        ├── EmailResponseDto.java
+                        ├── EmailService.java
+                  ├── home
+                        ├── contorller.HomeController.java
+                  ├── member
+                        ├── contorller.MemberController.java
+                        ├── contorller.UsernameCheckController.java
+                        ├── entity.Member.java
+                        ├── repository.MemberRepository.java
+                        ├── service.MemberService.java
+                  ├── music
+                        ├── contorller.MusicController.java
+                        ├── entity.Music.java
+                        ├── repository.MusicRepository.java
+                        ├── service.MusicService.java
+                  ├── post
+                        ├── contorller.PostController.java
+                        ├── entity.Post.java
+                        ├── repository.PostRepository.java
+                        ├── service.PostService.java
+                  ├── studio
+                        ├── contorller.StudioController.java
+                        ├── entity.Studio.java
+                        ├── repository.StudioRepository.java
+                        ├── service.StudioService.java
+           ├── global
+                  ├── initData
+                          ├── Dev.java
+                  ├── jpa
+                       ├── BaseEntity.java
+                  ├── security
+                          ├── CustomOAuth2UserService.java
+                          ├── SecurityConfig.java
+                          ├── UserSecurityService.java
+                  ├── DataNotFoundException.java
+    ├── resource
+            ├── static
+                   ├── chart
+                          ├── genreChart.css
+                          ├── top100.css
+                   ├── comment
+                          ├── comment.css
+                          ├── comment_detail.css
+                   ├── images
+                          ├── login
+                                ├── googlelogo.png
+                                ├── kakaologin.png
+                                ├── naverlogin.png
+                          ├── slide_img
+                                   ├── water bomb-1.png
+                                   ├── water bomb-2.png
+                                   ├── wbPost.png
+                                   ├── wdjfestivalPost.png
+                                   ├── world dj festival.png
+                          ├── ApollonLogo.png
+                          ├── My project.png
+                   ├── music
+                         ├── upload_form.css
+                   ├── post
+                         ├── postList.css
+                   ├── footerStyle.css
+                   ├── headerStyle.css
+                   ├── mainPage.css
+                   ├── studio.css
+                   ├── style.css
+            ├── templates
+            ├── application.yml
+            ├── application-dev.yml
+            ├── application-prod.yml
+            ├── application-secret.yml (비공개)
+            ├── application-secret.yml.default
 ```
 
 ## 작업 관리 방법

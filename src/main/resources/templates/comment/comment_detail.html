@@ -3,10 +3,8 @@
         <div class="top-section">
             <div class="welcome-box">
                 <span th:text="'#' + ${studio.member.username} + ' 님의 스튜디오에 오신 것을 환영합니다.'"></span>
-                <a th:href="@{|/studio/${studio.member.username}/changeActive|}"
-                   th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' and studio.active == 1}">스튜디오 차단</a>
-                <a th:href="@{|/studio/${studio.member.username}/changeActive|}"
-                   th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' and studio.active == 0}">스튜디오  활성화</a>
+                <a th:href="@{|/studio/${studio.member.username}/changeActive|}" th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' and studio.active == 1}">스튜디오 차단</a>
+                <a th:href="@{|/studio/${studio.member.username}/changeActive|}" th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' and studio.active == 0}">스튜디오  활성화</a>
             </div>
             <div th:if="${message}">
                 <script th:inline="javascript">
@@ -14,12 +12,18 @@
                 </script>
             </div>
             <div class="search-box">
-                <form th:action="@{/studio/search}" method="POST">
+                <form th:action="@{/studio/search}" method="get">
                     <div class="search-input-box">
                         <input type="text" id="kw" name="kw" class="form-control" required placeholder="스튜디오 이름 검색" th:value="${kw}">
                         <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                 </form>
+            </div>
+            <div th:if="${errorMessage}">
+                <script th:inline="javascript">
+                    var errorMessage = [[${errorMessage}]];
+                    alert(errorMessage);
+                </script>
             </div>
         </div>
         <div class="introduce-box">
@@ -82,7 +86,7 @@
                 </div>
                 <ul class="music-list">
                     <!-- 타임리프? 체크 박스 전체 선택할 수 있도록 해야함 -->
-                    <li>
+                    <li class="fix-menu">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckAll">
                             <label class="form-check-label" for="flexCheckAll"></label>
@@ -195,85 +199,38 @@
             </div>
             <div class="comment-box">
                 <div class="top-box">
-                    <div class="title">
-                        <span>방명록</span>
-                        <span th:text="'(' + ${#lists.size(commentList)} + ')'"></span>
-                    </div>
-                    <div class="user-menu">
-                        <a class="comment-plus-btn" th:href="@{|/studio/${studio.member.username}/comment/create/${#authentication.principal.username}|}" th:text="작성"></a>
-                        <button class="comment-delete-btn" onclick="return confirm('선택하신 방명록을 삭제하시겠습니까?');"
-                                th:text="삭제"
-                                th:if="${#authorization.expression('isAuthenticated()') and (#authentication.principal.username == 'admin' or #authentication.principal.username == studio.member.username)}"
-                                id="deleteSelectedBtn"></button>
+                    <div class="title-flex">
+                        <span>방명록 상세보기</span>
+                        <span class="writer" th:text="'작성자 : ' + ${comment.member.username}"></span>
                     </div>
                 </div>
-                <form id="deleteCommentsForm" method="post" th:action="@{|/studio/${studio.member.username}/comment/delete|}">
-                    <ul class="comment-list">
-                        <!-- 타임리프? 체크 박스 전체 선택할 수 있도록 해야함 -->
-                        <li>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckAll2">
-                                <label class="form-check-label" for="flexCheckAll2"></label>
+                <div class="bottom-detail-box">
+                    <form th:action="@{|/studio/${studio.member.username}/comment/create/${#authentication.principal.username}|}" th:object="${CommentForm}" method="POST">
+                        <div class="title-input">
+                            <label for="title">제목</label>
+                            <div class="title-detail">
+                                <span th:text="${comment.title}"></span>
                             </div>
-                            <span class="number">번호</span>
-                            <span class="comment-title">제목</span>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li th:each="comment, iterStat : ${commentList}" class="comment-detail">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="commentIds" th:value="${comment.id}" id="flexCheckDefault2" th:id="'flexCheckDefault2' + ${iterStat.index}">
-                                <label class="form-check-label" th:for="'flexCheckDefault2' + ${iterStat.index}"></label>
+                        </div>
+                        <div class="content-input">
+                            <label for="content">내용</label>
+                            <div class="content-detail">
+                                <span th:text="${comment.content}"></span>
                             </div>
-                            <a th:href="@{|/studio/${studio.member.username}/comment/detail/${comment.id}|}" class="number" th:text="${iterStat.index + 1}"></a>
-                            <a th:href="@{|/studio/${studio.member.username}/comment/detail/${comment.id}|}" class="comment-title" th:text="${comment.title}"></a>
-                        </li>
-                    </ul>
-                </form>
+                        </div>
+                        <input type="button" value="뒤로가기" onclick="history.back()">
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </html>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var alertMessage = urlParams.get('alertMessage');
-            if (alertMessage) {
-                var alertDiv = document.createElement('div');
-                alertDiv.style.color = 'red';
-                alertDiv.style.marginTop = '5px';
-                alertDiv.textContent = alertMessage;
-                var searchInputBox = document.querySelector('.search-input-box');
-                searchInputBox.appendChild(alertDiv);
-            }
-        });
-
     document.getElementById('flexCheckAll').addEventListener('change', function() {
-        let checkboxes = document.querySelectorAll('.music-detail .form-check-input');
+        let checkboxes = document.querySelectorAll('#flexCheckDefault');
         checkboxes.forEach(checkbox => {
             checkbox.checked = this.checked;
         });
-    });
-
-    document.getElementById('flexCheckAll2').addEventListener('change', function() {
-        let checkboxes = document.querySelectorAll('.comment-detail .form-check-input');
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = this.checked;
-        });
-    });
-
-    document.getElementById('deleteSelectedBtn').addEventListener('click', function(event) {
-        event.preventDefault();
-        let form = document.getElementById('deleteCommentsForm');
-        let selectedCheckboxes = document.querySelectorAll('.comment-detail .form-check-input:checked');
-        if (selectedCheckboxes.length > 0) {
-            if (confirm('선택하신 방명록을 삭제하시겠습니까?')) {
-                form.submit();
-            }
-        }
-        else {
-            alert('삭제할 댓글을 선택해주세요.');
-        }
     });
 </script>

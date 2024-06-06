@@ -1,5 +1,6 @@
 package com.example.Apollon.domain.studio.entity;
 
+import com.example.Apollon.domain.comment.entity.Comment;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.global.jpa.BaseEntity;
@@ -46,6 +47,11 @@ public class Studio extends BaseEntity {
     private Integer active = 1;
 
     private LocalDateTime createDate;
+
+    // 방명록 가져오기
+    @OneToMany(mappedBy = "studio", cascade = CascadeType.REMOVE)
+    @LazyCollection(LazyCollectionOption.EXTRA)
+    private List<Comment> commentList;
 
     public void addLike(Member liker) {
         if (this.likers == null) {
