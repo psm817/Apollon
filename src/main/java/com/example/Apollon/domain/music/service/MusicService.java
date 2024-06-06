@@ -30,31 +30,34 @@ public class MusicService {
     @Value("${custom.fileDirPath}")
     private String fileDirPath;
 
-    private final ResourceLoader resourceLoader;
-
     // 음악 업로드
     public void upload(String title, String content, String member, MultipartFile thumbnail, MultipartFile song, String[] genres) {
-        String thumbnailRelPath = UUID.randomUUID() + ".jpg";
-        File thumbnailFile = new File(fileDirPath + "/" + thumbnailRelPath);
 
+        String thumbnailDirPath = fileDirPath + "/uploadFile/uploadImgs";
+        String musicDirPath = fileDirPath + "/uploadFile/uploadMusics";
+
+        String thumbnailRelPath = UUID.randomUUID() + ".jpg";
         String musicFileRelPath = UUID.randomUUID() + ".mp3";
-        File musicFile = new File(fileDirPath + "/" + musicFileRelPath);
+
+        File thumbnailFile = new File(thumbnailDirPath + "/" + thumbnailRelPath);
+        File musicFile = new File(musicDirPath + "/" + musicFileRelPath);
 
         try {
             thumbnail.transferTo(thumbnailFile);
             song.transferTo(musicFile);
-        } catch ( IOException e ) {
-            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to upload files", e);
         }
 
         Music music = Music.builder()
                 .musicTitle(title)
                 .musicContent(content)
                 .uploadStudio(member)
-                .thumbnailImg(thumbnailRelPath)
-                .musicMp3(musicFileRelPath)
+                .thumbnailImg("/uploadImgs/" + thumbnailRelPath)
+                .musicMp3("/uploadMusics/" + musicFileRelPath)
                 .genres(genres)
                 .build();
+
         musicRepository.save(music);
     }
 
