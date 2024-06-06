@@ -77,7 +77,7 @@
             Music music = musicService.getMusic(id);
             String musicFilePath = music.getMusicMp3();
 
-            String fileDirPath = "src/main/resources/static/uploadFile/uploadMusics";
+            String fileDirPath = "src/main/resources/static/uploadFile";
             Path path = Paths.get(fileDirPath, musicFilePath);
 
             // 파일이 존재하지 않을 경우 404 응답 반환
