@@ -64,4 +64,4 @@ spring:
           transaction:
             in:
 custom:
-  fileDirPath: C:\
+  fileDirPath: C:\\
