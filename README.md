@@ -196,6 +196,9 @@
                                 ├── googlelogo.png
                                 ├── kakaologin.png
                                 ├── naverlogin.png
+                                ├── googlelogo2.png
+                                ├── naverlogo2.png
+                                ├── kakaologo2.png
                           ├── slide_img
                                    ├── water bomb-1.png
                                    ├── water bomb-2.png
@@ -204,6 +207,10 @@
                                    ├── world dj festival.png
                           ├── ApollonLogo.png
                           ├── My project.png
+                   ├── member
+                         ├── login.css
+                         ├── signup.css
+                         ├── signup2.css
                    ├── music
                          ├── upload_form.css
                    ├── post
@@ -214,6 +221,29 @@
                    ├── studio.css
                    ├── style.css
             ├── templates
+                    ├── chart
+                          ├── genreChart.html
+                          ├── TOP100.html
+                    ├── comment
+                            ├── comment_detail.html
+                            ├── comment_form.html
+                    ├── member
+                           ├── login.html
+                           ├── signup.html
+                           ├── signup2.html
+                    ├── music
+                          ├── upload_form.html
+                    ├── post
+                          ├── post_detail.html
+                          ├── post_list.html
+                    ├── sendmail
+                            ├── password.html
+                    ├── studio
+                           ├── studio_detail.html
+                    ├── footer.html
+                    ├── header.html
+                    ├── layout.html
+                    ├── mainPage.html
             ├── application.yml
             ├── application-dev.yml
             ├── application-prod.yml
@@ -224,9 +254,7 @@
 ## 작업 관리 방법
 
 - GitHub Projects와 Issues를 사용하여 진행 상황을 공유했습니다.
-- 주간회의를 진행하며 작업 순서와 방향성에 대한 고민을 나누고 GitHub Wiki에 회의 내용을 기록했습니다.
-- [접근제한 설정](https://github.com/likelion-project-README/README/wiki/README-6.%EC%8B%A0%EA%B2%BD-%EC%93%B4-%EB%B6%80%EB%B6%84_%EC%A0%91%EA%B7%BC%EC%A0%9C%ED%95%9C-%EC%84%A4%EC%A0%95)
-- [Recoil을 통한 상태관리 및 유지](https://github.com/likelion-project-README/README/wiki/README-6.%EC%8B%A0%EA%B2%BD-%EC%93%B4-%EB%B6%80%EB%B6%84_Recoil%EC%9D%84-%ED%86%B5%ED%95%9C-%EC%83%81%ED%83%9C%EA%B4%80%EB%A6%AC-%EB%B0%8F-%EC%9C%A0%EC%A7%80)
+- 매일 본인의 작업 양을 소화하고 각자 구현한 기능을 서로 테스트하며 프로그램의 신뢰성을 쌓았습니다.
 
 
 ## 페이지별 기능 소개
@@ -499,3 +527,4 @@
 ## 🔗Link
 
 [프로젝트 완성 및 시연 영상](https://velog.io/@rladuswl/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%99%84%EC%84%B1-%EB%B0%8F-%EC%8B%9C%EC%97%B0-%EC%98%81%EC%83%81)
+
