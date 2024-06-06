@@ -3,10 +3,7 @@ package com.example.Apollon.domain.music.entity;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.global.jpa.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.HashSet;
@@ -20,12 +17,34 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 public class Music extends BaseEntity {
+    @Setter
+    @Getter
     private String musicTitle;
+    @Getter
+    @Setter
     private String musicContent;
-    private String[] genres;
+    @Setter
+    @Getter
     private String uploadStudio;
+    @Getter
+    @Setter
     private String thumbnailImg;
+    @Getter
+    @Setter
     private String musicMp3;
+    @Setter
+    @Getter
+    private String[] genres;
+
+    @Setter
+    @Getter
+    @Transient
+    private String thumbnailImgFullPath;
+
+    @Setter
+    @Getter
+    @Transient
+    private String musicMp3FullPath;
 
     @Getter
     private Long musicPlayCount;
@@ -50,4 +69,13 @@ public class Music extends BaseEntity {
 
         this.likedByMembers.add(liker);
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }
