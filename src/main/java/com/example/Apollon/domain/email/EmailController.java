@@ -1,11 +1,15 @@
 package com.example.Apollon.domain.email;
 
 import com.example.Apollon.domain.member.entity.Member;
+import com.example.Apollon.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/sendmail")
@@ -13,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class EmailController {
 
     private final EmailService emailService;
+    private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping("/password")
     public ResponseEntity<Void> sendPasswordMail(@RequestBody EmailResponseDto emailResponseDto) {
@@ -22,6 +28,17 @@ public class EmailController {
         String subject = "[SAVIEW] 이메일 인증을 위한 인증 코드 발송";
         // 인증번호 생성
         String code = emailService.createCode();
+
+        Optional<Member> optionalMember = memberRepository.findByEmail(emailResponseDto.getEmail());
+        if (optionalMember.isPresent()) {
+            Member member = optionalMember.get();
+            // 새로운 비밀번호를 암호화하여 저장
+            member.setPassword(passwordEncoder.encode(code));
+            memberRepository.save(member);
+        } else {
+            throw new RuntimeException("해당 이메일을 가진 회원을 찾을 수 없습니다.");
+        }
+
         // 이메일 본문 내용
         String body = "인증 코드는 다음과 같습니다: " + code;
 
