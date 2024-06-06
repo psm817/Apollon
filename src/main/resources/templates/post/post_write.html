@@ -30,7 +30,9 @@
             </div>
             <div class="post-category box">
                 <hr>
+
                 <div class="board-title">====== 게시판 ======</div>
+
                 <ul class="board-list">
                     <li class="board-item">
                         <span class="icon">📋</span>
@@ -49,61 +51,44 @@
         </div>
         <div class="container">
             <div class="notice-box box">
-                <div class="notice-header">
-                    <span>공지사항</span>
-                </div>
+
                 <div class="notice-body">
-                    <div class="notice-item">
-                        <span>공지</span>
-                    </div>
-                    <div class="notice-item">
-                        <span>공지</span>
-                    </div>
-                    <div class="notice-item">
-                        <span>공지</span>
-                    </div>
-                    <div class="notice-item">
-                        <span>공지</span>
-                    </div>
+                    <span>글 작성하기</span>
+
                 </div>
             </div>
-            <div class="category-box box">
-                <span>게시판</span>
-                <span>제목</span>
-                <span>작성자</span>
-                <span>작성일</span>
-                <span>조회</span>
-            </div>
+
             <div class="postList-box box">
+
                 <div class="postbox-body">
-                    <tr th:each="post : ${postList}">
-                        <div class="post-item">
-                            <span>자유</span>
-                            <div class="post-title">
-                                <a th:text="${post.title}" th:href="@{|/post/detail/${post.id}|}"></a>
-                            </div>
-                            <div class="post-writer">
-                                <a th:text="${post.writer}" th:href="@{|/post/detail/${post.id}|}"></a>
-                            </div>
-                            <div class="post-createDate">
-                                <a th:text="${post.createDate}" th:href="@{|/post/detail/${post.id}|}"></a>
-                            </div>
-                            <div class="post-hit">
-                                <a th:text="${post.hit}" th:href="@{|/post/detail/${post.id}|}"></a>
-                            </div>
+                    <form action="/post/write" method="post">
+                        <div>
+                            <label for="title">제목:</label>
+                            <input type="text" id="title" name="title" required>
                         </div>
-                    </tr>
+                        <div>
+                            <label for="content">내용:</label>
+                            <textarea id="content" name="content" required></textarea>
+                        </div>
+                        <div>
+                            <button type="submit">작성완료</button>
+                        </div>
+                    </form>
+
                 </div>
                 <div class="postList-footer">
-                    <button onclick="location.href='/post/write'">글 작성하기</button>
                     <button>=========여기자리는 글쓰기 페이징 처리할부분=====</button>
+
                 </div>
             </div>
         </div>
+
         <div class="container">
+
             <div class="box">
                 <div id="clock" class="clock1"></div>
             </div>
+
             <div class="todayHotpost-box box">
                 <div class="todayHotpost-header">
                     <span>오늘의 TOP10</span>
@@ -140,22 +125,20 @@
                     <div class="todayHotpost-item">
                         <span>10</span>
                     </div>
+
                 </div>
+
             </div>
+
         </div>
     </div>
+
+
+
+
+
+
+
+
 </div>
 </html>
-<script>
-    function updateClock() {
-        const now = new Date();
-        const hours = String(now.getHours()).padStart(2, "0");
-        const minutes = String(now.getMinutes()).padStart(2, "0");
-        const seconds = String(now.getSeconds()).padStart(2, "0");
-        const timeString = `${hours}:${minutes}:${seconds}`;
-        document.getElementById("clock").textContent = timeString;
-    }
-
-    setInterval(updateClock, 1000);
-    updateClock(); // initial call to display the clock immediately
-</script>

@@ -1,5 +1,6 @@
 package com.example.Apollon.domain.post.service;
 
+import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.post.entity.Post;
 import com.example.Apollon.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,9 @@ public class PostService {
         Post post = Post.builder()
                 .title(title)
                 .content(content)
+                .writer(null)
                 .createDate(LocalDateTime.now())
+                .hit(0)
                 .build();
         postRepository.save(post);
     }

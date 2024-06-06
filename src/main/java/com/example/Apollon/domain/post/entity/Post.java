@@ -1,12 +1,15 @@
 package com.example.Apollon.domain.post.entity;
 
+import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.global.jpa.BaseEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.CreatedDate;
 
 
 import java.time.LocalDateTime;
@@ -21,7 +24,16 @@ import java.time.LocalDateTime;
 public class Post extends BaseEntity {
     private String title;
     private String content;
+    private String writer;
 
+    @CreatedDate
+    private LocalDateTime createDate;
 
+    private long hit;
 
+    @ManyToOne
+    private Member author;
 }
+
+
+
