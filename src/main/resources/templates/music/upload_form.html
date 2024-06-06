@@ -8,13 +8,27 @@
     <input type="text" name="title">
     
     <h3>음악 설명</h3>
-    <textarea name="content"></textarea>
+    <textarea name="content" rows="10"></textarea>
     
     <h3>썸네일 이미지</h3>
     <input type="file" name="thumbnail" accept="image/png, image/gif, image/jpg">
   
     <h3>음악 업로드</h3>
     <input type="file" name="musicFile" accept="audio/mpeg, audio/mp4, audio/mp3, audio/wav">
+    
+    <h3>음악 장르 선택</h3>
+    <div>
+      <label><input type="checkbox" name="genres[]" value="Ballad"> 발라드</label>
+      <label><input type="checkbox" name="genres[]" value="Dance"> 댄스</label>
+      <label><input type="checkbox" name="genres[]" value="Rap/HipHop"> 랩/힙합</label>
+      <label><input type="checkbox" name="genres[]" value="R&B/Soul"> R&B/Soul</label>
+      <label><input type="checkbox" name="genres[]" value="Rock/Metal"> 록/메탈</label>
+      <label><input type="checkbox" name="genres[]" value="Electronica"> 일렉트로니카</label>
+      <label><input type="checkbox" name="genres[]" value="OST"> OST</label>
+      <label><input type="checkbox" name="genres[]" value="JPOP"> JPOP</label>
+      <label><input type="checkbox" name="genres[]" value="indie"> 인디음악</label>
+      <label><input type="checkbox" name="genres[]" value="etc"> 그 외</label>
+    </div>
     
     <button type="submit">업로드</button>
   </form>
