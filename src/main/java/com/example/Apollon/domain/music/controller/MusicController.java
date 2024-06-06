@@ -75,7 +75,10 @@
         @GetMapping("/music/play/{id}")
         public ResponseEntity<Resource> playMusic(@PathVariable("id") Long id, @RequestHeader HttpHeaders headers) {
             Music music = musicService.getMusic(id);
-            Path path = Paths.get(music.getMusicMp3());
+            String musicFilePath = music.getMusicMp3();
+
+            String fileDirPath = "src/main/resources/static/uploadFile/uploadMusics";
+            Path path = Paths.get(fileDirPath, musicFilePath);
 
             // 파일이 존재하지 않을 경우 404 응답 반환
             if (!Files.exists(path)) {
@@ -124,6 +127,10 @@
                             }
                         });
             }
+        }
+
+        private boolean isValidPath(Path path) {
+            return Files.exists(path) && !Files.isDirectory(path);
         }
 
         private static class LimitedInputStream extends InputStream {
