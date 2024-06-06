@@ -1,37 +1,66 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content">
-
-  <div>음악 업로드</div>
   
-  <form th:action th:object="${uploadForm}" method="post" enctype="multipart/form-data">
-    <h3>음악 제목</h3>
-    <input type="text" name="title">
-    
-    <h3>음악 설명</h3>
-    <textarea name="content" rows="10"></textarea>
-    
-    <h3>썸네일 이미지</h3>
-    <input type="file" name="thumbnail" accept="image/png, image/gif, image/jpg">
-  
-    <h3>음악 업로드</h3>
-    <input type="file" name="musicFile" accept="audio/mpeg, audio/mp4, audio/mp3, audio/wav">
-    
-    <h3>음악 장르 선택</h3>
-    <div>
-      <label><input type="checkbox" name="genres[]" value="Ballad"> 발라드</label>
-      <label><input type="checkbox" name="genres[]" value="Dance"> 댄스</label>
-      <label><input type="checkbox" name="genres[]" value="Rap/HipHop"> 랩/힙합</label>
-      <label><input type="checkbox" name="genres[]" value="R&B/Soul"> R&B/Soul</label>
-      <label><input type="checkbox" name="genres[]" value="Rock/Metal"> 록/메탈</label>
-      <label><input type="checkbox" name="genres[]" value="Electronica"> 일렉트로니카</label>
-      <label><input type="checkbox" name="genres[]" value="OST"> OST</label>
-      <label><input type="checkbox" name="genres[]" value="JPOP"> JPOP</label>
-      <label><input type="checkbox" name="genres[]" value="indie"> 인디음악</label>
-      <label><input type="checkbox" name="genres[]" value="etc"> 그 외</label>
+  <div class="upload_sec">
+    <div class="upload_form_container">
+      <form th:action th:object="${uploadForm}" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+        <div class="musicTitle_sec">
+          <span>음악 제목</span>
+          <input id="title" type="text" name="title" required>
+        </div>
+        
+        <div class="musicContent_sec">
+          <span>음악 설명</span>
+          <textarea id="content" name="content" rows="10" required></textarea>
+        </div>
+        
+        <div class="musicThumbnail_sec">
+          <span>썸네일 이미지</span>
+          <input type="file" id="thumbnail" name="thumbnail" accept="image/png, image/gif, image/jpg" required>
+        </div>
+        
+        <div class="musicFile_sec">
+          <span>음악 업로드</span>
+          <input type="file" id="musicFile" name="musicFile" accept="audio/mpeg, audio/mp4, audio/mp3, audio/wav" required>
+        </div>
+        
+        <div class="musicGenre_sec">
+          <span>음악 장르 선택</span>
+          <div id="genresId">
+            <label><input type="checkbox" name="genres[]" value="Ballad"> 발라드</label>
+            <label><input type="checkbox" name="genres[]" value="Dance"> 댄스</label>
+            <label><input type="checkbox" name="genres[]" value="Rap/HipHop"> 랩/힙합</label>
+            <label><input type="checkbox" name="genres[]" value="R&B/Soul"> R&B/Soul</label>
+            <label><input type="checkbox" name="genres[]" value="Rock/Metal"> 록/메탈</label>
+            <label><input type="checkbox" name="genres[]" value="Electronica"> 일렉트로니카</label>
+            <label><input type="checkbox" name="genres[]" value="OST"> OST</label>
+            <label><input type="checkbox" name="genres[]" value="JPOP"> JPOP</label>
+            <label><input type="checkbox" name="genres[]" value="indie"> 인디음악</label>
+            <label><input type="checkbox" name="genres[]" value="etc" required> 그 외</label>
+          </div>
+        </div>
+        <button type="submit">업로드</button>
+      </form>
     </div>
-    
-    <button type="submit">업로드</button>
-  </form>
-
+  </div>
 </div>
+
+<script>
+  function validateForm() {
+    var thumbnail = document.getElementById("thumbnail").value;
+    var musicFile = document.getElementById("musicFile").value;
+    
+    if (thumbnail.trim() == '') {
+      alert("썸네일 이미지를 선택하세요.");
+      document.getElementById("thumbnail").focus();
+      return false;
+    } else if (musicFile.trim() == '') {
+      alert("음악 파일을 선택하세요.");
+      document.getElementById("musicFile").focus();
+      return false;
+    }
+    
+    return true;
+  }
+</script>
 </html>
