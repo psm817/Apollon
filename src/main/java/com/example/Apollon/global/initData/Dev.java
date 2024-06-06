@@ -3,7 +3,6 @@ package com.example.Apollon.global.initData;
 import com.example.Apollon.domain.comment.service.CommentService;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.service.MemberService;
-import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.domain.music.repository.MusicRepository;
 import com.example.Apollon.domain.music.service.MusicService;
 import com.example.Apollon.domain.studio.entity.Studio;
@@ -15,10 +14,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.UUID;
 
 @Configuration
 @Profile("dev")
