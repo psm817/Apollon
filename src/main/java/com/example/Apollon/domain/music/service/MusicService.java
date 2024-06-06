@@ -57,7 +57,6 @@ public class MusicService {
                 .build();
         musicRepository.save(music);
     }
-
     // 좋아요 추가
     public void likeMusic(Long musicId, Long memberId) {
         Music music = getMusic(musicId);
