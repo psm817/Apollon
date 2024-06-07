@@ -13,4 +13,8 @@ import java.util.Optional;
 @Repository
 public interface StudioRepository extends JpaRepository<Studio, Long> {
     Studio findByMemberUsername(String username);
+
+    boolean existsByMember(Member member);
+
+    Optional<Studio> findByMember(Member member);
 }

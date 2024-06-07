@@ -24,7 +24,7 @@ class ApollonApplicationTests {
 		Member member1 = memberService.signup("user3", "user3", "user3", "user3@test.com");
 		Member member2 = memberService.signup("user4", "user4", "user4", "user4@test.com");
 
-		Studio studio = studioService.create(member1, 15, 1);
+		Studio studio = studioService.createOrUpdate(member1, 15, 1);
 
 		studio.addLike(member1);
 		studio.addLike(member2);

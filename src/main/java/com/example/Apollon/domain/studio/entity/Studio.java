@@ -10,6 +10,7 @@ import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -26,7 +27,7 @@ import java.util.Set;
 public class Studio extends BaseEntity {
     // 스튜디오 주인(회원)
     @OneToOne
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_id", unique = true)
     private Member member;
 
     // 스튜디오에 등록된 노래 리스트
@@ -47,6 +48,7 @@ public class Studio extends BaseEntity {
     private Integer active = 1;
 
     private LocalDateTime createDate;
+    private LocalDateTime modifyDate;
 
     // 방명록 가져오기
     @OneToMany(mappedBy = "studio", cascade = CascadeType.REMOVE)
