@@ -33,4 +33,7 @@ public class Member extends BaseEntity {
     @LazyCollection(LazyCollectionOption.EXTRA)
     private Studio studio;
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

@@ -1,5 +1,8 @@
 package com.example.Apollon.domain.studio.controller;
 
+import com.example.Apollon.domain.comment.entity.Comment;
+import com.example.Apollon.domain.comment.form.CommentForm;
+import com.example.Apollon.domain.comment.service.CommentService;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.service.MemberService;
 import com.example.Apollon.domain.music.service.MusicService;
@@ -24,18 +27,26 @@ public class StudioController {
     private final StudioService studioService;
     private final MemberService memberService;
     private final MusicService musicService;
+    private final CommentService commentService;
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/{username}")
-    public String detail(Model model, @PathVariable("username") String username, Principal principal, @RequestParam(value= "kw", defaultValue = "") String kw ) {
+    public String detail(Model model,
+                         @PathVariable("username") String username,
+                         Principal principal,
+                         @RequestParam(value= "kw", defaultValue = "") String kw
+    ) {
         Studio studio = this.studioService.getStudioByMemberUsername(username);
 
         String loginedUsername = principal.getName();
         this.studioService.incrementVisit(username, loginedUsername);
 
+        List<Comment> commentList = this.commentService.getListByStudio(studio);
+
         if (studio != null) {
             model.addAttribute("studio", studio);
             model.addAttribute("kw", kw);
+            model.addAttribute("commentList", commentList);
 
             if(username.equals(loginedUsername) && studio.getActive() == 0) {
                 return "redirect:/";
@@ -48,7 +59,7 @@ public class StudioController {
     }
 
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("/search")
+    @PostMapping("/search")
     public String search(Model model, Principal principal, @RequestParam(value="kw", defaultValue = "") String kw) {
         String loginedUsername = principal.getName();
 
@@ -61,9 +72,8 @@ public class StudioController {
                     Studio loginedUserStudio = this.studioService.getStudioByMemberUsername(loginedUsername);
 
                     model.addAttribute("studio", loginedUserStudio);
-                    model.addAttribute("errorMessage", "검색하신 스튜디오는 존재하지 않습니다.");
 
-                    return "studio/studio_detail";
+                    return "redirect:/studio/%s".formatted(loginedUsername);
                 }
                 else if(studio.getActive() == 0) {
                     return "redirect:/studio/%s".formatted(kw);
@@ -80,9 +90,8 @@ public class StudioController {
                     Studio loginedUserStudio = this.studioService.getStudioByMemberUsername(loginedUsername);
 
                     model.addAttribute("studio", loginedUserStudio);
-                    model.addAttribute("errorMessage", "검색하신 스튜디오는 존재하지 않습니다.");
 
-                    return "studio/studio_detail";
+                    return "redirect:/studio/%s".formatted(loginedUsername);
                 }
             }
         }
@@ -118,9 +127,10 @@ public class StudioController {
             model.addAttribute("message", "스튜디오가 활성화 되었습니다.");
         }
 
-        return "studio/studio_detail";
+        return "redirect:/studio/%s".formatted(studio.getMember().getUsername());
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/{username}/upload")
     public String upload(Model model, Principal principal, @PathVariable("username") String username) {
         Studio studio = this.studioService.getStudioByMemberUsername(username);
@@ -130,6 +140,7 @@ public class StudioController {
         return "music/upload_form";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/{username}/upload")
     public String upload(@RequestParam("title") String title,
                          @RequestParam("content") String content,
