@@ -69,4 +69,14 @@ public class MemberService {
             throw new DataNotFoundException("Member not found");
         }
     }
+
+    public Member getMemberById(long id) {
+        Optional<Member> member = this.memberRepository.findById(id);
+        if (member.isPresent()) {
+            return member.get();
+        } else {
+            throw new DataNotFoundException("Member not found");
+        }
+    }
+
 }
