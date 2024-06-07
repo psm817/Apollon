@@ -1,10 +1,131 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html layout:decorate="~{layout}">
+<div layout:fragment="content">
 
-</body>
+    <div class="header">
+        <h1>자유게시판</h1>
+    </div>
+    <div class="middle">
+        <div class="container">
+            <div class="profile-card box">
+                <div class="profile-header">
+                    <div class="profile-id-box">
+                        <img src="profile-icon.png" alt="a">
+                        <span class="profile-id">testID</span>
+                    </div>
+                </div>
+                <hr>
+                <div class="profile-stats">
+                    <div class="stat">
+                        <span>게시물</span>
+                        <span>0</span>
+                    </div>
+                    <div class="stat">
+                        <span>댓글</span>
+                        <span>0</span>
+                    </div>
+                </div>
+                <div class="profile-footer">
+                    +프로필
+                </div>
+            </div>
+            <div class="post-category box">
+                <hr>
+
+                <div class="board-title">====== 게시판 ======</div>
+
+                <ul class="board-list">
+                    <li class="board-item">
+                        <span class="icon">📋</span>
+                        <span class="text">전체 게시판</span>
+                    </li>
+                    <li class="board-item">
+                        <span class="icon">❗</span>
+                        <span class="text">공지 게시판</span>
+                    </li>
+                    <li class="board-item">
+                        <span class="icon">✂️</span>
+                        <span class="text">자유 게시판</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="notice-box box">
+
+                <div class="notice-body">
+                    <span>글 작성하기</span>
+
+                </div>
+            </div>
+
+            <div class="postList-box box">
+
+                <div class="postbox-body">
+
+                </div>
+                <div class="postList-footer">
+                    <button>=========여기자리는 글쓰기 페이징 처리할부분=====</button>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="box">
+                <div id="clock" class="clock1"></div>
+            </div>
+
+            <div class="todayHotpost-box box">
+                <div class="todayHotpost-header">
+                    <span>오늘의 TOP10</span>
+                </div>
+                <div class="todayHotpost-body">
+                    <div class="todayHotpost-item">
+                        <span>1</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>2</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>3</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>4</span>
+                        <div class="todayHotpost-title">지리네dsafsadfdsafsda</div>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>5</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>6</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>7</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>8</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>9</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>10</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+</div>
 </html>

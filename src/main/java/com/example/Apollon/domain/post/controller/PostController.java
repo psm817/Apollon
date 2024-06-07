@@ -5,9 +5,7 @@ import com.example.Apollon.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,6 +32,18 @@ public class PostController {
         model.addAttribute("post", p);
 
         return "post/post_detail";
+    }
+
+    @GetMapping("/write")
+    public String create(Model model) {
+        // 필요한 모델 데이터를 추가할 수 있습니다.
+        return "post/post_write"; // 글 작성 페이지 템플릿 이름
+    }
+
+    @PostMapping("/write")
+    public String create(@RequestParam(value="title") String title, @RequestParam(value="content") String content) {
+        this.postService.create(title, content);
+        return "redirect:/post/list";
     }
 
 }

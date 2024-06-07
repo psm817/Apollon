@@ -25,9 +25,9 @@ public class Dev {
             Member m2 = memberService.signup("user1", "user1", "user1", "user1@test.com");
             Member m3 = memberService.signup("user2", "user2", "user2", "user2@test.com");
 
-            Studio s1 = studioService.create(m1, 55,1);
-            Studio s2 = studioService.create(m2, 12,1);
-            Studio s3 = studioService.create(m3, 5,1);
+            Studio s1 = studioService.createOrUpdate(m1, 55,1);
+            Studio s2 = studioService.createOrUpdate(m2, 12,1);
+            Studio s3 = studioService.createOrUpdate(m3, 5,1);
 
             commentService.create(m2, s3, "테스트입니다.1", "테스트입니다.1");
             commentService.create(m2, s3, "테스트입니다.2", "테스트입니다.2");
