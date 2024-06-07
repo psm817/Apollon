@@ -57,8 +57,6 @@ public class Music extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "playlist_id")
     )
     private Set<Playlist> playlists = new HashSet<>();
-
-
     @ManyToMany
     @JoinTable(
             name = "music_member_likes",
