@@ -2,7 +2,7 @@
 <div layout:fragment="content">
 
     <div class="header">
-        <h1>자유게시판</h1>
+        <h1>글 작성하기</h1>
     </div>
     <div class="middle">
         <div class="container">
@@ -50,17 +50,17 @@
             </div>
         </div>
         <div class="container">
-            <div class="notice-box box">
+            <div class="board-type box writeBox">
 
-                <div class="notice-body">
-                    <span>글 작성하기</span>
+                <div class="Board-type-1">
+                    <span>게시판선택 구현할곳</span>
 
                 </div>
             </div>
 
-            <div class="postList-box box">
+            <div class="postWrite-box box writeBox">
 
-                <div class="postbox-body">
+                <div class="postWrite-body">
                     <form action="/post/write" method="post">
                         <div>
                             <label for="title">제목:</label>
@@ -76,8 +76,15 @@
                     </form>
 
                 </div>
-                <div class="postList-footer">
-                    <button>=========여기자리는 글쓰기 페이징 처리할부분=====</button>
+                <div class="postWrite-footer">
+                    <div class="postButton-box">
+                        <div>
+                            <button type="submit" class="postListButton">목록</button>
+                        </div>
+                        <div>
+                            <button type="submit" class="cancelButton">취소</button>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -142,3 +149,17 @@
 
 </div>
 </html>
+
+<script>
+    function updateClock() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, "0");
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        const seconds = String(now.getSeconds()).padStart(2, "0");
+        const timeString = `${hours}:${minutes}:${seconds}`;
+        document.getElementById("clock").textContent = timeString;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock(); // initial call to display the clock immediately
+</script>
