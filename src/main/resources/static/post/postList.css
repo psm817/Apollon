@@ -13,6 +13,7 @@ body {
   height: 850px;
 
 
+
 }
 
 .container {
@@ -331,4 +332,5 @@ hr {
 .postList-footer > button{
   flex-grow:1
 }
+
 
