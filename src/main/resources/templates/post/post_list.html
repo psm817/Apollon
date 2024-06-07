@@ -1,8 +1,6 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content">
 
-
-
     <div class="header">
         <h1>자유게시판</h1>
     </div>
@@ -35,6 +33,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 
@@ -53,6 +52,9 @@
 =======
                 <div class="board-title">===== 게시판 =====</div>
 >>>>>>> 51e2237 (메인페이지 List부분 꾸ë작업중)
+=======
+                <div class="board-title">====== 게시판 ======</div>
+>>>>>>> 8190ede (글작성해서 홈페이지에 껴넣기)
                 <ul class="board-list">
                     <li class="board-item">
                         <span class="icon">📋</span>
@@ -90,13 +92,14 @@
                 </div>
             </div>
             <div class="category-box box">
-                <span>종류</span>
+                <span>게시판</span>
                 <span>제목</span>
                 <span>작성자</span>
                 <span>작성일</span>
                 <span>조회</span>
             </div>
             <div class="postList-box box">
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -109,41 +112,31 @@
 =======
 
 >>>>>>> 45ccda9 (메인최신화)
+=======
+>>>>>>> 8190ede (글작성해서 홈페이지에 껴넣기)
                 <div class="postbox-body">
-                    <div class="post-item">
-                        <span>자유</span>
-                    </div>
-                    <div class="post-item">
-                        <span>자유</span>
-                    </div>
-                    <div class="post-item">
-                        <span>자유</span>
-                    </div>
-                    <div class="post-item">
-                        <span>자유</span>
-                    </div>
-                    <div class="post-item">
-                        <span>자유</span>
-                    </div>
-                    <div class="post-item">
-                        <span>자유</span>
-                    </div>
-                    <div class="post-item">
-                        <span>자유</span>
-                    </div>
-                    <div class="post-item">
-                        <span>자유</span>
-                    </div>
-                    <div class="post-item">
-                        <span>자유</span>
-                    </div>
-                    <div class="post-item">
-                        <span>자유</span>
-                    </div>
-
+                    <tr th:each="post : ${postList}">
+                        <div class="post-item">
+                            <span>자유</span>
+                            <div class="post-title">
+                                <a th:text="${post.title}" th:href="@{|/post/detail/${post.id}|}"></a>
+                            </div>
+                            <div class="post-writer">
+                                <a th:text="${post.writer}" th:href="@{|/post/detail/${post.id}|}"></a>
+                            </div>
+                            <div class="post-createDate">
+                                <a th:text="${post.createDate}" th:href="@{|/post/detail/${post.id}|}"></a>
+                            </div>
+                            <div class="post-hit">
+                                <a th:text="${post.hit}" th:href="@{|/post/detail/${post.id}|}"></a>
+                            </div>
+                        </div>
+                    </tr>
                 </div>
                 <div class="postList-footer">
+                    <button onclick="location.href='/post/write'">글 작성하기</button>
                     <button>=========여기자리는 글쓰기 페이징 처리할부분=====</button>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -178,11 +171,13 @@
 
 
 >>>>>>> 51e2237 (메인페이지 List부분 꾸ë작업중)
+=======
+>>>>>>> 8190ede (글작성해서 홈페이지에 껴넣기)
                 </div>
             </div>
         </div>
-
         <div class="container">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -194,10 +189,11 @@
 =======
 
 >>>>>>> 45ccda9 (메인최신화)
+=======
+>>>>>>> 8190ede (글작성해서 홈페이지에 껴넣기)
             <div class="box">
                 <div id="clock" class="clock1"></div>
             </div>
-
             <div class="todayHotpost-box box">
                 <div class="todayHotpost-header">
                     <span>오늘의 TOP10</span>
@@ -234,10 +230,9 @@
                     <div class="todayHotpost-item">
                         <span>10</span>
                     </div>
-
                 </div>
-
             </div>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -254,23 +249,22 @@
             <div class="box">시계</div>
             <div class="box">오늘의핫게시글</div>
 >>>>>>> 51e2237 (메인페이지 List부분 꾸ë작업중)
+=======
+>>>>>>> 8190ede (글작성해서 홈페이지에 껴넣기)
         </div>
     </div>
-
-
 </div>
 </html>
 <script>
     function updateClock() {
-  const now = new Date();
-  const hours = String(now.getHours()).padStart(2, "0");
-  const minutes = String(now.getMinutes()).padStart(2, "0");
-  const seconds = String(now.getSeconds()).padStart(2, "0");
-  const timeString = `${hours}:${minutes}:${seconds}`;
-  document.getElementById("clock").textContent = timeString;
-}
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, "0");
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        const seconds = String(now.getSeconds()).padStart(2, "0");
+        const timeString = `${hours}:${minutes}:${seconds}`;
+        document.getElementById("clock").textContent = timeString;
+    }
 
-setInterval(updateClock, 1000);
-updateClock(); // initial call to display the clock immediately
-
+    setInterval(updateClock, 1000);
+    updateClock(); // initial call to display the clock immediately
 </script>

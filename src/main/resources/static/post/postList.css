@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
-  overflow:auto;
+  overflow: auto;
 }
 
 .header {
@@ -17,6 +17,7 @@ body {
 
   flex-wrap: wrap;
   width: 1500px; /* 고정 너비 설정 */
+  height:1000px;
   min-height: calc(100vh - 100px); /* 최소 높이 설정 (예시로 100px로 조절) */
   margin: 0 auto; /* 가운데 정렬 */
   overflow: auto; /* 스크롤 생성을 위해 추가 */
@@ -24,10 +25,7 @@ body {
 }
 
 .container {
-  display: flex;
   flex-direction: column;
-
-
 }
 
 .middle .container:nth-child(1) {
@@ -44,7 +42,6 @@ body {
   display: flex;
   flex-direction: column;
   flex: 1;
-
 }
 
 .container:nth-child(1) .box:nth-child(1) {
@@ -59,7 +56,7 @@ body {
 }
 
 .middle .container:nth-child(2) .box:nth-child(2) {
-  flex-grow: 0.1;
+  flex-grow: 0.05;
 }
 
 .middle .container:nth-child(2) .box:nth-child(3) {
@@ -67,7 +64,7 @@ body {
 }
 
 .middle .container:nth-child(2) .box:nth-child(1) {
-  flex-grow: 1;
+  flex-grow: 0.4;
 }
 
 .middle .container:nth-child(3) .box:nth-child(1) {
@@ -77,7 +74,6 @@ body {
 .box-1 {
   flex: 1;
   background-color: lightgreen;
-
 }
 
 .box-1:nth-child(3) {
@@ -93,7 +89,8 @@ body {
   text-align: center;
   border: 1px solid grey;
   margin: 20px auto;
-  width:250px;
+  width: 250px;
+  height: 250px;
 }
 
 .profile-header {
@@ -152,6 +149,7 @@ hr {
   align-items: center;
   justify-content: center;
   margin: 10px 0;
+  margin-right: 10px;
 }
 
 .board-item .icon {
@@ -210,8 +208,6 @@ hr {
 
 .category-box {
   flex-grow: 0.1;
-  display: flex;
-  justify-content: space-around;
   flex-direction: row;
 }
 
@@ -255,6 +251,7 @@ hr {
   color: white;
   font-family: "Arial", sans-serif;
   margin-top: 30px;
+  height: 300px;
 }
 
 .todayHotpost-body {
@@ -311,27 +308,36 @@ hr {
 
 
 .category-box {
-  text-align: center;
+  text-align:left;
+  margin-left:50px;
+  width:750px;
+
 }
 
 .category-box > span:nth-child(1) {
-  flex-grow: 1;
+
+
 }
 
 .category-box > span:nth-child(2) {
-  flex-grow: 2;
+  margin-left:170px;
+
 }
 
 .category-box > span:nth-child(3) {
-  flex-grow: 0.5;
+  margin-left:210px;
+
+
 }
 
 .category-box > span:nth-child(4) {
-  flex-grow: 0.5;
+  margin-left:90px;
+
 }
 
 .category-box > span:nth-child(5) {
-  flex-grow: 1;
+ margin-left:85px;
+
 }
 
 .postList-footer {
@@ -342,7 +348,47 @@ hr {
 .postList-footer > button {
   flex-grow: 1;
 }
+.post-title{
+
+  width:330px;
+  margin-left:20px;
+  white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+
+}
+.post-writer{
+text-align:center;
+  width:100px;
+  margin-left:20px;
+  white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+
+}
+.post-createDate{
+
+  width:120px;;
+
+  margin-left:20px;
+  white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+
+}
+.post-hit{
+text-align:center;
+  width:80px;;
+
+  margin-left:20px;
+  white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+
+}
+
 
 /* Responsive Design */
+
 @media (max-width: 1200
 
