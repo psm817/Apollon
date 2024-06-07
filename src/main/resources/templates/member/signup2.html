@@ -1,36 +1,54 @@
 <html layout:decorate="~{layout}">
     <div layout:fragment="content" class="box">
-        <div>회원가입</div>
-        <form th:action="@{/member/signup2}" method="POST" th:onchange="validateForm()">
-            <div>
-                <span>유저 아이디</span>
-                <input type="text" id="username" name="username" placeholder="아이디">
-                <!-- Add a button to check for duplicate username -->
-                <button type="button" onclick="validateForm()">아이디 중복 확인</button>
+        <div class="container">
+            <div class="welcome-box">
+                <span th:text="'회원 가입을 진행중입니다... 😂'"></span>
             </div>
-            <div>
-                <span>유저 비밀번호</span>
-                <input type="password" name="password" placeholder="비밀번호">
+            <div class="signup-form">
+                <div class="input-box">
+                    <form th:action="@{/member/signup2}" method="POST" th:onchange="validateForm()">
+                        <div class="id-box">
+                            <div class="id-info">
+                                <span class="font-weight">ID</span>
+                                <span>(※ 등록하신 ID는 스튜디오 이름과 일치합니다.)</span>
+                            </div>
+                            <div class="chk-id">
+                                <input type="text" id="username" maxlength="20" name="username" placeholder="ID를 입력하세요.">
+                                <!-- Add a button to check for duplicate username -->
+                                <button type="button" onclick="validateForm()">중복확인</button>
+                                <div class="error-box">
+                                    <div id="signupError" th:text="${signupError}" class="error"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="password-box">
+                            <span>비밀번호</span>
+                            <input type="password" name="password" maxlength="20" placeholder="비밀번호를 입력하세요.">
+                        </div>
+                        <div class="password-confirm-box">
+                            <span>비밀번호 확인</span>
+                            <input type="password" name="password_confirm" maxlength="20" placeholder="비밀번호를 한번 더 입력하세요.">
+                        </div>
+                        <div class="nickname-box">
+                            <span>닉네임</span>
+                            <input type="text" name="nickname" placeholder="닉네임을 입력하세요.">
+                        </div>
+                        <div class="email-box">
+                            <span>이메일</span>
+                            <input type="email" name="email" placeholder="이메일을 입력하세요.">
+                        </div>
+                        <div class="profile-picture-box">
+                            <span>프로필 사진</span>
+                            <input type="file" name="profile-picture">
+                        </div>
+                        <div class="signup-btn">
+                            <button type="button" onclick="window.location.href='/member/login'">취소</button>
+                            <button type="submit" id="submitButton">가입</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div>
-                <span>유저 비밀번호 확인</span>
-                <input type="password" name="password_confirm" placeholder="비밀번호 확인">
-            </div>
-            <div>
-                <span>닉네임</span>
-                <input type="text" name="nickname" placeholder="닉네임">
-            </div>
-            <div>
-                <span>이메일</span>
-                <input type="email" name="email" placeholder="이메일">
-            </div>
-            <div>
-                <div id="signupError" th:text="${signupError}" class="error"></div>
-            </div>
-            <div>
-                <button type="submit" id="submitButton">회원가입</button>
-            </div>
-        </form>
+        </div>
     </div>
 </html>
 
@@ -48,12 +66,12 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.exists) {
-                        signupError.innerText = "중복된 아이디";
+                        signupError.innerText = "(이미 존재하는 아이디입니다.)";
                         signupError.classList.remove("success");
                         signupError.classList.add("error");
                         submitButton.disabled = true;
                     } else {
-                        signupError.innerText = "사용 가능한 아이디";
+                        signupError.innerText = "(입력하신 아이디는 사용 가능합니다.)";
                         signupError.classList.remove("error");
                         signupError.classList.add("success");
                         submitButton.disabled = false;
