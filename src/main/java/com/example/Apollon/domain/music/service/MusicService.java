@@ -31,7 +31,6 @@ public class MusicService {
 
     // 음악 업로드
     public void upload(String title, String content, String member, MultipartFile thumbnail, MultipartFile song, String[] genres) {
-
         String thumbnailDirPath = fileDirPath + "/uploadFile/uploadImgs";
         String musicDirPath = fileDirPath + "/uploadFile/uploadMusics";
 
