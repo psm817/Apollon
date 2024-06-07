@@ -29,13 +29,24 @@ public class StudioService {
     }
 
     @Transactional
-    public Studio create(Member member, Integer visit, Integer active) {
-        Studio studio = Studio.builder()
-                .member(member)
-                .visit(visit)
-                .active(active)
-                .createDate(LocalDateTime.now())
-                .build();
+    public Studio createOrUpdate(Member member, Integer visit, Integer active) {
+        Optional<Studio> existingStudio = studioRepository.findByMember(member);
+
+        Studio studio;
+
+        if(existingStudio.isPresent()) {
+            studio = existingStudio.get();
+            studio.setModifyDate(LocalDateTime.now());
+        }
+        else {
+            studio = Studio.builder()
+                    .member(member)
+                    .visit(visit)
+                    .active(active)
+                    .createDate(LocalDateTime.now())
+                    .build();
+        }
+
         return this.studioRepository.save(studio);
     }
 
