@@ -12,11 +12,11 @@
     <div class="container">
         <div class="logo">
             <a href="/">
-                <img src="/images/ApollonLogo.png" alt="Your Logo" class="logo">
+                <img src="/images/ApollonLogo_dark.png" alt="Your Logo" class="logo">
             </a>
         </div>
         <div class="signup-check-box">
-            <form action="/member/signup2" id="joinForm" method="POST">
+            <form th:action="@{/member/signup2}" id="joinForm" method="POST">
                 <ul class="join_box">
                     <li class="checkBox check01">
                         <h3>◎ 이용 약관 및 개인정보 수집에 대한 동의(필수)</h3>
@@ -195,7 +195,7 @@
                     </li>
                 </ul>
                 <div class="button">
-                    <button type="button" onclick="history.back()">취소</button>
+                    <button type="button" onclick="window.location.href='/member/login'">취소</button>
                     <button type="submit" id="submitBtn" disabled>다음</button>
                 </div>
             </form>

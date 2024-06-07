@@ -59,7 +59,7 @@ public class MemberController {
         try {
             Member member = memberService.signup(signForm.getUsername(), signForm.getPassword(), signForm.getNickname(), signForm.getEmail());
             emailService.send(signForm.getEmail(), "서비스 가입을 환영합니다!", "회원가입을 축하드립니다^^~!");
-            studioService.create(member, 0, 1);
+            studioService.createOrUpdate(member, 0, 1);
         } catch (IllegalStateException e) {
             model.addAttribute("signupError", "이미 중복된 이메일 또는 아이디입니다");
             return "member/signup";

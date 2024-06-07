@@ -60,8 +60,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
             List<GrantedAuthority> authorityList = new ArrayList<>();
 
-            // 스튜디오 자동 생성
-            this.studioService.create(member, 0, 1);
+            // 스튜디오 자동 생성 또는 업데이트
+            this.studioService.createOrUpdate(member, 0, 1);
 
             return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
         } catch (IllegalStateException e) {
@@ -84,7 +84,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             List<GrantedAuthority> authorityList = new ArrayList<>();
 
             // 스튜디오 자동 생성
-            this.studioService.create(member, 0, 1);
+            this.studioService.createOrUpdate(member, 0, 1);
 
             return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
         } catch (IllegalStateException e) {
@@ -106,7 +106,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             List<GrantedAuthority> authorityList = new ArrayList<>();
 
             // 스튜디오 자동 생성
-            this.studioService.create(member, 0, 1);
+            this.studioService.createOrUpdate(member, 0, 1);
 
             return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
         } catch (IllegalStateException e) {
