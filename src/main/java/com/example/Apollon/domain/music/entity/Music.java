@@ -1,6 +1,7 @@
 package com.example.Apollon.domain.music.entity;
 
 import com.example.Apollon.domain.member.entity.Member;
+import com.example.Apollon.domain.playlist.entity.Playlist;
 import com.example.Apollon.global.jpa.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -49,10 +50,14 @@ public class Music extends BaseEntity {
     @Getter
     private Long musicPlayCount;
 
-    // 스튜디오 주인(회원)
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @ManyToMany
+    @JoinTable(
+            name = "playlist_music",
+            joinColumns = @JoinColumn(name = "music_id"),
+            inverseJoinColumns = @JoinColumn(name = "playlist_id")
+    )
+    private Set<Playlist> playlists = new HashSet<>();
+
 
     @ManyToMany
     @JoinTable(
@@ -69,13 +74,9 @@ public class Music extends BaseEntity {
 
         this.likedByMembers.add(liker);
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setPlaylist(Playlist playlist) {
+        playlists.add(playlist);
+        playlist.getMusics().add(this);
     }
 
 }

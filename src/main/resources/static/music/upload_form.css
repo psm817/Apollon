@@ -69,3 +69,7 @@ form {
     width: 80px;
     border-radius: 30px;
 }
+
+textarea{
+	resize: none;
+}

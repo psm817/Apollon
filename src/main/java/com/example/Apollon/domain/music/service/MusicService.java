@@ -4,6 +4,7 @@ import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.repository.MemberRepository;
 import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.domain.music.repository.MusicRepository;
+import com.example.Apollon.domain.playlist.entity.Playlist;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -116,4 +117,14 @@ public class MusicService {
         return memberOptional.orElseThrow(() -> new DateTimeException("Member not found with ID: " + memberId));
     }
 
+    public Music getMusicById(Long musicId) {
+        return musicRepository.findById(musicId)
+                .orElseThrow(() -> new RuntimeException("Music not found with ID: " + musicId));
+    }
+
+    public void playPlaylist(Playlist playlist) {
+        for (Music music : playlist.getMusics()) {
+            System.out.println("Now playing: " + music.getMusicTitle());
+        }
+    }
 }
