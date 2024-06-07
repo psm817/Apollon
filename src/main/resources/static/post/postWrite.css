@@ -1,0 +1,107 @@
+.writeBox {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #f9f9f9;
+
+}
+
+/* Board type styling */
+.board-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.Board-type-1 {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Post write box styling */
+.postWrite-box {
+    padding: 20px;
+    background-color: #fff;
+    height:600px;
+}
+
+.postWrite-body {
+    margin-bottom: 20px;
+}
+
+.postWrite-body form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.postWrite-body label {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+
+}
+
+.postWrite-body input[type="text"],
+.postWrite-body textarea {
+    width: 100%;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+}
+.postWrite-body textarea:nth-child(2){
+height:340px;
+}
+
+.postWrite-body button {
+    align-self: flex-end;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left:720px;
+}
+
+.postWrite-body button:hover {
+    background-color: #0056b3;
+}
+
+.postWrite-footer {
+    display:flex;
+    justify-content: space-between;
+
+    text-align: center;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+
+}
+
+
+.cancelButton,
+.postListButton {
+    padding: 10px 20px;
+    background-color: #36454F;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.cancelButton{
+margin-left:20px;
+}
+.postButton-box {
+    display: flex; /* Add this line */
+
+    text-align: center;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    width:170px;
+    margin-left:auto;
+}

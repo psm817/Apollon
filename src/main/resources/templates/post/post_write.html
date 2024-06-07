@@ -2,7 +2,7 @@
 <div layout:fragment="content">
 
     <div class="header">
-        <h1>자유게시판</h1>
+        <h1>글 작성하기</h1>
     </div>
     <div class="middle">
         <div class="container">
@@ -30,7 +30,9 @@
             </div>
             <div class="post-category box">
                 <hr>
+
                 <div class="board-title">====== 게시판 ======</div>
+
                 <ul class="board-list">
                     <li class="board-item">
                         <span class="icon">📋</span>
@@ -48,63 +50,52 @@
             </div>
         </div>
         <div class="container">
-            <div class="notice-box box">
-                <div class="notice-header">
-                    <span>공지사항</span>
-                </div>
-                <div class="notice-body">
-                    <div class="notice-item">
-                        <span>공지</span>
-                    </div>
-                    <div class="notice-item">
-                        <span>공지</span>
-                    </div>
-                    <div class="notice-item">
-                        <span>공지</span>
-                    </div>
-                    <div class="notice-item">
-                        <span>공지</span>
-                    </div>
+            <div class="board-type box writeBox">
+
+                <div class="Board-type-1">
+                    <span>게시판선택 구현할곳</span>
+
                 </div>
             </div>
-            <div class="category-box box">
-                <span>게시판</span>
-                <span>제목</span>
-                <span>작성자</span>
-                <span>작성일</span>
-                <span>조회</span>
-            </div>
-            <div class="postList-box box">
-                <div class="postbox-body">
-                    <tr th:each="post : ${postList}">
-                        <div class="post-item">
-                            <span>자유</span>
-                            <div class="post-title">
-                                <a th:text="${post.title}" th:href="@{|/post/detail/${post.id}|}"></a>
-                            </div>
-                            <div class="post-writer">
-                                <a th:text="${post.writer}" th:href="@{|/post/detail/${post.id}|}"></a>
-                            </div>
-                            <div class="post-createDate">
-                                <a th:text="${post.createDate}" th:href="@{|/post/detail/${post.id}|}"></a>
-                            </div>
-                            <div class="post-hit">
-                                <a th:text="${post.hit}" th:href="@{|/post/detail/${post.id}|}"></a>
-                            </div>
+
+            <div class="postWrite-box box writeBox">
+
+                <div class="postWrite-body">
+                    <form action="/post/write" method="post">
+                        <div>
+                            <label for="title">제목:</label>
+                            <input type="text" id="title" name="title" required>
                         </div>
-                    </tr>
+                        <div>
+                            <label for="content">내용:</label>
+                            <textarea id="content" name="content" required></textarea>
+                        </div>
+                        <div>
+                            <button type="submit">작성완료</button>
+                        </div>
+                    </form>
+
                 </div>
-                <div class="postList-footer">
-                    <span class="paging">=========여기자리는 글쓰기 페이징 처리할부분=====</span>
-                    <button onclick="location.href='/post/write'" class="postWriteButton">글 작성하기</button>
+                <div class="postWrite-footer">
+                    <div class="postButton-box">
+                        <div>
+                            <button type="submit" class="postListButton" onclick="location.href='/post/list'">목록</button>
+                        </div>
+                        <div>
+                            <button type="submit" class="cancelButton" onclick="location.href='/post/list'">취소</button>
+                        </div>
+                    </div>
 
                 </div>
             </div>
         </div>
+
         <div class="container">
+
             <div class="box">
                 <div id="clock" class="clock1"></div>
             </div>
+
             <div class="todayHotpost-box box">
                 <div class="todayHotpost-header">
                     <span>오늘의 TOP10</span>
@@ -141,12 +132,24 @@
                     <div class="todayHotpost-item">
                         <span>10</span>
                     </div>
+
                 </div>
+
             </div>
+
         </div>
     </div>
+
+
+
+
+
+
+
+
 </div>
 </html>
+
 <script>
     function updateClock() {
         const now = new Date();
