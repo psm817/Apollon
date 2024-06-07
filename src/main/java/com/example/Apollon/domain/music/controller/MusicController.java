@@ -132,7 +132,6 @@
         private boolean isValidPath(Path path) {
             return Files.exists(path) && !Files.isDirectory(path);
         }
-
         private static class LimitedInputStream extends InputStream {
             private final InputStream delegate;
             private final long maxLength;
