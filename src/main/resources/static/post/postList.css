@@ -23,7 +23,12 @@ body {
   margin: 0 auto; /* 가운데 정렬 */
   overflow: auto; /* 스크롤 생성을 위해 추가 */
 
+
+  .category-box span {
+    margin: 5px 0;
+  }
 }
+
 
 .container {
   flex-direction: column;
@@ -419,5 +424,6 @@ text-align:center;
 
 
 @media (max-width: 1200
+
 
 
