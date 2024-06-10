@@ -2,7 +2,7 @@
 <div layout:fragment="content">
 
     <div class="header">
-        <h1>자유게시판</h1>
+        <h1>자유 게시판</h1>
     </div>
     <div class="middle">
         <div class="container">
@@ -50,21 +50,34 @@
             </div>
         </div>
         <div class="container">
-            <div class="notice-box box">
+            <div class="board-type box detailHeader">
 
-                <div class="notice-body">
-                    <span>글 작성하기</span>
+                <div class="Board-type-1">
+                    <span>유저 아이디 랑 조회수</span>
 
                 </div>
             </div>
+            <div class="postDetail-box box detailBox">
 
-            <div class="postList-box box">
+                <div class="postDetail-body">
+                    <h1 th:text="${post.title}"></h1>
+                    <div th:text="${post.content}"></div>
 
-                <div class="postbox-body">
 
                 </div>
-                <div class="postList-footer">
-                    <button>=========여기자리는 글쓰기 페이징 처리할부분=====</button>
+                <div class="postDetail-footer">
+                    <div class="detailPostButton-box">
+                        <div>
+                            <button type="submit" class="previousPostButton" onclick="location.href='/post/list'">이전 글</button>
+                        </div>
+                        <div>
+                            <button type="submit" class="postListButton" onclick="location.href='/post/list'">목록</button>
+                        </div>
+                        <div>
+                            <button type="submit" class="nextPostButton" onclick="location.href='/post/list'">다음 글</button>
+                        </div>
+
+                    </div>
 
                 </div>
             </div>
@@ -129,3 +142,17 @@
 
 </div>
 </html>
+
+<script>
+    function updateClock() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, "0");
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        const seconds = String(now.getSeconds()).padStart(2, "0");
+        const timeString = `${hours}:${minutes}:${seconds}`;
+        document.getElementById("clock").textContent = timeString;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock(); // initial call to display the clock immediately
+</script>
