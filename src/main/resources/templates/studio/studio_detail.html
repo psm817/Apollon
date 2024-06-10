@@ -1,5 +1,5 @@
 <html layout:decorate="~{layout}">
-    <div layout:fragment="content" class="box">
+    <div layout:fragment="content" class="total-box">
         <div class="top-section">
             <div class="welcome-box">
                 <span th:text="'#' + ${studio.member.username} + ' 님의 스튜디오에 오신 것을 환영합니다.'"></span>
@@ -8,23 +8,16 @@
                 <a th:href="@{|/studio/${studio.member.username}/changeActive|}"
                    th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' and studio.active == 0}">스튜디오  활성화</a>
             </div>
-            <div th:if="${message}">
-                <script th:inline="javascript">
-                    alert([[${message}]]);
-                </script>
+            <div class="myHome-btn">
+                  <a th:if="${#authentication.principal.username != studio.member.username}" th:href="@{|/studio/${#authentication.principal.username}|}">내 스튜디오로 가기</a>
             </div>
             <div class="search-box">
-                <form id="searchForm" th:action="@{/studio/search}" method="POST">
+                <form th:action="@{/studio/search}" method="POST">
                     <div class="search-input-box">
-                        <input type="text" id="kw" name="kw" class="form-control" placeholder="스튜디오 이름 검색" th:value="${kw}">
+                        <input type="text" name="kw" class="form-control" required placeholder="스튜디오 이름 검색" th:value="${kw}">
                         <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                 </form>
-            </div>
-            <div th:if="${errorMessage}">
-                <script th:inline="javascript">
-                    alert([[${errorMessage}]]);
-                </script>
             </div>
         </div>
         <div class="introduce-box">
@@ -281,27 +274,4 @@
             alert('삭제할 댓글을 선택해주세요.');
         }
     });
-
-    // 검색어 체크
-	function fnIdCheck(event) {
-        event.preventDefault(); // 기본 동작 막기
-
-        var id = document.querySelector("[name='kw']").value;
-
-        if (id === "" || id === null) {
-            alert("올바르지 않은 스튜디오 이름입니다. \n다시 입력해주세요.");
-            document.querySelector("[name='kw']").focus();
-            return false; // 폼 제출 중단
-        }
-        else {
-            alert("검색되었습니다.");
-            document.querySelector("[name='kw']").focus();
-        }
-
-        // 폼 제출 진행
-        document.getElementById("searchForm").submit();
-    }
-
-    // 폼에 이벤트 리스너 추가
-    document.getElementById("searchForm").addEventListener("submit", fnIdCheck);
 </script>

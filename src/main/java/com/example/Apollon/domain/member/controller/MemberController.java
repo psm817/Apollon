@@ -36,6 +36,8 @@ import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.Optional;
 
+import java.security.Principal;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/member")
@@ -106,6 +108,16 @@ public class MemberController {
         }
         // 저장된 파일의 경로를 반환합니다.
         return uploadDir + File.separator + imageFileName;
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/myPage")
+    public String myPage(Principal principal, Model model) {
+        Member member = this.memberService.getMember(principal.getName());
+
+        model.addAttribute("member", member);
+
+        return "member/myPage";
     }
 
     @Getter

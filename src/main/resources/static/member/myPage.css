@@ -1,0 +1,23 @@
+.myPage-container {
+    border: 1px solid red;
+}
+
+/* 환영인사(상단 타이틀) */
+.myPage-container > .welcome-box {
+    border: 1px solid orange;
+    height: 80px;
+}
+
+.myPage-container > .welcome-box > span {
+    font-weight: 700;
+    height: 100%;
+    font-size: 23px;
+    line-height: 80px;
+    margin-left: 18%;
+}
+
+/*  */
+.myPage-container > .myPage-detail {
+    border: 1px solid orange;
+    height: 550px;
+}
