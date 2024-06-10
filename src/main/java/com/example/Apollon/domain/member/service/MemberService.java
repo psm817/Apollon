@@ -55,7 +55,7 @@ public class MemberService {
         if (opMember.isPresent()) return opMember.get();
 
         // 소셜 로그인을 통한 가입 시 비번은 없다.
-        return signup(username, "", nickname, email,""); // 최초 로그인 시 딱 한번 실행
+        return signup(username, "", nickname, email,"/images/none.png"); // 최초 로그인 시 딱 한번 실행
     }
 
     private Optional<Member> findByUsername(String username) {
