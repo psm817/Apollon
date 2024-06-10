@@ -52,8 +52,8 @@ public class MusicService {
                 .musicTitle(title)
                 .musicContent(content)
                 .uploadStudio(member)
-                .thumbnailImg("/uploadImgs/" + thumbnailRelPath)
-                .musicMp3("/uploadMusics/" + musicFileRelPath)
+                .thumbnailImg("/uploadImgs/" + thumbnailFile)
+                .musicMp3("/uploadMusics/" + musicFile)
                 .genres(genres)
                 .build();
 
@@ -124,5 +124,9 @@ public class MusicService {
         for (Music music : playlist.getMusics()) {
             System.out.println("Now playing: " + music.getMusicTitle());
         }
+    }
+
+    public List<Music> getTop100MusicByPlayCount() {
+        return musicRepository.findTop100ByOrderByMusicPlayCountDesc();
     }
 }
