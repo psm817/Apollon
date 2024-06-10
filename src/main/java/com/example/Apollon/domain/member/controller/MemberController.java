@@ -61,6 +61,7 @@ public class MemberController {
     public String signup3Page() {
         return "member/signup2";
     }
+
     @PostMapping("/signup2")
     public String signup(@Valid SignForm signForm, BindingResult bindingResult, Model model,@RequestParam("profilePicture") MultipartFile profilePicture) {
         if (bindingResult.hasErrors()) {
