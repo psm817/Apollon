@@ -48,7 +48,7 @@ public class Music extends BaseEntity {
     private String musicMp3FullPath;
 
     @Getter
-    private Long musicPlayCount;
+    private Long musicPlayCount = 0L;
 
     @ManyToMany
     @JoinTable(

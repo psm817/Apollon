@@ -35,7 +35,6 @@ public class PlaylistController {
 
     @PostMapping("/addSong")
     public String addSongToPlaylist(@RequestParam Long memberId, @RequestParam Long musicId) {
-        Member member = memberService.getMemberById(memberId);
         Playlist playlist = playlistService.getPlaylist(memberId);
 
         Music newMusic = musicService.getMusicById(musicId);

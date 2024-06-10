@@ -18,8 +18,8 @@
             </div>
             <!-- 재생 아이콘 -->
             <div class="growSet playMusic_icon">
-              <i class="fa-solid fa-play fa-lg" onclick="togglePlayPause()"></i>
-              <i class="fa-solid fa-pause fa-lg" onclick="togglePlayPause()"></i>
+              <i class="fa-solid fa-play fa-lg" onclick="togglePlayPause(${music.id})"></i>
+              <i class="fa-solid fa-pause fa-lg" onclick="togglePlayPause(${music.id})"></i>
             </div>
             <!-- 이후 곡 아이콘 -->
             <div class="growSet afterMusic_icon">
@@ -88,17 +88,8 @@
       <!-- 내 플레이 리스트 보기 -->
       <nav class="show_myPlayList" id="myPlayList">
         <ul>
-          <!--            나중에 ul에 추가-->
-          <!--th:each="music: ${myAllPlayList}"-->
-          <li>
-            <!--              <a th:text="${myAllPlayList.id}" th:href="@{|/music/myPlayList/${myAllPlayList.id}|}"></a>-->
-            <span>나중에 음악 추가되고 자동으로 재생목록 불러오게 되면 이 텍스트는 지울 것</span>
-          </li>
-          <li>
-            <span>저녁 메뉴 추천 받아요</span>
-          </li>
-          <li>
-            <span>이곳은 재생 목록 표출해주는 곳이야</span>
+          <li th:each="playlist : ${playlist}">
+            <span th:text="${song.title}"></span> - <span th:text="${song.artist}"></span>
           </li>
         </ul>
       </nav>
