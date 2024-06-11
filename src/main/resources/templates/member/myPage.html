@@ -18,9 +18,24 @@
                 <div class="myInfo">
                     <div class="info-container">
                         <div class="profile-detail">
-                            <div class="username-box"></div>
-                            <div class="nickname-box"></div>
-                            <div class="email-box"></div>
+                            <div class="username-box">
+                                <div class="title">ID (username)</div>
+                                <div class="text">
+                                    <span th:text="${member.username}"></span>
+                                </div>
+                            </div>
+                            <div class="nickname-box">
+                                <div class="title">닉네임 (스튜디오 이름)</div>
+                                <div class="text">
+                                    <span th:text="${member.nickname}"></span>
+                                </div>
+                            </div>
+                            <div class="email-box">
+                                <div class="title">이메일</div>
+                                <div class="text">
+                                    <span th:text="${member.email}"></span>
+                                </div>
+                            </div>
                         </div>
                         <div class="apollonIntro"></div>
                     </div>
