@@ -44,6 +44,7 @@
                     <div class="signup-btn">
                         <button type="button" onclick="if(confirm('프로필 수정을 그만두시겠습니까?')) { window.location.href='/member/myPage'; }">취소</button>
                         <button type="submit" onclick="confirm('프로필 수정을 진행하시겠습니까? \n프로필 수정이 완료되면 재로그인이 필요합니다.');" id="submitButton">수정</button>
+                        <img id="profilePicturePreview" src="#" alt="프로필 사진 미리보기" style="display: none; max-width: 260px; max-height: 2600px;">
                     </div>
                 </form>
             </div>
@@ -84,5 +85,13 @@
     }
     document.addEventListener("DOMContentLoaded", function() {
         validateForm();
+        document.querySelector('input[type="file"]').addEventListener('change', function () {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('profilePicturePreview').src = e.target.result;
+                document.getElementById('profilePicturePreview').style.display = 'block';
+            };
+            reader.readAsDataURL(this.files[0]);
+        });
     });
 </script>

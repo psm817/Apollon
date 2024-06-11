@@ -45,11 +45,8 @@ public class MemberService {
                 .password(passwordEncoder.encode(password))
                 .nickname(nickname)
                 .email(email)
-<<<<<<< HEAD
                 .image(imageFileName) // Set the image file name
-=======
                 .createDate(LocalDateTime.now())
->>>>>>> 1740d39 (마이페이지 진화면 디자인 진행중, 회원 탈퇴, 정보 수정 완료)
                 .build();
 
         return memberRepository.save(member);
