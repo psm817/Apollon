@@ -68,8 +68,11 @@ form {
     color: #D9D9D9;
     width: 80px;
     border-radius: 30px;
+<<<<<<< HEAD
 }
 
 textarea{
 	resize: none;
+=======
+>>>>>>> fe47ea5 (업로드 폼 디자인 및 미입력시 경고문 출력, 업로드 후 경로지정 다시 할 것, db에 장르 저장시 올바르게 입력되도록 수정할 것)
 }
