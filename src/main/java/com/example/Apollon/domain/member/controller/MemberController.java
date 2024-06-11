@@ -125,21 +125,29 @@ public class MemberController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{username}")
-    public String modify(SignForm signForm, @PathVariable("username") String username, Model model) {
+    public String modify(SignForm signForm, @PathVariable("username") String username, Model model, Principal principal) {
         Member member = this.memberService.getMember(username);
-
-        model.addAttribute("member", member);
-
-        return "member/signup_modify";
+        if (principal.getName().startsWith("KAKAO") || principal.getName().startsWith("NAVER") || principal.getName().startsWith("GOOGLE")) {
+            // 소셜 로그인 사용자인 경우 modify2 페이지로 이동
+            return "redirect:/member/modify2/" + username;
+        } else {
+            // 일반 가입 사용자인 경우 modify 페이지로 이동
+            model.addAttribute("member", member);
+            return "member/signup_modify";
+        }
     }
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify2/{username}")
-    public String modify2(@PathVariable("username") String username, Model model) {
+    public String modify2(@PathVariable("username") String username, Model model, Principal principal) {
         Member member = this.memberService.getMember(username);
-
-        model.addAttribute("member", member);
-
-        return "member/signup_modify2";
+        if (principal.getName().startsWith("KAKAO") || principal.getName().startsWith("NAVER") || principal.getName().startsWith("GOOGLE")) {
+            // 소셜 로그인 사용자인 경우 modify2 페이지로 이동
+            model.addAttribute("member", member);
+            return "member/signup_modify2";
+        } else {
+            // 일반 가입 사용자인 경우 modify 페이지로 이동
+            return "redirect:/member/modify/" + username;
+        }
     }
 
     @PreAuthorize("isAuthenticated()")
