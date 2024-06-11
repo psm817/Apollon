@@ -39,7 +39,7 @@ class ApollonApplicationTests {
 
 	@Test
 	void contextLoads1() {
-		for ( int i = 1; i <= 8; i++ ) {
+		for ( int i = 1; i <= 300; i++ ) {
 			String title = String.format("안녕하세요%d", i);
 			String content = String.format("내용 %d", i);
 			String writer = String.format("admin %d" ,i);

@@ -1,31 +1,29 @@
 package com.example.Apollon.domain.member.controller;
 
+import com.example.Apollon.domain.comment.service.CommentService;
 import com.example.Apollon.domain.email.EmailService;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.repository.MemberRepository;
 import com.example.Apollon.domain.member.service.MemberService;
+import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.domain.studio.service.StudioService;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,6 +43,7 @@ public class MemberController {
     private final StudioService studioService;
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+    private final CommentService commentService;
 
     @PreAuthorize("isAnonymous()")
     @GetMapping("/login")
@@ -85,6 +84,7 @@ public class MemberController {
     private String storeProfilePicture(MultipartFile profilePicture) {
         // 이미지 저장 디렉토리 경로
         String uploadDir = "C:\\work\\thumbnail\\uploads";
+
         // 디렉토리가 존재하지 않으면 생성합니다.
         Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
@@ -106,6 +106,56 @@ public class MemberController {
         }
         // 저장된 파일의 경로를 반환합니다.
         return uploadDir + File.separator + imageFileName;
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/myPage")
+    public String myPage(Principal principal, Model model) {
+        Member member = this.memberService.getMember(principal.getName());
+
+        model.addAttribute("member", member);
+
+        return "member/myPage";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/modify/{username}")
+    public String modify(SignForm signForm, @PathVariable("username") String username, Model model) {
+        Member member = this.memberService.getMember(username);
+
+        model.addAttribute("member", member);
+
+        return "member/signup_modify";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/modify/{username}")
+    public String modify(@PathVariable("username") String username, @Valid SignForm signForm, BindingResult bindingResult, Model model) {
+        Member member = this.memberService.getMember(username);
+        Studio studio = this.studioService.getStudioByMemberUsername(username);
+
+        if (bindingResult.hasErrors()) {
+            return "member/signup_modify";
+        }
+
+        this.memberService.modify(member, signForm.getUsername(), signForm.getPassword(), signForm.getNickname(), signForm.getEmail());
+        this.studioService.createOrUpdate(member, studio.getVisit(), studio.getActive());
+
+        return "redirect:/member/logout";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/delete/{username}")
+    public String delete(Principal principal, @PathVariable("username") String username) {
+        Member member = this.memberService.getMember(principal.getName());
+
+        if (!member.getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
+        }
+
+        this.memberService.delete(member);
+
+        return "redirect:/member/logout";
     }
 
     @Getter

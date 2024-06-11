@@ -13,6 +13,10 @@ body {
     overflow: hidden;
 }
 
+.total-box {
+    height: 500px;
+}
+
 /* 상단 환영 인사 및 검색창 */
 .top-section {
     display: flex;
@@ -44,6 +48,21 @@ body {
     padding: 10px;
 }
 
+/* 돌아가기 버튼 */
+.top-section > .myHome-btn {
+    display: flex;
+    align-items: center;
+}
+
+.top-section > .myHome-btn > a {
+    display: block;
+    border-radius: 5px;
+    background-color: #36454F;
+    color: #fff;
+    font-weight: 700;
+    padding: 10px;
+}
+
 /* 검색창 */
 .top-section > .search-box {
     display: flex;
@@ -52,6 +71,7 @@ body {
     height: 80px;
     flex-grow: 1;
     flex-basis: 0;
+    margin-left: -60px;
 }
 
 .search-input-box {
