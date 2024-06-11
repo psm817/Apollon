@@ -39,7 +39,8 @@
                   </div>
                   <span class="TOP100_number" th:text="${iterStat.index + 1}"></span>
                   <div class="TOP100_musicTitle">
-                    <img class="thumbImg" th:src="@{/uploadImgs/{filename}(filename=${music.thumbnailImg})}" alt="사진X">
+                    <div class="thumbImg">
+                      <img th:src="@{/uploadImgs/{filename}(filename=${music.thumbnailImg})}" alt="사진X"></div>
                     <div class="classnull"></div>
                     <a class="musicTi" th:href="@{/chart/TOP100/{id}(id=${music.id})}">
                       <span th:text="${music.musicTitle}"></span>
@@ -53,10 +54,10 @@
                     <span th:text="${music.likeCount != null ? music.likeCount : 0}">22</span>
                   </div>
                   <div class="music_imp">
-                    <span><i class="fa-solid fa-plus fa-lg"></i></span>
+                    <span><i class="fa-solid fa-plus"></i></span>
                   </div>
                   <div class="music_p">
-                    <span><i class="fa-solid fa-play fa-lg"></i></span>
+                    <span><i class="fa-solid fa-play"></i></span>
                   </div>
                 </li>
               </ul>
