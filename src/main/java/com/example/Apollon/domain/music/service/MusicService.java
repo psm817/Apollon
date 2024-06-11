@@ -84,13 +84,6 @@ public class MusicService {
         return music.getLikedByMembers().contains(member);
     }
 
-    // TOP100 가져옴(전체 음악중 재생한 count 가 많은 순으로 정렬)
-    public List<Music> getTOP100List() {
-        List<Music> allMusic = musicRepository.findAll();
-        allMusic.sort(Comparator.comparingLong(Music::getMusicPlayCount).reversed());
-        return allMusic;
-    }
-
     // 원하는 음악을 가져오는데 음악 없으면 찾을 수 없다고 표시
     public Music getMusic(Long musicId) {
         Optional<Music> op = musicRepository.findById(musicId);
