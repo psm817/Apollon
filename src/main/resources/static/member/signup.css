@@ -26,24 +26,24 @@ ul, li {
     margin-top: 50px;
 }
 
-.container > .signup-check-box > form {
+.container > .signup-check-box {
     max-width: 1000px;
     height: 590px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.signup-check-box > form > ul {
+.signup-check-box > ul {
     margin-top: 0;
     height: 100%;
 }
 
-.signup-check-box > form > ul > .checkBox {
+.signup-check-box > ul > .checkBox {
     height: 50%;
     padding-right: 40px;
 }
 
-.signup-check-box > form > ul > .check01 > .text-box {
+.signup-check-box > ul > .check01 > .text-box {
     border: 1px solid #000;
     border-radius: 6px;
     height: 62%;
@@ -52,16 +52,16 @@ ul, li {
     background-color: #F4F4F5;
 }
 
-.signup-check-box > form > ul > .check01 > .text-box > span {
+.signup-check-box > ul > .check01 > .text-box > span {
     padding-left: 20px;
 }
 
-.signup-check-box > form > ul > .check01 > .chk-btn {
+.signup-check-box > ul > .check01 > .chk-btn {
     margin-top: 10px;
     font-size: 15px;
 }
 
-.signup-check-box > form > ul > .check02 > .text-box {
+.signup-check-box > ul > .check02 > .text-box {
     border: 1px solid #000;
     border-radius: 6px;
     height: 62%;
@@ -70,21 +70,21 @@ ul, li {
     background-color: #F4F4F5;
 }
 
-.signup-check-box > form > ul > .check02 > .text-box > span {
+.signup-check-box > ul > .check02 > .text-box > span {
     padding-left: 20px;
 }
 
-.signup-check-box > form > ul > .check02 > .chk-btn {
+.signup-check-box > ul > .check02 > .chk-btn {
     margin-top: 10px;
     font-size: 15px;
 }
 
-.container > .signup-check-box > form > .button {
+.container > .signup-check-box > .button {
     display: flex;
     justify-content: flex-end;
 }
 
-.container > .signup-check-box > form > .button > button {
+.container > .signup-check-box > .button > button {
     color: #fff;
     font-family: 'Pretendard-Regular';
     background-color: #36454F;

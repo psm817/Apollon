@@ -1,0 +1,45 @@
+<html layout:decorate="~{layout}">
+    <div layout:fragment="content">
+        <div class="myPage-container">
+            <div class="welcome-box">
+                <span th:text="'마이페이지 👤'"></span>
+            </div>
+            <div class="myPage-detail">
+                <div class="myPicture">
+                    <div class="picture-container">
+                        <div class="profile-picture">
+                            <img src="" alt="프로필사진">
+                        </div>
+                        <div class="profile-hashtag">
+                            <span th:text="'#' + ${member.username}"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="myInfo">
+                    <div class="info-container">
+                        <div class="profile-detail">
+                            <div class="username-box"></div>
+                            <div class="nickname-box"></div>
+                            <div class="email-box"></div>
+                        </div>
+                        <div class="apollonIntro"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="userBtn">
+                <a th:href="@{|/member/modify/${member.username}|}" class="modify-btn">프로필 수정</a>
+                <a th:href="@{|/member/delete/${member.username}|}" class="delete-btn" onclick="return confirmDelete()">회원 탈퇴</a>
+            </div>
+        </div>
+    </div>
+</html>
+
+<script>
+    function confirmDelete() {
+        if (confirm('생각 잘하고 결정해라')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>

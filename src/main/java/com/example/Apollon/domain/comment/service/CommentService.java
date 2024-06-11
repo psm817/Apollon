@@ -4,7 +4,11 @@ import com.example.Apollon.domain.comment.entity.Comment;
 import com.example.Apollon.domain.comment.repository.CommentRepository;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.studio.entity.Studio;
+import groovy.util.ConfigObject;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.DateTimeException;
