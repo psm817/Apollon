@@ -119,12 +119,10 @@ public class StudioController {
 
         if (studio != null && studio.getActive() == 1) {
             this.studioService.changeInActive(studio, 0);
-            model.addAttribute("message", "스튜디오가 차단 되었습니다.");
         }
 
         else if(studio != null && studio.getActive() == 0) {
             this.studioService.changeActive(studio, 1);
-            model.addAttribute("message", "스튜디오가 활성화 되었습니다.");
         }
 
         return "redirect:/studio/%s".formatted(studio.getMember().getUsername());
