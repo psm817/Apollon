@@ -27,9 +27,20 @@ input: focus {
 }
 
 /* 커스텀 */
+.TOP100_container {
+    height: 840px;
+    cursor: default;
+}
+
+.TOP100_cont_sec {
+    height: calc(100vh - 50px);
+    overflow: hidden;
+    overflow-y: auto;
+}
+
 /* 상단 nav 추가 */
 .chartList_nav {
-    width: 1920px; height: 48px;
+    height: 48px;
     background-color: #FFF;
     border-bottom: 1px solid rgba(0, 0, 0, .2);
 }
@@ -76,13 +87,126 @@ input: focus {
 
 .TOP100_body {
     display: flex;
+    flex-direction: column;
 }
 
 .TOP100_nav {
     border-top: 1px solid rgba(0, 0, 0, .2);
     border-bottom: 1px solid rgba(0, 0, 0, .2);
+    display: flex;
+    align-items: center;
+    height: 40px;
+    font-weight: 500;
+    font-size: 18px;
+    text-align: center;
 }
 
+.TOP100_nav > ul {
+    display: flex;
+}
+
+.TOP100_nav > ul > li:nth-child(1) {
+    width: 16px;
+}
+
+.TOP100_nav > ul > li:nth-child(2) {
+    width: 84px;
+}
+
+.TOP100_nav > ul > li:nth-child(3) {
+    width: 80px;
+}
+
+.TOP100_nav > ul > li:nth-child(4) {
+    width: 50px;
+}
+
+.TOP100_nav > ul > li:nth-child(5) {
+    width: 660px;
+    text-align: left;
+}
+
+.TOP100_nav > ul > li:nth-child(6) {
+    width: 280px;
+    text-align: left;
+}
+
+.TOP100_nav > ul > li:nth-child(7) {
+    width: 100px;
+}
+
+.TOP100_nav > ul > li:nth-child(8) {
+    width: 100px;
+}
+
+.TOP100_nav > ul > li:nth-child(9) {
+    width: 100px;
+}
+
+/* 목록 */
 .TOP100_list {
     border-bottom: 1px solid rgba(0, 0, 0, .2);
+    overflow-y: auto;
+    height: 820px;
+}
+
+.TOP100_list-num {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.TOP100_list > ul > li {
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.TOP100_list > ul .TOP100_form-check {
+    width: 16px;
+}
+
+.TOP100_list > ul .TOP100_number {
+    width: 84px;
+    text-align: center;
+}
+
+.TOP100_list > ul .TOP100_musicTitle {
+    display: flex;
+    align-items: center;
+}
+
+.TOP100_list > ul .TOP100_musicTitle > .thumbImg {
+    width: 80px;
+}
+
+.thumbImg > img {
+    margin: 5px;
+    height: 50px;
+}
+
+.TOP100_list > ul .TOP100_musicTitle > .classnull {
+    width: 50px;
+}
+
+.TOP100_list > ul .TOP100_musicTitle > .musicTi {
+    width: 660px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.TOP100_list > ul .TOP100_musicTitle > .upstu {
+    width: 280px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.TOP100_list > ul > li .music_like,
+.TOP100_list > ul > li .music_imp,
+.TOP100_list > ul > li .music_p {
+    width: 100px;
+    text-align: center;
 }
