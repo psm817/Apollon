@@ -81,6 +81,7 @@ public class MemberController {
 
         return "redirect:/member/login";
     }
+
     private String storeProfilePicture(MultipartFile profilePicture) {
         // 이미지 저장 디렉토리 경로
         String uploadDir = "C:\\work\\thumbnail\\uploads";
