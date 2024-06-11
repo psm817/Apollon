@@ -25,7 +25,8 @@ public class MemberService {
     public boolean usernameExists(String username) {
         return memberRepository.existsByUsername(username);
     }
-    public Member signup(String username, String password, String nickname, String email) {
+
+    public Member signup(String username, String password, String nickname, String email, String imageFileName) {
         // Check for duplicate username
         if (memberRepository.findByUsername(username).isPresent()) {
             throw new IllegalStateException("Username already exists");
@@ -42,11 +43,11 @@ public class MemberService {
                 .password(passwordEncoder.encode(password))
                 .nickname(nickname)
                 .email(email)
+                .image(imageFileName) // Set the image file name
                 .build();
 
         return memberRepository.save(member);
     }
-
     @Transactional
     public Member whenSocialLogin(String providerTypeCode, String username, String nickname, String email) {
         Optional<Member> opMember = findByUsername(username);
@@ -54,7 +55,7 @@ public class MemberService {
         if (opMember.isPresent()) return opMember.get();
 
         // 소셜 로그인을 통한 가입 시 비번은 없다.
-        return signup(username, "", nickname, email); // 최초 로그인 시 딱 한번 실행
+        return signup(username, "", nickname, email,"/images/none.png"); // 최초 로그인 시 딱 한번 실행
     }
 
     private Optional<Member> findByUsername(String username) {

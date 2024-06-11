@@ -24,8 +24,8 @@ class ApollonApplicationTests {
 
 	@Test
 	void contextLoads() {
-		Member member1 = memberService.signup("user3", "user3", "user3", "user3@test.com");
-		Member member2 = memberService.signup("user4", "user4", "user4", "user4@test.com");
+		Member member1 = memberService.signup("user3", "user3", "user3", "user3@test.com","");
+		Member member2 = memberService.signup("user4", "user4", "user4", "user4@test.com","");
 
 		Studio studio = studioService.createOrUpdate(member1, 15, 1);
 

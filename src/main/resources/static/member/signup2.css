@@ -125,3 +125,6 @@ a {
 .success {
     color: blue;
 }
+#profilePicturePreview{
+    margin: -490px 0 0 450px
+}
