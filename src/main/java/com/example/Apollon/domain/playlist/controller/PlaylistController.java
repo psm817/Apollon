@@ -29,7 +29,6 @@ import java.nio.file.Paths;
 @RequiredArgsConstructor
 @RequestMapping("/playlist")
 public class PlaylistController {
-    private final MemberService memberService;
     private final MusicService musicService;
     private final PlaylistService playlistService;
 
