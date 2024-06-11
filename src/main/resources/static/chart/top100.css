@@ -25,15 +25,14 @@ button {
 input: focus {
     outline: none;
 }
-
 /* 커스텀 */
 .TOP100_container {
-    height: 840px;
     cursor: default;
+    height: calc(100vh - 150px);
+    overflow-y: auto;
 }
 
 .TOP100_cont_sec {
-    height: calc(100vh - 50px);
     overflow: hidden;
     overflow-y: auto;
 }
@@ -145,9 +144,8 @@ input: focus {
 
 /* 목록 */
 .TOP100_list {
-    border-bottom: 1px solid rgba(0, 0, 0, .2);
     overflow-y: auto;
-    height: 820px;
+    height: 100%;
 }
 
 .TOP100_list-num {
@@ -160,6 +158,7 @@ input: focus {
     height: 50px;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
 }
 
 .TOP100_list > ul .TOP100_form-check {
@@ -209,4 +208,13 @@ input: focus {
 .TOP100_list > ul > li .music_p {
     width: 100px;
     text-align: center;
+}
+
+.TOP100_list > ul > li .music_like i {
+    color: #ffa4b3;
+}
+
+.TOP100_list > ul > li .music_imp i,
+.TOP100_list > ul > li .music_p i {
+    color: #000;
 }

@@ -145,7 +145,7 @@
                              @PathVariable("username") String memberName,
                              @RequestParam("thumbnail") MultipartFile thumbnail,
                              @RequestParam("musicFile") MultipartFile musicFile,
-                             @RequestParam("genres[]") String[] genres,
+                             @RequestParam("genres") List<String> genres,
                              @PathVariable("username") String username) {
             Studio studio = this.studioService.getStudioByMemberUsername(username);
             musicService.upload(title, content, memberName, thumbnail, musicFile, genres);
