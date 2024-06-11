@@ -38,6 +38,7 @@
 .notice-item span {
   font-size: 16px;
   background-color: #e0e0e0;
+  color:red;
   padding: 5px 10px;
   border-radius: 5px;
 }

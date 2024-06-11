@@ -3,6 +3,8 @@ package com.example.Apollon.domain.post.entity;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.global.jpa.BaseEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,4 +35,7 @@ public class Post extends BaseEntity {
 
     @ManyToOne
     private Member author;
+
+    @Enumerated(EnumType.STRING)
+    private BoardType boardType;
 }

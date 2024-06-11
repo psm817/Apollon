@@ -13,7 +13,7 @@
             <div class="profile-card box">
                 <div class="profile-header">
                     <div class="profile-id-box">
-                        <img src="profile-icon.png" alt="a">
+                        <img src="/images/none.png" alt="Your Logo" class="logo">
                         <span class="profile-id">testID</span>
                     </div>
                 </div>
@@ -82,7 +82,9 @@
                 <div class="postbox-body">
                     <tr th:each="post, loop : ${paging}">
                         <div class="post-item">
-                            <span>자유</span>
+                            <span>
+                                <a th:text="${post.boardType}" th:href="@{|/post/detail/${post.id}|}"></a>
+                            </span>
                             <div class="post-title">
                                 <a th:text="${post.title}" th:href="@{|/post/detail/${post.id}|}"></a>
                             </div>
