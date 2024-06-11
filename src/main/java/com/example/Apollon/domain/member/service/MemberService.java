@@ -9,6 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -44,6 +46,7 @@ public class MemberService {
                 .nickname(nickname)
                 .email(email)
                 .image(imageFileName) // Set the image file name
+                .createDate(LocalDateTime.now())
                 .build();
 
         return memberRepository.save(member);
@@ -69,5 +72,19 @@ public class MemberService {
         } else {
             throw new DataNotFoundException("Member not found");
         }
+    }
+
+    public void modify(Member member, String username, String password, String nickname, String email) {
+        member.setUsername(username);
+        member.setPassword(passwordEncoder.encode(password));
+        member.setNickname(nickname);
+        member.setEmail(email);
+        member.setModifyDate(LocalDateTime.now());
+
+        this.memberRepository.save(member);
+    }
+
+    public void delete(Member member) {
+        this.memberRepository.delete(member);
     }
 }
