@@ -114,7 +114,6 @@ public class MusicService {
             System.out.println("Now playing: " + music.getMusicTitle());
         }
     }
-
     public List<Music> getTop100MusicByPlayCount() {
         return musicRepository.findTop100ByOrderByMusicPlayCountDesc();
     }
