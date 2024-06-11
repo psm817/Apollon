@@ -1,6 +1,5 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content">
-  
   <div class="upload_sec">
     <div class="upload_form_container">
       <form th:action th:object="${uploadForm}" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
