@@ -52,21 +52,12 @@ public class MusicService {
                 .musicTitle(title)
                 .musicContent(content)
                 .uploadStudio(member)
-                .thumbnailImg("/uploadImgs/" + thumbnailFile)
-                .musicMp3("/uploadMusics/" + musicFile)
+                .thumbnailImg(""+ thumbnailFile)
+                .musicMp3(""+ musicFile)
                 .genres(genres)
                 .build();
 
         musicRepository.save(music);
-    }
-
-    private void createDirectoryIfNotExists(String dirPath) {
-        File dir = new File(dirPath);
-        if (!dir.exists()) {
-            if (!dir.mkdirs()) {
-                throw new RuntimeException("Failed to create directory: " + dirPath);
-            }
-        }
     }
 
     // 좋아요 추가

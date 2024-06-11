@@ -28,18 +28,19 @@ input: focus {
 
 /* 커스텀 */
 .TOP100_container {
-    height: 800px;
+    height: 840px;
     cursor: default;
 }
 
 .TOP100_cont_sec {
     height: calc(100vh - 50px);
+    overflow: hidden;
     overflow-y: auto;
 }
 
 /* 상단 nav 추가 */
 .chartList_nav {
-    width: 1920px; height: 48px;
+    height: 48px;
     background-color: #FFF;
     border-bottom: 1px solid rgba(0, 0, 0, .2);
 }
@@ -131,17 +132,18 @@ input: focus {
 }
 
 .TOP100_nav > ul > li:nth-child(7) {
-    width: 80px;
+    width: 100px;
 }
 
 .TOP100_nav > ul > li:nth-child(8) {
-    width: 80px;
+    width: 100px;
 }
 
 .TOP100_nav > ul > li:nth-child(9) {
-    width: 80px;
+    width: 100px;
 }
 
+/* 목록 */
 .TOP100_list {
     border-bottom: 1px solid rgba(0, 0, 0, .2);
     overflow-y: auto;
@@ -172,14 +174,15 @@ input: focus {
 .TOP100_list > ul .TOP100_musicTitle {
     display: flex;
     align-items: center;
-    width: 940px; /* 총 너비가 940px로 계산됨 */
-    overflow: hidden;
 }
 
 .TOP100_list > ul .TOP100_musicTitle > .thumbImg {
     width: 80px;
-    height: 50px;
+}
+
+.thumbImg > img {
     margin: 5px;
+    height: 50px;
 }
 
 .TOP100_list > ul .TOP100_musicTitle > .classnull {
@@ -187,9 +190,8 @@ input: focus {
 }
 
 .TOP100_list > ul .TOP100_musicTitle > .musicTi {
-    flex: 1; /* 나머지 공간을 채우도록 설정 */
+    width: 660px;
     text-align: left;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -202,9 +204,9 @@ input: focus {
     text-overflow: ellipsis;
 }
 
-.TOP100_list > ul .music_like,
-.TOP100_list > ul .music_imp,
-.TOP100_list > ul .music_p {
-    width: 80px;
+.TOP100_list > ul > li .music_like,
+.TOP100_list > ul > li .music_imp,
+.TOP100_list > ul > li .music_p {
+    width: 100px;
     text-align: center;
 }
