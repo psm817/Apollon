@@ -58,7 +58,6 @@ public class Music extends BaseEntity {
     )
     private Set<Playlist> playlists = new HashSet<>();
 
-
     @ManyToMany
     @JoinTable(
             name = "music_member_likes",

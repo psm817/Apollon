@@ -59,7 +59,6 @@ public class MusicService {
 
         musicRepository.save(music);
     }
-
     // 좋아요 추가
     public void likeMusic(Long musicId, Long memberId) {
         Music music = getMusic(musicId);
@@ -116,7 +115,6 @@ public class MusicService {
             System.out.println("Now playing: " + music.getMusicTitle());
         }
     }
-
     public List<Music> getTop100MusicByPlayCount() {
         return musicRepository.findTop100ByOrderByMusicPlayCountDesc();
     }
