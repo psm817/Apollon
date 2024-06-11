@@ -1,8 +1,8 @@
 package com.example.Apollon.domain.member.entity;
 
 
-import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.domain.comment.entity.Comment;
+import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.global.jpa.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,6 +23,7 @@ import java.util.List;
 public class Member extends BaseEntity {
     @Column(unique = true)
     private String username;
+    @Setter
     private String password;
     @Column(unique = false)
     private String nickname;
