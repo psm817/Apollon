@@ -30,11 +30,11 @@ public class MusicService {
     @Value("${custom.fileDirPath}")
     private String fileDirPath;
     // 음악 업로드
-    public void upload(String title, String content, String member, MultipartFile thumbnail, MultipartFile song, String[] genres) {
+    public void upload(String title, String content, String member, MultipartFile thumbnail, MultipartFile song, List<String> genres) {
         String thumbnailDirPath = fileDirPath + "/uploadFile/uploadImgs";
         String musicDirPath = fileDirPath + "/uploadFile/uploadMusics";
 
-        String thumbnailRelPath = UUID.randomUUID() + ".jpg";
+        String thumbnailRelPath = UUID.randomUUID() + ".png";
         String musicFileRelPath = UUID.randomUUID() + ".mp3";
 
         File thumbnailFile = new File(thumbnailDirPath + "/" + thumbnailRelPath);
@@ -63,7 +63,7 @@ public class MusicService {
         Music music = getMusic(musicId);
         Member member = getMemberId(memberId);
 
-        music.addLikedByMembers(member);
+        music.addMusicLike(member);
         musicRepository.save(music);
     }
 
@@ -71,17 +71,8 @@ public class MusicService {
         Music music = getMusic(musicId);
         Member member = getMemberId(memberId);
 
-        music.getLikedByMembers().remove(member);
+        music.getMusicLikers().remove(member);
         musicRepository.save(music);
-    }
-
-
-    // 해당 음악에 대한 좋아요 여부 확인
-    public boolean isMusicLikedByMember(Long musicId, Long memberId) {
-        Music music = getMusic(musicId);
-        Member member = getMemberId(memberId);
-
-        return music.getLikedByMembers().contains(member);
     }
 
     // 원하는 음악을 가져오는데 음악 없으면 찾을 수 없다고 표시

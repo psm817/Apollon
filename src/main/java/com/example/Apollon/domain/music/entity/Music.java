@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -35,7 +36,7 @@ public class Music extends BaseEntity {
     private String musicMp3;
     @Setter
     @Getter
-    private String[] genres;
+    private List<String> genres;
 
     @Setter
     @Getter
@@ -50,6 +51,10 @@ public class Music extends BaseEntity {
     @Getter
     private Long musicPlayCount = 0L;
 
+    // 좋아요
+    @ManyToMany
+    Set<Member> musicLikers = new LinkedHashSet<>();
+
     @ManyToMany
     @JoinTable(
             name = "playlist_music",
@@ -57,24 +62,17 @@ public class Music extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "playlist_id")
     )
     private Set<Playlist> playlists = new HashSet<>();
-    @ManyToMany
-    @JoinTable(
-            name = "music_member_likes",
-            joinColumns = @JoinColumn(name = "music_id"),
-            inverseJoinColumns = @JoinColumn(name = "member_id")
-    )
-    private Set<Member> likedByMembers = new LinkedHashSet<>();
 
-    public void addLikedByMembers(Member liker) {
-        if (this.likedByMembers == null) {
-            this.likedByMembers = new HashSet<>();
-        }
-
-        this.likedByMembers.add(liker);
-    }
     public void setPlaylist(Playlist playlist) {
         playlists.add(playlist);
         playlist.getMusics().add(this);
     }
 
+    public void addMusicLike(Member liker) {
+        if (this.musicLikers == null) {
+            this.musicLikers = new HashSet<>();
+        }
+
+        this.musicLikers.add(liker);
+    }
 }

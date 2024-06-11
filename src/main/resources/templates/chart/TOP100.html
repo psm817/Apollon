@@ -30,9 +30,9 @@
               </ul>
             </div>
             <div class="TOP100_list">
-              <ul th:each="music, iterStat : ${musicList}">
+              <ul>
                 <!-- 타임리프를 사용하여 musicList라는 변수에 저장된 음악 데이터를 반복하여 출력 -->
-                <li class="TOP100_list-num">
+                <li class="TOP100_list-num" th:each="music, iterStat : ${musicList}">
                   <div class="TOP100_form-check">
                     <input class="TOP100_form-check-input" type="checkbox" th:value="${music.id}" th:id="'flexCheckDefault' + ${iterStat.index}">
                     <label class="TOP100_form-check-label" th:for="'flexCheckDefault' + ${iterStat.index}"></label>
@@ -51,7 +51,7 @@
                   </div>
                   <div class="music_like">
                     <span><i class="fa-regular fa-heart"></i></span>
-                    <span th:text="${music.likeCount != null ? music.likeCount : 0}">22</span>
+<!--                    <span th:text="${music.musicLikers != null ? music.musicLikers : 0}"></span>-->
                   </div>
                   <div class="music_imp">
                     <span><i class="fa-solid fa-plus"></i></span>
