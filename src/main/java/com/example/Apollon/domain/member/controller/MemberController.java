@@ -132,6 +132,15 @@ public class MemberController {
 
         return "member/signup_modify";
     }
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/modify2/{username}")
+    public String modify2(@PathVariable("username") String username, Model model) {
+        Member member = this.memberService.getMember(username);
+
+        model.addAttribute("member", member);
+
+        return "member/signup_modify2";
+    }
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{username}")
@@ -144,6 +153,19 @@ public class MemberController {
         }
 
         this.memberService.modify(member, signForm.getUsername(), signForm.getPassword(), signForm.getNickname(), signForm.getEmail());
+        this.studioService.createOrUpdate(member, studio.getVisit(), studio.getActive());
+
+        return "redirect:/member/logout";
+    }
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/modify2/{username}")
+    public String modify2(@PathVariable("username") String username, @RequestParam("nickname") String nickname, Model model) {
+        Member member = this.memberService.getMember(username);
+        Studio studio = this.studioService.getStudioByMemberUsername(username);
+
+        member.setNickname(nickname); // 닉네임 수정
+
+        this.memberService.modify2(member, nickname);
         this.studioService.createOrUpdate(member, studio.getVisit(), studio.getActive());
 
         return "redirect:/member/logout";
