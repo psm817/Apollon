@@ -28,6 +28,8 @@
         @GetMapping("/TOP100")
         public String getTop100Music(Model model) {
             List<Music> musicList = musicService.getTop100MusicByPlayCount();
+
+            System.out.println("musicList : " + musicList.toString());
             model.addAttribute("musicList", musicList);
             return "chart/TOP100";
         }
@@ -50,7 +52,7 @@
             Music music = this.musicService.getMusic(id);
             Member member = this.memberService.getMember(principal.getName());
 
-            if (music.getLikedByMembers().contains(member)) {
+            if (music.getMusicLikers().contains(member)) {
                 this.musicService.unlikeMusic(music.id, member.id);
             } else {
                 this.musicService.likeMusic(music.id, member.id);
