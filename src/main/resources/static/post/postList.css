@@ -165,15 +165,17 @@
 .post-writer {
   flex: 1;
   text-align: center;
-  margin-left: 20px;
+  margin-left: 70px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .post-createDate {
+
   flex: 1.5;
-  margin-left: 120px;
+  text-align: center;
+  margin-left: 5px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -182,7 +184,6 @@
 .post-hit {
   flex: 1;
   text-align: center;
-  margin-left: 20px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

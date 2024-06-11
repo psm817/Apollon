@@ -1,6 +1,7 @@
 package com.example.Apollon.domain.post.service;
 
 import com.example.Apollon.domain.member.entity.Member;
+import com.example.Apollon.domain.member.service.MemberService;
 import com.example.Apollon.domain.post.entity.Post;
 import com.example.Apollon.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,11 +31,11 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public void create( String title, String content) {
+    public void create(String title, String content, Member member) {
         Post post = Post.builder()
                 .title(title)
                 .content(content)
-                .writer(null)
+                .author(member)
                 .createDate(LocalDateTime.now())
                 .hit(0)
                 .build();

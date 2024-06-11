@@ -34,6 +34,3 @@ public class Post extends BaseEntity {
     @ManyToOne
     private Member author;
 }
-
-
-
