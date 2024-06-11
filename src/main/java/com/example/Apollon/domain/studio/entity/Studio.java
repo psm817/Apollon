@@ -25,6 +25,8 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 public class Studio extends BaseEntity {
+    public long id;
+
     // 스튜디오 주인(회원)
     @OneToOne
     @JoinColumn(name = "member_id", unique = true)

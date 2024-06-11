@@ -1,0 +1,120 @@
+.myPage-container {
+    border: 1px solid red;
+}
+
+/* 환영인사(상단 타이틀) */
+.myPage-container > .welcome-box {
+    border: 1px solid orange;
+    height: 80px;
+    text-align: center;
+}
+
+.myPage-container > .welcome-box > span {
+    font-weight: 700;
+    height: 100%;
+    font-size: 23px;
+    line-height: 80px;
+}
+
+/* 마이페이지 시작 */
+.myPage-container > .myPage-detail {
+    border: 1px solid orange;
+    height: 550px;
+    display: flex;
+}
+
+/* 프로필 사진 */
+.myPage-container > .myPage-detail > .myPicture {
+    border: 1px solid green;
+    flex-grow: 1.7;
+    flex-basis: 0;
+}
+
+.myPage-container > .myPage-detail > .myPicture > .picture-container {
+    border: 1px solid blue;
+    width: 300px;
+    height: 100%;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.myPage-detail > .myPicture > .picture-container > .profile-picture {
+    border: 1px solid red;
+    width: 300px;
+    height: 300px;
+    border-radius: 100%;
+}
+
+.myPage-detail > .myPicture > .picture-container > .profile-hashtag {
+    border: 1px solid red;
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+    text-align: center;
+    background-color: #36454F;
+}
+
+.myPage-detail > .myPicture > .picture-container > .profile-hashtag > span {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 50px;
+    color: #fff;
+}
+
+/* 회원 정보 */
+.myPage-container > .myPage-detail > .myInfo {
+    border: 1px solid green;
+    flex-grow: 2.5;
+    flex-basis: 0;
+}
+
+.myPage-detail > .myInfo > .info-container {
+    border: 1px solid red;
+    width: 650px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.myPage-detail > .myInfo > .info-container > .profile-detail {
+    border: 1px solid orange;
+    flex-grow: 2;
+    flex-basis: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.myPage-detail > .myInfo > .info-container > .profile-detail > div {
+    border: 1px solid green;
+}
+
+.myPage-detail > .myInfo > .info-container > .apollonIntro {
+    border: 1px solid orange;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+/* 유저 버튼 */
+.myPage-container > .userBtn {
+    border: 1px solid orange;
+    height: 60px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.myPage-container > .userBtn > a {
+    border: 1px solid red;
+    border-radius: 6px;
+    padding: 10px 20px 10px 20px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #36454F;
+}
+
+.myPage-container > .userBtn > .modify-btn {
+    margin-right: 50px;
+}

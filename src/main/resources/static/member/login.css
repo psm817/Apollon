@@ -141,7 +141,6 @@ a {
 .social-login > a:nth-child(1){
     background-color: #FEE500;
     font-weight: bold;
-    box-shadow: 2px 2px 2px 2px gray;
 }
 
 .social-login > a:nth-child(1):hover {
@@ -153,7 +152,6 @@ a {
     background-color: #03C75A;
     color: #fff;
     font-weight: bold;
-    box-shadow: 2px 2px 2px 2px gray;
 }
 
 .social-login > a:nth-child(2):hover {
@@ -165,7 +163,6 @@ a {
     background-color: #FF6376;
     color: #fff;
     font-weight: bold;
-    box-shadow: 2px 2px 2px 2px gray;
 }
 
 .social-login > a:nth-child(3):hover {
