@@ -24,8 +24,8 @@ class ApollonApplicationTests {
 
 	@Test
 	void contextLoads() {
-		Member member1 = memberService.signup("user3", "user3", "user3", "user3@test.com");
-		Member member2 = memberService.signup("user4", "user4", "user4", "user4@test.com");
+		Member member1 = memberService.signup("user3", "user3", "user3", "user3@test.com","");
+		Member member2 = memberService.signup("user4", "user4", "user4", "user4@test.com","");
 
 		Studio studio = studioService.createOrUpdate(member1, 15, 1);
 
@@ -39,7 +39,7 @@ class ApollonApplicationTests {
 
 	@Test
 	void contextLoads1() {
-		for ( int i = 1; i <= 8; i++ ) {
+		for ( int i = 1; i <= 300; i++ ) {
 			String title = String.format("안녕하세요%d", i);
 			String content = String.format("내용 %d", i);
 			String writer = String.format("admin %d" ,i);

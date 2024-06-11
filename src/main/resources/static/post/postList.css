@@ -94,15 +94,62 @@
 
 
 .postList-footer {
-
-    bottom: 100px; /* Adjust as needed */
+    display: flex; /* Flexbox 사용 */
+    justify-content: space-between; /* 요소들 사이에 공간 배분 */
+    align-items: center; /* 수직 중앙 정렬 */
+    bottom: 100px; /* 필요에 따라 조정 */
     width: 87%;
-    margin-left: 5%; /* Centering the footer */
+    margin-left: 5%; /* 푸터 중앙 정렬 */
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 10px;
+}
+.postList-footer2 {
+    display: flex; /* Flexbox 사용 */
+    justify-content: space-between; /* 요소들 사이에 공간 배분 */
+    align-items: center; /* 수직 중앙 정렬 */
+    bottom: 50px; /* 필요에 따라 조정 */
+    width: 87%;
+    margin-left: 5%; /* 푸터 중앙 정렬 */
 
+    padding: 10px;
+}
+
+.paging {
+    display: flex;
+    justify-content: center; /* 숫자들을 중앙 정렬 */
+    width: 100%; /* 전체 폭 사용 */
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.page-item {
+    margin: 0 5px;
+}
+
+.page-link {
+    text-decoration: none;
+    color: #007bff;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.page-item.disabled .page-link {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.page-item.active .page-link {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
 }
 
 
@@ -170,7 +217,7 @@ text-align:center;
 }
 
 .postWriteButton {
-margin-left:220px;
+margin-left:650px;
     width:130px;
     align-self: flex-end;
     padding: 10px 20px;

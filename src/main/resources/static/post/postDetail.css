@@ -1,10 +1,18 @@
-.writeBox {
+.detailBox {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 20px;
     margin: 20px 0;
     background-color: #f9f9f9;
+    height:700px;
 
+}
+.detailHeader{
+ border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #f9f9f9;
 }
 
 /* Board type styling */
@@ -21,31 +29,31 @@
 }
 
 /* Post write box styling */
-.postWrite-box {
+.postDetail-box {
     padding: 20px;
     background-color: #fff;
     height:600px;
     position: relative; /* Added */
 }
 
-.postWrite-body {
+.postDetail-body {
     margin-bottom: 20px;
 }
 
-.postWrite-body form {
+.postDetail-body form {
     display: flex;
     flex-direction: column;
 
 }
 
-.postWrite-body label {
+.postWDetail-body label {
     font-size: 1.1em;
     margin-bottom: 10px;
 
 }
 
-.postWrite-body input[type="text"],
-.postWrite-body textarea {
+.postDetail-body input[type="text"],
+.postDetail-body textarea {
     width: 100%;
     padding: 10px 0;
     margin-bottom: 20px;
@@ -53,11 +61,11 @@
     border-radius: 5px;
 
 }
-.postWrite-body textarea:nth-child(2){
+.postDetail-body textarea:nth-child(2){
 height:340px;
 }
 
-.postWrite-body button {
+.postDetail-body button {
     align-self: flex-end;
     padding: 10px 20px;
     background-color: #007bff;
@@ -68,11 +76,11 @@ height:340px;
     margin-left:720px;
 }
 
-.postWrite-body button:hover {
+.postDetail-body button:hover {
     background-color: #0056b3;
 }
 
-.postWrite-footer {
+.postDetail-footer {
     display:flex;
     justify-content: space-between;
     margin-bottom:10px;
@@ -90,25 +98,26 @@ height:340px;
 }
 
 
-.cancelButton,
-.postListButton {
+.previousPostButton,
+.postListButton,
+ .nextPostButton{
     padding: 10px 20px;
     background-color: #36454F;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-left:5px;
 }
 .cancelButton{
 margin-left:20px;
 }
-.postButton-box {
+.detailPostButton-box {
     display: flex; /* Add this line */
-
     text-align: center;
     padding: 10px;
     background-color: #e9ecef;
     border-radius: 5px;
-    width:170px;
-    margin-left:auto;
+    width:300px;
+    margin-left:550px;
 }

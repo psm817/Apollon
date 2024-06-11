@@ -21,9 +21,9 @@ public class Dev {
     @Bean
     public ApplicationRunner init(MemberService memberService, StudioService studioService, CommentService commentService) {
         return args -> {
-            Member m1 = memberService.signup("admin", "admin", "admin", "admin@test.com");
-            Member m2 = memberService.signup("user1", "user1", "user1", "user1@test.com");
-            Member m3 = memberService.signup("user2", "user2", "user2", "user2@test.com");
+            Member m1 = memberService.signup("admin", "admin", "admin", "admin@test.com","");
+            Member m2 = memberService.signup("user1", "user1", "user1", "user1@test.com","");
+            Member m3 = memberService.signup("user2", "user2", "user2", "user2@test.com","");
 
             Studio s1 = studioService.createOrUpdate(m1, 55,1);
             Studio s2 = studioService.createOrUpdate(m2, 12,1);
