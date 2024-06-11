@@ -105,15 +105,18 @@ margin-left:60px;
 }
 
 .profile-header .profile-id-box img {
-  width: 25px;
-  height: 25px;
+  width: 40px;
+  height: 40px;
   margin-left: 30px;
+
 }
 
 .profile-id {
   font-size: 16px;
   font-weight: bold;
   margin-left: 5px;
+  margin-bottom: 30px;
+  align-self: flex-start; /* 또는 다른 flex 속성 */
 }
 
 hr {
