@@ -2,14 +2,18 @@
 <div layout:fragment="content">
 
     <div class="header">
-        <h1>글 작성하기</h1>
+        <div class="post-logo">
+            <a href="/">
+                <img src="/images/ApollonLogo_dark.png" alt="Your Logo" class="logo">
+            </a>
+        </div>
     </div>
     <div class="middle">
         <div class="container">
             <div class="profile-card box">
                 <div class="profile-header">
                     <div class="profile-id-box">
-                        <img src="profile-icon.png" alt="a">
+                        <img src="/images/none.png" alt="Your Logo" class="logo">
                         <span class="profile-id">testID</span>
                     </div>
                 </div>
@@ -50,18 +54,24 @@
             </div>
         </div>
         <div class="container">
-            <div class="board-type box writeBox">
 
-                <div class="Board-type-1">
-                    <span>게시판선택 구현할곳</span>
-
-                </div>
-            </div>
 
             <div class="postWrite-box box writeBox">
+                <form action="/post/write" method="post">
+                <div class="board-type box writeBox">
+
+                    <div class="Board-type-1">
+                            <label for="boardType">Board Type:</label>
+                            <select id="boardType" name="boardType">
+                                <option th:each="boardType : ${boardTypes}"
+                                        th:value="${boardType}" th:text="${boardType}">BoardType</option>
+                            </select>
+                    </div>
+                </div>
 
                 <div class="postWrite-body">
-                    <form action="/post/write" method="post">
+
+
                         <div>
                             <label for="title">제목:</label>
                             <input type="text" id="title" name="title" required>
@@ -73,9 +83,10 @@
                         <div>
                             <button type="submit">작성완료</button>
                         </div>
-                    </form>
+
 
                 </div>
+                </form>
                 <div class="postWrite-footer">
                     <div class="postButton-box">
                         <div>
@@ -162,4 +173,6 @@
 
     setInterval(updateClock, 1000);
     updateClock(); // initial call to display the clock immediately
+
+
 </script>
