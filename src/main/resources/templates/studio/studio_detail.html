@@ -2,7 +2,7 @@
     <div layout:fragment="content" class="total-box">
         <div class="top-section">
             <div class="welcome-box">
-                <span th:text="'#' + ${studio.member.username} + ' 님의 스튜디오에 오신 것을 환영합니다.'"></span>
+                <span th:text="'#' + ${studio.member.nickname} + ' 님의 스튜디오에 오신 것을 환영합니다.'"></span>
                 <a th:href="@{|/studio/${studio.member.username}/changeActive|}"
                    th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' and studio.active == 1}">스튜디오 차단</a>
                 <a th:href="@{|/studio/${studio.member.username}/changeActive|}"
@@ -26,7 +26,7 @@
             </div>
             <div class="text-box">
                 <div class="common-margin nickname-box">
-                    <h2 th:text="'#' + ${studio.member.username}"></h2>
+                    <h2 th:text="'#' + ${studio.member.nickname}"></h2>
                 </div>
                 <div class="common-margin email-box">
                     <span>이메일 : </span>

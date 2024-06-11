@@ -1,58 +1,57 @@
 <html layout:decorate="~{layout}">
-<div layout:fragment="content" class="box">
-    <div class="container">
-        <div class="welcome-box">
-            <span th:text="'회원 가입을 진행중입니다... 😂'"></span>
-        </div>
-        <div class="signup-form">
-            <div class="input-box">
-                <form th:action="@{/member/signup2}" method="POST" enctype="multipart/form-data">
-                    <div class="id-box">
-                        <div class="id-info">
-                            <span class="font-weight">ID</span>
-                            <span>(※ 등록하신 ID는 스튜디오 이름과 일치합니다.)</span>
-                        </div>
-                        <div class="chk-id">
-                            <input type="text" id="username" maxlength="20" name="username" placeholder="ID를 입력하세요.">
-                            <!-- Add a button to check for duplicate username -->
-                            <button type="button" onclick="validateForm()">중복확인</button>
-                            <div class="error-box">
-                                <div id="signupError" th:text="${signupError}" class="error"></div>
+    <div layout:fragment="content" class="box">
+        <div class="container">
+            <div class="welcome-box">
+                <span th:text="'회원 가입을 진행중입니다... 😂'"></span>
+            </div>
+            <div class="signup-form">
+                <div class="input-box">
+                    <form th:action="@{/member/signup2}" method="POST" th:onchange="validateForm()">
+                        <div class="id-box">
+                            <div class="id-info">
+                                <span class="font-weight">ID</span>
+                                <span>(※ 등록하신 ID는 스튜디오 이름과 일치합니다.)</span>
+                            </div>
+                            <div class="chk-id">
+                                <input type="text" id="username" maxlength="20" name="username" placeholder="ID를 입력하세요.">
+                                <!-- Add a button to check for duplicate username -->
+                                <button type="button" onclick="validateForm()">중복확인</button>
+                                <div class="error-box">
+                                    <div id="signupError" th:text="${signupError}" class="error"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="password-box">
-                        <span>비밀번호</span>
-                        <input type="password" name="password" maxlength="20" placeholder="비밀번호를 입력하세요.">
-                    </div>
-                    <div class="password-confirm-box">
-                        <span>비밀번호 확인</span>
-                        <input type="password" name="password_confirm" maxlength="20" placeholder="비밀번호를 한번 더 입력하세요.">
-                    </div>
-                    <div class="nickname-box">
-                        <span>닉네임</span>
-                        <input type="text" name="nickname" placeholder="닉네임을 입력하세요.">
-                    </div>
-                    <div class="email-box">
-                        <span>이메일</span>
-                        <input type="email" name="email" placeholder="이메일을 입력하세요.">
-                    </div>
-                    <div class="profile-picture-box">
-                        <span>프로필 사진</span>
-                        <input type="file" name="profilePicture">
-
-                    </div>
-                    <div class="signup-btn">
-                        <button type="button" onclick="window.location.href='/member/login'">취소</button>
-                        <button type="submit" id="submitButton">가입</button>
-                        <img id="profilePicturePreview" src="#" alt="프로필 사진 미리보기" style="display: none; max-width: 260px; max-height: 2600px;">
-                    </div>
-                </form>
+                        <div class="password-box">
+                            <span>비밀번호</span>
+                            <input type="password" name="password" maxlength="20" placeholder="비밀번호를 입력하세요.">
+                        </div>
+                        <div class="password-confirm-box">
+                            <span>비밀번호 확인</span>
+                            <input type="password" name="password_confirm" maxlength="20" placeholder="비밀번호를 한번 더 입력하세요.">
+                        </div>
+                        <div class="nickname-box">
+                            <span>닉네임</span>
+                            <input type="text" name="nickname" placeholder="닉네임을 입력하세요.">
+                        </div>
+                        <div class="email-box">
+                            <span>이메일</span>
+                            <input type="email" name="email" placeholder="이메일을 입력하세요.">
+                        </div>
+                        <div class="profile-picture-box">
+                            <span>프로필 사진</span>
+                            <input type="file" name="profile-picture">
+                        </div>
+                        <div class="signup-btn">
+                            <button type="button" onclick="window.location.href='/'">취소</button>
+                            <button type="submit" id="submitButton">가입</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </html>
+
 <script>
     function validateForm() {
         const signupError = document.getElementById("signupError");
@@ -85,13 +84,5 @@
     }
     document.addEventListener("DOMContentLoaded", function() {
         validateForm();
-        document.querySelector('input[type="file"]').addEventListener('change', function () {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                document.getElementById('profilePicturePreview').src = e.target.result;
-                document.getElementById('profilePicturePreview').style.display = 'block';
-            };
-            reader.readAsDataURL(this.files[0]);
-        });
     });
 </script>

@@ -82,8 +82,4 @@ public class StudioService {
 
         this.studioRepository.save(studio);
     }
-
-    public List<Studio> getAllStudio() {
-        return this.studioRepository.findAll();
-    }
 }
