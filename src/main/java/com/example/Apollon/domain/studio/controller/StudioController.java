@@ -142,13 +142,13 @@
         @PostMapping("/{username}/upload")
         public String upload(@RequestParam("title") String title,
                              @RequestParam("content") String content,
-                             @PathVariable("username") String memberName,
                              @RequestParam("thumbnail") MultipartFile thumbnail,
                              @RequestParam("musicFile") MultipartFile musicFile,
                              @RequestParam("genres") List<String> genres,
                              @PathVariable("username") String username) {
+
             Studio studio = this.studioService.getStudioByMemberUsername(username);
-            musicService.upload(title, content, memberName, thumbnail, musicFile, genres);
+            musicService.upload(title, content, studio, thumbnail, musicFile, genres);
 
             return "redirect:/studio/%s".formatted(studio.getMember().getUsername());
         }
