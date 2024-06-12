@@ -382,4 +382,22 @@ input: focus {
     color: #FFF;
     display: none;
     font-size: 24px;
+    background-color: #D9D9D9;
+}
+
+.show_myPlayList_list {
+    border: 1px solid red;
+    width: 1600px; height: 360px;
+    margin-left: auto; margin-right: auto;
+}
+
+.notLogin_m {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.notLogin_message {
+    color: #000;
+    font-size: 80px;
 }

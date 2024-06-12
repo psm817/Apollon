@@ -95,7 +95,7 @@ public class MusicService {
     }
 
     public void playPlaylist(Playlist playlist) {
-        for (Music music : playlist.getMusics()) {
+        for (Music music : playlist.getMusicPlayList()) {
             System.out.println("Now playing: " + music.getMusicTitle());
         }
     }
