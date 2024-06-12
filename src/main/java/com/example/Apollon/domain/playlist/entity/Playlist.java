@@ -21,12 +21,11 @@ public class Playlist extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-
-    @ManyToMany(mappedBy = "playlists")
-    private Set<Music> musics = new HashSet<>();
+    @OneToMany(mappedBy = "playlist")
+    private List<Music> musicPlayList;
 
     public void addMusic(Music newMusic) {
-        this.musics.add(newMusic);
+        this.musicPlayList.add(newMusic);
         newMusic.setPlaylist(this);
     }
 

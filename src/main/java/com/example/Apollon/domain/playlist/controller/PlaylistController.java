@@ -27,12 +27,10 @@ import java.nio.file.Paths;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/playlist")
 public class PlaylistController {
     private final MusicService musicService;
     private final PlaylistService playlistService;
 
-    @PostMapping("/addSong")
     public String addSongToPlaylist(@RequestParam Long memberId, @RequestParam Long musicId) {
         Playlist playlist = playlistService.getPlaylist(memberId);
 

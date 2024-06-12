@@ -41,22 +41,17 @@ public class Music extends BaseEntity {
 
     private Long musicPlayCount = 0L;
 
+    @OneToOne
+    private Member member;
+
+    @ManyToOne
+    private Playlist playlist;
+
     // 좋아요
     @ManyToMany
     Set<Member> musicLikers = new LinkedHashSet<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "playlist_music",
-            joinColumns = @JoinColumn(name = "music_id"),
-            inverseJoinColumns = @JoinColumn(name = "playlist_id")
-    )
-    private Set<Playlist> playlists = new HashSet<>();
 
-    public void setPlaylist(Playlist playlist) {
-        playlists.add(playlist);
-        playlist.getMusics().add(this);
-    }
 
     public void addMusicLike(Member liker) {
         if (this.musicLikers == null) {
