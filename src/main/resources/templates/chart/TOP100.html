@@ -46,7 +46,7 @@
                       <span th:text="${music.musicTitle}"></span>
                     </a>
                     <a class="upstu" th:href="@{/chart/TOP100/{id}(id=${music.id})}">
-                      <span th:text="${music.uploadStudio}"></span>
+                      <span th:text="${studio.member.username}"></span>
                     </a>
                   </div>
                   <div class="music_like">

@@ -31,7 +31,6 @@ public class Music extends BaseEntity {
     private String thumbnailImg;
 
     private String musicMp3;
-
     private List<String> genres;
 
     @Transient
@@ -40,7 +39,6 @@ public class Music extends BaseEntity {
     @Transient
     private String musicMp3FullPath;
 
-    @Getter
     private Long musicPlayCount = 0L;
 
     // 좋아요
