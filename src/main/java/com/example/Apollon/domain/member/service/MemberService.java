@@ -82,6 +82,15 @@ public class MemberService {
 
         this.memberRepository.save(member);
     }
+    public void modify2(Member member, String nickname) {
+
+
+        member.setNickname(nickname);
+
+        member.setModifyDate(LocalDateTime.now());
+
+        this.memberRepository.save(member);
+    }
 
     public void delete(Member member) {
         this.memberRepository.delete(member);
