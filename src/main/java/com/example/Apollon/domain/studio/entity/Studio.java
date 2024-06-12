@@ -33,9 +33,9 @@ public class Studio extends BaseEntity {
     private Member member;
 
     // 스튜디오에 등록된 노래 리스트
-//    @OneToMany(mappedBy = "studio", cascade = CascadeType.REMOVE)
-//    @LazyCollection(LazyCollectionOption.EXTRA)
-//    private List<Music> musicList;
+    @OneToMany(mappedBy = "studio", cascade = CascadeType.REMOVE)
+    @LazyCollection(LazyCollectionOption.EXTRA)
+    private List<Music> musicList;
 
     // 좋아요
     @ManyToMany

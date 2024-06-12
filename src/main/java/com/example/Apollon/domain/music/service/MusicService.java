@@ -5,6 +5,7 @@ import com.example.Apollon.domain.member.repository.MemberRepository;
 import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.domain.music.repository.MusicRepository;
 import com.example.Apollon.domain.playlist.entity.Playlist;
+import com.example.Apollon.domain.studio.entity.Studio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +31,7 @@ public class MusicService {
     @Value("${custom.fileDirPath}")
     private String fileDirPath;
     // 음악 업로드
-    public void upload(String title, String content, String member, MultipartFile thumbnail, MultipartFile song, List<String> genres) {
+    public void upload(String title, String content, Studio Studio, MultipartFile thumbnail, MultipartFile song, List<String> genres) {
         String thumbnailDirPath = fileDirPath + "/uploadFile/uploadImgs";
         String musicDirPath = fileDirPath + "/uploadFile/uploadMusics";
 
@@ -50,7 +51,7 @@ public class MusicService {
         Music music = Music.builder()
                 .musicTitle(title)
                 .musicContent(content)
-                .uploadStudio(member)
+                .studio(Studio)
                 .thumbnailImg(""+ thumbnailFile)
                 .musicMp3(""+ musicFile)
                 .genres(genres)
