@@ -4,6 +4,8 @@
     import com.example.Apollon.domain.member.service.MemberService;
     import com.example.Apollon.domain.music.entity.Music;
     import com.example.Apollon.domain.music.service.MusicService;
+    import com.example.Apollon.domain.studio.entity.Studio;
+    import com.example.Apollon.domain.studio.service.StudioService;
     import jakarta.servlet.http.HttpServletRequest;
     import lombok.RequiredArgsConstructor;
     import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +26,16 @@
         @Autowired
         private final MusicService musicService;
         private final MemberService memberService;
+        private final StudioService studioService;
 
         @GetMapping("/TOP100")
-        public String getTop100Music(Model model) {
+        public String getTop100Music(Model model, Principal principal) {
             List<Music> musicList = musicService.getTop100MusicByPlayCount();
 
-            System.out.println("musicList : " + musicList.toString());
+            Studio studio = studioService.getStudioByMemberUsername(principal.getName());
+
             model.addAttribute("musicList", musicList);
+            model.addAttribute("studio", studio);
             return "chart/TOP100";
         }
 
