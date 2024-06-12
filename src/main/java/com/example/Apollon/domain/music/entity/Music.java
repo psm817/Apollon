@@ -2,6 +2,7 @@ package com.example.Apollon.domain.music.entity;
 
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.playlist.entity.Playlist;
+import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.global.jpa.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,41 +15,28 @@ import java.util.Set;
 
 @Entity
 @Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class Music extends BaseEntity {
-    @Setter
-    @Getter
     private String musicTitle;
-    @Getter
-    @Setter
     private String musicContent;
-    @Setter
-    @Getter
-    private String uploadStudio;
-    @Getter
-    @Setter
+
+    @ManyToOne
+    private Studio uploadStudio;
+
     private String thumbnailImg;
-    @Getter
-    @Setter
     private String musicMp3;
-    @Setter
-    @Getter
     private List<String> genres;
 
-    @Setter
-    @Getter
     @Transient
     private String thumbnailImgFullPath;
 
-    @Setter
-    @Getter
     @Transient
     private String musicMp3FullPath;
 
-    @Getter
     private Long musicPlayCount = 0L;
 
     // 좋아요
