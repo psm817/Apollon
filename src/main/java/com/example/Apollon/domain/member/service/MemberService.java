@@ -73,20 +73,21 @@ public class MemberService {
             throw new DataNotFoundException("Member not found");
         }
     }
-    public void modify(Member member, String username, String password, String nickname, String email) {
+    public void modify(Member member, String username, String password, String nickname, String email,String imageFileName) {
         member.setUsername(username);
         member.setPassword(passwordEncoder.encode(password));
         member.setNickname(nickname);
         member.setEmail(email);
+        member.setImage(imageFileName);
         member.setModifyDate(LocalDateTime.now());
 
         this.memberRepository.save(member);
     }
-    public void modify2(Member member, String nickname) {
+    public void modify2(Member member, String nickname,String imageFileName) {
 
 
         member.setNickname(nickname);
-
+        member.setImage(imageFileName);
         member.setModifyDate(LocalDateTime.now());
 
         this.memberRepository.save(member);

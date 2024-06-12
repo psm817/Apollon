@@ -155,7 +155,7 @@ public class MemberController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{username}")
-    public String modify(@PathVariable("username") String username, @Valid SignForm signForm, BindingResult bindingResult, Model model) {
+    public String modify(@PathVariable("username") String username, @Valid SignForm signForm, BindingResult bindingResult, Model model, @RequestParam("profilePicture") MultipartFile profilePicture) {
         Member member = this.memberService.getMember(username);
         Studio studio = this.studioService.getStudioByMemberUsername(username);
 
@@ -163,25 +163,33 @@ public class MemberController {
             return "member/signup_modify";
         }
 
-        this.memberService.modify(member, signForm.getUsername(), signForm.getPassword(), signForm.getNickname(), signForm.getEmail());
+        String imageFileName = null;
+        if (profilePicture != null && !profilePicture.isEmpty()) {
+            imageFileName = storeProfilePicture(profilePicture);
+        }
+
+        this.memberService.modify(member, signForm.getUsername(), signForm.getPassword(), signForm.getNickname(), signForm.getEmail(), imageFileName);
         this.studioService.createOrUpdate(member, studio.getVisit(), studio.getActive());
 
         return "redirect:/member/logout";
     }
+
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify2/{username}")
-    public String modify2(@PathVariable("username") String username, @RequestParam("nickname") String nickname, Model model) {
+    public String modify2(@PathVariable("username") String username, @RequestParam("nickname") String nickname, @RequestParam("profilePicture") MultipartFile profilePicture, Model model) {
         Member member = this.memberService.getMember(username);
         Studio studio = this.studioService.getStudioByMemberUsername(username);
 
-        member.setNickname(nickname); // 닉네임 수정
+        String imageFileName = null;
+        if (profilePicture != null && !profilePicture.isEmpty()) {
+            imageFileName = storeProfilePicture(profilePicture);
+        }
 
-        this.memberService.modify2(member, nickname);
+        this.memberService.modify2(member, nickname, imageFileName);
         this.studioService.createOrUpdate(member, studio.getVisit(), studio.getActive());
 
         return "redirect:/member/logout";
     }
-
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/delete/{username}")
     public String delete(Principal principal, @PathVariable("username") String username) {
