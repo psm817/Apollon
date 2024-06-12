@@ -8,7 +8,7 @@
                 <div class="myPicture">
                     <div class="picture-container">
                         <div class="profile-picture">
-                            <img src="" alt="프로필사진">
+                            <img th:src="@{${member.image}}" alt="프로필사진">
                         </div>
                         <div class="profile-hashtag">
                             <span th:text="'#' + ${member.username}"></span>
@@ -18,11 +18,33 @@
                 <div class="myInfo">
                     <div class="info-container">
                         <div class="profile-detail">
-                            <div class="username-box"></div>
-                            <div class="nickname-box"></div>
-                            <div class="email-box"></div>
+                            <div class="username-box">
+                                <div class="title">ID (username)</div>
+                                <div class="text">
+                                    <span th:text="${member.username}"></span>
+                                </div>
+                            </div>
+                            <div class="nickname-box">
+                                <div class="title">닉네임 (스튜디오 이름)</div>
+                                <div class="text">
+                                    <span th:text="${member.nickname}"></span>
+                                </div>
+                            </div>
+                            <div class="email-box">
+                                <div class="title">이메일</div>
+                                <div class="text">
+                                    <span th:text="${member.email}"></span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="apollonIntro"></div>
+                        <div class="apollonIntro">
+                            <h3>😍안녕하십니까 소중한 고객님😍</h3>
+                            <h5>날씨가 많이 더워지고 있습니다. 이럴 땐 집에서 편안하게 음악 감상을 하는게 최고겠죠?</br>
+                                우리 Apollon과 함께 이번 무더위도 함께 잘 이겨내봅시다.</br>
+                                서비스에 불만사항이 있으시거나 개선해야될 부분이 있다면 커뮤니티를 통해 언제든지 문의 부탁드립니다.</br>
+                                해볼만 하다면 즉각 반영하도록 하겠습니다. 저희 개발진은 스마트하니까요.</br>
+                            항상 즐거운 일만 가득하시길 바랍니다.</h5>
+                        </div>
                     </div>
                 </div>
             </div>
