@@ -203,14 +203,14 @@ input: focus {
     text-overflow: ellipsis;
 }
 
-.TOP100_list > ul > li .music_like,
+.TOP100_list > ul > li .music_likeCount,
 .TOP100_list > ul > li .music_imp,
 .TOP100_list > ul > li .music_p {
     width: 100px;
     text-align: center;
 }
 
-.TOP100_list > ul > li .music_like i {
+.TOP100_list > ul > li .music_likeCount i {
     color: #ffa4b3;
 }
 
