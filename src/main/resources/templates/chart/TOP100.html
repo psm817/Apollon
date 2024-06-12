@@ -49,7 +49,7 @@
                       <span th:text="${studio.member.username}"></span>
                     </a>
                   </div>
-                  <div class="music_like">
+                  <div class="music_likeCount">
                     <span><i class="fa-regular fa-heart"></i></span>
 <!--                    <span th:text="${music.musicLikers != null ? music.musicLikers : 0}"></span>-->
                   </div>
@@ -68,4 +68,48 @@
     </div>
     
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggleIcon = document.getElementById('toggleIcon');
+      const musicPlayList = [];
+    
+      // plus 아이콘 클릭 시
+      toggleIcon.addEventListener('click', async function () {
+        const songId = toggleIcon.getAttribute('data-id');
+    
+        try {
+          const response = await fetch(`/api/music/${songId}`);
+          if (!response.ok) throw new Error('Network response was not ok');
+          
+          const music = await response.json();
+    
+          if (toggleIcon.classList.contains('fa-plus')) {
+            toggleIcon.classList.remove('fa-plus');
+            toggleIcon.classList.add('fa-times');
+            toggleIcon.style.color = 'red';
+    
+            // 음악을 musicPlayList에 추가
+            if (!musicPlayList.includes(songId)) {
+              musicPlayList.push(songId);
+              console.log('Added to playlist:', musicPlayList);
+            }
+          } else {
+            toggleIcon.classList.remove('fa-times');
+            toggleIcon.classList.add('fa-plus');
+            toggleIcon.style.color = '#FFF';
+    
+            // 음악을 musicPlayList에서 제거
+            const index = musicPlayList.indexOf(songId);
+            if (index > -1) {
+              musicPlayList.splice(index, 1);
+              console.log('Removed from playlist:', musicPlayList);
+            }
+          }
+        } catch (error) {
+          console.error('Error fetching music:', error);
+        }
+      });
+    });
+  </script>
+
 </html>
