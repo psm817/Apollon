@@ -34,12 +34,12 @@ input: focus {
 }
 
 .mainPage_slide_container {
-  width: 1480px; /* 슬라이드 컨테이너의 너비를 1480px로 고정 */
-  height: 280px; /* 슬라이드 컨테이너의 높이를 280px로 고정 */
+  width: 100%; /* 슬라이드 컨테이너의 너비를 1480px로 고정 */
+  height: 350px; /* 슬라이드 컨테이너의 높이를 280px로 고정 */
   margin: auto;
   overflow: hidden;
-  top: 20px;
   position: relative;
+  background-color: #000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
 }
 

@@ -5,6 +5,7 @@
     import com.example.Apollon.domain.comment.service.CommentService;
     import com.example.Apollon.domain.member.entity.Member;
     import com.example.Apollon.domain.member.service.MemberService;
+    import com.example.Apollon.domain.music.entity.Music;
     import com.example.Apollon.domain.music.service.MusicService;
     import com.example.Apollon.domain.studio.entity.Studio;
     import com.example.Apollon.domain.studio.service.StudioService;
@@ -42,11 +43,13 @@
             this.studioService.incrementVisit(username, loginedUsername);
 
             List<Comment> commentList = this.commentService.getListByStudio(studio);
+            List<Music> musicList = this.musicService.getListByStudio(studio);
 
             if (studio != null) {
                 model.addAttribute("studio", studio);
                 model.addAttribute("kw", kw);
                 model.addAttribute("commentList", commentList);
+                model.addAttribute("musicList", musicList);
 
                 if(username.equals(loginedUsername) && studio.getActive() == 0) {
                     return "redirect:/";

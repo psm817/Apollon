@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.time.DateTimeException;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -55,6 +56,7 @@ public class MusicService {
                 .thumbnailImg(""+ thumbnailFile)
                 .musicMp3(""+ musicFile)
                 .genres(genres)
+                .createDate(LocalDateTime.now())
                 .build();
 
         musicRepository.save(music);
@@ -101,5 +103,9 @@ public class MusicService {
     }
     public List<Music> getTop100MusicByPlayCount() {
         return musicRepository.findTop100ByOrderByMusicPlayCountDesc();
+    }
+
+    public List<Music> getListByStudio(Studio studio) {
+        return musicRepository.findByStudio(studio);
     }
 }
