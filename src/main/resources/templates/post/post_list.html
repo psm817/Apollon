@@ -1,7 +1,7 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content">
 
-    <div class="header">
+    <div class="header postHeader">
         <div class="post-logo">
             <a href="/">
                 <img src="/images/ApollonLogo_dark.png" alt="Your Logo" class="logo">
@@ -57,17 +57,13 @@
                     <span>공지사항</span>
                 </div>
                 <div class="notice-body">
-                    <div class="notice-item">
-                        <span>공지</span>
-                    </div>
-                    <div class="notice-item">
-                        <span>공지</span>
-                    </div>
-                    <div class="notice-item">
-                        <span>공지</span>
-                    </div>
-                    <div class="notice-item">
-                        <span>공지</span>
+                    <div class="post-item" th:each="post, loop : ${notices}">
+                        <div class="notice-item">
+                            <span>공지</span>
+                        </div>
+                        <div class="post-title">
+                            <a th:text="${post.title}" th:href="@{|/post/detail/${post.id}|}"></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -81,12 +77,15 @@
             <div class="postList-box box">
                 <div class="postbox-body">
                     <tr th:each="post, loop : ${paging}">
-                        <div class="post-item">
+                        <div th:if="${post.boardType.name() != '공지'}" class="post-item">
                             <span>
                                 <a th:text="${post.boardType}" th:href="@{|/post/detail/${post.id}|}"></a>
                             </span>
                             <div class="post-title">
                                 <a th:text="${post.title}" th:href="@{|/post/detail/${post.id}|}"></a>
+                                <div class="comment-count"
+                                      th:if="${#lists.size(post.postCommentList) > 0}"
+                                      th:text="' (' + ${#lists.size(post.postCommentList)} + ')'"></div>
                             </div>
                             <div class="post-writer">
                                 <a th:text="${post.author.nickname}" th:href="@{|/post/detail/${post.id}|}"></a>
@@ -126,11 +125,10 @@
                         </div>
                         <!-- 페이징처리 끝 -->
                     </div>
-
-
-
                 </div>
-                <div class="postList-footer2"> <button onclick="location.href='/post/write'" class="postWriteButton">글 작성하기</button></div>
+                <div class="postList-footer2">
+                    <button onclick="location.href='/post/write'" class="postWriteButton">글 작성하기</button>
+                </div>
             </div>
         </div>
         <div class="container">
