@@ -35,10 +35,7 @@
         public String getTop100Music(Model model, Principal principal) {
             List<Music> musicList = musicService.getTop100MusicByPlayCount();
 
-            Studio studio = studioService.getStudioByMemberUsername(principal.getName());
-
             model.addAttribute("musicList", musicList);
-            model.addAttribute("studio", studio);
             return "chart/TOP100";
         }
 
@@ -63,17 +60,19 @@
 
         @PreAuthorize("isAuthenticated()")
         @GetMapping("/music/{id}/like")
-        public String likeOrUnlikeMusic(Principal principal, @PathVariable("id") Long id, HttpServletRequest request) {
+        public String likeOrUnlikeMusic(Principal principal, @PathVariable("id") Long id) {
             Music music = this.musicService.getMusic(id);
             Member member = this.memberService.getMember(principal.getName());
+            Studio studio = this.studioService.getStudioByMemberUsername(music.getStudio().getMember().getUsername());
 
-            if (music.getMusicLikers().contains(member)) {
-                this.musicService.unlikeMusic(music.id, member.id);
-            } else {
-                this.musicService.likeMusic(music.id, member.id);
-            }
+//            if (music.getMusicLikers().contains(member)) {
+//                this.musicService.unlikeMusic(music.id, member.id);
+//            } else {
+//                this.musicService.likeMusic(music.id, member.id);
+//            }
 
-            String referer = request.getHeader("Referer");
-            return "redirect:" + (referer != null ? referer : "/");
+            this.musicService.likeMusic(music, member);
+
+            return "redirect:/studio/%s".formatted(studio.getMember().getUsername());
         }
     }

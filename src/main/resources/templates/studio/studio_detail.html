@@ -66,50 +66,48 @@
                            th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' or #authentication.principal.username == studio.member.username}"
                            th:text="등록">
                         </a>
-
-                        <a href="/music/modify" class="btn music-modify-btn"
-                           th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' or #authentication.principal.username == studio.member.username}"
-                           th:text="수정">
-                        </a>
-
-                        <a onclick="return confirm('선택한 음악을 정말 삭제하시겠습니까?')" href="/music/delete"
-                           class="btn music-delete-btn"
-                           th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' or #authentication.principal.username == studio.member.username}"
-                           th:text="삭제">
-                        </a>
+                        <button class="comment-delete-btn"
+                                th:text="삭제"
+                                th:if="${#authorization.expression('isAuthenticated()') and (#authentication.principal.username == 'admin' or #authentication.principal.username == studio.member.username)}"
+                                id="deleteSelectedMusicBtn"></button>
                     </div>
                 </div>
-                <ul class="music-list">
-                    <!-- 타임리프? 체크 박스 전체 선택할 수 있도록 해야함 -->
-                    <li>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckAll">
-                            <label class="form-check-label" for="flexCheckAll"></label>
-                        </div>
-                        <span class="number">번호</span>
-                        <span class="music-title">곡 제목</span>
-                        <span class="like">좋아요</span>
-                        <span class="create-date">등록날짜</span>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="music-detail" th:each="music, iterStat2 : ${musicList}">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault"></label>
-                        </div>
-                        <span class="number" th:text="${iterStat2.index + 1}"></span>
-                        <a class="music-title" th:href="@{|/chart/music/detail/${music.id}|}">
-                            <img th:src="@{/uploadImgs/{filename}(filename=${music.thumbnailImg})}" alt="사진">
-                            <span th:text="${music.musicTitle}"></span>
-                        </a>
-                        <div class="like">
-                            <span><i class="fa-regular fa-heart"></i></span>
-                            <span th:text="200"></span>
-                        </div>
-                        <span class="create-date" th:text="${#temporals.format(music.createDate, 'yyyy-MM-dd')}"></span>
-                    </li>
-                </ul>
+                <form id="deleteMusicForm" method="post" th:action="@{|/studio/${studio.member.username}/delete|}">
+                    <ul class="music-list">
+                        <!-- 타임리프? 체크 박스 전체 선택할 수 있도록 해야함 -->
+                        <li>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckAll">
+                                <label class="form-check-label" for="flexCheckAll"></label>
+                            </div>
+                            <span class="number">번호</span>
+                            <span class="music-title">곡 제목</span>
+                            <span class="like">좋아요</span>
+                            <span class="create-date">등록날짜</span>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="music-detail" th:each="music, iterStat2 : ${musicList}">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="musicIds" th:value="${music.id}" id="flexCheckDefault" th:id="'flexCheckDefault' + ${iterStat2.index}">
+                                <label class="form-check-label" th:for="'flexCheckDefault' + ${iterStat2.index}"></label>
+                            </div>
+                            <span class="number" th:text="${iterStat2.index + 1}"></span>
+                            <a class="music-title" th:href="@{|/chart/music/detail/${music.id}|}">
+                                <img th:src="@{/uploadImgs/{filename}(filename=${music.thumbnailImg})}" alt="사진">
+                                <span th:text="${music.musicTitle}"></span>
+                            </a>
+                            <div class="like">
+                                <a onclick="return confirm('음악을 추천하시겠습니까?');" class="btn like-plus-btn"
+                                   th:href="@{|/chart/music/${music.id}/like|}">
+                                    <i class="fa-regular fa-heart"></i>
+                                </a>
+                                <span th:text="${#lists.size(music.musicLikers)}"></span>
+                            </div>
+                            <span class="create-date-text" th:text="${#temporals.format(music.createDate, 'yyyy-MM-dd')}"></span>
+                        </li>
+                    </ul>
+                </form>
             </div>
             <div class="comment-box">
                 <div class="top-box">
@@ -119,7 +117,7 @@
                     </div>
                     <div class="user-menu">
                         <a class="comment-plus-btn" th:href="@{|/studio/${studio.member.username}/comment/create/${#authentication.principal.username}|}" th:text="작성"></a>
-                        <button class="comment-delete-btn" onclick="return confirm('선택하신 방명록을 삭제하시겠습니까?');"
+                        <button class="comment-delete-btn"
                                 th:text="삭제"
                                 th:if="${#authorization.expression('isAuthenticated()') and (#authentication.principal.username == 'admin' or #authentication.principal.username == studio.member.username)}"
                                 id="deleteSelectedBtn"></button>
@@ -166,6 +164,7 @@
         }
     });
 
+    // 음악 선택박스 체크
     document.getElementById('flexCheckAll').addEventListener('change', function() {
         let checkboxes = document.querySelectorAll('.music-detail .form-check-input');
         checkboxes.forEach(checkbox => {
@@ -173,6 +172,7 @@
         });
     });
 
+    // 방명록 선택박스 체크
     document.getElementById('flexCheckAll2').addEventListener('change', function() {
         let checkboxes = document.querySelectorAll('.comment-detail .form-check-input');
         checkboxes.forEach(checkbox => {
@@ -180,6 +180,22 @@
         });
     });
 
+    // 음악 선택 또는 전체 삭제
+    document.getElementById('deleteSelectedMusicBtn').addEventListener('click', function(event) {
+        event.preventDefault();
+        let form = document.getElementById('deleteMusicForm');
+        let selectedCheckboxes = document.querySelectorAll('.music-detail .form-check-input:checked');
+        if (selectedCheckboxes.length > 0) {
+            if (confirm('선택하신 음악을 삭제하시겠습니까?')) {
+                form.submit();
+            }
+        }
+        else {
+            alert('삭제할 음악을 선택해주세요.');
+        }
+    });
+
+    // 방명록 선택 또는 전체 삭제
     document.getElementById('deleteSelectedBtn').addEventListener('click', function(event) {
         event.preventDefault();
         let form = document.getElementById('deleteCommentsForm');

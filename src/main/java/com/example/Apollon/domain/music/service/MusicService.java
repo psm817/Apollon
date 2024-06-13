@@ -62,12 +62,10 @@ public class MusicService {
         musicRepository.save(music);
     }
     // 좋아요 추가
-    public void likeMusic(Long musicId, Long memberId) {
-        Music music = getMusic(musicId);
-        Member member = getMemberId(memberId);
-
+    public void likeMusic(Music music, Member member) {
         music.addMusicLike(member);
-        musicRepository.save(music);
+
+        this.musicRepository.save(music);
     }
 
     public void unlikeMusic(Long musicId, Long memberId) {
@@ -107,5 +105,30 @@ public class MusicService {
 
     public List<Music> getListByStudio(Studio studio) {
         return musicRepository.findByStudio(studio);
+    }
+
+    public void reUpload(Music music, String content, MultipartFile thumbnail, List<String> genres) {
+        String thumbnailDirPath = fileDirPath + "/uploadFile/uploadImgs";
+
+        String thumbnailRelPath = UUID.randomUUID() + ".png";
+
+        File thumbnailFile = new File(thumbnailDirPath + "/" + thumbnailRelPath);
+
+        try {
+            thumbnail.transferTo(thumbnailFile);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to upload files", e);
+        }
+
+        music.setMusicContent(content);
+        music.setModifyDate(LocalDateTime.now());
+        music.setThumbnailImg("" + thumbnailFile);
+        music.setGenres(genres);
+
+        musicRepository.save(music);
+    }
+
+    public void delete(Music music) {
+        this.musicRepository.delete(music);
     }
 }

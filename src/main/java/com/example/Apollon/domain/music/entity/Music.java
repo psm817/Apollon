@@ -49,6 +49,7 @@ public class Music extends BaseEntity {
     private Playlist playlist;
 
     private LocalDateTime createDate;
+    private LocalDateTime modifyDate;
 
     // 좋아요
     @ManyToMany
