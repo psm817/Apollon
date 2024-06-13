@@ -19,7 +19,7 @@
                 <li><span class="music_title">곡 제목</span></li>
                 <li><span class="music_studio">스튜디오</span></li>
                 <li><span class="musicLike">좋아요</span></li>
-                <li><span class="music_import_myPlayList">담기</span></li>
+                <li><span class="music_import_myPlayList" th:if="${#authorization.expression('isAuthenticated()')}">담기</span></li>
                 <li><span class="music_play">듣기</span></li>
               </ul>
             </div>
@@ -55,14 +55,21 @@
                       <span th:text="${music.studio.member.username}"></span>
                     </a>
                   </div>
+                  <!-- 좋아요 개수 표시 -->
                   <div class="music_likeCount">
                     <span><i class="fa-regular fa-heart"></i></span>
                     <span th:text="${#lists.size(music.musicLikers)}"></span>
                   </div>
+                  <!-- 재생목록에 추가 -->
                   <div class="music_imp">
-                    <span class="plus-icon"><i class="fa-solid fa-plus"></i></span>
-                    <span class="check-icon hidden"><i class="fa-solid fa-check"></i></span>
+                    <form id="musicForm" onsubmit="addSongToPlaylist(event, ${music.id}); return false;">
+                      <input type="hidden" name="impMusicPlaylist" th:value="${music.id}" />
+                      <button type="submit" class="plus-icon" th:if="${#authorization.expression('isAuthenticated()')}">
+                        <i class="fa-solid fa-plus"></i>
+                      </button>
+                    </form>
                   </div>
+                  <!-- 해당곡 재생하기 -->
                   <div class="music_p">
                     <span><i class="fa-solid fa-play"></i></span>
                   </div>
@@ -76,20 +83,29 @@
     
   </div>
   <script>
+    //재생목록에 추가
+        function addSongToPlaylist(event, musicId) {
+          event.preventDefault(); // 폼의 기본 동작을 막습니다.
     
-    // 플레이리스트에 담기 후 체크 표시
-    document.addEventListener("DOMContentLoaded", function() {
-      var plusIcon = document.querySelector('.plus-icon');
-      var checkIcon = document.querySelector('.check-icon');
-
-      plusIcon.addEventListener('click', function() {
-          // 플레이리스트에 추가하는 로직을 이곳에 작성하세요.
-          
-          // 아이콘 변경
-          plusIcon.classList.add('hidden');
-          checkIcon.classList.remove('hidden');
-      });
-  });
+          const formData = new FormData();
+          formData.append('impMusicPlaylist', musicId);
+    
+          fetch('/{username}/playlist', {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => {
+            if (response.ok) {
+              alert('곡이 재생목록에 추가되었습니다!');
+            } else {
+              alert('곡을 재생목록에 추가하는데 실패했습니다.');
+            }
+          })
+          .catch(error => {
+            console.error('오류 발생:', error);
+            alert('오류가 발생했습니다.');
+          });
+        }
   </script>
 
 </html>

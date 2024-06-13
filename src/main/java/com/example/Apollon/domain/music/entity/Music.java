@@ -22,6 +22,8 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 public class Music extends BaseEntity {
+    public Long id;
+
     private String musicTitle;
 
     private String musicContent;

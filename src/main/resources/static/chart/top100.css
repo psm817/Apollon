@@ -216,6 +216,10 @@ input: focus {
     color: #000;
 }
 
+.music_imp > button {
+    border: 1px solid red;
+}
+
 .fa-plus {
     transition: transform 0.3s ease-in-out;
 }
