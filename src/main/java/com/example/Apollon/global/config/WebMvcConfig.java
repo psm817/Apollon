@@ -7,15 +7,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-    @Value("${custom.fileDirPath}")
-    private String fileDirPath;
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/file/**")
-//                .addResourceLocations("file:///" + fileDirPath + "/");
-
-        registry.addResourceHandler("/music/play/**")
-                .addResourceLocations("file:///" + fileDirPath + "/");
+        registry.addResourceHandler("/images/uploads/**")
+                .addResourceLocations("file:///C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/images/uploads/");
     }
 }
