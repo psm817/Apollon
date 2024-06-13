@@ -3,13 +3,13 @@
         <div class="top-section">
             <div class="welcome-box">
                 <span th:text="'#' + ${studio.member.username} + ' 님의 스튜디오에 오신 것을 환영합니다.'"></span>
-                <a th:href="@{|/studio/${studio.member.username}/changeActive|}" th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' and studio.active == 1}">스튜디오 차단</a>
-                <a th:href="@{|/studio/${studio.member.username}/changeActive|}" th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' and studio.active == 0}">스튜디오  활성화</a>
+                <a th:href="@{|/studio/${studio.member.username}/changeActive|}"
+                   th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' and studio.active == 1}">스튜디오 차단</a>
+                <a th:href="@{|/studio/${studio.member.username}/changeActive|}"
+                   th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' and studio.active == 0}">스튜디오  활성화</a>
             </div>
-            <div th:if="${message}">
-                <script th:inline="javascript">
-                    alert([[${message}]]);
-                </script>
+            <div class="myHome-btn">
+                <a th:if="${#authentication.principal.username != studio.member.username}" th:href="@{|/studio/${#authentication.principal.username}|}">내 스튜디오로 가기</a>
             </div>
             <div class="search-box">
                 <form th:action="@{/studio/search}" method="get">
@@ -19,16 +19,10 @@
                     </div>
                 </form>
             </div>
-            <div th:if="${errorMessage}">
-                <script th:inline="javascript">
-                    var errorMessage = [[${errorMessage}]];
-                    alert(errorMessage);
-                </script>
-            </div>
         </div>
         <div class="introduce-box">
             <div class="profile-box">
-                <img src="https://thumb.mt.co.kr/06/2016/07/2016071814312232941_1.jpg" alt="1234">
+                <img th:src="@{${studio.member.image}}" alt="1234">
             </div>
             <div class="text-box">
                 <div class="common-margin nickname-box">
@@ -40,7 +34,7 @@
                 </div>
                 <div class="common-margin total_music-box">
                     <span>총 업로드 음악 수 : </span>
-                    <span th:text="100"></span>
+                    <span th:text="${#lists.size(musicList)}"></span>
                 </div>
                 <div class="common-margin total_visit-box">
                     <span>총 방문자 수 : </span>
@@ -65,137 +59,55 @@
                 <div class="top-box">
                     <div class="title">
                         <span>음악 목록</span>
+                        <span th:text="'(' + ${#lists.size(musicList)} + ')'"></span>
                     </div>
                     <div class="user-menu">
                         <a th:action method="post" class="btn music-plus-btn" th:href="@{|/studio/${studio.member.username}/upload|}"
                            th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' or #authentication.principal.username == studio.member.username}"
                            th:text="등록">
                         </a>
-
-                        <a href="/music/modify" class="btn music-modify-btn"
-                           th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' or #authentication.principal.username == studio.member.username}"
-                           th:text="수정">
-                        </a>
-
-                        <a onclick="return confirm('선택한 음악을 정말 삭제하시겠습니까?')" href="/music/delete"
-                           class="btn music-delete-btn"
-                           th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' or #authentication.principal.username == studio.member.username}"
-                           th:text="삭제">
-                        </a>
+                        <button class="comment-delete-btn"
+                                th:text="삭제"
+                                th:if="${#authorization.expression('isAuthenticated()') and (#authentication.principal.username == 'admin' or #authentication.principal.username == studio.member.username)}"
+                                id="deleteSelectedMusicBtn"></button>
                     </div>
                 </div>
-                <ul class="music-list">
-                    <!-- 타임리프? 체크 박스 전체 선택할 수 있도록 해야함 -->
-                    <li class="fix-menu">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckAll">
-                            <label class="form-check-label" for="flexCheckAll"></label>
-                        </div>
-                        <span class="number">번호</span>
-                        <span class="music-title">곡 제목</span>
-                        <span class="like">좋아요</span>
-                        <span class="create-date">등록날짜</span>
-                    </li>
-                </ul>
-                <ul>
-                    <!-- 타임리프 적용해서 목록 출력해야됨 -->
-                    <li class="music-detail">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault"></label>
-                        </div>
-                        <span class="number" th:text="1"></span>
-                        <div class="music-title">
-                            <img src="https://image.bugsm.co.kr/album/images/500/201238/20123812.jpg" alt="사진없음">
-                            <a href="chart/detail"><span th:text="'비투비' +  ' - ' + '그리워하다'"></span></a>
-                        </div>
-                        <div class="like">
-                            <span><i class="fa-regular fa-heart"></i></span>
-                            <span th:text="200"></span>
-                        </div>
-                        <span class="create-date" th:text="2024-05-30"></span>
-                    </li>
-                    <li class="music-detail">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault"></label>
-                        </div>
-                        <span class="number" th:text="1"></span>
-                        <div class="music-title">
-                            <img src="https://image.bugsm.co.kr/album/images/500/201238/20123812.jpg" alt="사진없음">
-                            <a href="chart/detail"><span th:text="'비투비' +  ' - ' + '그리워하다'"></span></a>
-                        </div>
-                        <div class="like">
-                            <span><i class="fa-regular fa-heart"></i></span>
-                            <span th:text="200"></span>
-                        </div>
-                        <span class="create-date" th:text="2024-05-30"></span>
-                    </li>
-                    <li class="music-detail">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault"></label>
-                        </div>
-                        <span class="number" th:text="1"></span>
-                        <div class="music-title">
-                            <img src="https://image.bugsm.co.kr/album/images/500/201238/20123812.jpg" alt="사진없음">
-                            <a href="chart/detail"><span th:text="'비투비' +  ' - ' + '그리워하다'"></span></a>
-                        </div>
-                        <div class="like">
-                            <span><i class="fa-regular fa-heart"></i></span>
-                            <span th:text="200"></span>
-                        </div>
-                        <span class="create-date" th:text="2024-05-30"></span>
-                    </li>
-                    <li class="music-detail">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault"></label>
-                        </div>
-                        <span class="number" th:text="1"></span>
-                        <div class="music-title">
-                            <img src="https://image.bugsm.co.kr/album/images/500/201238/20123812.jpg" alt="사진없음">
-                            <a href="chart/detail"><span th:text="'비투비' +  ' - ' + '그리워하다'"></span></a>
-                        </div>
-                        <div class="like">
-                            <span><i class="fa-regular fa-heart"></i></span>
-                            <span th:text="200"></span>
-                        </div>
-                        <span class="create-date" th:text="2024-05-30"></span>
-                    </li>
-                    <li class="music-detail">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault"></label>
-                        </div>
-                        <span class="number" th:text="1"></span>
-                        <div class="music-title">
-                            <img src="https://image.bugsm.co.kr/album/images/500/201238/20123812.jpg" alt="사진없음">
-                            <a href="chart/detail"><span th:text="'비투비' +  ' - ' + '그리워하다'"></span></a>
-                        </div>
-                        <div class="like">
-                            <span><i class="fa-regular fa-heart"></i></span>
-                            <span th:text="200"></span>
-                        </div>
-                        <span class="create-date" th:text="2024-05-30"></span>
-                    </li>
-                    <li class="music-detail">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault"></label>
-                        </div>
-                        <span class="number" th:text="1"></span>
-                        <div class="music-title">
-                            <img src="https://image.bugsm.co.kr/album/images/500/201238/20123812.jpg" alt="사진없음">
-                            <a href="chart/detail"><span th:text="'비투비' +  ' - ' + '그리워하다'"></span></a>
-                        </div>
-                        <div class="like">
-                            <span><i class="fa-regular fa-heart"></i></span>
-                            <span th:text="200"></span>
-                        </div>
-                        <span class="create-date" th:text="2024-05-30"></span>
-                    </li>
-                </ul>
+                <form id="deleteMusicForm" method="post" th:action="@{|/studio/${studio.member.username}/delete|}">
+                    <ul class="music-list">
+                        <!-- 타임리프? 체크 박스 전체 선택할 수 있도록 해야함 -->
+                        <li>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckAll">
+                                <label class="form-check-label" for="flexCheckAll"></label>
+                            </div>
+                            <span class="number">번호</span>
+                            <span class="music-title">곡 제목</span>
+                            <span class="like">좋아요</span>
+                            <span class="create-date">등록날짜</span>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="music-detail" th:each="music, iterStat2 : ${musicList}">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="musicIds" th:value="${music.id}" id="flexCheckDefault" th:id="'flexCheckDefault' + ${iterStat2.index}">
+                                <label class="form-check-label" th:for="'flexCheckDefault' + ${iterStat2.index}"></label>
+                            </div>
+                            <span class="number" th:text="${iterStat2.index + 1}"></span>
+                            <a class="music-title" th:href="@{|/chart/music/detail/${music.id}|}">
+                                <img th:src="@{/uploadImgs/{filename}(filename=${music.thumbnailImg})}" alt="사진">
+                                <span th:text="${music.musicTitle}"></span>
+                            </a>
+                            <div class="like">
+                                <a onclick="return confirm('음악을 추천하시겠습니까?');" class="btn like-plus-btn"
+                                   th:href="@{|/chart/music/${music.id}/like|}">
+                                    <i class="fa-regular fa-heart"></i>
+                                </a>
+                                <span th:text="${#lists.size(music.musicLikers)}"></span>
+                            </div>
+                            <span class="create-date-text" th:text="${#temporals.format(music.createDate, 'yyyy-MM-dd')}"></span>
+                        </li>
+                    </ul>
+                </form>
             </div>
             <div class="comment-box">
                 <div class="top-box">
@@ -227,10 +139,39 @@
 </html>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var alertMessage = urlParams.get('alertMessage');
+        if (alertMessage) {
+            var alertDiv = document.createElement('div');
+            alertDiv.style.color = 'red';
+            alertDiv.style.marginTop = '5px';
+            alertDiv.textContent = alertMessage;
+            var searchInputBox = document.querySelector('.search-input-box');
+            searchInputBox.appendChild(alertDiv);
+        }
+    });
+
+    // 음악 선택박스 체크
     document.getElementById('flexCheckAll').addEventListener('change', function() {
-        let checkboxes = document.querySelectorAll('#flexCheckDefault');
+        let checkboxes = document.querySelectorAll('.music-detail .form-check-input');
         checkboxes.forEach(checkbox => {
             checkbox.checked = this.checked;
         });
+    });
+
+    // 음악 선택 또는 전체 삭제
+    document.getElementById('deleteSelectedMusicBtn').addEventListener('click', function(event) {
+        event.preventDefault();
+        let form = document.getElementById('deleteMusicForm');
+        let selectedCheckboxes = document.querySelectorAll('.music-detail .form-check-input:checked');
+        if (selectedCheckboxes.length > 0) {
+            if (confirm('선택하신 음악을 삭제하시겠습니까?')) {
+                form.submit();
+            }
+        }
+        else {
+            alert('삭제할 음악을 선택해주세요.');
+        }
     });
 </script>

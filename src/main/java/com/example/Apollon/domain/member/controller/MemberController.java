@@ -33,6 +33,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
@@ -87,9 +88,10 @@ public class MemberController {
         return "redirect:/member/login";
     }
 
-    private String storeProfilePicture(MultipartFile profilePicture) {
+
+    public String storeProfilePicture(MultipartFile profilePicture) {
         // 이미지 저장 디렉토리 경로
-        String uploadDir = "C:\\work\\thumbnail\\uploads";
+        String uploadDir = "C:\\work\\Apollon\\src\\main\\resources\\static\\images\\uploads";
 
         // 디렉토리가 존재하지 않으면 생성합니다.
         Path uploadPath = Paths.get(uploadDir);
@@ -101,8 +103,8 @@ public class MemberController {
             }
         }
         // 파일명 중복을 피하기 위해 임의의 파일명을 생성합니다.
-        String fileName = StringUtils.cleanPath(profilePicture.getOriginalFilename());
-        String imageFileName = System.currentTimeMillis() + "-" + fileName;
+        String fileName = UUID.randomUUID().toString(); // UUID로 파일명 생성
+        String imageFileName = fileName + ".jpg"; // 파일 확장자 지정
         // 파일을 저장합니다.
         try {
             Path filePath = uploadPath.resolve(imageFileName);
@@ -110,8 +112,8 @@ public class MemberController {
         } catch (IOException e) {
             throw new IllegalStateException("Could not store image file", e);
         }
-        // 저장된 파일의 경로를 반환합니다.
-        return uploadDir + File.separator + imageFileName;
+        // 저장된 파일의 상대 경로를 반환합니다.
+        return "/images/uploads/" + imageFileName;
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -153,7 +155,7 @@ public class MemberController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{username}")
-    public String modify(@PathVariable("username") String username, @Valid SignForm signForm, BindingResult bindingResult, Model model) {
+    public String modify(@PathVariable("username") String username, @Valid SignForm signForm, BindingResult bindingResult, Model model, @RequestParam("profilePicture") MultipartFile profilePicture) {
         Member member = this.memberService.getMember(username);
         Studio studio = this.studioService.getStudioByMemberUsername(username);
 
@@ -161,25 +163,33 @@ public class MemberController {
             return "member/signup_modify";
         }
 
-        this.memberService.modify(member, signForm.getUsername(), signForm.getPassword(), signForm.getNickname(), signForm.getEmail());
+        String imageFileName = null;
+        if (profilePicture != null && !profilePicture.isEmpty()) {
+            imageFileName = storeProfilePicture(profilePicture);
+        }
+
+        this.memberService.modify(member, signForm.getUsername(), signForm.getPassword(), signForm.getNickname(), signForm.getEmail(), imageFileName);
         this.studioService.createOrUpdate(member, studio.getVisit(), studio.getActive());
 
         return "redirect:/member/logout";
     }
+
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify2/{username}")
-    public String modify2(@PathVariable("username") String username, @RequestParam("nickname") String nickname, Model model) {
+    public String modify2(@PathVariable("username") String username, @RequestParam("nickname") String nickname, @RequestParam("profilePicture") MultipartFile profilePicture, Model model) {
         Member member = this.memberService.getMember(username);
         Studio studio = this.studioService.getStudioByMemberUsername(username);
 
-        member.setNickname(nickname); // 닉네임 수정
+        String imageFileName = null;
+        if (profilePicture != null && !profilePicture.isEmpty()) {
+            imageFileName = storeProfilePicture(profilePicture);
+        }
 
-        this.memberService.modify2(member, nickname);
+        this.memberService.modify2(member, nickname, imageFileName);
         this.studioService.createOrUpdate(member, studio.getVisit(), studio.getActive());
 
         return "redirect:/member/logout";
     }
-
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/delete/{username}")
     public String delete(Principal principal, @PathVariable("username") String username) {

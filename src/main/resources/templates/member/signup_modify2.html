@@ -6,7 +6,7 @@
         </div>
         <div class="signup-form">
             <div class="input-box">
-                <form th:action="@{|/member/modify2/${member.username}|}" method="POST" th:onchange="validateForm()">
+                <form th:action="@{|/member/modify2/${member.username}|}" method="POST" enctype="multipart/form-data">
                     <div class="id-box">
                         <div class="id-info">
                             <span class="font-weight">ID</span>
@@ -39,7 +39,8 @@
                     </div>
                     <div class="profile-picture-box">
                         <span>프로필 사진</span>
-                        <input type="file" name="profile-picture">
+                        <input type="file" name="profilePicture" onchange="imagecheck()">
+
                     </div>
                     <div class="signup-btn">
                         <button type="button" onclick="if(confirm('프로필 수정을 그만두시겠습니까?')) { window.location.href='/member/myPage'; }">취소</button>

@@ -38,6 +38,11 @@
     border-radius: 100%;
 }
 
+.myPage-detail > .myPicture > .picture-container > .profile-picture > img {
+    width: 100%;
+    height: 100%;
+}
+
 .myPage-detail > .myPicture > .picture-container > .profile-hashtag {
     width: 100%;
     height: 50px;

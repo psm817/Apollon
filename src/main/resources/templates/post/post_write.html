@@ -1,7 +1,7 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content">
 
-    <div class="header">
+    <div class="header postHeader">
         <div class="post-logo">
             <a href="/">
                 <img src="/images/ApollonLogo_dark.png" alt="Your Logo" class="logo">
@@ -57,17 +57,20 @@
 
 
             <div class="postWrite-box box writeBox">
-                <form action="/post/write" method="post">
-                <div class="board-type box writeBox">
-
-                    <div class="Board-type-1">
+                <form id="postForm" action="/post/write" method="post" onsubmit="return checkBoardType();">
+                    <input type="hidden" id="userId" name="userId" value="testID"> <!-- This should be dynamically set to the logged-in user's ID -->
+                    <div class="board-type box writeBox">
+                        <div class="Board-type-1">
                             <label for="boardType">Board Type:</label>
                             <select id="boardType" name="boardType">
-                                <option th:each="boardType : ${boardTypes}"
-                                        th:value="${boardType}" th:text="${boardType}">BoardType</option>
+                                <div th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin'}">
+                                    <option value="공지">공지 게시판</option>
+                                </div>
+
+                                <option value="자유">자유 게시판</option>
                             </select>
+                        </div>
                     </div>
-                </div>
 
                 <div class="postWrite-body">
 
@@ -173,6 +176,7 @@
 
     setInterval(updateClock, 1000);
     updateClock(); // initial call to display the clock immediately
+
 
 
 </script>

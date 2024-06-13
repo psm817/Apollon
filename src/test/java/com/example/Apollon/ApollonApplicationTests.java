@@ -44,7 +44,7 @@ class ApollonApplicationTests {
 //			String content = String.format("내용 %d", i);
 //			String author = String.format("admin %d" ,i);
 //			LocalDateTime createDate = LocalDateTime.now();
-//			this.postService.create(title, content, null);
+//			this.postService.create(title, content,author,  );
 //		}
 //	}
 
