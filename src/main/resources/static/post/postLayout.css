@@ -15,7 +15,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   width: 1600px;
-  height: 1000px;
+  height: 1400px;
   min-height: calc(100vh - 100px);
   margin: 0 auto;
   overflow: auto;

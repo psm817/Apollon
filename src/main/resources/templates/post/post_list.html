@@ -57,17 +57,13 @@
                     <span>공지사항</span>
                 </div>
                 <div class="notice-body">
-                    <div class="notice-item">
-                        <span>공지</span>
-                    </div>
-                    <div class="notice-item">
-                        <span>공지</span>
-                    </div>
-                    <div class="notice-item">
-                        <span>공지</span>
-                    </div>
-                    <div class="notice-item">
-                        <span>공지</span>
+                    <div class="post-item" th:each="post, loop : ${notices}">
+                        <div class="notice-item">
+                            <span>공지</span>
+                        </div>
+                        <div class="post-title">
+                            <a th:text="${post.title}" th:href="@{|/post/detail/${post.id}|}"></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -81,10 +77,10 @@
             <div class="postList-box box">
                 <div class="postbox-body">
                     <tr th:each="post, loop : ${paging}">
-                        <div class="post-item">
-                            <span>
-                                <a th:text="${post.boardType}" th:href="@{|/post/detail/${post.id}|}"></a>
-                            </span>
+                        <div th:if="${post.boardType.name() != '공지'}" class="post-item">
+                <span>
+                    <a th:text="${post.boardType}" th:href="@{|/post/detail/${post.id}|}"></a>
+                </span>
                             <div class="post-title">
                                 <a th:text="${post.title}" th:href="@{|/post/detail/${post.id}|}"></a>
                             </div>

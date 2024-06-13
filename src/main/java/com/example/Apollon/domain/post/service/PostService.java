@@ -60,4 +60,8 @@ public class PostService {
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
         return postRepository.findByBoardType(boardType, pageable);
     }
+    public List<Post> getNoticePosts(int limit) {
+        Pageable pageable = PageRequest.of(0, limit, Sort.by(Sort.Order.desc("createDate")));
+        return postRepository.findByBoardType(BoardType.공지, pageable).getContent();
+    }
 }
