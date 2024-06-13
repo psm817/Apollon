@@ -1,5 +1,7 @@
     package com.example.Apollon.domain.music.controller;
 
+    import com.example.Apollon.domain.comment.entity.Comment;
+    import com.example.Apollon.domain.comment.service.CommentService;
     import com.example.Apollon.domain.member.entity.Member;
     import com.example.Apollon.domain.member.service.MemberService;
     import com.example.Apollon.domain.music.entity.Music;
@@ -27,6 +29,7 @@
         private final MusicService musicService;
         private final MemberService memberService;
         private final StudioService studioService;
+        private final CommentService commentService;
 
         @GetMapping("/TOP100")
         public String getTop100Music(Model model, Principal principal) {
@@ -41,12 +44,19 @@
 
 
         // 곡 정보 상세보기
-        @GetMapping("/musicDetail/{id}")
-        public String musicDetail(Model model, @PathVariable("id") Long id) {
+        @GetMapping("/music/detail/{id}")
+        public String musicDetail(Model model, @PathVariable("id") Long id, Principal principal) {
 
             Music m = musicService.getMusic(id);
+            Member member = this.memberService.getMember(m.getStudio().getMember().getUsername());
+            Studio studio = this.studioService.getStudioByMemberUsername(member.getUsername());
+            List<Comment> commentList = this.commentService.getListByStudio(studio);
+            List<Music> musicList = this.musicService.getListByStudio(studio);
 
             model.addAttribute("music", m);
+            model.addAttribute("studio", studio);
+            model.addAttribute("commentList", commentList);
+            model.addAttribute("musicList", musicList);
 
             return "music/musicDetail";
         }

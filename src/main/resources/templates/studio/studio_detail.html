@@ -9,7 +9,7 @@
                    th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' and studio.active == 0}">스튜디오  활성화</a>
             </div>
             <div class="myHome-btn">
-                  <a th:if="${#authentication.principal.username != studio.member.username}" th:href="@{|/studio/${#authentication.principal.username}|}">내 스튜디오로 가기</a>
+                <a th:if="${#authentication.principal.username != studio.member.username}" th:href="@{|/studio/${#authentication.principal.username}|}">내 스튜디오로 가기</a>
             </div>
             <div class="search-box">
                 <form th:action="@{/studio/search}" method="POST">
@@ -99,10 +99,10 @@
                             <label class="form-check-label" for="flexCheckDefault"></label>
                         </div>
                         <span class="number" th:text="${iterStat2.index + 1}"></span>
-                        <div class="music-title">
+                        <a class="music-title" th:href="@{|/chart/music/detail/${music.id}|}">
                             <img th:src="@{/uploadImgs/{filename}(filename=${music.thumbnailImg})}" alt="사진">
-                            <a href="chart/detail"><span th:text="${music.musicTitle}"></span></a>
-                        </div>
+                            <span th:text="${music.musicTitle}"></span>
+                        </a>
                         <div class="like">
                             <span><i class="fa-regular fa-heart"></i></span>
                             <span th:text="200"></span>
@@ -127,7 +127,6 @@
                 </div>
                 <form id="deleteCommentsForm" method="post" th:action="@{|/studio/${studio.member.username}/comment/delete|}">
                     <ul class="comment-list">
-                        <!-- 타임리프? 체크 박스 전체 선택할 수 있도록 해야함 -->
                         <li>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckAll2">
