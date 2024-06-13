@@ -68,4 +68,4 @@ spring:
       max-file-size: 10MB
       max-request-size: 30MB
 custom:
-  fileDirPath: C:\\Users\\user\\IdeaProjects\\Apollon\\src\\main\\resources\\static
+  fileDirPath: C:\Users\user\IdeaProjects\Apollon\src\main\resources\static

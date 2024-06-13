@@ -66,6 +66,11 @@ public class MemberController {
         if (bindingResult.hasErrors()) {
             return "member/signup2";
         }
+        if (signForm.getProfilePicture() == null || signForm.getProfilePicture().isEmpty()) {
+            model.addAttribute("signupError", "프로필 사진을 첨부해주세요.");
+            return "member/signup2";
+        }
+
 
         try {
             String imageFileName = storeProfilePicture(signForm.profilePicture);
@@ -81,9 +86,11 @@ public class MemberController {
 
         return "redirect:/member/login";
     }
+
     private String storeProfilePicture(MultipartFile profilePicture) {
         // 이미지 저장 디렉토리 경로
         String uploadDir = "C:\\work\\thumbnail\\uploads";
+
         // 디렉토리가 존재하지 않으면 생성합니다.
         Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
@@ -119,12 +126,29 @@ public class MemberController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{username}")
-    public String modify(SignForm signForm, @PathVariable("username") String username, Model model) {
+    public String modify(SignForm signForm, @PathVariable("username") String username, Model model, Principal principal) {
         Member member = this.memberService.getMember(username);
-
-        model.addAttribute("member", member);
-
-        return "member/signup_modify";
+        if (principal.getName().startsWith("KAKAO") || principal.getName().startsWith("NAVER") || principal.getName().startsWith("GOOGLE")) {
+            // 소셜 로그인 사용자인 경우 modify2 페이지로 이동
+            return "redirect:/member/modify2/" + username;
+        } else {
+            // 일반 가입 사용자인 경우 modify 페이지로 이동
+            model.addAttribute("member", member);
+            return "member/signup_modify";
+        }
+    }
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/modify2/{username}")
+    public String modify2(@PathVariable("username") String username, Model model, Principal principal) {
+        Member member = this.memberService.getMember(username);
+        if (principal.getName().startsWith("KAKAO") || principal.getName().startsWith("NAVER") || principal.getName().startsWith("GOOGLE")) {
+            // 소셜 로그인 사용자인 경우 modify2 페이지로 이동
+            model.addAttribute("member", member);
+            return "member/signup_modify2";
+        } else {
+            // 일반 가입 사용자인 경우 modify 페이지로 이동
+            return "redirect:/member/modify/" + username;
+        }
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -138,6 +162,19 @@ public class MemberController {
         }
 
         this.memberService.modify(member, signForm.getUsername(), signForm.getPassword(), signForm.getNickname(), signForm.getEmail());
+        this.studioService.createOrUpdate(member, studio.getVisit(), studio.getActive());
+
+        return "redirect:/member/logout";
+    }
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/modify2/{username}")
+    public String modify2(@PathVariable("username") String username, @RequestParam("nickname") String nickname, Model model) {
+        Member member = this.memberService.getMember(username);
+        Studio studio = this.studioService.getStudioByMemberUsername(username);
+
+        member.setNickname(nickname); // 닉네임 수정
+
+        this.memberService.modify2(member, nickname);
         this.studioService.createOrUpdate(member, studio.getVisit(), studio.getActive());
 
         return "redirect:/member/logout";

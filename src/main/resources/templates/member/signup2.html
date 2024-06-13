@@ -8,10 +8,7 @@
             <div class="input-box">
                 <form th:action="@{/member/signup2}" method="POST" enctype="multipart/form-data">
                     <div class="id-box">
-                        <div class="id-info">
-                            <span class="font-weight">ID</span>
-                            <span>(※ 등록하신 ID는 스튜디오 이름과 일치합니다.)</span>
-                        </div>
+                        <span class="font-weight">ID</span>
                         <div class="chk-id">
                             <input type="text" id="username" maxlength="20" name="username" placeholder="ID를 입력하세요.">
                             <!-- Add a button to check for duplicate username -->
@@ -30,7 +27,10 @@
                         <input type="password" name="password_confirm" maxlength="20" placeholder="비밀번호를 한번 더 입력하세요.">
                     </div>
                     <div class="nickname-box">
-                        <span>닉네임</span>
+                        <div class="nickname-info">
+                            <span>닉네임</span>
+                            <span>(※ 등록하신 닉네임은 스튜디오 이름과 일치합니다.)</span>
+                        </div>
                         <input type="text" name="nickname" placeholder="닉네임을 입력하세요.">
                     </div>
                     <div class="email-box">
@@ -39,7 +39,7 @@
                     </div>
                     <div class="profile-picture-box">
                         <span>프로필 사진</span>
-                        <input type="file" name="profilePicture">
+                        <input type="file" name="profilePicture" onchange="imagecheck()">
 
                     </div>
                     <div class="signup-btn">
@@ -83,6 +83,21 @@
                 });
         }
     }
+
+   function imagecheck() {
+        const submitButton = document.getElementById("submitButton");
+        const image = document.querySelector('input[type="file"]').value;
+        const profilePictureError = document.getElementById("profilePictureError");
+
+        if (image === "") {
+            submitButton.disabled = true;
+            profilePictureError.innerText = "프로필 사진을 첨부해주세요."; // 에러 메시지 표시
+        } else {
+            submitButton.disabled = false;
+            profilePictureError.innerText = ""; // 에러 메시지 지우기
+        }
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
         validateForm();
         document.querySelector('input[type="file"]').addEventListener('change', function () {

@@ -62,12 +62,6 @@ a {
 }
 
 /* 아이디 입력창 세부 설정 시작 */
-.container > .signup-form > .input-box > form > .id-box > .id-info > span:first-child {
-    font-weight: 700;
-    font-size: 18px;
-    margin-right: 10px;
-}
-
 .container > .signup-form > .input-box > form > .id-box > .chk-id {
     display: flex;
     align-items: center;
@@ -90,6 +84,12 @@ a {
     cursor: pointer;
 }
 /* 아이디 입력창 세부 설정 끝 */
+
+.container > .signup-form > .input-box > form > .nickname-box > .nickname-info > span:first-child {
+    font-weight: 700;
+    font-size: 18px;
+    margin-right: 10px;
+}
 
 /* 나머지 input-box 설정 */
 .container > .signup-form > .input-box > form > div > input {
@@ -125,7 +125,7 @@ a {
 .success {
     color: blue;
 }
-
 #profilePicturePreview{
     margin: -490px 0 0 450px;
+
 }

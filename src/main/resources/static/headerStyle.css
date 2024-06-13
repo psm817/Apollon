@@ -80,7 +80,7 @@ button {
 /* 헤더 왼쪽 박스 > nav */
 .header_nav > ul {
     display: flex;
-    width: 390px; height: 100%;
+    width: 390px;
 }
 
 /* 헤더 nav의 후손인 li */
@@ -89,10 +89,10 @@ button {
     flex-basis: 0;
     text-align: center;
     border-right: 1px solid #2E2E2E;
-    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 55px;
 }
 
 .header_nav .H_nav:hover {
@@ -100,8 +100,11 @@ button {
 }
 
 .H_nav > a {
+    display: inline-block;
+    align-content: center;
     font-size: 18px;
     flex-grow: 1;
+    height: 100%;
 }
 
 .H_nav > a:hover {
@@ -178,31 +181,41 @@ button {
 
 .header_profile_box > .header_member > .text {
     display: flex;
+    height: 55px;
 }
 
-.header_profile_box > .header_member > .text > a {
+.header_profile_box > .header_member a {
     flex-grow: 1;
     flex-basis: 0;
     font-weight: 400;
+    display: inline-block;
+    align-content: center;
+    height: 100%;
 }
+
 
 .header_profile_box > .header_member > .header_isAnonymous > a:hover {
     color: #FFF;
 }
 
-.header_profile_box > .header_member > .header_isAnonymous > .header_login {
-    text-align: center;
-}
-
+.header_profile_box > .header_member > .header_isAnonymous > .header_login,
 .header_profile_box > .header_member > .header_isAnonymous > .header_signup {
     text-align: center;
 }
 
-.header_profile_box > .header_member > .header_isAuthenticated > .header_logout {
+.header_profile_box > .header_member > .header_isAnonymous > .header_login:hover,
+.header_profile_box > .header_member > .header_isAnonymous > .header_signup:hover {
+    background-color: #151c21;
+}
+
+
+.header_profile_box > .header_member > .header_isAuthenticated > .header_logout,
+.header_profile_box > .header_member > .header_isAuthenticated > .header_mypage {
     text-align: center;
 }
 
-.header_profile_box > .header_member > .header_isAuthenticated > .header_mypage {
-    text-align: center;
+.header_profile_box > .header_member > .header_isAuthenticated > .header_logout:hover,
+.header_profile_box > .header_member > .header_isAuthenticated > .header_mypage:hover {
+    background-color: #151c21;
 }
 
