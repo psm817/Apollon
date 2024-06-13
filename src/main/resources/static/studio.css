@@ -193,8 +193,16 @@ body {
     font-weight: bold;
 }
 
+.detail-box > .myMusic-box > .top-box > .user-menu > button {
+    line-height: 50px;
+    font-weight: bold;
+    margin-right: 15px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
 /* 음악 리스트 박스 - 하단(목록) */
-.detail-box > .myMusic-box > ul {
+.detail-box > .myMusic-box > form > ul {
     padding-left: 180px;
     box-sizing: border-box;
     width: 100%;
@@ -202,7 +210,7 @@ body {
     max-height: 60%;
 }
 
-.detail-box > .myMusic-box > ul > li {
+.detail-box > .myMusic-box > form > ul > li {
     display: flex;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -211,44 +219,53 @@ body {
     align-items: center;
 }
 
-.detail-box > .myMusic-box > ul > .music-detail {
+.detail-box > .myMusic-box > form > ul > .music-detail {
     height: 70px;
 }
 
-.detail-box > .myMusic-box > ul > .music-detail > .music-title {
+.detail-box > .myMusic-box > form > ul > .music-detail > .music-title {
     width: 60%;
 }
 
-.detail-box > .myMusic-box > ul > .music-detail:hover {
+.detail-box > .myMusic-box > form > ul > .music-detail:hover {
     background-color: #e6f5ff;
     cursor: pointer;
 }
 
-.detail-box > .myMusic-box > ul > li > .number {
+.detail-box > .myMusic-box > form > ul > li > .number {
     width: 7%;
     text-align: center;
 }
 
-.detail-box > .myMusic-box > ul > li > .music-title {
+.detail-box > .myMusic-box > form > ul > li > .music-title {
     width: 53%;
     margin-left: 30px;
     display: flex;
     align-items: center;
 }
 
-.detail-box > .myMusic-box > ul > li > .music-title > img {
+.detail-box > .myMusic-box > form > ul > li > .music-title > img {
     width: 60px;
     height: 60px;
     display: block;
     margin-right: 20px;
 }
 
-.detail-box > .myMusic-box > ul > li > .like {
+.detail-box > .myMusic-box > form > ul > li > .like {
     width: 15%;
 }
 
-.detail-box > .myMusic-box > ul > li > .create-date {
+.detail-box > .myMusic-box > form > ul > li > .like > a {
+    margin-left: -10px;
+}
+
+.detail-box > .myMusic-box > form > ul > li > .create-date {
     width: 25%;
+}
+
+.detail-box > .myMusic-box > form > ul > li > .create-date-text {
+    width: 25%;
+    margin-right: 20px;
 }
 
 /* 코멘트 박스 */

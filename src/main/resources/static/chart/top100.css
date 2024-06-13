@@ -154,6 +154,11 @@ input: focus {
     text-align: center;
 }
 
+.TOP100_list-num:hover {
+    background-color: #e6f5ff;
+    cursor: pointer;
+}
+
 .TOP100_list > ul > li {
     height: 50px;
     display: flex;

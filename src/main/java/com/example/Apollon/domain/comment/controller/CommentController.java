@@ -5,6 +5,8 @@ import com.example.Apollon.domain.comment.form.CommentForm;
 import com.example.Apollon.domain.comment.service.CommentService;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.service.MemberService;
+import com.example.Apollon.domain.music.entity.Music;
+import com.example.Apollon.domain.music.service.MusicService;
 import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.domain.studio.service.StudioService;
 import jakarta.validation.Valid;
@@ -26,6 +28,7 @@ public class CommentController {
     private final StudioService studioService;
     private final MemberService memberService;
     private final CommentService commentService;
+    private final MusicService musicService;
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/studio/{username}/comment/create/{writer}")
@@ -53,10 +56,12 @@ public class CommentController {
                                 @PathVariable("writer") String writer)
     {
         Studio studio = this.studioService.getStudioByMemberUsername(username);
+        List<Music> musicList = this.musicService.getListByStudio(studio);
 
         if (studio != null) {
             model.addAttribute("studio", studio);
             model.addAttribute("kw", kw);
+            model.addAttribute("musicList", musicList);
         }
 
         return "comment/comment_form";
@@ -71,10 +76,12 @@ public class CommentController {
     {
         Studio studio = this.studioService.getStudioByMemberUsername(username);
         Comment comment = this.commentService.getComment(id);
+        List<Music> musicList = this.musicService.getListByStudio(studio);
 
         if(studio != null) {
             model.addAttribute("studio", studio);
             model.addAttribute("comment", comment);
+            model.addAttribute("musicList", musicList);
         }
 
         return "comment/comment_detail";
