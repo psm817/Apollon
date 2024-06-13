@@ -1,0 +1,146 @@
+<html layout:decorate="~{layout}">
+    <div layout:fragment="content" class="total-box">
+        <div class="top-section">
+            <div class="welcome-box">
+                <span th:text="'#' + ${studio.member.nickname} + ' 님의 스튜디오에 오신 것을 환영합니다.'"></span>
+                <a th:href="@{|/studio/${studio.member.username}/changeActive|}"
+                   th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' and studio.active == 1}">스튜디오 차단</a>
+                <a th:href="@{|/studio/${studio.member.username}/changeActive|}"
+                   th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' and studio.active == 0}">스튜디오  활성화</a>
+            </div>
+            <div class="myHome-btn">
+                <a th:if="${#authentication.principal.username != studio.member.username}" th:href="@{|/studio/${#authentication.principal.username}|}">내 스튜디오로 가기</a>
+            </div>
+            <div class="search-box">
+                <form th:action="@{/studio/search}" method="POST">
+                    <div class="search-input-box">
+                        <input type="text" name="kw" class="form-control" required placeholder="스튜디오 이름 검색" th:value="${kw}">
+                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="introduce-box">
+            <div class="profile-box">
+                <img th:src="@{${studio.member.image}}" alt="Profile Picture">
+            </div>
+            <div class="text-box">
+                <div class="common-margin nickname-box">
+                    <h2 th:text="'#' + ${studio.member.nickname}"></h2>
+                </div>
+                <div class="common-margin email-box">
+                    <span>이메일 : </span>
+                    <span th:text="${studio.member.email}"></span>
+                </div>
+                <div class="common-margin total_music-box">
+                    <span>총 업로드 음악 수 : </span>
+                    <span th:text="${#lists.size(musicList)}"></span>
+                </div>
+                <div class="common-margin total_visit-box">
+                    <span>총 방문자 수 : </span>
+                    <span th:text="${studio.visit} + ' 명'"></span>
+                </div>
+                <div class="common-margin like-box">
+                    <a onclick="return confirm('방문하신 스튜디오를 추천하시겠습니까?');" class="btn like-plus-btn"
+                       th:href="@{|/studio/like/${studio.id}|}">
+                        좋아요
+                        <span th:text="${#lists.size(studio.likers)}"></span>
+                        <i class="fa-regular fa-heart"></i>
+                    </a>
+                </div>
+                <div class="common-margin like-box">
+                    <span>스튜디오 개설 날짜 : </span>
+                    <span th:text="${#temporals.format(studio.createDate, 'yyyy-MM-dd')}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="detail-box">
+            <div class="myMusic-box">
+                <div class="top-box">
+                    <div class="title">
+                        <span>음악 정보</span>
+                    </div>
+                    <div class="user-menu">
+                        <a th:href="@{|/studio/${studio.member.username}/reUpload/${music.id}|}" class="btn music-modify-btn"
+                           th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' or #authentication.principal.username == studio.member.username}"
+                           th:text="수정">
+                        </a>
+
+                        <a class="btn back-btn" onclick="history.back()" th:text="뒤로가기"></a>
+                    </div>
+                </div>
+                <div class="music-info-box">
+                    <div class="music-img-box">
+                        <img src="#" alt="앨범 사진">
+                    </div>
+                    <div class="music-info-box">
+                        <h2 class="info" th:text="${music.musicTitle}"></h2>
+                        <div class="info margin studio-name">
+                            <span th:text="'소속 스튜디오 : #' + ${music.studio.member.username}"></span>
+                        </div>
+                        <div class="info margin genre-box">
+                            <span th:text="'장르 : ' + ${music.genres}"></span>
+                        </div>
+                        <div class="info margin like-box">
+                            <a onclick="return confirm('음악을 추천하시겠습니까?');" class="btn like-plus-btn"
+                               th:href="@{|/chart/music/${music.id}/like|}">
+                                <span th:text="'좋아요 ' + ${#lists.size(music.musicLikers)}"></span>
+                                <i class="fa-regular fa-heart"></i>
+                            </a>
+                        </div>
+                        <div class="info margin create-box">
+                            <span th:text="'업로드 날짜 : ' + ${#temporals.format(music.createDate, 'yyyy-MM-dd')}"></span>
+                        </div>
+                    </div>
+                    <div class="music-describe-box">
+                        <div class="semi-container">
+                            <div class="title-box">
+                                <span>음악 설명</span>
+                            </div>
+                            <div class="content-box">
+                                <span th:text="${music.musicContent}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="comment-box">
+                <div class="top-box">
+                    <div class="title">
+                        <span>방명록</span>
+                        <span th:text="'(' + ${#lists.size(commentList)} + ')'"></span>
+                    </div>
+                    <div class="user-menu">
+                        <a class="comment-plus-btn" th:href="@{|/studio/${studio.member.username}/comment/create/${#authentication.principal.username}|}" th:text="작성"></a>
+                        <button class="comment-delete-btn" onclick="return confirm('선택하신 방명록을 삭제하시겠습니까?');"
+                                th:text="삭제"
+                                th:if="${#authorization.expression('isAuthenticated()') and (#authentication.principal.username == 'admin' or #authentication.principal.username == studio.member.username)}"
+                                id="deleteSelectedBtn"></button>
+                    </div>
+                </div>
+                <form id="deleteCommentsForm" method="post" th:action="@{|/studio/${studio.member.username}/comment/delete|}">
+                    <ul class="comment-list">
+                        <li>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckAll2">
+                                <label class="form-check-label" for="flexCheckAll2"></label>
+                            </div>
+                            <span class="number">번호</span>
+                            <span class="comment-title">제목</span>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li th:each="comment, iterStat : ${commentList}" class="comment-detail">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="commentIds" th:value="${comment.id}" id="flexCheckDefault2" th:id="'flexCheckDefault2' + ${iterStat.index}">
+                                <label class="form-check-label" th:for="'flexCheckDefault2' + ${iterStat.index}"></label>
+                            </div>
+                            <a th:href="@{|/studio/${studio.member.username}/comment/detail/${comment.id}|}" class="number" th:text="${iterStat.index + 1}"></a>
+                            <a th:href="@{|/studio/${studio.member.username}/comment/detail/${comment.id}|}" class="comment-title" th:text="${comment.title}"></a>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</html>

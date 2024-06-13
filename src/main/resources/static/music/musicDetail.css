@@ -1,0 +1,72 @@
+/* 뒤로가기 버튼 */
+.detail-box > .myMusic-box > .top-box > .user-menu > .back-btn {
+    cursor: pointer;
+}
+
+/* 음악 상세페이지 시작 */
+.detail-box > .myMusic-box > .music-info-box {
+    padding-left: 180px;
+    box-sizing: border-box;
+    height: 70%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detail-box > .myMusic-box > .music-info-box > div {
+    width: 280px;
+    height: 280px;
+}
+
+/* 음악 앨범 */
+.detail-box > .myMusic-box > .music-info-box > .music-img-box > img {
+    width: 100%;
+    height: 100%:
+}
+
+/* 음악 정보 */
+.detail-box > .myMusic-box > .music-info-box > .music-info-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-box > .myMusic-box > .music-info-box > .music-info-box > h2 {
+    color: #5842eb;
+}
+
+.detail-box > .myMusic-box > .music-info-box > .music-info-box > .margin {
+    margin-top: 20px;
+}
+
+.detail-box > .myMusic-box > .music-info-box > .music-info-box > .margin > span {
+    font-weight: 700;
+}
+
+.detail-box > .myMusic-box > .music-info-box > .music-info-box > .margin > a > span {
+    font-weight: 700;
+}
+
+
+/* 음악 설명 */
+.detail-box > .myMusic-box > .music-info-box > .music-describe-box {
+    margin-right: 100px;
+}
+
+.detail-box > .myMusic-box > .music-info-box > .music-describe-box > .semi-container {
+    margin-top: 46px;
+    height: 192px;
+}
+
+.detail-box > .myMusic-box > .music-info-box > .music-describe-box > .semi-container > .title-box > span {
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.detail-box > .myMusic-box > .music-info-box > .music-describe-box > .semi-container > .content-box {
+    border: 1.5px solid #36454F;
+    height: 125px;
+    margin-top: 15px;
+    border-radius: 6px;
+    padding: 10px;
+}

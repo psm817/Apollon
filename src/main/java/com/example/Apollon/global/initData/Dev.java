@@ -34,9 +34,9 @@ public class Dev {
     public ApplicationRunner init(MemberService memberService, StudioService studioService, CommentService commentService) {
 
         return args -> {
-            Member m1 = memberService.signup("admin", "admin", "admin", "admin@test.com","C:\\work\\thumbnail\\uploads\\1718115730332-KakaoTalk_20240611_144737993.jpg");
-            Member m2 = memberService.signup("user1", "user1", "user1", "user1@test.com","C:\\work\\thumbnail\\uploads\\1718115730332-KakaoTalk_20240611_144737993.jpg");
-            Member m3 = memberService.signup("user2", "user2", "user2", "user2@test.com","C:\\work\\thumbnail\\uploads\\1718115730332-KakaoTalk_20240611_144737993.jpg");
+            Member m1 = memberService.signup("admin", "admin", "admin", "admin@test.com","/images/none.png");
+            Member m2 = memberService.signup("user1", "user1", "user1", "user1@test.com","/images/none.png");
+            Member m3 = memberService.signup("user2", "user2", "user2", "user2@test.com","/images/none.png");
 
             Studio s1 = studioService.createOrUpdate(m1, 55, 1);
             Studio s2 = studioService.createOrUpdate(m2, 12, 1);
