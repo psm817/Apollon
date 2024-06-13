@@ -64,4 +64,5 @@ public class PostService {
         Pageable pageable = PageRequest.of(0, limit, Sort.by(Sort.Order.desc("createDate")));
         return postRepository.findByBoardType(BoardType.공지, pageable).getContent();
     }
+
 }

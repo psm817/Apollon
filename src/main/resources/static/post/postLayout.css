@@ -9,6 +9,14 @@ body {
 .header {
   text-align: center;
 }
+.postHeader{
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+min-width:1600px;
+
+
+}
 
 .middle {
   display: flex;

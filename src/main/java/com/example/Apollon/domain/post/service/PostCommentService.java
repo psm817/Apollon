@@ -6,6 +6,7 @@ import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.post.entity.Post;
 import com.example.Apollon.domain.post.entity.PostComment;
 import com.example.Apollon.domain.post.repository.PostCommentRepository;
+import com.example.Apollon.domain.studio.entity.Studio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +34,8 @@ public class PostCommentService {
                 .createDate(LocalDateTime.now())
                 .build();
         postCommentRepository.save(postComment);
+    }
+    public List<PostComment> getListByPost(Post post) {
+        return postCommentRepository.findByPost(post);
     }
 }

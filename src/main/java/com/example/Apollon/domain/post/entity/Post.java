@@ -12,6 +12,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -35,5 +36,10 @@ public class Post extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private BoardType boardType;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    private List<PostComment> postCommentList;
+
+
 
 }

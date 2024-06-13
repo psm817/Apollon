@@ -31,6 +31,7 @@ public class PostController {
         Page<Post> paging;
         List<Post> noticePosts = postService.getNoticePosts(4); // 공지 게시글 4개까지 가져오기
 
+
         if (boardType != null && boardType != BoardType.공지) {
             paging = postService.getPostsByBoardType(page, boardType);
         } else {
@@ -38,6 +39,8 @@ public class PostController {
         }
         model.addAttribute("paging", paging);
         model.addAttribute("notices", noticePosts);
+
+
 
         return "post/post_list";
         }
