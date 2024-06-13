@@ -15,48 +15,24 @@
 
     <!--Bootstrap JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
-    <!-- 포인터 변경 -->
-    <script  th:inline="javascript">
-      document.addEventListener("DOMContentLoaded", function() {
-        var urlPrefix = "http://localhost:8030/";
-        var currentPageUrl = window.location.href;
-        
-        if (currentPageUrl.startsWith(urlPrefix)) {
-            // Set custom cursor
-            document.body.style.cursor = "none"; // Hide default cursor
-    
-            // Create custom cursor element (musical note pointer)
-            var customCursor = document.createElement("div");
-            customCursor.innerHTML = "&#9835;"; // Musical note symbol
-            customCursor.style.fontSize = "24px";
-            customCursor.style.position = "fixed";
-            customCursor.style.pointerEvents = "none"; // Ensure the cursor doesn't interfere with pointer events
-            document.body.appendChild(customCursor);
-    
-            // Update custom cursor position on mousemove
-            document.addEventListener("mousemove", function(event) {
-                var posX = event.clientX;
-                var posY = event.clientY;
-    
-                // Set custom cursor position
-                customCursor.style.left = posX + "px";
-                customCursor.style.top = posY + "px";
-            });
-    
-            // Function to generate a random color
-            function getRandomColor() {
-                return "#" + Math.floor(Math.random() * 16777215).toString(16);
+
+    <script>
+      document.addEventListener("mousemove", function (e) {
+           const cursor = document.getElementById('magic-cursor');
+           const cursorWidth = cursor.offsetWidth / 2;
+           const cursorHeight = cursor.offsetHeight / 2;
+           cursor.style.left = (e.clientX - cursorWidth) + 'px';
+           cursor.style.top = (e.clientY - cursorHeight) + 'px';
+       });
+
+       document.addEventListener('mouseover', function (e) {
+            const cursor = document.getElementById('magic-cursor');
+            if (getComputedStyle(e.target).cursor === 'pointer') {
+                cursor.classList.add('pointer');
+            } else {
+                cursor.classList.remove('pointer');
             }
-    
-            // Set initial random color
-            customCursor.style.color = getRandomColor();
-    
-            // Change the color every 5 seconds
-            setInterval(function() {
-                customCursor.style.color = getRandomColor();
-            }, 3000); // 3000 milliseconds = 3 seconds
-        }
-      });
+        });
     </script>
 
     <!-- static 아래의 style.css 연결(폰트 설정) -->
@@ -113,5 +89,12 @@
 
     <!-- 하단 footer(플레이 바) -->
     <nav th:replace="~{footer :: footerFragment}"></nav>
+
+    <!-- 커서 -->
+    <div id="magic-cursor" class="cursorCustom">
+      <div id="ball" class="ballCursor">
+        <div id="ball-loader"></div>
+      </div>
+    </div>
 </body>
 </html>

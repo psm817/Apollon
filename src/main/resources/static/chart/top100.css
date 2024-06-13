@@ -105,29 +105,29 @@ input: focus {
 }
 
 .TOP100_nav > ul > li:nth-child(1) {
-    width: 16px;
+    width: 100px;
 }
 
 .TOP100_nav > ul > li:nth-child(2) {
-    width: 84px;
-}
-
-.TOP100_nav > ul > li:nth-child(3) {
     width: 80px;
 }
 
-.TOP100_nav > ul > li:nth-child(4) {
+.TOP100_nav > ul > li:nth-child(3) {
     width: 50px;
 }
 
-.TOP100_nav > ul > li:nth-child(5) {
+.TOP100_nav > ul > li:nth-child(4) {
     width: 660px;
     text-align: left;
 }
 
-.TOP100_nav > ul > li:nth-child(6) {
+.TOP100_nav > ul > li:nth-child(5) {
     width: 280px;
     text-align: left;
+}
+
+.TOP100_nav > ul > li:nth-child(6) {
+    width: 100px;
 }
 
 .TOP100_nav > ul > li:nth-child(7) {
@@ -135,10 +135,6 @@ input: focus {
 }
 
 .TOP100_nav > ul > li:nth-child(8) {
-    width: 100px;
-}
-
-.TOP100_nav > ul > li:nth-child(9) {
     width: 100px;
 }
 
@@ -166,12 +162,8 @@ input: focus {
     border-bottom: 1px solid rgba(0, 0, 0, .2);
 }
 
-.TOP100_list > ul .TOP100_form-check {
-    width: 16px;
-}
-
 .TOP100_list > ul .TOP100_number {
-    width: 84px;
+    width: 100px;
     text-align: center;
 }
 
@@ -222,4 +214,17 @@ input: focus {
 .TOP100_list > ul > li .music_imp i,
 .TOP100_list > ul > li .music_p i {
     color: #000;
+}
+
+.fa-plus {
+    transition: transform 0.3s ease-in-out;
+}
+
+.fa-plus:hover {
+    transform: scale(1.3); /* 마우스를 올렸을 때 아이콘 크기 확대 */
+}
+
+
+.hidden {
+    display: none;
 }

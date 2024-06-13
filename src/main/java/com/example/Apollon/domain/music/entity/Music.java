@@ -32,6 +32,7 @@ public class Music extends BaseEntity {
     private String thumbnailImg;
 
     private String musicMp3;
+
     private List<String> genres;
 
     @Transient

@@ -32,7 +32,7 @@
         private final CommentService commentService;
 
         @GetMapping("/TOP100")
-        public String getTop100Music(Model model, Principal principal) {
+        public String getTop100Music(Model model) {
             List<Music> musicList = musicService.getTop100MusicByPlayCount();
 
             model.addAttribute("musicList", musicList);
