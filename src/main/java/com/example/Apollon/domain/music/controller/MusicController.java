@@ -29,13 +29,10 @@
         private final StudioService studioService;
 
         @GetMapping("/TOP100")
-        public String getTop100Music(Model model, Principal principal) {
+        public String getTop100Music(Model model) {
             List<Music> musicList = musicService.getTop100MusicByPlayCount();
 
-            Studio studio = studioService.getStudioByMemberUsername(principal.getName());
-
             model.addAttribute("musicList", musicList);
-            model.addAttribute("studio", studio);
             return "chart/TOP100";
         }
 

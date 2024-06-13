@@ -70,7 +70,6 @@ input: focus {
 /* 확장버튼 */
 .myPlayList-btn_icon i {
     color: #808080;
-    cursor: none;
 }
 
 .fa-angle-up {
@@ -119,7 +118,6 @@ input: focus {
 
 .fa-solid {
     color: #FFF;
-    cursor: none;
 }
 .fa-backward-step {
     transition: transform 0.3s ease-in-out;
@@ -398,6 +396,7 @@ input: focus {
 }
 
 .notLogin_message {
-    color: #000;
+    color: #3D3D3D;
     font-size: 80px;
+    font-weight: 600;
 }
