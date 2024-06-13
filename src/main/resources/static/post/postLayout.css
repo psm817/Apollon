@@ -9,12 +9,20 @@ body {
 .header {
   text-align: center;
 }
+.postHeader{
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+min-width:1600px;
+
+
+}
 
 .middle {
   display: flex;
   flex-wrap: wrap;
   width: 1600px;
-  height: 1000px;
+  height: 1400px;
   min-height: calc(100vh - 100px);
   margin: 0 auto;
   overflow: auto;

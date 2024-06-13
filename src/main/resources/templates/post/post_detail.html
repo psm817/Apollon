@@ -1,8 +1,8 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content">
 
-    <div class="header">
-        <h1>자유 게시판</h1>
+    <div class="header postHeader">
+        <h1 th:text="${post.boardType}"></h1>
     </div>
     <div class="middle">
         <div class="container">
@@ -54,7 +54,6 @@
 
                 <div class="Board-type-1">
                     <span>유저 아이디 랑 조회수</span>
-
                 </div>
             </div>
             <div class="postDetail-box box detailBox">
@@ -62,8 +61,6 @@
                 <div class="postDetail-body">
                     <h1 th:text="${post.title}"></h1>
                     <div th:text="${post.content}"></div>
-
-
                 </div>
                 <div class="postDetail-footer">
                     <div class="detailPostButton-box">
@@ -76,15 +73,34 @@
                         <div>
                             <button type="submit" class="nextPostButton" onclick="location.href='/post/list'">다음 글</button>
                         </div>
-
                     </div>
+                </div>
+            </div>
 
+            <div class="postReply-section box">
+                <div class="postReply-header">
+                    <h3>댓글 <span th:text="${#lists.size(comments)}"></span></h3>
+                </div>
+                <hr>
+                <div class="postReply-input">
+                    <form th:action="@{/post/detail/{id}/comment(id=${post.id})}" method="post">
+                        <input type="text" name="content" placeholder="댓글을 입력해주세요." required>
+                        <button type="submit" class="submit-button">등록</button>
+                    </form>
+                </div>
+                <div class="postReply-list">
+                    <ul>
+                        <li th:each="comment : ${comments}">
+                            <strong th:text="${comment.author.username}"></strong>
+                            <span th:text="${comment.createDate}"></span>
+                            <p th:text="${comment.content}"></p>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
 
         <div class="container">
-
             <div class="box">
                 <div id="clock" class="clock1"></div>
             </div>
@@ -125,21 +141,10 @@
                     <div class="todayHotpost-item">
                         <span>10</span>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
     </div>
-
-
-
-
-
-
-
-
 </div>
 </html>
 

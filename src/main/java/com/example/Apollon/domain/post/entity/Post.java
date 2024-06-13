@@ -2,10 +2,7 @@ package com.example.Apollon.domain.post.entity;
 
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.global.jpa.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +12,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -38,4 +36,10 @@ public class Post extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private BoardType boardType;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    private List<PostComment> postCommentList;
+
+
+
 }
