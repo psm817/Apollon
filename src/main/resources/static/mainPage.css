@@ -30,7 +30,6 @@ input: focus {
 .mainPage_container {
     /* footer에 가려지지 않기 위함 */
     height: calc(100vh - 50px);
-    overflow-y: auto;
 }
 
 .mainPage_slide_container {
@@ -40,7 +39,7 @@ input: focus {
   overflow: hidden;
   position: relative;
   background-color: #000;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .banner_inner_section {
@@ -147,36 +146,86 @@ input: focus {
     height: 560px;
 }
 
+/* 자주찾는 질문 */
 .body_side_notice {
     width: 270px; height: 240px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
 }
+
 .side_notice, .side_news {
-    width: 150px; height: 30px;
+    width: 230px; height: 30px;
     display: flex;
     align-items: center;
     color: #111;
-    font-size: 22px;
-    font-weight: 500;
+    font-size: 20px;
+    font-weight: 700;
     margin-left: 20px;
 }
 
 .notice_box {
     margin-left: 20px;
+    margin-top: 20px;
     width: 230px; height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .notice_box > li {
     color: #111;
-    font-size: 14px;
+    font-size: 1.08rem;
     font-weight: 500;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
+.notice_box > li > a {
+    cursor: pointer;
+}
+
+/* 방문자 TOP5 */
+.body_side_studio {
+    width: 270px; height: 240px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-top: 75px;
+}
+
+.side_studio, .side_news {
+    width: 230px; height: 30px;
+    display: flex;
+    align-items: center;
+    color: #111;
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 20px;
+}
+
+.studio_box {
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 230px; height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.studio_box > li {
+    color: #111;
+    font-size: 1.08rem;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.studio_box > li > a {
+    cursor: pointer;
+}
 
 /* 추가 내용 */
 .p_container {

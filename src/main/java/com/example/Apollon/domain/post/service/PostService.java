@@ -89,4 +89,7 @@ public class PostService {
         }
     }
 
+    public List<Post> getTop5PostsByViewAndBoardType(BoardType boardType) {
+        return this.postRepository.findTop5ByBoardTypeOrderByViewDesc(boardType);
+    }
 }
