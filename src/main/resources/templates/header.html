@@ -26,7 +26,7 @@
                  th:href="@{'/studio/' + ${#authentication.principal.username}}">스튜디오</a>
 
               <a th:if="${#authorization.expression('isAnonymous()')}"
-                 onclick="return confirm('로그인이 필요한 서비스입니다.');"
+                 onclick="return confirm('스튜디오를 방문하시려면 로그인이 필요합니다.');"
                  th:href="@{/member/login}">스튜디오</a>
             </li>
           </ul>
