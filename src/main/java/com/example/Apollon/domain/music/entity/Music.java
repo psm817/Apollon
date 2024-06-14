@@ -22,6 +22,8 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 public class Music extends BaseEntity {
+    public Long id;
+
     private String musicTitle;
 
     private String musicContent;
@@ -32,6 +34,7 @@ public class Music extends BaseEntity {
     private String thumbnailImg;
 
     private String musicMp3;
+
     private List<String> genres;
 
     @Transient
