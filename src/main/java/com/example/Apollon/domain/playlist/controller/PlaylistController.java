@@ -9,10 +9,7 @@ import com.example.Apollon.domain.playlist.service.PlaylistService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -25,8 +22,8 @@ public class PlaylistController {
     private final PlaylistService playlistService;
 
     @PreAuthorize("isAuthenticated()")
-    @PostMapping("/{username}/playlist/import")
-    public ResponseEntity<String> addSongToPlaylist(@RequestParam("impMusicPlaylist") Long id, Principal principal) {
+    @PostMapping("/playlist/import/{id}")
+    public ResponseEntity<String> addSongToPlaylist(@PathVariable("id") Long id, Principal principal) {
         String username = principal.getName();
         // 회원 가져오기
         Member member = memberService.getMember(username);
