@@ -13,5 +13,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
                 .addResourceLocations("file:///C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/images/uploads/");
 
+        registry.addResourceHandler("/uploadFile/uploadImgs/**")
+                .addResourceLocations("file:///C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadImgs/");
+
+        registry.addResourceHandler("/uploadFile/uploadMusics/**")
+                .addResourceLocations("file:///C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadMusics/");
+
     }
 }

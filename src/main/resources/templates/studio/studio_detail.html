@@ -94,7 +94,7 @@
                             </div>
                             <span class="number" th:text="${iterStat2.index + 1}"></span>
                             <a class="music-title" th:href="@{|/chart/music/detail/${music.id}|}">
-                                <img th:src="@{/uploadImgs/{filename}(filename=${music.thumbnailImg})}" alt="사진">
+                                <img th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                                 <span th:text="${music.musicTitle}"></span>
                             </a>
                             <div class="like">

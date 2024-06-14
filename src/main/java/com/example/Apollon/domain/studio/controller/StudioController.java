@@ -181,7 +181,7 @@
             Studio studio = this.studioService.getStudioByMemberUsername(username);
             Music music = this.musicService.getMusic(id);
 
-            musicService.reUpload(music, content, thumbnail, genres);
+//            musicService.reUpload(music, content, thumbnail, genres);
 
             return "redirect:/studio/%s".formatted(studio.getMember().getUsername());
         }

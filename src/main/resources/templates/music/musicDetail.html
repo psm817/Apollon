@@ -71,7 +71,7 @@
                 </div>
                 <div class="music-info-box">
                     <div class="music-img-box">
-                        <img src="#" alt="앨범 사진">
+                        <img th:src="@{${music.thumbnailImg}}" alt="썸네일이미지" style="width: 260px; height: 260px;">
                     </div>
                     <div class="music-info-box">
                         <h2 class="info" th:text="${music.musicTitle}"></h2>

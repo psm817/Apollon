@@ -37,11 +37,6 @@ public class Music extends BaseEntity {
 
     private List<String> genres;
 
-    @Transient
-    private String thumbnailImgFullPath;
-
-    @Transient
-    private String musicMp3FullPath;
 
     private Long musicPlayCount = 0L;
 
