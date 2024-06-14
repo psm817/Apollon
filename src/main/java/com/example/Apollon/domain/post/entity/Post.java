@@ -31,8 +31,8 @@ public class Post extends BaseEntity {
     @LastModifiedDate
     private LocalDateTime modifyDate;
 
-    private long hit;
-
+    @Column(nullable = false)
+    private int view = 0; // 초기값 설정
 
     @ManyToOne
     private Member author;
@@ -43,6 +43,8 @@ public class Post extends BaseEntity {
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<PostComment> postCommentList;
 
-
-
+    // 조회수 증가 메서드
+    public void increaseView() {
+        this.view++;
+    }
 }
