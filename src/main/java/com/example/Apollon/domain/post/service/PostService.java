@@ -65,4 +65,16 @@ public class PostService {
         return postRepository.findByBoardType(BoardType.공지, pageable).getContent();
     }
 
+    public void modify(Post post, String title, String content) {
+        post.setTitle(title);
+        post.setContent(content);
+        post.setModifyDate(LocalDateTime.now());
+        this.postRepository.save(post);
+    }
+
+    public void delete(Post post) {
+        this.postRepository.delete(post);
+    }
+
+
 }
