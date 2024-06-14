@@ -28,17 +28,32 @@ input: focus {
 /* 커스텀 */
 .upload_sec {
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
+/* 환영 인사 */
+.upload_sec > .welcome-box {
+    height: 80px;
+    text-align: center;
+}
+
+.upload_sec > .welcome-box > span {
+    font-weight: 700;
+    height: 100%;
+    font-size: 23px;
+    line-height: 80px;
+}
 
 .upload_form_container {
     display: flex;
     flex-direction: column;
-    width: 1200px; height: 640px;
+    width: 1000px; height: 640px;
     border: 1px solid rgba(0, 0, 0, .2);
-    margin-top: 40px;
+    border-radius: 6px;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 form {
@@ -54,20 +69,59 @@ form {
 
 .musicTitle_sec, .musicContent_sec, .musicThumbnail_sec, .musicFile_sec, .musicGenre_sec > span {
     color: #111;
-    font-size: 26px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.musicContent_sec > .title > .bold {
+    color: #111;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.musicContent_sec, .musicGenre_sec > .title > span {
+    color: #111;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.musicContent_sec, .musicGenre_sec > .title > .detail-title {
+    font-size: 16px;
     font-weight: 400;
+}
+
+.musicTitle_sec > input {
+    border-radius: 6px;
+    border: 1px solid #000;
+    height: 30px;
+    width: 350px;
+}
+
+.musicContent_sec > textarea {
+    border-radius: 6px;
 }
 
 .upload_form_container input, textarea {
     margin-top: 10px;
 }
 
-.upload_form_container button {
-    font-size: 14px;
+.upload_form_container .btn-box {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 40px;
+}
+
+.upload_form_container .btn-box > button {
+    font-size: 17px;
     background-color: #36454F;
     color: #D9D9D9;
     width: 80px;
-    border-radius: 30px;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-family: 'Pretendard-Regular';
+    margin-left: 20px;
+    cursor: pointer;
 }
 
 textarea{

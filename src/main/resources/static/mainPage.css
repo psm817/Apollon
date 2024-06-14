@@ -52,10 +52,11 @@ input: focus {
 .banner_inner_list {
   display: flex;
   transition: transform 0.5s ease-in-out;
+  width: 100%;
 }
 
 .inner {
-  width: 1800px; /* 슬라이드 페이지의 너비를 1480px로 고정 */
+  flex: 1 0 100%; /* 슬라이드 페이지의 너비를 1480px로 고정 */
   height: 350px; /* 슬라이드 페이지의 높이를 280px로 고정 */
   box-sizing: border-box;
   text-align: center;

@@ -112,7 +112,9 @@
     let intervalId;
   
     const updateSlidePosition = () => {
-      slideContainer.style.transform = `translateX(-${currentIndex * 1800}px)`;
+      const slideContainer = document.querySelector('.banner_inner_list');
+      const slideWidth = slideContainer.offsetWidth;
+      slideContainer.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
     };
   
     const showNextSlide = () => {
