@@ -73,10 +73,27 @@
         </div>
         <div class="mainPage_side_container">
           <div class="body_side_notice">
-            <div class="side_notice">Notice</div>
+            <div class="side_notice">[자주 찾는 질문 TOP5❓]</div>
             <ul class="notice_box">
-              <li><a href="/post/list">[자주 찾는 질문] 비밀번호 찾기 어떻게 하나요?</a></li>
-              <li><a href="/post/list">[자주 찾는 질문] 비회원은 노래 전체 듣기 불가능 하나요?</a></li>
+              <li th:each="post, iterStat : ${top5NoticePosts}">
+                <a th:href="@{|/post/detail/${post.id}|}"
+                   th:text="${iterStat.index + 1} + '. ' + ${post.title}"></a>
+              </li>
+            </ul>
+          </div>
+          <div class="body_side_studio">
+            <div class="side_studio">[스튜디오 TOP5👍]</div>
+            <ul class="studio_box">
+              <li th:each="studio, iterStat : ${top5Studios}">
+                <a th:href="@{|/studio/${studio.member.username}|}"
+                   th:text="${iterStat.index + 1} + '. ' + ${studio.member.nickname} + ' - 방문자수: ' + ${studio.visit}"
+                   th:if="${#authorization.expression('isAuthenticated()')}">
+                </a>
+                <a th:text="${iterStat.index + 1} + '. ' + ${studio.member.nickname} + ' - 방문자수: ' + ${studio.visit}"
+                   th:if="${#authorization.expression('isAnonymous()')}"
+                   onclick="alert('스튜디오를 방문하시려면 로그인이 필요합니다.'); return false;">
+                </a>
+              </li>
             </ul>
           </div>
         </div>

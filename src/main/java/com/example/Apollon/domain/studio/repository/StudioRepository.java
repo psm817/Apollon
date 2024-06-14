@@ -17,4 +17,6 @@ public interface StudioRepository extends JpaRepository<Studio, Long> {
     boolean existsByMember(Member member);
 
     Optional<Studio> findByMember(Member member);
+
+    List<Studio> findTop5ByOrderByVisitDesc();
 }
