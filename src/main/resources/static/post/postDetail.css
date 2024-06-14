@@ -1,176 +1,199 @@
-/* General styles */
-.detailBox {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    margin: 20px 0;
-    background-color: #f9f9f9;
-    height: 700px;
-}
+   /* General styles */
+    .detailBox {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        margin: 20px 0;
+        background-color: #f9f9f9;
+        height: 700px;
+    }
 
-.detailHeader {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    margin: 20px 0;
-    background-color: #f9f9f9;
-}
+    .detailHeader {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        margin: 20px 0;
+        background-color: #f9f9f9;
+    }
 
-.postDetail-box {
-    padding: 20px;
-    background-color: #fff;
-    height: 600px;
-    position: relative; /* Added */
-}
+    .postDetail-box {
+        padding: 20px;
+        background-color: #fff;
+        height: 600px;
+        position: relative; /* Added */
+    }
 
-.postDetail-body {
-    margin-bottom: 20px;
-}
+    .postDetail-body {
+        margin-bottom: 20px;
+    }
 
-.postDetail-body form {
-    display: flex;
-    flex-direction: column;
-}
+    .postDetail-body form {
+        display: flex;
+        flex-direction: column;
+    }
 
-.postDetail-body label {
-    font-size: 1.1em;
-    margin-bottom: 10px;
-}
+    .postDetail-body label {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
 
-.postDetail-body input[type="text"],
-.postDetail-body textarea {
-    width: 100%;
-    padding: 10px 0;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+    .postDetail-body input[type="text"],
+    .postDetail-body textarea {
+        width: 100%;
+        padding: 10px 0;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
 
-.postDetail-body textarea:nth-child(2) {
-    height: 340px;
-}
+    .postDetail-body textarea:nth-child(2) {
+        height: 340px;
+    }
 
-.postDetail-body button {
-    align-self: flex-end;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+    .postDetail-body button {
+        align-self: flex-end;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 
-.postDetail-body button:hover {
-    background-color: #0056b3;
-}
+    .postDetail-body button:hover {
+        background-color: #0056b3;
+    }
 
-.postDetail-footer {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    text-align: center;
-    padding: 10px;
-    background-color: #e9ecef;
-    border-radius: 5px;
-    position: absolute; /* Added */
-    bottom: 0; /* Added */
-    left: 0; /* Added */
-    width: 95%; /* Added */
-}
+    .postDetail-footer {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        text-align: center;
+        padding: 10px;
+        background-color: #e9ecef;
+        border-radius: 5px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 95%;
+        margin-left: 10px;
+    }
 
-.previousPostButton,
-.postListButton,
-.nextPostButton {
-    padding: 10px 20px;
-    background-color: #36454F;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 5px;
-}
+    .previousPostButton,
+    .postListButton,
+    .nextPostButton {
+        padding: 10px 20px;
+        background-color: #36454F;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 5px;
+    }
 
-.cancelButton {
-    margin-left: 20px;
-}
+    .cancelButton {
+        margin-left: 20px;
+    }
 
-.detailPostButton-box {
-    display: flex;
-    text-align: center;
-    padding: 10px;
-    background-color: #e9ecef;
-    border-radius: 5px;
-    width: 300px;
-    margin-left: 550px;
-}
+    .detailPostButton-box {
+        display: flex;
+        text-align: center;
+        padding: 10px;
+        background-color: #e9ecef;
+        border-radius: 5px;
+        width: 300px;
+        margin-left: 550px;
+    }
 
-.postReply-header {
-    display: flex;
-    align-items: center;
-}
+    .postReply-header {
+        display: flex;
+        align-items: center;
+    }
 
-.postReply-header h3 {
-    margin: 0;
-    font-size: 1.2em;
-}
+    .postReply-header h3 {
+        margin: 0;
+        font-size: 1.2em;
+    }
 
-.postReply-header span {
-    margin-left: 10px;
-    font-weight: normal;
-    color: #666;
-}
+    .postReply-header span {
+        margin-left: 10px;
+        font-weight: normal;
+        color: #666;
+    }
 
-hr {
-    border: 1px solid #ccc;
-    margin: 10px 0;
-}
+    hr {
+        border: 1px solid #ccc;
+        margin: 10px 0;
+    }
 
-.postReply-section {
-    max-width: 880px; /* Adjust the max-width to your desired value */
-    height:100px;
-    margin: 0 auto; /* Center align the section horizontally */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-}
+    .postReply-section {
+        max-width: 880px;
+        height: 100px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+    }
 
-.postReply-input input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 86%; /* Adjust as necessary */
-    height:44px;
-}
+    .postReply-input input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 86%;
+    }
 
-.upload-button {
-    background: none;
-    border: none;
-    margin-left: 10px;
-    cursor: pointer;
-}
+    .upload-button {
+        background: none;
+        border: none;
+        margin-left: 10px;
+        cursor: pointer;
+    }
 
-.upload-button img {
-    width: 20px;
-    height: 20px;
-}
+    .upload-button img {
+        width: 20px;
+        height: 20px;
+    }
 
-.submit-button {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 10px; /* Adjust margin as per your design */
-}
+    .submit-button {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
 
-.postReply-list {
-    margin-top:50px;
-    text-align: center;
-    color: #666;
-    font-size: 0.9em;
-    max-height: 100px;
-    overflow: auto;
-}
+    .postReply-list {
+        margin-top: 50px;
+        text-align: center;
+        color: #666;
+        font-size: 0.9em;
+        max-height: 100px;
+        overflow: auto;
+    }
+
+    /* Fixed buttons at top */
+    .detailButtons {
+        position: sticky;
+        top: 0;
+
+        padding: 10px;
+        z-index: 1000;
+        margin-left:670px;
+
+    }
+
+
+
+    .modifyPostButton,
+    .deletePostButton {
+
+        color: #000;
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        margin-left: 10px;
+    }

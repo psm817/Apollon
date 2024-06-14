@@ -1,0 +1,149 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content">
+    <div class="header postHeader">
+        <div class="post-logo">
+            <a href="/">
+                <img src="/images/ApollonLogo_dark.png" alt="Your Logo" class="logo">
+            </a>
+        </div>
+    </div>
+    <div class="middle">
+        <div class="container">
+            <div class="profile-card box">
+                <div class="profile-header">
+                    <div class="profile-id-box">
+                        <img src="/images/none.png" alt="Your Logo" class="logo">
+                        <span class="profile-id">testID</span>
+                    </div>
+                </div>
+                <hr>
+                <div class="profile-stats">
+                    <div class="stat">
+                        <span>게시물</span>
+                        <span>0</span>
+                    </div>
+                    <div class="stat">
+                        <span>댓글</span>
+                        <span>0</span>
+                    </div>
+                </div>
+                <div class="profile-footer">
+                    +프로필
+                </div>
+            </div>
+            <div class="post-category box">
+                <hr>
+                <div class="board-title">====== 게시판 ======</div>
+                <ul class="board-list">
+                    <li class="board-item">
+                        <span class="icon">📋</span>
+                        <span class="text">전체 게시판</span>
+                    </li>
+                    <li class="board-item">
+                        <span class="icon">❗</span>
+                        <span class="text">공지 게시판</span>
+                    </li>
+                    <li class="board-item">
+                        <span class="icon">✂️</span>
+                        <span class="text">자유 게시판</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="board-type box detailHeader">
+                <div class="Board-type-1">
+                    <span>유저 아이디 랑 조회수</span>
+                </div>
+            </div>
+            <div class="postDetail-box box detailBox">
+                <!-- Edit and delete buttons fixed at the top -->
+                <div class="postDetail-body">
+                    <form th:object="${postForm}" th:action="@{/post/modify/{id}(id=${post.id})}" method="post">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        <div class="mb-3">
+                            <label for="title" class="form-label">제목</label>
+                            <input type="text" th:field="*{title}" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="content" class="form-label">내용</label>
+                            <textarea th:field="*{content}" class="form-control" rows="10"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">저장하기</button>
+                    </form>
+                </div>
+                <div class="postDetail-footer">
+                    <div class="detailPostButton-box">
+                        <div>
+                            <button type="button" class="previousPostButton" onclick="location.href='/post/list'">이전 글</button>
+                        </div>
+                        <div>
+                            <button type="button" class="postListButton" onclick="location.href='/post/list'">목록</button>
+                        </div>
+                        <div>
+                            <button type="button" class="nextPostButton" onclick="location.href='/post/list'">다음 글</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="box">
+                <div id="clock" class="clock1"></div>
+            </div>
+            <div class="todayHotpost-box box">
+                <div class="todayHotpost-header">
+                    <span>오늘의 TOP10</span>
+                </div>
+                <div class="todayHotpost-body">
+                    <div class="todayHotpost-item">
+                        <span>1</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>2</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>3</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>4</span>
+                        <div class="todayHotpost-title">지리네dsafsadfdsafsda</div>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>5</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>6</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>7</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>8</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>9</span>
+                    </div>
+                    <div class="todayHotpost-item">
+                        <span>10</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
+
+<script>
+    function updateClock() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, "0");
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        const seconds = String(now.getSeconds()).padStart(2, "0");
+        const timeString = `${hours}:${minutes}:${seconds}`;
+        document.getElementById("clock").textContent = timeString;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock(); // initial call to display the clock immediately
+</script>
