@@ -9,6 +9,32 @@ html > body {
     font-family: 'Pretendard-Regular';
 }
 
-.non-cursor {
-    cursor: none;
+#magic-cursor {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+    z-index: 10000;
+    transition: opacity 0.2s ease-in-out 0.2s, left 0.1s ease-in-out, top 0.1s ease-in-out;
+}
+
+#ball {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 2.6px solid gray;
+    border-radius: 50%;
+    box-sizing: border-box;
+    pointer-events: none;
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.pointer #ball {
+    width: 60px;
+    height: 60px;
+    border-width: 1.2px;
+    opacity: 0.6;
+    transition: width 1.2s ease-in-out, height 1.2s ease-in-out, border-width 1.2s ease-in-out, opacity 1.2s ease-in-out;
 }
