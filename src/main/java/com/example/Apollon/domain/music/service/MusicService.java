@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -134,6 +135,18 @@ public class MusicService {
 
     public List<Music> getListByStudio(Studio studio) {
         return musicRepository.findByStudio(studio);
+    }
+    public void reUpload(Music music, String content, MultipartFile thumbnail, List<String> genres) {
+        if (thumbnail != null && !thumbnail.isEmpty()) {
+            String thumbnailFile = storeImg(thumbnail);
+            music.setThumbnailImg(thumbnailFile);
+        }
+
+        music.setMusicContent(content);
+        music.setModifyDate(LocalDateTime.now());
+        music.setGenres(genres);
+
+        musicRepository.save(music);
     }
 
     public void delete(Music music) {

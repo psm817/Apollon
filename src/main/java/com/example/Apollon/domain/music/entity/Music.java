@@ -61,4 +61,7 @@ public class Music extends BaseEntity {
 
         this.musicLikers.add(liker);
     }
+    public String getMusicMp3FullPath() {
+        return "/uploadFile/uploadMusics/" + this.musicMp3;
+    }
 }
