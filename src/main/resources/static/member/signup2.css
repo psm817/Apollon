@@ -33,7 +33,7 @@ a {
 }
 
 .container > .signup-form > .input-box {
-    border: 1px solid #8d8d8d;
+    border: 1px solid rgba(0, 0, 0, .2);
     border-radius: 6px;
     margin-left: auto;
     margin-right: auto;
@@ -83,8 +83,8 @@ a {
     border-radius: 6px;
     cursor: pointer;
 }
-/* 아이디 입력창 세부 설정 끝 */
 
+/* 아이디 입력창 세부 설정 끝 */
 .container > .signup-form > .input-box > form > .nickname-box > .nickname-info > span:first-child {
     font-weight: 700;
     font-size: 18px;
