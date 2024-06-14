@@ -1,6 +1,9 @@
 <html layout:decorate="~{layout}">
   <div layout:fragment="content">
     <div class="upload_sec">
+      <div class="welcome-box">
+        <span th:text="'음악 정보 수정을 진행중입니다... 🎼'"></span>
+      </div>
       <div class="upload_form_container">
         <form th:action th:object="${uploadForm}" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
           <div class="musicTitle_sec">
@@ -9,7 +12,10 @@
           </div>
 
           <div class="musicContent_sec">
-            <span>음악 설명</span>
+            <div class="title">
+              <span class="bold">음악 설명</span>
+              <span class="detail-title">(※ 업로드할 음악에 대한 설명 작성)</span>
+            </div>
             <textarea id="content" name="content" rows="10" required></textarea>
           </div>
 
@@ -24,7 +30,10 @@
           </div>
 
           <div class="musicGenre_sec">
-            <span>음악 장르 선택</span>
+            <div class="title">
+              <span>음악 장르 선택</span>
+              <span class="detail-title">(※ 복수 선택 가능 / '그 외' 항목은 필수 선택)</span>
+            </div>
             <div id="genresId">
               <label><input type="checkbox" name="genres" value="Ballad"> 발라드</label>
               <label><input type="checkbox" name="genres" value="Dance"> 댄스</label>
@@ -38,8 +47,10 @@
               <label><input type="checkbox" name="genres" value="etc" required> 그 외</label>
             </div>
           </div>
-          <button type="submit">취소</button>
-          <button type="buttom">업로드</button>
+          <div class="btn-box">
+            <button type="button" onclick="if(confirm('음악 정보 수정을 취소하시겠습니까?')) { history.back(); }">취소</button>
+            <button type="submit">수정</button>
+          </div>
         </form>
       </div>
     </div>

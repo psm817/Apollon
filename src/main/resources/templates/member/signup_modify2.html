@@ -8,10 +8,7 @@
             <div class="input-box">
                 <form th:action="@{|/member/modify2/${member.username}|}" method="POST" enctype="multipart/form-data">
                     <div class="id-box">
-                        <div class="id-info">
-                            <span class="font-weight">ID</span>
-                            <span>(※ 등록하신 ID는 스튜디오 이름과 일치합니다.)</span>
-                        </div>
+                        <span class="font-weight">ID</span>
                         <div class="chk-id">
                             <input type="text" id="username" maxlength="20" name="username" th:placeholder="${member.username}" th:disabled="true">
                             <!-- Add a button to check for duplicate username -->
@@ -30,7 +27,10 @@
                         <input type="password" name="password_confirm" maxlength="20" placeholder="비밀번호를 한번 더 입력하세요." th:disabled="true">
                     </div>
                     <div class="nickname-box">
-                        <span>닉네임</span>
+                        <div class="nickname-info">
+                            <span>닉네임</span>
+                            <span>(※ 등록하신 닉네임은 스튜디오 이름과 일치합니다.)</span>
+                        </div>
                         <input type="text" name="nickname" th:placeholder="${member.nickname}">
                     </div>
                     <div class="email-box">
