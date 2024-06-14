@@ -32,13 +32,14 @@
         private final CommentService commentService;
 
         @GetMapping("/TOP100")
-        public String getTop100Music(Model model) {
+        public String getTop100Music(Model model, Principal principal) {
             List<Music> musicList = musicService.getTop100MusicByPlayCount();
+            Member member = memberService.getMember(principal.getName());
 
             model.addAttribute("musicList", musicList);
+            model.addAttribute("member", member);
             return "chart/TOP100";
         }
-
 
         // 곡 정보 상세보기
         @GetMapping("/music/detail/{id}")
