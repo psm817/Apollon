@@ -73,6 +73,10 @@
                     <div class="music-img-box">
                         <img th:src="@{${music.thumbnailImg}}" alt="썸네일이미지" style="width: 260px; height: 260px;">
                     </div>
+                    <audio controls>
+                        <source th:src="@{${music.musicMp3}}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
                     <div class="music-info-box">
                         <h2 class="info" th:text="${music.musicTitle}"></h2>
                         <div class="info margin studio-name">
