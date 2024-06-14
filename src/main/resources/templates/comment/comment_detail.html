@@ -86,7 +86,7 @@
                             <span class="create-date">등록날짜</span>
                         </li>
                     </ul>
-                    <ul>
+                    <ul class="music-list-detail">
                         <li class="music-detail" th:each="music, iterStat2 : ${musicList}">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="musicIds" th:value="${music.id}" id="flexCheckDefault" th:id="'flexCheckDefault' + ${iterStat2.index}">
