@@ -97,13 +97,14 @@ public class PostController {
         }
         postForm.setTitle(post.getTitle());
         postForm.setContent(post.getContent());
-        return "post/post_form";
+        return "post/post_modifyForm";
     }
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{id}")
-    public String postModify(@Valid PostForm postForm, BindingResult bindingResult,
+    public String postModify(Model model, @Valid PostForm postForm, BindingResult bindingResult,
                                  Principal principal, @PathVariable("id") Long id) {
+
         if (bindingResult.hasErrors()) {
             return "post/post_form";
         }
