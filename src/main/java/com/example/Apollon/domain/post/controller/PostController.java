@@ -51,11 +51,13 @@ public class PostController {
         return "post/post_list";
         }
 
+    // PostController.java
     @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable("id") Long id) {
-        Post p = postService.getPost(id);
+        Post post = postService.getPostByView(id);  // 조회수가 증가된 Post 객체 가져오기
         List<PostComment> comments = postCommentService.getPostCommentsByPost(id);
-        model.addAttribute("post", p);
+
+        model.addAttribute("post", post);  // 수정된 Post 객체를 모델에 추가
         model.addAttribute("comments", comments);
         return "post/post_detail";
     }
