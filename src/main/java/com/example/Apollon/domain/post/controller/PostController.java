@@ -90,19 +90,21 @@ public class PostController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
-    public String postModify(PostForm postForm, @PathVariable("id") Long id, Principal principal) {
+    public String postModify(PostForm postForm, @PathVariable("id") Long id, Principal principal, Model model) {
         Post post = this.postService.getPost(id);
-        if(!post.getAuthor().getUsername().equals(principal.getName())) {
+        if (!post.getAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
         postForm.setTitle(post.getTitle());
         postForm.setContent(post.getContent());
+        model.addAttribute("post", post);
+        model.addAttribute("postForm", postForm); // Ensure the PostForm is added to the model
         return "post/post_modifyForm";
     }
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{id}")
-    public String postModify(Model model, @Valid PostForm postForm, BindingResult bindingResult,
+    public String postModify(@Valid PostForm postForm, BindingResult bindingResult,
                                  Principal principal, @PathVariable("id") Long id) {
 
         if (bindingResult.hasErrors()) {
@@ -114,6 +116,17 @@ public class PostController {
         }
         this.postService.modify(post, postForm.getTitle(), postForm.getContent());
         return String.format("redirect:/post/detail/%s", id);
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/delete/{id}")
+    public String postDelete(Principal principal, @PathVariable("id") Long id) {
+        Post post = this.postService.getPost(id);
+        if (!post.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
+        }
+        this.postService.delete(post);
+        return "redirect:/post/list";
     }
 
 

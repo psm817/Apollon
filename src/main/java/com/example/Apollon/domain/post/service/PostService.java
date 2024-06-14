@@ -72,5 +72,9 @@ public class PostService {
         this.postRepository.save(post);
     }
 
+    public void delete(Post post) {
+        this.postRepository.delete(post);
+    }
+
 
 }
