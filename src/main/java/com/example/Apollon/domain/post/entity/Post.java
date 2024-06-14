@@ -3,12 +3,10 @@ package com.example.Apollon.domain.post.entity;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.global.jpa.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 
 import java.time.LocalDateTime;
@@ -17,6 +15,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,7 +28,11 @@ public class Post extends BaseEntity {
     @CreatedDate
     private LocalDateTime createDate;
 
+    @LastModifiedDate
+    private LocalDateTime modifyDate;
+
     private long hit;
+
 
     @ManyToOne
     private Member author;
