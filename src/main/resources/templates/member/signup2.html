@@ -43,7 +43,7 @@
 
                     </div>
                     <div class="signup-btn">
-                        <button type="button" onclick="window.location.href='/member/login'">취소</button>
+                        <button type="button" onclick="if(confirm('회원 가입을 취소하시겠습니까?')) { window.location.href='/'; }">취소</button>
                         <button type="submit" id="submitButton">가입</button>
                         <img id="profilePicturePreview" src="#" alt="프로필 사진 미리보기" style="display: none; max-width: 260px; max-height: 2600px;">
                     </div>

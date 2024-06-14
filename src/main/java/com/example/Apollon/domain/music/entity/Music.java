@@ -37,11 +37,6 @@ public class Music extends BaseEntity {
 
     private List<String> genres;
 
-    @Transient
-    private String thumbnailImgFullPath;
-
-    @Transient
-    private String musicMp3FullPath;
 
     private Long musicPlayCount = 0L;
 
@@ -65,5 +60,8 @@ public class Music extends BaseEntity {
         }
 
         this.musicLikers.add(liker);
+    }
+    public String getMusicMp3FullPath() {
+        return "/uploadFile/uploadMusics/" + this.musicMp3;
     }
 }

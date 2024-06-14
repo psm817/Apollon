@@ -86,7 +86,7 @@
                             <span class="create-date">등록날짜</span>
                         </li>
                     </ul>
-                    <ul>
+                    <ul class="music-list-detail">
                         <li class="music-detail" th:each="music, iterStat2 : ${musicList}">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="musicIds" th:value="${music.id}" id="flexCheckDefault" th:id="'flexCheckDefault' + ${iterStat2.index}">
@@ -113,7 +113,7 @@
                 <div class="top-box">
                     <div class="title-flex">
                         <span>방명록 상세보기</span>
-                        <span class="writer" th:text="'작성자 : ' + ${comment.member.username}"></span>
+                        <span class="writer" th:text="'작성자 : ' + ${comment.member.nickname}"></span>
                     </div>
                 </div>
                 <div class="bottom-detail-box">

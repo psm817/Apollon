@@ -55,8 +55,9 @@
 - Music
 - Studio
 - Comment
-- Article
-- Reply
+- Post
+- PostComment
+- BoardType
 - PlayList
 
 
@@ -163,10 +164,19 @@
                         ├── entity.Music.java
                         ├── repository.MusicRepository.java
                         ├── service.MusicService.java
+                  ├── playlist
+                        ├── contorller.PlaylistController.java
+                        ├── entity.Playlist.java
+                        ├── repository.PlaylistRepository.java
+                        ├── service.PlaylistService.java
                   ├── post
                         ├── contorller.PostController.java
+                        ├── entity.BoardType.java
                         ├── entity.Post.java
+                        ├── entity.PostComment.java
+                        ├── repository.PostCommnetRepository.java
                         ├── repository.PostRepository.java
+                        ├── service.PostCommentService.java
                         ├── service.PostService.java
                   ├── studio
                         ├── contorller.StudioController.java
@@ -174,6 +184,8 @@
                         ├── repository.StudioRepository.java
                         ├── service.StudioService.java
            ├── global
+                  ├── config
+                          ├── WebMvcConfig.java
                   ├── initData
                           ├── Dev.java
                   ├── jpa
@@ -192,29 +204,27 @@
                           ├── comment.css
                           ├── comment_detail.css
                    ├── images
-                          ├── login
-                                ├── googlelogo.png
-                                ├── kakaologin.png
-                                ├── naverlogin.png
-                                ├── googlelogo2.png
-                                ├── naverlogo2.png
-                                ├── kakaologo2.png
-                          ├── slide_img
-                                   ├── water bomb-1.png
-                                   ├── water bomb-2.png
-                                   ├── wbPost.png
-                                   ├── wdjfestivalPost.png
-                                   ├── world dj festival.png
+                          ├── login (소셜로그인 관련 이미지)
+                          ├── slide_img (슬라이드 배너 관련 이미지)
+                          ├── uploads (프로필사진, 음악파일)
                           ├── ApollonLogo.png
+                          ├── ApollonLogo_dark.png
                           ├── My project.png
+                          ├── none.png
                    ├── member
                          ├── login.css
+                         ├── myPage.css
+                         ├── password.css
                          ├── signup.css
                          ├── signup2.css
                    ├── music
+                         ├── musicDetail.css
                          ├── upload_form.css
                    ├── post
+                         ├── postDetail.css
+                         ├── postLayout.css
                          ├── postList.css
+                         ├── postWrite.css
                    ├── footerStyle.css
                    ├── headerStyle.css
                    ├── mainPage.css

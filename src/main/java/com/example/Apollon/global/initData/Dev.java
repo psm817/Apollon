@@ -4,6 +4,8 @@ import com.example.Apollon.domain.comment.service.CommentService;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.service.MemberService;
 import com.example.Apollon.domain.music.service.MusicService;
+import com.example.Apollon.domain.post.entity.BoardType;
+import com.example.Apollon.domain.post.service.PostService;
 import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.domain.studio.service.StudioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class Dev {
 
     @Autowired
     TestFileUtils testFileUtils;
+
+    @Autowired
+    PostService postService;
 
     @Bean
     public ApplicationRunner init(MemberService memberService, StudioService studioService, CommentService commentService) {
@@ -65,6 +70,11 @@ public class Dev {
             for (int i = 1; i<=40; i++) {
                 musicService.upload("user2의 테스트 음악 제목 " + i, "user2의 테스트 음악 설명 " + i, s3,
                         testFileUtils.createMockThumbnail(),  testFileUtils.createMockSong(), Arrays.asList("Rap/HipHop, JPOP, indie, etc"));
+            }
+            // 게시글
+            for (int i = 1; i <= 4; i++) {
+                Member author = m1;
+                postService.create("제목 " + i, "내용 " + i, author, BoardType.공지);
             }
         };
     }

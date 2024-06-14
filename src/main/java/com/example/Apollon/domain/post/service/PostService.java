@@ -4,6 +4,7 @@ import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.post.entity.BoardType;
 import com.example.Apollon.domain.post.entity.Post;
 import com.example.Apollon.domain.post.repository.PostRepository;
+import com.example.Apollon.global.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,7 +35,7 @@ public class PostService {
                 .author(member)
                 .createDate(LocalDateTime.now())
                 .boardType(boardType)
-                .hit(0)
+                .view(0)
                 .build();
         postRepository.save(post);
     }
@@ -76,5 +77,16 @@ public class PostService {
         this.postRepository.delete(post);
     }
 
+    public Post getPostByView(Long id) {
+        Optional<Post> postOptional = postRepository.findById(id);
+        if (postOptional.isPresent()) {
+            Post post = postOptional.get();
+            post.increaseView(); // 조회수 증가
+            postRepository.save(post); // 변경된 Post 객체 저장
+            return post; // 조회수가 증가된 Post 객체 반환
+        } else {
+            throw new DataNotFoundException("Post not found with id: " + id);
+        }
+    }
 
 }

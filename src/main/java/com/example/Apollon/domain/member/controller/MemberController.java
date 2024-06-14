@@ -91,6 +91,7 @@ public class MemberController {
 
     public String storeProfilePicture(MultipartFile profilePicture) {
         // 이미지 저장 디렉토리 경로
+
         String uploadDir = "C:\\work\\Apollon\\src\\main\\resources\\static\\images\\uploads";
 
         // 디렉토리가 존재하지 않으면 생성합니다.
