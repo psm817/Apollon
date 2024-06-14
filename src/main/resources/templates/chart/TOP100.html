@@ -30,7 +30,8 @@
                   <span class="TOP100_number" th:text="${iterStat.index + 1}"></span>
                   <div class="TOP100_musicTitle">
                     <div class="thumbImg">
-                      <img th:src="@{/uploadImgs/{filename}(filename=${music.thumbnailImg})}" alt="사진X"></div>
+                      <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
+                    </div>
                     <div class="classnull"></div>
 
                     <a th:if="${#authorization.expression('isAuthenticated()')}"
