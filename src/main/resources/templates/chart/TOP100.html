@@ -61,8 +61,8 @@
                     <span th:text="${#lists.size(music.musicLikers)}"></span>
                   </div>
                   <!-- 재생목록에 추가 -->
-                  <div class="music_imp">
-                    <form id="musicForm" onsubmit="addSongToPlaylist(event, ${music.id}); return false;" method="POST" th:action="@{|/${member.username}/playlist/import|}">
+                  <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
                       <input type="hidden" name="impMusicPlaylist" th:value="${music.id}" />
                       <button type="submit" class="plus-icon" th:if="${#authorization.expression('isAuthenticated()')}">
                         <i class="fa-solid fa-plus"></i>
