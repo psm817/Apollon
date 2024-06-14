@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -21,6 +22,8 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 public class Music extends BaseEntity {
+    public Long id;
+
     private String musicTitle;
 
     private String musicContent;
@@ -31,6 +34,7 @@ public class Music extends BaseEntity {
     private String thumbnailImg;
 
     private String musicMp3;
+
     private List<String> genres;
 
     @Transient
@@ -47,10 +51,12 @@ public class Music extends BaseEntity {
     @ManyToOne
     private Playlist playlist;
 
+    private LocalDateTime createDate;
+    private LocalDateTime modifyDate;
+
     // 좋아요
     @ManyToMany
     Set<Member> musicLikers = new LinkedHashSet<>();
-
 
 
     public void addMusicLike(Member liker) {

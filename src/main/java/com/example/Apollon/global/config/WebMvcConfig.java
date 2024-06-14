@@ -10,6 +10,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/uploads/**")
+
                 .addResourceLocations("file:///C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/images/uploads/");
+
     }
 }

@@ -5,6 +5,7 @@
     import com.example.Apollon.domain.comment.service.CommentService;
     import com.example.Apollon.domain.member.entity.Member;
     import com.example.Apollon.domain.member.service.MemberService;
+    import com.example.Apollon.domain.music.entity.Music;
     import com.example.Apollon.domain.music.service.MusicService;
     import com.example.Apollon.domain.studio.entity.Studio;
     import com.example.Apollon.domain.studio.service.StudioService;
@@ -42,11 +43,13 @@
             this.studioService.incrementVisit(username, loginedUsername);
 
             List<Comment> commentList = this.commentService.getListByStudio(studio);
+            List<Music> musicList = this.musicService.getListByStudio(studio);
 
             if (studio != null) {
                 model.addAttribute("studio", studio);
                 model.addAttribute("kw", kw);
                 model.addAttribute("commentList", commentList);
+                model.addAttribute("musicList", musicList);
 
                 if(username.equals(loginedUsername) && studio.getActive() == 0) {
                     return "redirect:/";
@@ -128,6 +131,7 @@
             return "redirect:/studio/%s".formatted(studio.getMember().getUsername());
         }
 
+        // 음악 신규 등록
         @PreAuthorize("isAuthenticated()")
         @GetMapping("/{username}/upload")
         public String upload(Model model, Principal principal, @PathVariable("username") String username) {
@@ -149,6 +153,56 @@
 
             Studio studio = this.studioService.getStudioByMemberUsername(username);
             musicService.upload(title, content, studio, thumbnail, musicFile, genres);
+
+            return "redirect:/studio/%s".formatted(studio.getMember().getUsername());
+        }
+
+        // 음악 수정
+        @PreAuthorize("isAuthenticated()")
+        @GetMapping("/{username}/reUpload/{id}")
+        public String modifyMusic(Model model, Principal principal, @PathVariable("username") String username, @PathVariable("id") Long id) {
+            Studio studio = this.studioService.getStudioByMemberUsername(username);
+            Music music = this.musicService.getMusic(id);
+
+            model.addAttribute("studio", studio);
+            model.addAttribute("music", music);
+
+            return "music/modify_form";
+        }
+
+        @PreAuthorize("isAuthenticated()")
+        @PostMapping("/{username}/reUpload/{id}")
+        public String modifyMusic(@RequestParam("content") String content,
+                                  @RequestParam("thumbnail") MultipartFile thumbnail,
+                                  @RequestParam("genres") List<String> genres,
+                                  @PathVariable("username") String username,
+                                  @PathVariable("id") Long id) {
+
+            Studio studio = this.studioService.getStudioByMemberUsername(username);
+            Music music = this.musicService.getMusic(id);
+
+            musicService.reUpload(music, content, thumbnail, genres);
+
+            return "redirect:/studio/%s".formatted(studio.getMember().getUsername());
+        }
+
+        // 음악삭제
+        @PreAuthorize("isAuthenticated()")
+        @PostMapping("/{username}/delete")
+        public String deleteMusic(@PathVariable("username") String username,
+                                    @RequestParam("musicIds") List<Long> musicIds,
+                                    Principal principal) {
+            String loginedUsername = principal.getName();
+
+            for (Long musicId : musicIds) {
+                Music music = this.musicService.getMusic(musicId);
+
+                if (music != null) {
+                    this.musicService.delete(music);
+                }
+            }
+
+            Studio studio = this.studioService.getStudioByMemberUsername(username);
 
             return "redirect:/studio/%s".formatted(studio.getMember().getUsername());
         }

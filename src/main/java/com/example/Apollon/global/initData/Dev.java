@@ -3,17 +3,17 @@ package com.example.Apollon.global.initData;
 import com.example.Apollon.domain.comment.service.CommentService;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.service.MemberService;
-import com.example.Apollon.domain.music.repository.MusicRepository;
 import com.example.Apollon.domain.music.service.MusicService;
 import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.domain.studio.service.StudioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.Arrays;
 
 @Configuration
 @Profile("dev")
@@ -25,18 +25,19 @@ public class Dev {
     MusicService musicService;
 
     @Autowired
-    MusicRepository musicRepository;
-
-    @Value("${custom.fileDirPath}")
-    private String fileDirPath;
+    TestFileUtils testFileUtils;
 
     @Bean
     public ApplicationRunner init(MemberService memberService, StudioService studioService, CommentService commentService) {
 
+        // 테스트 음악 데이터 추가를 하기 전에 폴더에 쌓이는 데이터 삭제
+        DataFileUtils.deleteFilesExcept("C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadImgs", "와보2.png");
+        DataFileUtils.deleteFilesExcept("C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadMusics", "Zedd & Alessia Cara - Stay.mp3");
+
         return args -> {
-            Member m1 = memberService.signup("admin", "admin", "admin", "admin@test.com","C:\\work\\thumbnail\\uploads\\1718115730332-KakaoTalk_20240611_144737993.jpg");
-            Member m2 = memberService.signup("user1", "user1", "user1", "user1@test.com","C:\\work\\thumbnail\\uploads\\1718115730332-KakaoTalk_20240611_144737993.jpg");
-            Member m3 = memberService.signup("user2", "user2", "user2", "user2@test.com","C:\\work\\thumbnail\\uploads\\1718115730332-KakaoTalk_20240611_144737993.jpg");
+            Member m1 = memberService.signup("admin", "admin", "admin", "admin@test.com","/images/none.png");
+            Member m2 = memberService.signup("user1", "user1", "user1", "user1@test.com","/images/none.png");
+            Member m3 = memberService.signup("user2", "user2", "user2", "user2@test.com","/images/none.png");
 
             Studio s1 = studioService.createOrUpdate(m1, 55, 1);
             Studio s2 = studioService.createOrUpdate(m2, 12, 1);
@@ -50,6 +51,21 @@ public class Dev {
             commentService.create(m3, s2, "테스트입니다.2", "테스트입니다.2");
             commentService.create(m3, s2, "테스트입니다.3", "테스트입니다.3");
 
+            // 폴더에 쌓이는 테스트 데이터 삭제 후 신규 테스트 음악 데이터 생성
+            for (int i = 1; i<=40; i++) {
+                musicService.upload("admin의 테스트 음악 제목 " + i, "admin의 테스트 음악 설명 " + i, s1,
+                        testFileUtils.createMockThumbnail(),  testFileUtils.createMockSong(), Arrays.asList("Electronica, etc"));
+            }
+
+            for (int i = 1; i<=40; i++) {
+                musicService.upload("user1의 테스트 음악 제목 " + i, "user1의 테스트 음악 설명 " + i, s2,
+                        testFileUtils.createMockThumbnail(),  testFileUtils.createMockSong(), Arrays.asList("Ballad, OST, etc"));
+            }
+
+            for (int i = 1; i<=40; i++) {
+                musicService.upload("user2의 테스트 음악 제목 " + i, "user2의 테스트 음악 설명 " + i, s3,
+                        testFileUtils.createMockThumbnail(),  testFileUtils.createMockSong(), Arrays.asList("Rap/HipHop, JPOP, indie, etc"));
+            }
         };
     }
 }

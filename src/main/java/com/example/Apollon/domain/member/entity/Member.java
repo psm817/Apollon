@@ -21,6 +21,9 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 public class Member extends BaseEntity {
+
+    public long id;
+
     @Column(unique = true)
     private String username;
     @Setter

@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.time.DateTimeException;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -55,17 +56,16 @@ public class MusicService {
                 .thumbnailImg(""+ thumbnailFile)
                 .musicMp3(""+ musicFile)
                 .genres(genres)
+                .createDate(LocalDateTime.now())
                 .build();
 
         musicRepository.save(music);
     }
     // 좋아요 추가
-    public void likeMusic(Long musicId, Long memberId) {
-        Music music = getMusic(musicId);
-        Member member = getMemberId(memberId);
-
+    public void likeMusic(Music music, Member member) {
         music.addMusicLike(member);
-        musicRepository.save(music);
+
+        this.musicRepository.save(music);
     }
 
     public void unlikeMusic(Long musicId, Long memberId) {
@@ -79,27 +79,56 @@ public class MusicService {
     // 원하는 음악을 가져오는데 음악 없으면 찾을 수 없다고 표시
     public Music getMusic(Long musicId) {
         Optional<Music> op = musicRepository.findById(musicId);
-        if (!op.isPresent()) {throw new DateTimeException("music not found");}
+        if (!op.isPresent()) {throw new DateTimeException("음악을 찾을 수 없습니다. getMusic");}
 
         return op.get();
     }
 
     private Member getMemberId(Long memberId) {
         Optional<Member> memberOptional = memberRepository.findById(memberId);
-        return memberOptional.orElseThrow(() -> new DateTimeException("Member not found with ID: " + memberId));
+        return memberOptional.orElseThrow(() -> new DateTimeException("해당 회원 번호의 정보를 찾을 수 없습니다. getMemberId : " + memberId));
     }
 
     public Music getMusicById(Long musicId) {
         return musicRepository.findById(musicId)
-                .orElseThrow(() -> new RuntimeException("Music not found with ID: " + musicId));
+                .orElseThrow(() -> new RuntimeException("해당 번호를 가진 음악을 찾을 수 없습니다. getMusicById : " + musicId));
     }
 
     public void playPlaylist(Playlist playlist) {
         for (Music music : playlist.getMusicPlayList()) {
-            System.out.println("Now playing: " + music.getMusicTitle());
+            System.out.println("재생 중인 음악 제목: " + music.getMusicTitle());
         }
     }
     public List<Music> getTop100MusicByPlayCount() {
         return musicRepository.findTop100ByOrderByMusicPlayCountDesc();
+    }
+
+    public List<Music> getListByStudio(Studio studio) {
+        return musicRepository.findByStudio(studio);
+    }
+
+    public void reUpload(Music music, String content, MultipartFile thumbnail, List<String> genres) {
+        String thumbnailDirPath = fileDirPath + "/uploadFile/uploadImgs";
+
+        String thumbnailRelPath = UUID.randomUUID() + ".png";
+
+        File thumbnailFile = new File(thumbnailDirPath + "/" + thumbnailRelPath);
+
+        try {
+            thumbnail.transferTo(thumbnailFile);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to upload files", e);
+        }
+
+        music.setMusicContent(content);
+        music.setModifyDate(LocalDateTime.now());
+        music.setThumbnailImg("" + thumbnailFile);
+        music.setGenres(genres);
+
+        musicRepository.save(music);
+    }
+
+    public void delete(Music music) {
+        this.musicRepository.delete(music);
     }
 }
