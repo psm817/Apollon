@@ -68,7 +68,7 @@ public class MemberController {
             return "member/signup2";
         }
         if (signForm.getProfilePicture() == null || signForm.getProfilePicture().isEmpty()) {
-            model.addAttribute("signupError", "프로필 사진을 첨부해주세요.");
+            model.addAttribute("profilePictureError", "(프로필 사진을 첨부해주세요.)");
             return "member/signup2";
         }
 
