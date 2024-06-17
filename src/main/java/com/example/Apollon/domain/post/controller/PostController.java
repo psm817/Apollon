@@ -72,6 +72,7 @@ public class PostController {
 
 
 
+
     // PostController.java
     @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable("id") Long id, Principal principal) {
@@ -90,6 +91,7 @@ public class PostController {
         model.addAttribute("member", member);
         model.addAttribute("myPosts", myPosts);
         model.addAttribute("myComments", myComments);
+
 
 
         model.addAttribute("post", post);  // 수정된 Post 객체를 모델에 추가

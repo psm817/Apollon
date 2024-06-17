@@ -50,7 +50,9 @@ public class MusicService {
     }
 
     public String storeImg(MultipartFile profilePicture) {
+
         String uploadDir = "C:\\work\\Apollon\\src\\main\\resources\\static\\uploadFile\\uploadImgs";
+
         Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
             try {
@@ -71,7 +73,9 @@ public class MusicService {
     }
 
     public String storeMp3(MultipartFile profilePicture) {
+
         String uploadDir = "C:\\work\\Apollon\\src\\main\\resources\\static\\uploadFile\\uploadMusics";
+
         Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
             try {

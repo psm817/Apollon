@@ -104,11 +104,17 @@ public class PostService {
         }
     }
 
+
     public List<Post> getTop10Posts() {
         return postRepository.findTop10ByOrderByViewDesc();
     }
 
     public List<Post> getPostsByMember(Member member) {
         return postRepository.findByAuthor(member);
+    }
+
+    public List<Post> getTop5PostsByViewAndBoardType(BoardType boardType) {
+        return this.postRepository.findTop5ByBoardTypeOrderByViewDesc(boardType);
+
     }
 }

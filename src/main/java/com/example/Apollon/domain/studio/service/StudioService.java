@@ -82,4 +82,7 @@ public class StudioService {
 
         this.studioRepository.save(studio);
     }
+    public List<Studio> getTop5StudiosByVisit() {
+        return this.studioRepository.findTop5ByOrderByVisitDesc();
+    }
 }
