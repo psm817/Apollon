@@ -1,5 +1,6 @@
 package com.example.Apollon.domain.post.repository;
 
+import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.post.entity.BoardType;
 import com.example.Apollon.domain.post.entity.Post;
 import org.springframework.data.domain.Page;
@@ -15,4 +16,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Page<Post> findByBoardType(BoardType boardType, Pageable pageable);
 
     List<Post> findTop10ByOrderByViewDesc();
+    List<Post> findByAuthor(Member author);
 }

@@ -93,5 +93,9 @@ public class PostService {
         return postRepository.findTop10ByOrderByViewDesc();
     }
 
+    public List<Post> getPostsByMember(Member member) {
+        return postRepository.findByAuthor(member);
+    }
+
 
 }

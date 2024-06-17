@@ -34,9 +34,13 @@ public class PostController {
 
     @GetMapping("/list")
     public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
-                       @RequestParam(value = "boardType", required = false) BoardType boardType) {
+                       @RequestParam(value = "boardType", required = false) BoardType boardType,Principal principal) {
         Page<Post> paging;
         List<Post> noticePosts = postService.getNoticePosts(4); // 공지 게시글 4개까지 가져오기
+        Member member = memberService.getMember(principal.getName());
+        List<Post> myPosts = postService.getPostsByMember(member);
+        List<PostComment> myComments = postCommentService.getCommentsByMember(member);
+
 
         if (boardType != null) {
             paging = postService.getPostsByBoardType(page, boardType);
@@ -45,6 +49,9 @@ public class PostController {
         }
         model.addAttribute("paging", paging);
         model.addAttribute("notices", noticePosts);
+        model.addAttribute("member", member);
+        model.addAttribute("myPosts", myPosts);
+        model.addAttribute("myComments", myComments);
 
         // 오늘의 Top 10 게시글 추가
         List<Post> topPosts = postService.getTop10Posts();
@@ -58,7 +65,7 @@ public class PostController {
 
     // PostController.java
     @GetMapping("/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Long id) {
+    public String detail(Model model, @PathVariable("id") Long id, Principal principal) {
         List<Post> topPosts = postService.getTop10Posts();
         topPosts = topPosts.stream()
                 .filter(post -> post.getBoardType() != BoardType.공지)
@@ -68,6 +75,12 @@ public class PostController {
         Post post = postService.getPostByView(id);  // 조회수가 증가된 Post 객체 가져오기
 
         List<PostComment> comments = postCommentService.getPostCommentsByPost(id);
+        Member member = memberService.getMember(principal.getName());
+        List<Post> myPosts = postService.getPostsByMember(member);
+        List<PostComment> myComments = postCommentService.getCommentsByMember(member);
+        model.addAttribute("member", member);
+        model.addAttribute("myPosts", myPosts);
+        model.addAttribute("myComments", myComments);
 
 
         model.addAttribute("post", post);  // 수정된 Post 객체를 모델에 추가
@@ -82,7 +95,15 @@ public class PostController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/write")
-    public String create(Model model) {
+    public String create(Model model, Principal principal) {
+
+        Member member = memberService.getMember(principal.getName());
+        List<Post> myPosts = postService.getPostsByMember(member);
+        List<PostComment> myComments = postCommentService.getCommentsByMember(member);
+
+        model.addAttribute("member", member);
+        model.addAttribute("myPosts", myPosts);
+        model.addAttribute("myComments", myComments);
         model.addAttribute("boardTypes", BoardType.values());
         return "post/post_write";
     }
@@ -92,8 +113,10 @@ public class PostController {
     public String create(@RequestParam(value="title") String title,
                          @RequestParam(value="content") String content,
                          @RequestParam(value="boardType") BoardType boardType,
-                         Principal principal) {
+                         Principal principal,Model model) {
         Member member = memberService.getMember(principal.getName());
+
+
         postService.create(title, content, member, boardType);
         return "redirect:/post/list";
     }
@@ -115,6 +138,14 @@ public class PostController {
         if (!post.getAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
+        Member member = memberService.getMember(principal.getName());
+        List<Post> myPosts = postService.getPostsByMember(member);
+        List<PostComment> myComments = postCommentService.getCommentsByMember(member);
+        model.addAttribute("member", member);
+        model.addAttribute("myPosts", myPosts);
+        model.addAttribute("myComments", myComments);
+
+
         postForm.setTitle(post.getTitle());
         postForm.setContent(post.getContent());
         model.addAttribute("post", post);
@@ -145,13 +176,23 @@ public class PostController {
         if (!post.getAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
         }
+
         this.postService.delete(post);
         return "redirect:/post/list";
     }
 
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/profile")
-    public String profile() {
+    public String profile(Model model, Principal principal) {
+        Member member = memberService.getMember(principal.getName());
+        List<Post> myPosts = postService.getPostsByMember(member);
+        List<PostComment> myComments = postCommentService.getCommentsByMember(member);
+
+
+        model.addAttribute("member", member);
+        model.addAttribute("myPosts", myPosts);
+        model.addAttribute("myComments", myComments);
 
         return "post/post_profile";
     }
