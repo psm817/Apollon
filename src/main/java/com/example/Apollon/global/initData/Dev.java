@@ -4,6 +4,8 @@ import com.example.Apollon.domain.comment.service.CommentService;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.service.MemberService;
 import com.example.Apollon.domain.music.service.MusicService;
+import com.example.Apollon.domain.playlist.entity.Playlist;
+import com.example.Apollon.domain.playlist.service.PlaylistService;
 import com.example.Apollon.domain.post.entity.BoardType;
 import com.example.Apollon.domain.post.service.PostService;
 import com.example.Apollon.domain.studio.entity.Studio;
@@ -27,6 +29,9 @@ public class Dev {
     MusicService musicService;
 
     @Autowired
+    PlaylistService playlistService;
+
+    @Autowired
     TestFileUtils testFileUtils;
 
     @Autowired
@@ -47,6 +52,10 @@ public class Dev {
             Studio s1 = studioService.createOrUpdate(m1, 55, 1);
             Studio s2 = studioService.createOrUpdate(m2, 12, 1);
             Studio s3 = studioService.createOrUpdate(m3, 5, 1);
+
+            Playlist p1 = playlistService.PCreateOrUpdate(m1);
+            Playlist p2 = playlistService.PCreateOrUpdate(m2);
+            Playlist p3 = playlistService.PCreateOrUpdate(m3);
 
             commentService.create(m2, s3, "테스트입니다.1", "테스트입니다.1");
             commentService.create(m2, s3, "테스트입니다.2", "테스트입니다.2");

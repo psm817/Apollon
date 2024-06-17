@@ -2,6 +2,8 @@ package com.example.Apollon.domain.member.entity;
 
 
 import com.example.Apollon.domain.comment.entity.Comment;
+import com.example.Apollon.domain.music.entity.Music;
+import com.example.Apollon.domain.playlist.entity.Playlist;
 import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.global.jpa.BaseEntity;
 import jakarta.persistence.*;
@@ -11,6 +13,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -37,6 +40,13 @@ public class Member extends BaseEntity {
 
     private LocalDateTime createDate;
     private LocalDateTime modifyDate;
+
+    @OneToOne(mappedBy = "member", cascade = CascadeType.REMOVE)
+    @LazyCollection(LazyCollectionOption.EXTRA)
+    private Playlist playlist;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Music> musics = new ArrayList<>();
 
     @OneToOne(mappedBy = "member", cascade = CascadeType.REMOVE)
     @LazyCollection(LazyCollectionOption.EXTRA)

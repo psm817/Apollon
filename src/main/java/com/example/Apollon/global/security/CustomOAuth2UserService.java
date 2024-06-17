@@ -1,6 +1,7 @@
 package com.example.Apollon.global.security;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.service.MemberService;
+import com.example.Apollon.domain.playlist.service.PlaylistService;
 import com.example.Apollon.domain.studio.service.StudioService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     private static final Logger log = LoggerFactory.getLogger(CustomOAuth2UserService.class);
     private final MemberService memberService;
     private final StudioService studioService;
+    private final PlaylistService playlistService;
 
     @Override
     @Transactional
@@ -62,6 +64,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
             // 스튜디오 자동 생성 또는 업데이트
             this.studioService.createOrUpdate(member, 0, 1);
+            // 플레이리스트 자동 생성 또는 업데이트
+            this.playlistService.PCreateOrUpdate(member);
 
             return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
         } catch (IllegalStateException e) {
@@ -85,6 +89,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
             // 스튜디오 자동 생성
             this.studioService.createOrUpdate(member, 0, 1);
+            // 플레이리스트 자동 생성 또는 업데이트
+            this.playlistService.PCreateOrUpdate(member);
 
             return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
         } catch (IllegalStateException e) {
@@ -107,6 +113,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
             // 스튜디오 자동 생성
             this.studioService.createOrUpdate(member, 0, 1);
+            // 플레이리스트 자동 생성 또는 업데이트
+            this.playlistService.PCreateOrUpdate(member);
 
             return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
         } catch (IllegalStateException e) {
