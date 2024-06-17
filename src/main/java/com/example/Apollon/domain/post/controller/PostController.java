@@ -12,6 +12,7 @@ import com.example.Apollon.domain.post.service.PostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -33,35 +34,43 @@ public class PostController {
     private final PostCommentService postCommentService;
 
     @GetMapping("/list")
-    public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
-                       @RequestParam(value = "boardType", required = false) BoardType boardType,Principal principal) {
+    public String list(Model model,
+                       @RequestParam(value = "page", defaultValue = "0") int page,
+                       @RequestParam(value = "boardType", required = false) BoardType boardType,
+                       Principal principal) {
+
         Page<Post> paging;
-        List<Post> noticePosts = postService.getNoticePosts(4); // 공지 게시글 4개까지 가져오기
+        List<Post> noticePosts = postService.getNoticePosts(4); // Fetch up to 4 notice posts
         Member member = memberService.getMember(principal.getName());
         List<Post> myPosts = postService.getPostsByMember(member);
         List<PostComment> myComments = postCommentService.getCommentsByMember(member);
 
-
         if (boardType != null) {
-            paging = postService.getPostsByBoardType(page, boardType);
+            if (boardType.equals(BoardType.공지)) {
+                paging = new PageImpl<>(noticePosts); // Directly use noticePosts for notice board
+            } else {
+                paging = postService.getPostsByBoardTypeExcludeNotice(page, boardType);
+            }
         } else {
-            paging = postService.getList(page);
+            paging = postService.getListExcludeNotice(page);
         }
+
         model.addAttribute("paging", paging);
         model.addAttribute("notices", noticePosts);
         model.addAttribute("member", member);
         model.addAttribute("myPosts", myPosts);
         model.addAttribute("myComments", myComments);
 
-        // 오늘의 Top 10 게시글 추가
-        List<Post> topPosts = postService.getTop10Posts();
-        topPosts = topPosts.stream()
+        // Fetch top 10 posts excluding notice posts
+        List<Post> topPosts = postService.getTop10Posts().stream()
                 .filter(post -> post.getBoardType() != BoardType.공지)
                 .collect(Collectors.toList());
         model.addAttribute("topPosts", topPosts);
 
         return "post/post_list";
     }
+
+
 
     // PostController.java
     @GetMapping("/detail/{id}")

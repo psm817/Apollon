@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
 <div layout:fragment="content">
+    <div class="postMainContainer">
 
     <div class="header postHeader">
         <div class="post-logo">
@@ -35,23 +36,60 @@
                 </div>
             </div>
 
-            <div class="profile-content">
-                <h2>My Posts</h2>
-                <ul>
-                    <li th:each="post : ${posts}">
-                        <a th:href="@{'/post/detail/' + ${post.id}}" th:text="${post.title}">Post Title</a>
-                    </li>
-                </ul>
 
-                <h2>My Comments</h2>
-                <ul>
-                    <li th:each="comment : ${comments}">
-                        <span th:text="${comment.content}">Comment Content</span>
-                        <a th:href="@{'/post/detail/' + ${comment.post.id}}">View Post</a>
-                    </li>
-                </ul>
+        </div>
+        <div class="container">
+            <div class="profile-content">
+                <button onclick="showPosts()">게시글</button>
+                <button onclick="showComments()">댓글</button>
+
+                <div id="posts">
+
+                    <ul>
+                        <li th:each="myPosts : ${myPosts}">
+                            <a th:href="@{'/post/detail/' + ${myPosts.id}}" th:text="${myPosts.boardType}">Post Title</a>
+                            <a th:href="@{'/post/detail/' + ${myPosts.id}}" th:text="${myPosts.title}">Post Title</a>
+                            <a th:href="@{'/post/detail/' + ${myPosts.id}}" th:text="${member.username}">Post Title</a>
+                            <a th:href="@{'/post/detail/' + ${myPosts.id}}" th:text="${myPosts.createDate}">Post Title</a>
+                            <a th:href="@{'/post/detail/' + ${myPosts.id}}" th:text="${myPosts.view}">Post Title</a>
+
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="comments" style="display: none;">
+
+                    <ul>
+                        <li th:each="myComments : ${myComments}">
+                            <span th:text="${myComments.content}">myComments Content</span>
+                            <a th:href="@{'/post/detail/' + ${myComments.post.id}}">View Post</a>
+                            <a th:href="@{'/post/detail/' + ${myComments.post.id}}" th:text="${myComments.post.title}"></a>
+                            <a th:href="@{'/post/detail/' + ${myComments.post.id}}" th:text="${myComments.post.createDate}"></a>
+
+
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
+
+        </div>
+        <div class="container">
+
+        </div>
     </div>
-</div>
+
+    </div>
+
 </html>
+<script th:inline="javascript">
+    function showPosts() {
+        document.getElementById('posts').style.display = 'block';
+        document.getElementById('comments').style.display = 'none';
+    }
+
+    function showComments() {
+        document.getElementById('posts').style.display = 'none';
+        document.getElementById('comments').style.display = 'block';
+    }
+</script>

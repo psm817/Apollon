@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
 <div layout:fragment="content">
-
+    <div class="postMainContainer">
     <div class="header postHeader">
         <div class="post-logo">
             <a href="/">
@@ -53,6 +53,7 @@
             </div>
         </div>
         <div class="container">
+            <!-- 공지사항 섹션 -->
             <div class="notice-box box">
                 <div class="notice-header">
                     <span>공지사항</span>
@@ -68,6 +69,7 @@
                     </div>
                 </div>
             </div>
+            <!-- 일반 게시글 섹션 -->
             <div class="category-box box">
                 <span>게시판</span>
                 <span>제목</span>
@@ -77,8 +79,8 @@
             </div>
             <div class="postList-box box">
                 <div class="postbox-body">
-                    <tr th:each="post, loop : ${paging}">
-                        <div th:if="${post.boardType.name() != '공지'}" class="post-item">
+                    <div th:each="post, loop : ${paging.content}">
+                        <div class="post-item">
                             <span>
                                 <a th:text="${post.boardType}" th:href="@{|/post/detail/${post.id}|}"></a>
                             </span>
@@ -98,7 +100,7 @@
                                 <a th:text="${post.view}" th:href="@{|/post/detail/${post.id}|}"></a>
                             </div>
                         </div>
-                    </tr>
+                    </div>
                 </div>
                 <div class="postList-footer">
                     <div class="paging">
@@ -106,15 +108,13 @@
                         <div th:if="${!paging.isEmpty()}">
                             <ul class="pagination justify-content-center">
                                 <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
-                                    <a class="page-link"
-                                       th:href="@{|?page=${paging.number-1}|}">
+                                    <a class="page-link" th:href="@{|?page=${paging.number-1}|}">
                                         <span>이전</span>
                                     </a>
                                 </li>
                                 <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
                                     th:if="${page >= paging.number-5 and page <= paging.number+5}"
-                                    th:classappend="${page == paging.number} ? 'active'"
-                                    class="page-item">
+                                    th:classappend="${page == paging.number} ? 'active'" class="page-item">
                                     <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
                                 </li>
                                 <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
@@ -125,6 +125,11 @@
                             </ul>
                         </div>
                         <!-- 페이징처리 끝 -->
+                        <div th:if="${paging.isEmpty()}">
+                            <div class="alert alert-warning" role="alert">
+                                해당 페이지에는 게시글이 없습니다.
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="postList-footer2">
@@ -149,6 +154,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 </html>
 <script>

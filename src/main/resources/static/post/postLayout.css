@@ -3,8 +3,13 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
-  overflow: auto;
+
 }
+.postMainContainer{
+    height: calc(100vh - 120px);
+    overflow-y: auto;
+    }
+
 
 .header {
   text-align: center;
@@ -22,10 +27,9 @@ min-width:1600px;
   display: flex;
   flex-wrap: wrap;
   width: 1600px;
-  height: 1400px;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 100px); /* 최소 높이 설정 */
   margin: 0 auto;
-  overflow: auto;
+  overflow: overflow; /* 내용이 뷰포트보다 크더라도 스크롤이 생성되지 않음 */
 }
 
 .container {

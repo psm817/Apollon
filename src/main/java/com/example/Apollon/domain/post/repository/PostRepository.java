@@ -10,11 +10,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-    Page<Post> findAll(Pageable pageable);
     Page<Post> findByBoardType(BoardType boardType, Pageable pageable);
-
+    Page<Post> findByBoardTypeNot(BoardType boardType, Pageable pageable);
+    Page<Post> findByBoardTypeAndBoardTypeNot(BoardType boardType, BoardType excludeBoardType, Pageable pageable);
     List<Post> findTop10ByOrderByViewDesc();
-    List<Post> findByAuthor(Member author);
+    List<Post> findByAuthor(Member member);
 }

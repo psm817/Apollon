@@ -55,12 +55,27 @@ public class PostService {
         return postRepository.findAll(pageable);
     }
 
+    public Page<Post> getListExcludeNotice(int page) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        return postRepository.findByBoardTypeNot(BoardType.공지, pageable);
+    }
+
     public Page<Post> getPostsByBoardType(int page, BoardType boardType) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
         return postRepository.findByBoardType(boardType, pageable);
     }
+
+    public Page<Post> getPostsByBoardTypeExcludeNotice(int page, BoardType boardType) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        return postRepository.findByBoardTypeAndBoardTypeNot(boardType, BoardType.공지, pageable);
+    }
+
     public List<Post> getNoticePosts(int limit) {
         Pageable pageable = PageRequest.of(0, limit, Sort.by(Sort.Order.desc("createDate")));
         return postRepository.findByBoardType(BoardType.공지, pageable).getContent();
@@ -96,6 +111,4 @@ public class PostService {
     public List<Post> getPostsByMember(Member member) {
         return postRepository.findByAuthor(member);
     }
-
-
 }
