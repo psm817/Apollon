@@ -46,29 +46,43 @@
         <div class="mainPage_block_container">
           <div class="block_track_box-1">
             <div class="block_title_link">최신 음악</div>
-            <div class="block_track_section">
-              <div class="block_track block_track_1">
-                <a href="#">최신 음악 1</a></div>
-              <div class="block_track block_track_2">
-                <a href="#">최신 음악 2</a></div>
-              <div class="block_track block_track_3">
-                <a href="#">최신 음악 3</a></div>
-              <div class="block_track block_track_4">
-                <a href="#">최신 음악 4</a></div>
-            </div>
+            <ul class="block_track_section">
+              <li class="block_track" th:each="music, iterStat : ${latest4Music}">
+                <img th:src="@{${music.thumbnailImg}}" alt="음악이미지">
+                <div class="background">
+                  <div class="btn-box">
+                    <a th:if="${#authorization.expression('isAuthenticated()')}"
+                       th:href="@{|/chart/music/detail/${music.id}|}"
+                       th:utext="'<span>' + ${music.musicTitle} + '</span><br/><br/><span>' + '⭐곡 정보 보러가기⭐' + '</span>'">>
+                    </a>
+                    <a th:if="${#authorization.expression('isAnonymous()')}"
+                       onclick="alert('곡 정보를 확인하려면 로그인이 필요합니다.'); return false;"
+                       th:utext="'<span>' + ${music.musicTitle} + '</span><br/><br/><span>' + '⭐곡 정보 보러가기⭐' + '</span>'">>
+                    </a>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
           <div class="block_track_box-2">
             <div class="block_title_link">추천 음악</div>
-            <div class="block_track_section">
-              <div class="block_track block_track_1">
-                <a href="#">추천 음악 1</a></div>
-              <div class="block_track block_track_2">
-                <a href="#">추천 음악 2</a></div>
-              <div class="block_track block_track_3">
-                <a href="#">추천 음악 3</a></div>
-              <div class="block_track block_track_4">
-                <a href="#">추천 음악 4</a></div>
-            </div>
+            <ul class="block_track_section">
+              <li class="block_track" th:each="musicTop, iterStat : ${top4MusicByLikers}">
+                <img th:src="@{${musicTop.thumbnailImg}}" alt="음악이미지">
+                <div class="background another-color">
+                  <div class="btn-box">
+                    <a th:if="${#authorization.expression('isAuthenticated()')}"
+                       th:href="@{|/chart/music/detail/${musicTop.id}|}"
+                       th:utext="'<span>' + ${musicTop.musicTitle} + '</span><br/><br/><span>' + '⭐곡 정보 보러가기⭐' + '</span>'">>
+                    </a>
+                    <a th:if="${#authorization.expression('isAnonymous()')}"
+                       onclick="alert('곡 정보를 확인하려면 로그인이 필요합니다.'); return false;"
+                       th:utext="'<span>' + ${musicTop.musicTitle} + '</span><br/><br/><span>' + '⭐곡 정보 보러가기⭐' + '</span>'">>
+                    </a>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
         <div class="mainPage_side_container">
