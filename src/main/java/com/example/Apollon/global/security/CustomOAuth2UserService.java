@@ -74,9 +74,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     }
 
     private OAuth2User processNaverLogin(OAuth2User oAuth2User) {
-        String oauthId = oAuth2User.getAttribute("id");
         Map<String, Object> attributes = oAuth2User.getAttributes();
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+
+        // 네이버 OAuth2 응답에서 사용자 ID는 "id" 필드에 있습니다.
+        String oauthId = (String) response.get("id");
         String nickname = (String) response.get("nickname");
         String email = (String) response.get("email");
         String providerTypeCode = "NAVER";
@@ -84,7 +86,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         String username;
         if (oauthId != null) {
             String encryptedId = encryptProviderId(oauthId); // Generate two-digit random number if oauthId is not null
-            username = providerTypeCode + "_" + nickname + "__" + encryptedId; // Append to username
+            username = providerTypeCode + "_" + nickname + "_" + encryptedId; // Append to username
         } else {
             username = providerTypeCode + "_" + nickname; // Use only nickname if oauthId is null
         }
