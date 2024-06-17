@@ -37,10 +37,10 @@ public class EmailController {
             memberRepository.save(member);
 
             // 이메일 본문 내용
-            String body = "인증 코드는 다음과 같습니다: " + code;
+            String body = "임시비밀번호는 다음과 같습니다: " + code;
 
             // 이메일 발송
-            emailService.send(emailRequestDto.getEmail(), "입력하신 정보는 다음과 같습니다.", body);
+            emailService.send(emailRequestDto.getEmail(), "Apollon 임시비밀번호 발급", body);
 
             // 인증번호를 클라이언트로 반환
             return ResponseEntity.ok().build();
