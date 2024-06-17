@@ -95,7 +95,6 @@ public class MemberController {
 
         String uploadDir = "C:\\work\\Apollon\\src\\main\\resources\\static\\images\\uploads";
 
-
         // 디렉토리가 존재하지 않으면 생성합니다.
         Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
