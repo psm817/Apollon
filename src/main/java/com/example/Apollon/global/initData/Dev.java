@@ -72,9 +72,15 @@ public class Dev {
                         testFileUtils.createMockThumbnail(),  testFileUtils.createMockSong(), Arrays.asList("Rap/HipHop, JPOP, indie, etc"));
             }
             // 게시글
-            for (int i = 1; i <= 4; i++) {
+            for (int i = 1; i <= 5; i++) {
                 Member author = m1;
                 postService.create("제목 " + i, "내용 " + i, author, BoardType.공지);
+
+            }//자유게시글
+            for (int i = 1; i <= 30; i++) {
+                Member author = m1;
+                postService.create("제목 " + i, "내용 " + i, author, BoardType.자유);
+
             }
         };
     }
