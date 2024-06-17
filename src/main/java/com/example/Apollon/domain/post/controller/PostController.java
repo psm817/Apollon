@@ -22,6 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/post")
@@ -32,13 +33,12 @@ public class PostController {
     private final PostCommentService postCommentService;
 
     @GetMapping("/list")
-    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page,
-                       @RequestParam(value="boardType", required = false) BoardType boardType) {
+    public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+                       @RequestParam(value = "boardType", required = false) BoardType boardType) {
         Page<Post> paging;
         List<Post> noticePosts = postService.getNoticePosts(4); // 공지 게시글 4개까지 가져오기
 
-
-        if (boardType != null && boardType != BoardType.공지) {
+        if (boardType != null) {
             paging = postService.getPostsByBoardType(page, boardType);
         } else {
             paging = postService.getList(page);
@@ -46,20 +46,38 @@ public class PostController {
         model.addAttribute("paging", paging);
         model.addAttribute("notices", noticePosts);
 
-
+        // 오늘의 Top 10 게시글 추가
+        List<Post> topPosts = postService.getTop10Posts();
+        topPosts = topPosts.stream()
+                .filter(post -> post.getBoardType() != BoardType.공지)
+                .collect(Collectors.toList());
+        model.addAttribute("topPosts", topPosts);
 
         return "post/post_list";
-        }
+    }
 
     // PostController.java
     @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable("id") Long id) {
+        List<Post> topPosts = postService.getTop10Posts();
+        topPosts = topPosts.stream()
+                .filter(post -> post.getBoardType() != BoardType.공지)
+                .collect(Collectors.toList());
+        model.addAttribute("topPosts", topPosts);
+
         Post post = postService.getPostByView(id);  // 조회수가 증가된 Post 객체 가져오기
+
         List<PostComment> comments = postCommentService.getPostCommentsByPost(id);
+
 
         model.addAttribute("post", post);  // 수정된 Post 객체를 모델에 추가
         model.addAttribute("comments", comments);
+
+
+
         return "post/post_detail";
+
+
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -130,6 +148,14 @@ public class PostController {
         this.postService.delete(post);
         return "redirect:/post/list";
     }
+
+
+    @GetMapping("/profile")
+    public String profile() {
+
+        return "post/post_profile";
+    }
+
 
 
 }

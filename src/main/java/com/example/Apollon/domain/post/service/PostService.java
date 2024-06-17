@@ -89,4 +89,9 @@ public class PostService {
         }
     }
 
+    public List<Post> getTop10Posts() {
+        return postRepository.findTop10ByOrderByViewDesc();
+    }
+
+
 }
