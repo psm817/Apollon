@@ -53,7 +53,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         Map<String, Object> attributesProperties = (Map<String, Object>) attributes.get("properties");
         String nickname = (String) attributesProperties.get("nickname");
         String providerTypeCode = "KAKAO";
-        String username = providerTypeCode + "__%s".formatted(oauthId);
+        String username = providerTypeCode +"_"+nickname+ "__%s".formatted(oauthId);
         String email = (String) ((Map<String, Object>) attributes.get("kakao_account")).get("email");
 
         try {
@@ -77,7 +77,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         String nickname = (String) response.get("nickname");
         String email = (String) response.get("email");
         String providerTypeCode = "NAVER";
-        String username = providerTypeCode + "__%s".formatted(oauthId);
+        String username = providerTypeCode +"_"+nickname+ "__%s".formatted(oauthId);
 
         try {
             Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
@@ -99,7 +99,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         String nickname = (String) attributes.get("name");
         String email = (String) attributes.get("email");
         String providerTypeCode = "GOOGLE";
-        String username = providerTypeCode + "__%s".formatted(oauthId);
+        String username = providerTypeCode + "_"+nickname+"__%s".formatted(oauthId);
 
         try {
             Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
