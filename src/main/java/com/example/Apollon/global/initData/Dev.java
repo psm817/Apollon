@@ -41,12 +41,16 @@ public class Dev {
 
         return args -> {
             Member m1 = memberService.signup("admin", "admin", "admin", "admin@test.com","/images/none.png");
-            Member m2 = memberService.signup("user1", "user1", "user1", "user1@test.com","/images/none.png");
-            Member m3 = memberService.signup("user2", "user2", "user2", "user2@test.com","/images/none.png");
+            Member m2 = memberService.signup("5004pp", "5004pp", "5004pp", "5004pp@test.com","/images/none.png");
+            Member m3 = memberService.signup("ilmong06", "ilmong06", "ilmong06", "ilmong06@test.com","/images/none.png");
+            Member m4 = memberService.signup("tron0318", "tron0318", "tron0318", "tron0318@test.com","/images/none.png");
+            Member m5 = memberService.signup("maegon", "maegon", "maegon", "maegon@test.com","/images/none.png");
 
             Studio s1 = studioService.createOrUpdate(m1, 55, 1);
-            Studio s2 = studioService.createOrUpdate(m2, 12, 1);
-            Studio s3 = studioService.createOrUpdate(m3, 5, 1);
+            Studio s2 = studioService.createOrUpdate(m2, 94, 1);
+            Studio s3 = studioService.createOrUpdate(m3, 172, 1);
+            Studio s4 = studioService.createOrUpdate(m4, 58, 1);
+            Studio s5 = studioService.createOrUpdate(m5, 17, 1);
 
             commentService.create(m2, s3, "테스트입니다.1", "테스트입니다.1");
             commentService.create(m2, s3, "테스트입니다.2", "테스트입니다.2");
@@ -57,18 +61,28 @@ public class Dev {
             commentService.create(m3, s2, "테스트입니다.3", "테스트입니다.3");
 
             // 폴더에 쌓이는 테스트 데이터 삭제 후 신규 테스트 음악 데이터 생성
-            for (int i = 1; i<=40; i++) {
+            for (int i = 1; i<=30; i++) {
                 musicService.upload("admin의 테스트 음악 제목 " + i, "admin의 테스트 음악 설명 " + i, s1,
                         testFileUtils.createMockThumbnail(),  testFileUtils.createMockSong(), Arrays.asList("Electronica, etc"));
             }
 
-            for (int i = 1; i<=40; i++) {
-                musicService.upload("user1의 테스트 음악 제목 " + i, "user1의 테스트 음악 설명 " + i, s2,
+            for (int i = 1; i<=30; i++) {
+                musicService.upload("5004pp의 테스트 음악 제목 " + i, "5004pp의 테스트 음악 설명 " + i, s2,
                         testFileUtils.createMockThumbnail(),  testFileUtils.createMockSong(), Arrays.asList("Ballad, OST, etc"));
             }
 
-            for (int i = 1; i<=40; i++) {
-                musicService.upload("user2의 테스트 음악 제목 " + i, "user2의 테스트 음악 설명 " + i, s3,
+            for (int i = 1; i<=30; i++) {
+                musicService.upload("ilmong06의 테스트 음악 제목 " + i, "ilmong06의 테스트 음악 설명 " + i, s3,
+                        testFileUtils.createMockThumbnail(),  testFileUtils.createMockSong(), Arrays.asList("Rap/HipHop, JPOP, indie, etc"));
+            }
+
+            for (int i = 1; i<=30; i++) {
+                musicService.upload("tron0318의 테스트 음악 제목 " + i, "tron0318의 테스트 음악 설명 " + i, s4,
+                        testFileUtils.createMockThumbnail(),  testFileUtils.createMockSong(), Arrays.asList("Rap/HipHop, JPOP, indie, etc"));
+            }
+
+            for (int i = 1; i<=30; i++) {
+                musicService.upload("maegon의 테스트 음악 제목 " + i, "maegon의 테스트 음악 설명 " + i, s5,
                         testFileUtils.createMockThumbnail(),  testFileUtils.createMockSong(), Arrays.asList("Rap/HipHop, JPOP, indie, etc"));
             }
             // 게시글
