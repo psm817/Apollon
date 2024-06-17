@@ -14,9 +14,10 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional(readOnly = true)
@@ -25,9 +26,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     private static final Logger log = LoggerFactory.getLogger(CustomOAuth2UserService.class);
     private final MemberService memberService;
     private final StudioService studioService;
-
-
-
 
     @Override
     @Transactional
@@ -55,8 +53,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         Map<String, Object> attributesProperties = (Map<String, Object>) attributes.get("properties");
         String nickname = (String) attributesProperties.get("nickname");
         String providerTypeCode = "KAKAO";
-        String encryptedId = encryptProviderId(oauthId); // Generate two-digit random number
-        String username = providerTypeCode + "_" + nickname + "_" + encryptedId; // Append to username
+        String username = providerTypeCode +"_"+nickname+ "_%s".formatted(oauthId.substring(0, 2));
         String email = (String) ((Map<String, Object>) attributes.get("kakao_account")).get("email");
 
         try {
@@ -83,13 +80,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         String email = (String) response.get("email");
         String providerTypeCode = "NAVER";
 
-        String username;
-        if (oauthId != null) {
-            String encryptedId = encryptProviderId(oauthId); // Generate two-digit random number if oauthId is not null
-            username = providerTypeCode + "_" + nickname + "_" + encryptedId; // Append to username
-        } else {
-            username = providerTypeCode + "_" + nickname; // Use only nickname if oauthId is null
-        }
+        String username = providerTypeCode + "_" + nickname + "_%s".formatted(oauthId.substring(0, 2));
 
         try {
             Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
@@ -104,15 +95,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             throw new OAuth2AuthenticationException("Email already exists");
         }
     }
-
     private OAuth2User processGoogleLogin(OAuth2User oAuth2User) {
         Map<String, Object> attributes = oAuth2User.getAttributes();
         String oauthId = (String) attributes.get("sub");
         String nickname = (String) attributes.get("name");
         String email = (String) attributes.get("email");
         String providerTypeCode = "GOOGLE";
-        String encryptedId = encryptProviderId(oauthId); // Generate two-digit random number
-        String username = providerTypeCode + "_" + nickname + "_" + encryptedId; // Append to username
+        String username = providerTypeCode + "_"+nickname+"_%s".formatted(oauthId.substring(0, 2));
 
         try {
             Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
@@ -144,19 +133,5 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             return getUsername();
         }
     }
-
-
-    private String encryptProviderId(String providerId) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hash = md.digest(providerId.getBytes());
-            Random random = new Random();
-            return String.format("%02d", random.nextInt(100));  // 두 자리의 랜덤 숫자 생성
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("SHA-256 algorithm not found", e);
-        }
-    }
 }
-
-
 
