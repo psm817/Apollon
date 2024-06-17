@@ -19,9 +19,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -50,7 +48,9 @@ public class MusicService {
     }
 
     public String storeImg(MultipartFile profilePicture) {
+
         String uploadDir = "C:\\work\\Apollon\\src\\main\\resources\\static\\uploadFile\\uploadImgs";
+
         Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
             try {
@@ -71,7 +71,9 @@ public class MusicService {
     }
 
     public String storeMp3(MultipartFile profilePicture) {
+
         String uploadDir = "C:\\work\\Apollon\\src\\main\\resources\\static\\uploadFile\\uploadMusics";
+
         Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
             try {
@@ -152,4 +154,51 @@ public class MusicService {
     public void delete(Music music) {
         this.musicRepository.delete(music);
     }
+
+    public List<Music> getLatest4MusicByCreateDate() {
+        List<Music> latestMusic = this.musicRepository.findAllByOrderByCreateDateDesc();
+
+        if (latestMusic.size() <= 4) {
+            return latestMusic;
+        }
+
+        // createDate가 동일한 경우 랜덤으로 4개의 음악 선택
+        Collections.shuffle(latestMusic);
+        return latestMusic.subList(0, 4);
+    }
+
+    public List<Music> getTop4MusicByLikers() {
+        List<Music> allMusic = this.musicRepository.findAllByOrderByMusicLikersDesc();
+
+        if (allMusic.size() <= 4) {
+            return allMusic;
+        }
+
+        // 최대 4개의 음악을 선택하는 로직
+        List<Music> top4Music = new ArrayList<>();
+        int currentIndex = 0;
+
+        while (top4Music.size() < 4 && currentIndex < allMusic.size()) {
+            int nextIndex = currentIndex;
+
+            // 현재 musicLikers 수와 같은 음악들을 모음
+            List<Music> sameLikersMusic = new ArrayList<>();
+            int currentLikersSize = allMusic.get(currentIndex).getMusicLikers().size();
+
+            while (nextIndex < allMusic.size() && allMusic.get(nextIndex).getMusicLikers().size() == currentLikersSize) {
+                sameLikersMusic.add(allMusic.get(nextIndex));
+                nextIndex++;
+            }
+
+            // 같은 musicLikers 수를 가진 음악들을 섞어서 필요한 만큼 선택
+            Collections.shuffle(sameLikersMusic);
+            int remainingSlots = 4 - top4Music.size();
+            top4Music.addAll(sameLikersMusic.subList(0, Math.min(remainingSlots, sameLikersMusic.size())));
+
+            currentIndex = nextIndex;
+        }
+
+        return top4Music;
+    }
+
 }

@@ -2,6 +2,8 @@ package com.example.Apollon.domain.member.entity;
 
 
 import com.example.Apollon.domain.comment.entity.Comment;
+import com.example.Apollon.domain.post.entity.Post;
+import com.example.Apollon.domain.post.entity.PostComment;
 import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.global.jpa.BaseEntity;
 import jakarta.persistence.*;
@@ -54,4 +56,12 @@ public class Member extends BaseEntity {
     public void setImage(String image) {
         this.image = image;
     }
+    //커뮤니티 게시글이랑 댓글
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
+    @LazyCollection(LazyCollectionOption.EXTRA)
+    private List<Post> posts;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
+    @LazyCollection(LazyCollectionOption.EXTRA)
+    private List<PostComment> postComments;
 }

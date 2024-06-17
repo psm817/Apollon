@@ -48,12 +48,12 @@
                     <a th:if="${#authorization.expression('isAuthenticated()')}"
                        class="upstu"
                        th:href="@{|/chart/music/detail/${music.id}|}">
-                      <span th:text="${music.studio.member.username}"></span>
+                      <span th:text="${music.studio.member.nickname}"></span>
                     </a>
                     <a th:if="${#authorization.expression('isAnonymous()')}"
                        class="upstu"
                        onclick="alert('곡 정보를 확인하려면 로그인이 필요합니다.'); return false;">
-                      <span th:text="${music.studio.member.username}"></span>
+                      <span th:text="${music.studio.member.nickname}"></span>
                     </a>
                   </div>
                   <!-- 좋아요 개수 표시 -->

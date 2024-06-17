@@ -1,0 +1,47 @@
+.profile-content {
+margin-top:100px;
+
+
+        }
+
+        .profile-content button {
+
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+
+            font-size: 20px;
+            font-weight: 900;
+
+        }
+
+        .profile-content button:hover {
+            opacity: 0.8;
+        }
+
+        .profile-content h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .profile-content ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .profile-content ul li {
+            margin-bottom: 10px;
+        }
+
+        .profile-content a {
+            color: #007bff;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        .profile-content a:hover {
+            text-decoration: underline;
+        }

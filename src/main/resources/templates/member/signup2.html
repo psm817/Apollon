@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="box">
     <div class="container">
@@ -40,7 +41,9 @@
                     <div class="profile-picture-box">
                         <span>프로필 사진</span>
                         <input type="file" name="profilePicture" onchange="imagecheck()">
-
+                    </div>
+                    <div class="error-box1">
+                        <div id="profilePictureError" th:text="${profilePictureError}" class="error1"></div>
                     </div>
                     <div class="signup-btn">
                         <button type="button" onclick="if(confirm('회원 가입을 취소하시겠습니까?')) { window.location.href='/'; }">취소</button>
