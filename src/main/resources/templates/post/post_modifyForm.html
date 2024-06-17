@@ -1,5 +1,6 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content">
+    <div class="postMainContainer">
     <div class="header postHeader">
         <div class="post-logo">
             <a href="/">
@@ -13,22 +14,22 @@
                 <div class="profile-header">
                     <div class="profile-id-box">
                         <img src="/images/none.png" alt="Your Logo" class="logo">
-                        <span class="profile-id">testID</span>
+                        <span class="profile-id" th:text="${member.username}">Username</span>
                     </div>
                 </div>
                 <hr>
                 <div class="profile-stats">
                     <div class="stat">
                         <span>게시물</span>
-                        <span>0</span>
+                        <span th:text="${myPosts.size()}">0</span>
                     </div>
                     <div class="stat">
                         <span>댓글</span>
-                        <span>0</span>
+                        <span th:text="${myComments.size()}">0</span>
                     </div>
                 </div>
                 <div class="profile-footer">
-                    +프로필
+                    <a class="text" th:href="@{/post/profile}">+프로필</a>
                 </div>
             </div>
             <div class="post-category box">
@@ -130,6 +131,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </div>
 </html>

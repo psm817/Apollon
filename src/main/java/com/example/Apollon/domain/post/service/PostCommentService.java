@@ -38,4 +38,10 @@ public class PostCommentService {
     public List<PostComment> getListByPost(Post post) {
         return postCommentRepository.findByPost(post);
     }
+
+    public List<PostComment> getCommentsByMember(Member member) {
+        return postCommentRepository.findByAuthor(member);
+    }
+
+
 }

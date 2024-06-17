@@ -1,11 +1,15 @@
    /* General styles */
+   .postDetail-body {
+       margin-bottom: 20px;
+       overflow: visible; /* Remove overflow property */
+       min-height: 700px; /* Optional: Set a minimum height for the content area */
+   }
     .detailBox {
         border: 1px solid #ccc;
         border-radius: 5px;
         padding: 20px;
         margin: 20px 0;
         background-color: #f9f9f9;
-        height: 700px;
     }
 
     .detailHeader {
@@ -19,8 +23,7 @@
     .postDetail-box {
         padding: 20px;
         background-color: #fff;
-        height: 600px;
-        position: relative; /* Added */
+        position: relative;
     }
 
     .postDetail-body {
@@ -128,8 +131,6 @@
 
     .postReply-section {
         max-width: 880px;
-        height: 100px;
-        margin: 0 auto;
         padding: 20px;
         border: 1px solid #ccc;
         border-radius: 5px;
@@ -166,14 +167,7 @@
         margin-left: 10px;
     }
 
-    .postReply-list {
-        margin-top: 50px;
-        text-align: center;
-        color: #666;
-        font-size: 0.9em;
-        max-height: 100px;
-        overflow: auto;
-    }
+
 
     /* Fixed buttons at top */
     .detailButtons {
@@ -197,3 +191,34 @@
         cursor: pointer;
         margin-left: 10px;
     }
+
+        .postReply-list {
+            margin-top: 20px; /* Adjust margin as needed */
+        }
+        .postReply-list ul {
+            list-style-type: none; /* Remove default list styling */
+            padding: 0;
+        }
+        .postReply-list li {
+            margin-bottom: 15px; /* Spacing between each comment */
+            border-bottom: 1px solid #ccc; /* Horizontal line between comments */
+            padding-bottom: 10px; /* Padding bottom for each comment */
+        }
+        .postReply-list li strong {
+            display: block; /* Ensure author name is on its own line */
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .postReply-list li span {
+            color: #666; /* Color for date */
+            font-size: 0.9em;
+        }
+        .postReply-list li p {
+            margin-top: 5px; /* Space between author/date and comment content */
+            font-size: 1.1em;
+            line-height: 1.4; /* Line height for better readability */
+        }
+
+
+
+
