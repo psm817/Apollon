@@ -1,5 +1,11 @@
 <nav th:fragment="footerFragment" class="footer">
   <div class="footer_container">
+    <style>******************************************************
+      .music-player {
+        display: inline-block;
+        cursor: pointer;
+      }
+    </style>******************************************************
     <div class="footer_play_box">
       <div class="music_myPlayList_box">
         <div class="myPlayList-btn_icon">
@@ -17,10 +23,13 @@
               <i class="fa-solid fa-backward-step fa-lg"></i>
             </div>
             <!-- 재생 아이콘 -->
-            <div class="growSet playMusic_icon">
-              <i class="fa-solid fa-play fa-lg" onclick="togglePlayPause(${music.id})"></i>
-              <i class="fa-solid fa-pause fa-lg" onclick="togglePlayPause(${music.id})"></i>
-            </div>
+            <div class="music-player">******************************************************
+              <audio id="audioPlayer" controls style="display: none;">
+                <source th:src="@{${music.musicMp3}}" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
+              <img class="play-icon" src="/images/login/naverlogo2.png" alt="재생 아이콘" onclick="toggleAudio()">
+            </div>******************************************************
             <!-- 이후 곡 아이콘 -->
             <div class="growSet afterMusic_icon">
               <i class="fa-solid fa-forward-step fa-lg"></i>
@@ -347,7 +356,17 @@
             }
           });
         });
+        ******************************************************
+function toggleAudio() {
+  var audio = document.getElementById('audioPlayer');
 
+  if (audio.paused) {
+    audio.play();
+  } else {
+    audio.pause();
+  }
+}
+    ******************************************************
 
   </script>
   <!-- 재생목록 표출시 html, css로 구현 가능한데 코드가 길어져서 자바스크립트 추가 -->
