@@ -99,7 +99,6 @@ public class MemberController {
             studioService.createOrUpdate(member, 0, 1);
             playlistService.PCreateOrUpdate(member);
 
-
         } catch (IllegalStateException e) {
             model.addAttribute("signupError", "이미 중복된 이메일 또는 아이디입니다");
             return "member/signup";
