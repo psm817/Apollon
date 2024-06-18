@@ -8,13 +8,16 @@ import com.example.Apollon.domain.playlist.entity.Playlist;
 import com.example.Apollon.domain.playlist.service.PlaylistService;
 import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.domain.studio.service.StudioService;
+import com.example.Apollon.global.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,7 +33,7 @@ public class PlaylistController {
         String username = principal.getName();
         // 회원 정보 가져오기
         Member member = memberService.getMember(username);
-        Long memberId = member.getId();
+        long memberId = member.getId();
 
         // 가져온 음악 번호의 스튜디오
         Music m = musicService.getMusic(id);

@@ -90,7 +90,7 @@
         <div class="show_myPlayList_list">
           <ul>
             <!-- 타임리프를 사용하여 musicList라는 변수에 저장된 음악 데이터를 반복하여 출력 -->
-            <li sec:authorize="!isAuthenticated()" class="show_myPlayList_list-num" th:each="playlist, inerStat : ${playlist}">
+            <li sec:authorize="isAuthenticated()" class="show_myPlayList_list-num" th:each="music, inerStat : ${playlist}">
               <span class="myPlayList_number" th:text="${inerStat.index + 1}"></span>
               <div class="myPlayList_musicTitle">
                 <div class="myPlayList-thumbImg">

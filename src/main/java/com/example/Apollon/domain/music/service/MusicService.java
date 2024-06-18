@@ -7,7 +7,9 @@ import com.example.Apollon.domain.music.repository.MusicRepository;
 import com.example.Apollon.domain.playlist.entity.Playlist;
 import com.example.Apollon.domain.playlist.repository.PlaylistRepository;
 import com.example.Apollon.domain.studio.entity.Studio;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,13 +24,15 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
+@Setter
+@Getter
 @RequiredArgsConstructor
 public class MusicService {
 
     @Autowired
     private final MusicRepository musicRepository;
     private final MemberRepository memberRepository;
-    private PlaylistRepository playlistRepository;
+    private final PlaylistRepository playlistRepository;
 
     // 음악 업로드
     public void upload(String title, String content, Studio studio, MultipartFile thumbnail, MultipartFile song, List<String> genres) {
@@ -200,6 +204,10 @@ public class MusicService {
         }
 
         return top4Music;
+    }
+
+    public List<Music> getMusicByMember(Optional<Member> member) {
+        return musicRepository.findByMember(member);
     }
 
 }

@@ -43,7 +43,8 @@ public class Dev {
         // 테스트 음악 데이터 추가를 하기 전에 폴더에 쌓이는 데이터 삭제
         DataFileUtils.deleteFilesExcept("C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadImgs", "와보2.png");
         DataFileUtils.deleteFilesExcept("C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadMusics", "Zedd & Alessia Cara - Stay.mp3");
-
+        DataFileUtils.deleteFilesExcept("C:/work/Apollon/src/main/resources/static/uploadFile/uploadImgs", "와보2.png");
+        DataFileUtils.deleteFilesExcept("C:/work/Apollon/src/main/resources/static/uploadFile/uploadMusics", "Zedd & Alessia Cara - Stay.mp3");
         return args -> {
             Member m1 = memberService.signup("admin", "admin", "admin", "admin@test.com","/images/none.png");
             Member m2 = memberService.signup("5004pp", "5004pp", "5004pp", "5004pp@test.com","/images/none.png");
@@ -60,6 +61,8 @@ public class Dev {
             Playlist p1 = playlistService.PCreateOrUpdate(m1);
             Playlist p2 = playlistService.PCreateOrUpdate(m2);
             Playlist p3 = playlistService.PCreateOrUpdate(m3);
+            Playlist p4 = playlistService.PCreateOrUpdate(m4);
+            Playlist p5 = playlistService.PCreateOrUpdate(m5);
 
             commentService.create(m2, s3, "테스트입니다.1", "테스트입니다.1");
             commentService.create(m2, s3, "테스트입니다.2", "테스트입니다.2");
