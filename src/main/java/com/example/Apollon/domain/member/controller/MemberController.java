@@ -68,7 +68,7 @@ public class MemberController {
             return "member/signup2";
         }
         if (signForm.getProfilePicture() == null || signForm.getProfilePicture().isEmpty()) {
-            model.addAttribute("signupError", "프로필 사진을 첨부해주세요.");
+            model.addAttribute("profilePictureError", "(프로필 사진을 첨부해주세요.)");
             return "member/signup2";
         }
 
@@ -77,8 +77,24 @@ public class MemberController {
             String imageFileName = storeProfilePicture(signForm.profilePicture);
             // Member 객체에 이미지 경로를 저장합니다.
             Member member = memberService.signup(signForm.getUsername(), signForm.getPassword(), signForm.getNickname(), signForm.getEmail(), imageFileName);
-            emailService.send(signForm.getEmail(), "서비스 가입을 환영합니다!", "회원가입을 축하드립니다^^~!");
+            String textContent = String.format(
+                    "안녕하세요, <b>%s</b>님<br><br>"+
+                            "Apollon 사이트에 오신 것을 진심으로 환영합니다! 저희는 음악을 사랑하는 모든 분들이 함께 모여 음악을 공유하고 즐기는 공간을 만들고자 합니다.<br><br>" +
+                            "회원 가입해 주셔서 감사드립니다. Apollon에서는 여러분이 등록하신 음악이 많은 이들과 함께 소중한 경험이 될 것입니다. 우리는 음악이 인생의 일부분이며, 그 감동을 공유함으로써 새로운 모험을 시작할 수 있다고 믿습니다.<br><br>" +
+                            "Apollon에 가입하신 여러분께서는 다음과 같은 특별한 혜택을 제공받으실 수 있습니다:<br><br>" +
+                            "* 다양한 음악 장르와 아티스트들의 소식을 먼저 접하실 수 있는 기회<br>" +
+                            "* 개인화된 추천 알림을 통해 새로운 음악을 탐색할 수 있는 기회<br>" +
+                            "* Apollon 커뮤니티에서 참여하고 의견을 나눌 수 있는 기회<br><br>" +
+                            "더불어, 회원님의 참여가 Apollon 커뮤니티를 더욱 풍요롭게 만들어갈 수 있습니다. 우리는 여러분이 행복하게 음악을 즐기며, Apollon이 여러분의 음악 여정을 지원하는데 도움이 될 것이라 확신합니다.<br><br>" +
+                            "더 궁금하신 점이나 도움이 필요하신 경우 언제든지 저희에게 연락해 주세요. 저희의 서비스가 여러분께 많은 즐거움을 줄 수 있기를 바랍니다.<br><br>" +
+                            "감사합니다,<br><br>" +
+                            "Apollon 팀 드림.",
+                    signForm.getUsername()
+            );
+
+            emailService.send(signForm.getEmail(), "Apollon 사이트에 오신 것을 환영합니다!", textContent);
             studioService.createOrUpdate(member, 0, 1);
+
 
         } catch (IllegalStateException e) {
             model.addAttribute("signupError", "이미 중복된 이메일 또는 아이디입니다");
@@ -93,7 +109,7 @@ public class MemberController {
         // 이미지 저장 디렉토리 경로
 
 
-        String uploadDir = "C:\\work\\Apollon\\src\\main\\resources\\static\\images\\uploads";
+        String uploadDir = "C:\\Users\\user\\IdeaProjects\\Apollon\\src\\main\\resources\\static\\images\\uploads";
 
         // 디렉토리가 존재하지 않으면 생성합니다.
         Path uploadPath = Paths.get(uploadDir);
