@@ -5,13 +5,13 @@ import com.example.Apollon.domain.member.repository.MemberRepository;
 import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.domain.music.repository.MusicRepository;
 import com.example.Apollon.domain.playlist.entity.Playlist;
+import com.example.Apollon.domain.playlist.repository.PlaylistRepository;
 import com.example.Apollon.domain.studio.entity.Studio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,6 +28,7 @@ public class MusicService {
     @Autowired
     private final MusicRepository musicRepository;
     private final MemberRepository memberRepository;
+    private PlaylistRepository playlistRepository;
 
     // 음악 업로드
     public void upload(String title, String content, Studio studio, MultipartFile thumbnail, MultipartFile song, List<String> genres) {
