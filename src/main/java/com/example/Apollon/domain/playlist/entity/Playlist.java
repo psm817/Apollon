@@ -33,11 +33,11 @@ public class Playlist extends BaseEntity {
     private LocalDateTime modifyDate;
 
     @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<Music> musicPlayList = new ArrayList<>();
 
     public void addMusic(Music music) {
         musicPlayList.add(music);
         music.setPlaylist(this);
     }
-
 }

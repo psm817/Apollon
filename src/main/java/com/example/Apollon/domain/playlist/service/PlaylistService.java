@@ -9,6 +9,7 @@ import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.global.DataNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Service;
 
@@ -43,13 +44,7 @@ public class PlaylistService {
     }
 
     public Playlist getPlaylist(long memberId) {
-        Optional<Playlist> playlist = this.playlistRepository.findById(memberId);
-
-        if(playlist.isEmpty()) {
-            throw new DataNotFoundException("플레이 리스트를 찾을 수 없음");
-        }
-
-        return playlist.get();
+        return playlistRepository.findAllById(memberId);
     }
 
     public void savePlaylist(Playlist playlist) {

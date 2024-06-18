@@ -18,8 +18,12 @@
             </div>
             <!-- 재생 아이콘 -->
             <div class="growSet playMusic_icon">
-              <i class="fa-solid fa-play fa-lg" onclick="togglePlayPause(${music.id})"></i>
-              <i class="fa-solid fa-pause fa-lg" onclick="togglePlayPause(${music.id})"></i>
+              <audio preload="auto" id="audio" controls type="audio/mpeg">
+                <source src="@{${music.musicMp3}}">
+              </audio>
+              <span class="play" onclick="handlePlay()">
+                    <i class="material-icons fa-solid fa-play fa-lg"></i>
+                  </span>
             </div>
             <!-- 이후 곡 아이콘 -->
             <div class="growSet afterMusic_icon">
@@ -31,7 +35,9 @@
             </div>
             <!-- 반복 아이콘 -->
             <div class="growSet loopMusic_icon">
-              <i class="fa-solid fa-repeat fa-lg" onclick="toggleLoop()"></i>
+              <div class="btn-box">
+                <i class="material-icons fa-solid fa-repeat fa-lg repeat" onclick="handleRepeat()"></i>
+              </div>
             </div>
           </div>
         </div>
@@ -40,16 +46,28 @@
           <div class="musicMiddle_column">
             <!-- 곡 타임라인 -->
             <div class="music_timeLine">
-              <div class="timeLine_bar"></div>
+              <div class="timeLine_bar">
+                <div class="music-box">
+                  <!-- 곡이 재생되고 있는 타이머(?) -->
+                  <span class="current-time"></span>
+                  <input type="range" step="1" class="seekbar" value="0" min="0" max="100" oninput="handleSeekBar()">
+                  <audio class="music-element">
+                    <source src="@{${music.musicMp3}}" type="audio/mp3">
+                  </audio>
+                  <span class="duration"></span>
+                </div>
+              </div>
             </div>
           </div>
           <!-- 볼륨 -->
-          <div class="volume">
-            <div class="vol_icon">
-              <i class="fa-solid fa-volume-low fa-lg"></i>
-              <i class="fa-solid fa-volume-xmark fa-lg"></i>
-            </div>
-            <div class="volume-slider"></div>
+          <div class="volume-box">
+            <span class="volume-down"><i class="material-icons fa-solid fa-minus fa-lg"></i></span>
+            <input type="range" class="volume-range" step="1" value="80" min="0" max="100"
+                   oninput="music.volume = this.value/100">
+            <span class="volume-up"><i class="material-icons fa-solid fa-plus fa-lg"></i></span>
+          </div>
+          <div class="btn-box">
+            <i class="material-icons fa-solid fa-volume-low fa-lg volume" onclick="handleVolume()"></i>
           </div>
         </div>
         <!-- 플레이바 오른쪽 박스 -->
@@ -58,28 +76,16 @@
             <!-- 곡 정보 썸네일 이미지 -->
             <div class="info_thumbnail">
               <div class="info_info_thumbnail_frame">
-                <!-- <img th:src="@{|/file/${music.thumnailImg}|}" alt="">-->
+                <!--                 <img th:src="@{|${music.thumnailImg}}" alt="">-->
               </div>
             </div>
             <!-- 곡 정보 제목, 올린 사람 -->
             <div class="info_box">
               <div class="info_uploadUser">
-                <a href="#" th:each="music : ${playlist}" th:text="${music.user}">업로드한 사람</a>
+                <a href="#" th:each="music : ${playlist}" th:text="${music.user}"></a>
               </div>
               <div class="info_musicTitle">
-                <a href="#" th:each="music : ${playlist}" th:text="${music.title}">업로드된 곡 제목</a>
-              </div>
-            </div>
-            <!-- 재생목록 추가/삭제, 스튜디오, 좋아요 아이콘 -->
-            <div class="info_icon">
-              <div class="growSet info_library_icon">
-                <i id="toggleIcon" class="fa-solid fa-plus fa-lg"></i>
-              </div>
-              <div class="growSet info_studio_icon">
-                <i class="fa-solid fa-user fa-lg"></i>
-              </div>
-              <div class="growSet info_hit_icon">
-                <i id="toggleHit"  class="fa-solid fa-heart fa-lg"></i>
+                <a href="#" th:each="music : ${playlist}" th:text="${music.title}"></a>
               </div>
             </div>
           </div>
@@ -89,24 +95,18 @@
       <nav class="show_myPlayList" id="myPlayList">
         <div class="show_myPlayList_list">
           <ul>
-            <!-- 타임리프를 사용하여 musicList라는 변수에 저장된 음악 데이터를 반복하여 출력 -->
-            <li sec:authorize="isAuthenticated()" class="show_myPlayList_list-num" th:each="music, inerStat : ${playlist}">
-              <span class="myPlayList_number" th:text="${inerStat.index + 1}"></span>
+            <!-- 타임리프를 사용하여 memberMusic 변수에 저장된 음악 데이터를 반복하여 출력 -->
+            <li sec:authorize="isAuthenticated()" class="show_myPlayList_list-num"
+                th:each="music, iterStat : ${memberMusic}">
+              <span class="myPlayList_number" th:text="${iterStat.index + 1}"></span>
               <div class="myPlayList_musicTitle">
                 <div class="myPlayList-thumbImg">
-                  <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="사진X"></div>
-                <a class="myPlayList-musicTi" th:href="@{/music/detail/{id}(id=${music.id})}">
-                  <span th:text="${music.musicTitle}"></span>
-                </a>
-                <a class="myPlayList-upstu" th:href="@{/studio/{id}(id=${music.id})}">
-                  <span th:text="${studio.member.username}"></span>
-                </a>
-              </div>
-              <div class="music_like">
-                <span><i class="fa-regular fa-heart"></i></span>
-              </div>
-              <div class="music_del">
-                <span><i class="fa-solid fa-xmark"></i></span>
+                  <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="사진 없음">
+                </div>
+                <a class="myPlayList-musicTi" th:href="@{/music/detail/{id}(id=${music.id})}"
+                   th:text="${music.musicTitle}"></a>
+                <a class="myPlayList-upstu" th:href="@{/studio/{id}(id=${music.studio.id})}"
+                   th:text="${music.studio.member.username}"></a>
               </div>
               <div class="music_play">
                 <span><i class="fa-solid fa-play"></i></span>
@@ -124,18 +124,23 @@
   
   <!-- 재생목록 표출시 html, css로 구현 가능한데 코드가 길어져서 자바스크립트 추가 -->
   <script>
-    var isShuffle = false; // 셔플 상태를 저장하는 변수
-    var isLoop = false; // 반복 상태를 저장하는 변수
     var audio = new Audio(); // 오디오 객체 생성
     var currentTrackId = null; // 현재 재생 중인 트랙 ID
     
+    var music = document.querySelector('.music-element')
+    var playBtn = document.querySelector('.play')
+    var seekbar = document.querySelector('.seekbar')
+    var currentTime = document.querySelector('.current-time')
+    var duration = document.querySelector('.duration')
+
+  
     // 재생목록 열기/닫기
     function togglePlaylist() {
       var footerContainer = document.querySelector('.footer_container');
       var upIcon = document.querySelector('.fa-angle-up');
       var downIcon = document.querySelector('.fa-angle-down');
       var showMyPlayList = document.querySelector('.show_myPlayList');
-    
+  
       if (footerContainer.classList.contains('open')) {
         upIcon.style.display = 'block';
         downIcon.style.display = 'none';
@@ -147,62 +152,100 @@
       }
       footerContainer.classList.toggle('open');
     }
-    
+  
     // 셔플
     function toggleShuffle() {
       var shuffleIcon = document.querySelector('.fa-shuffle');
       if (!isShuffle) {
         shuffleIcon.style.color = 'orange'; // 연한 보라색으로 변경
-        // 재생목록을 무작위로 재배치하는 코드를 여기에 추가
+        shuffle(playlist);
       } else {
         shuffleIcon.style.color = 'white'; // 원래 색상으로 변경
         // 이전에 재배치된 순서로 재생되도록 하는 코드를 여기에 추가
       }
       isShuffle = !isShuffle; // 셔플 상태를 토글
     }
-    
+  
     // 반복
-    function toggleLoop() {
-      var loopIcon = document.querySelector('.fa-repeat');
-      if (!isLoop) {
-        loopIcon.style.color = 'skyblue'; // 하늘색으로 변경
-        audio.loop = true; // 오디오 반복 설정
-      } else {
-        loopIcon.style.color = 'white'; // 원래 색상으로 변경
-        audio.loop = false; // 오디오 반복 해제
-      }
-      isLoop = !isLoop; // 반복 상태를 토글
+    var repIcon = document.querySelector('.repeat')
+    function handleRepeat() {
+        if (music.loop == true) {
+            music.loop = false
+            repIcon.style.color = 'white'
+            repIcon.classList.toggle('active')
+        }
+        else {
+            music.loop = true
+            repIcon.style.color = 'skyblue'
+            repIcon.classList.toggle('active')
+        }
     }
     
-    // 페이지 로드 시 초기화
-    document.addEventListener('DOMContentLoaded', function() {
-      var playButton = document.querySelector('.play-button');
-      playButton.addEventListener('click', function() {
-        var trackId = this.dataset.trackId; // 재생할 트랙 ID 가져오기
-        togglePlayPause(trackId);
-      });
+    // 볼륨 조절
+    var volIcon = document.querySelector('.volume')
+    var volBox = document.querySelector('.volume-box')
+    var volumeRange = document.querySelector('.volume-range')
+    var volumeDown = document.querySelector('.volume-down')
+    var volumeUp = document.querySelector('.volume-up')
     
-      var shuffleButton = document.querySelector('.shuffle-button');
-      shuffleButton.addEventListener('click', toggleShuffle);
+    function handleVolume() {
+        volIcon.classList.toggle('active')
+        volBox.classList.toggle('active')
+    }
     
-      var loopButton = document.querySelector('.loop-button');
-      loopButton.addEventListener('click', toggleLoop);
-    });
-        
-        
-        // 좋아요 클릭시
-        document.addEventListener('DOMContentLoaded', function () {
-          const toggleHit = document.getElementById('toggleHit');
-        
-          toggleHit.addEventListener('click', function () {
-            if (toggleHit.style.color === 'rgb(255, 164, 179)') { // 현재 색상이 #ffa4b3인 경우
-              toggleHit.style.color = '#FFF'; // #FFF로 변경
-            } else {
-              toggleHit.style.color = '#ffa4b3'; // 그 외의 경우 #ffa4b3로 변경
-            }
-          });
+    volumeDown.addEventListener('click', handleVolumeDown);
+    volumeUp.addEventListener('click', handleVolumeUp);
+    
+    function handleVolumeDown() {
+        volumeRange.value = Number(volumeRange.value) - 20
+        music.volume = volumeRange.value / 100
+    }
+    function handleVolumeUp() {
+        volumeRange.value = Number(volumeRange.value) + 20
+        music.volume = volumeRange.value / 100
+    }
+  
+  
+    // 재생, 일시정지
+    var music = document.querySelector('.music-element')
+    var playBtn = document.querySelector('.play')
+    var seekbar = document.querySelector('.seekbar')
+    var currentTime = document.querySelector('.current-time')
+    var duration = document.querySelector('.duration')
+    
+    function handlePlay() {
+        if (music.paused) {
+            music.play();
+            playBtn.className = 'pause'
+            playBtn.innerHTML = '<i class="material-icons fa-solid fa-pause fa-lg"></i>'
+        } else {
+            music.pause();
+            playBtn.className = 'play'
+            playBtn.innerHTML = '<i class="material-icons fa-solid fa-play fa-lg"></i>'
+        }
+        music.addEventListener('ended', function () {
+            playBtn.className = 'play'
+            playBtn.innerHTML = '<i class="material-icons fa-solid fa-play fa-lg"></i>'
+            music.currentTime = 0
         });
-
-
+    }
+    
+    music.onloadeddata = function () {
+        seekbar.max = music.duration
+        var ds = parseInt(music.duration % 60)
+        var dm = parseInt((music.duration / 60) % 60)
+        duration.innerHTML = dm + ':' + ds
+    }
+    music.ontimeupdate = function () { seekbar.value = music.currentTime }
+    handleSeekBar = function () { music.currentTime = seekbar.value }
+    music.addEventListener('timeupdate', function () {
+        var cs = parseInt(music.currentTime % 60)
+        var cm = parseInt((music.currentTime / 60) % 60)
+        currentTime.innerHTML = cm + ':' + cs
+    }, false)
+    
+    // 이전곡, 이후곡
+    
+  
   </script>
 </nav>

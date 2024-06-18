@@ -14,4 +14,6 @@ import java.util.Optional;
 public interface PlaylistRepository extends JpaRepository<Playlist, Long> {
 
     Optional<Playlist> findByMember(Member member);
+
+    Playlist findAllById(long memberId);
 }

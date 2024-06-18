@@ -30,6 +30,10 @@ input: focus {
   }
 }
 
+audio{
+    display: none;
+}
+
 /* 푸터 컨테이너 커스텀 */
 .footer_container {
     margin-left: auto; margin-right: auto;
@@ -221,73 +225,143 @@ input: focus {
 
 /* 타임라인 */
 .musicMiddle_column {
-    width: 740px;
+    width: 840px;
 }
+
+.material-icons {
+    color: #FFF;
+}
+
+input[type="range"] {
+    -webkit-appearance: none !important;
+    margin: 0px;
+    padding: 0px;
+    background: #FFF;
+    height: 10px;
+    width: 650px;
+    outline: none;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 5px;
+  }
+
+  input[type="range"]::-ms-fill-lower {
+    background: #FFF;
+  }
+
+  input[type="range"]::-ms-fill-upper {
+    background: #FFF;
+  }
+
+  input[type="range"]::-moz-range-track {
+    border: none;
+    background: #FFF;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    background: #36454F;
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    box-shadow: -100vw 0 0 100vw #36454F;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    background: #36454F;
+    height: 8px;
+    width: 8px;
+    border-radius: 100%;
+  }
+
+  input[type="range"]::-ms-thumb {
+    -webkit-appearance: none !important;
+    background: #36454F;
+    height: 8px;
+    width: 8px;
+    border-radius: 100%;
+  }
 
 .music_timeLine {
     height: 20px;
-    border: 1px solid red;
     margin-top: 10px;
+    width: 840px;
+    display: flex; justify-content: center;
 }
 
 /* 볼륨 */
-.volume {
-      flex-grow: 1;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      position: relative;
-  }
-
-  .volume {
-      display: flex;
-      align-items: center;
-  }
-
-  .vol_icon i:nth-child(2) {
-      display: none;
-  }
-
-  .vol_icon i:hover .volume-slider {
-      display: block;
-  }
-
-  .volume > .vol_icon {
-      margin-left: auto; margin-right: auto;
-  }
-
-/* 볼륨 조절 바*/
-.volume-slider {
+.volume-box {
+    display: none;
     position: absolute;
-    bottom: 30px; /* 조절 바가 아이콘 위에 오도록 위치 조정 */
-    left: 50%;
+    left: 65%;
+    top: 10px;
     transform: translateX(-50%);
-    width: 10px;
-    height: 100px;
-    background-color: #ccc;
-    border-radius: 5px;
-    display: none; /* 처음에는 숨김 */
+    z-index: 1;
+    padding: 0 20px;
+
+    .volume-down {
+      position: absolute;
+      left: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #FFF;
+    }
+
+    .volume-up {
+      position: absolute;
+      right: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #FFF;
+    }
+
+    .volume-up::selection {
+      background-color: #FFF;
+    }
+
+    input[type="range"] {
+      height: 5px;
+      width: 150px;
+      margin: 0 0 15px 0;
+    }
 }
 
-.volume-slider-handle {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    translate(-50%, -50%);
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    cursor: pointer;
-    background-color: #111;
+.music-box {
+    display: flex;
+    align-items: center;
 }
+
+.current-time,
+.duration {
+    width: 60px;
+    color: #FFF;
+    text-align: center;
+    font-size: 18px;
+}
+
+.volume-box.active {
+  display: block;
+}
+
 /* 음악 플레이바 오른쪽 */
+
 .footer_play_musicInformation {
     width: 630px; height: 60px;
     margin-right: 50px;
     display:flex;
     justify-content: flex-end;
+}
+
+.btn-box {
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+
+.btn-box > .volume {
+    margin-left: 60px;
 }
 
 .footer_play_musicInfo {
@@ -327,53 +401,6 @@ input: focus {
 .info_musicTitle a {
     color: #FFF;
 }
-
-/* 플레이바 오른쪽 아이콘 */
-.info_icon {
-    width: 160px; height: 60px;
-    display: flex;
-    text-align: end;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.info_icon > .growSet {
-    display: inline-block;
-}
-
-.fa-plus {
-    transition: transform 0.3s ease-in-out;
-}
-
-.fa-plus:hover {
-    transform: scale(1.3); /* 마우스를 올렸을 때 아이콘 크기 확대 */
-}
-
-.fa-times {
-    transition: transform 0.3s ease-in-out;
-    display: none;
-}
-
-.fa-times:hover {
-     transform: scale(1.3); /* 마우스를 올렸을 때 아이콘 크기 확대 */
- }
-
-.fa-user {
-    transition: transform 0.3s ease-in-out;
-}
-
-.fa-user:hover {
-    transform: scale(1.3); /* 마우스를 올렸을 때 아이콘 크기 확대 */
-}
-
-.fa-heart {
-    transition: transform 0.3s ease-in-out;
-}
-
-.fa-heart:hover {
-    transform: scale(1.3); /* 마우스를 올렸을 때 아이콘 크기 확대 */
-}
-
 
 /* 내 재생 목록 */
 .show_myPlayList {
@@ -447,18 +474,11 @@ input: focus {
     text-overflow: ellipsis;
 }
 
-.music_like,
-.music_del,
 .music_play {
     width: 100px;
     text-align: center;
 }
 
-.music_like i {
-    color: #ffa4b3;
-}
-
-.music_del i,
 .music_play i {
     color: #FFF;
 }
