@@ -26,6 +26,12 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     private static final Logger log = LoggerFactory.getLogger(CustomOAuth2UserService.class);
     private final MemberService memberService;
     private final StudioService studioService;
+    public static String getUsernameFromEmail(String email) {
+        // 이메일 주소를 '@'로 분리
+        String[] parts = email.split("@");
+        // '@' 앞의 부분을 반환
+        return parts[0];
+    }
 
     @Override
     @Transactional
@@ -47,14 +53,16 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         return null;
     }
 
+
     private OAuth2User processKakaoLogin(OAuth2User oAuth2User) {
         String oauthId = oAuth2User.getName();
         Map<String, Object> attributes = oAuth2User.getAttributes();
         Map<String, Object> attributesProperties = (Map<String, Object>) attributes.get("properties");
         String nickname = (String) attributesProperties.get("nickname");
         String providerTypeCode = "KAKAO";
-        String username = providerTypeCode +"_"+nickname+ "_%s".formatted(oauthId.substring(0, 2));
         String email = (String) ((Map<String, Object>) attributes.get("kakao_account")).get("email");
+        String username = providerTypeCode +"_"+getUsernameFromEmail(email)+ "_%s".formatted(oauthId.substring(0, 2));
+
 
         try {
             Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
@@ -80,7 +88,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         String email = (String) response.get("email");
         String providerTypeCode = "NAVER";
 
-        String username = providerTypeCode + "_" + nickname + "_%s".formatted(oauthId.substring(0, 2));
+        String username = providerTypeCode + "_" + getUsernameFromEmail(email) + "_%s".formatted(oauthId.substring(0, 2));
 
         try {
             Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
@@ -101,7 +109,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         String nickname = (String) attributes.get("name");
         String email = (String) attributes.get("email");
         String providerTypeCode = "GOOGLE";
-        String username = providerTypeCode + "_"+nickname+"_%s".formatted(oauthId.substring(0, 2));
+        String username = providerTypeCode + "_"+getUsernameFromEmail(email)+"_%s".formatted(oauthId.substring(0, 2));
 
         try {
             Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
