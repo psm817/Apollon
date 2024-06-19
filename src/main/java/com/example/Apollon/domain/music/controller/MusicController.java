@@ -35,10 +35,9 @@ public class MusicController {
     public String getTop100Music(Model model) {
         List<Music> musicList = musicService.getTop100MusicByPlayCount();
 
-        model.addAttribute("musicList", musicList);
-        return "chart/TOP100";
+            model.addAttribute("musicList", musicList);
+            return "chart/TOP100";
     }
-
 
     // 곡 정보 상세보기
     @GetMapping("/music/detail/{id}")
