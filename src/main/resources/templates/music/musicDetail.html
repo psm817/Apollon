@@ -77,6 +77,58 @@
                 
                 <a class="btn back-btn" th:href="@{|/studio/${studio.member.username}|}" th:text="뒤로가기"></a>
               </div>
+            <div class="myMusic-box">
+                <div class="top-box">
+                    <div class="title">
+                        <span>음악 정보</span>
+                    </div>
+                    <div class="user-menu">
+                        <a th:href="@{|/studio/${studio.member.username}/reUpload/${music.id}|}" class="btn music-modify-btn"
+                           th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == 'admin' or #authentication.principal.username == studio.member.username}"
+                           th:text="수정">
+                        </a>
+
+                        <a class="btn back-btn" th:href="@{|/studio/${studio.member.username}|}" th:text="뒤로가기"></a>
+                    </div>
+                </div>
+                <div class="music-info-box">
+                    <div class="music-img-box">
+                        <img th:src="@{${music.thumbnailImg}}" alt="썸네일이미지" style="width: 260px; height: 260px;">
+                    </div>
+                    <!-- 음악 재생 -->
+                    <audio preload="auto" controls type="audio/mpeg">
+                      <source src="@{${music.musicMp3}}">
+                    </audio>
+                    <div class="music-info-box">
+                        <h2 class="info" th:text="${music.musicTitle}"></h2>
+                        <div class="info margin studio-name">
+                            <span th:text="'소속 스튜디오 : #' + ${music.studio.member.username}"></span>
+                        </div>
+                        <div class="info margin genre-box">
+                            <span th:text="'장르 : ' + ${music.genres}"></span>
+                        </div>
+                        <div class="info margin like-box">
+                            <a onclick="return confirm('음악을 추천하시겠습니까?');" class="btn like-plus-btn"
+                               th:href="@{|/chart/music/${music.id}/like|}">
+                                <span th:text="'좋아요 ' + ${#lists.size(music.musicLikers)}"></span>
+                                <i class="fa-regular fa-heart"></i>
+                            </a>
+                        </div>
+                        <div class="info margin create-box">
+                            <span th:text="'업로드 날짜 : ' + ${#temporals.format(music.createDate, 'yyyy-MM-dd')}"></span>
+                        </div>
+                    </div>
+                    <div class="music-describe-box">
+                        <div class="semi-container">
+                            <div class="title-box">
+                                <span>음악 설명</span>
+                            </div>
+                            <div class="content-box">
+                                <span th:text="${music.musicContent}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="music-info-box">
               <div class="music-img-box">

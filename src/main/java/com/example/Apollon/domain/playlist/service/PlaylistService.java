@@ -7,6 +7,7 @@ import com.example.Apollon.domain.playlist.entity.Playlist;
 import com.example.Apollon.domain.playlist.repository.PlaylistRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Service;
 

@@ -8,7 +8,6 @@ import com.example.Apollon.domain.music.service.MusicService;
 import com.example.Apollon.domain.playlist.entity.Playlist;
 import com.example.Apollon.domain.playlist.service.PlaylistService;
 import com.example.Apollon.domain.studio.service.StudioService;
-import com.example.Apollon.global.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;

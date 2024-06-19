@@ -42,7 +42,6 @@ public class Music extends BaseEntity {
     @OneToOne
     private Member member;
 
-    @Setter
     @ManyToOne
     @JoinColumn(name = "playlist_id")
     private Playlist playlist;
