@@ -2,14 +2,10 @@ package com.example.Apollon.domain.playlist.service;
 
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.repository.MemberRepository;
-import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.domain.playlist.entity.Playlist;
 import com.example.Apollon.domain.playlist.repository.PlaylistRepository;
-import com.example.Apollon.domain.studio.entity.Studio;
-import com.example.Apollon.global.DataNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -43,16 +39,14 @@ public class PlaylistService {
     }
 
     public Playlist getPlaylist(long memberId) {
-        Optional<Playlist> playlist = this.playlistRepository.findById(memberId);
-
-        if(playlist.isEmpty()) {
-            throw new DataNotFoundException("플레이 리스트를 찾을 수 없음");
-        }
-
-        return playlist.get();
+        return playlistRepository.findAllById(memberId);
     }
 
     public void savePlaylist(Playlist playlist) {
         playlistRepository.save(playlist);
+    }
+
+    public List<Playlist> getMusicByMember(Optional<Member> member) {
+        return playlistRepository.findByMember(member);
     }
 }

@@ -37,13 +37,11 @@ public class Music extends BaseEntity {
 
     private List<String> genres;
 
-
     private Long musicPlayCount = 0L;
 
     @OneToOne
     private Member member;
 
-    @Setter
     @ManyToOne
     @JoinColumn(name = "playlist_id")
     private Playlist playlist;
