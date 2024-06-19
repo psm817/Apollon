@@ -5,13 +5,15 @@ import com.example.Apollon.domain.member.repository.MemberRepository;
 import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.domain.music.repository.MusicRepository;
 import com.example.Apollon.domain.playlist.entity.Playlist;
+import com.example.Apollon.domain.playlist.repository.PlaylistRepository;
 import com.example.Apollon.domain.studio.entity.Studio;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,17 +21,18 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
+@Setter
+@Getter
 @RequiredArgsConstructor
 public class MusicService {
 
     @Autowired
     private final MusicRepository musicRepository;
     private final MemberRepository memberRepository;
+    private final PlaylistRepository playlistRepository;
 
     // 음악 업로드
     public void upload(String title, String content, Studio studio, MultipartFile thumbnail, MultipartFile song, List<String> genres) {
@@ -51,7 +54,7 @@ public class MusicService {
 
     public String storeImg(MultipartFile profilePicture) {
 
-        String uploadDir = "C:\\work\\Apollon\\src\\main\\resources\\static\\uploadFile\\uploadImgs";
+        String uploadDir = "C:\\Users\\user\\IdeaProjects\\Apollon\\src\\main\\resources\\static\\uploadFile\\uploadImgs";
 
         Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
@@ -74,7 +77,7 @@ public class MusicService {
 
     public String storeMp3(MultipartFile profilePicture) {
 
-        String uploadDir = "C:\\work\\Apollon\\src\\main\\resources\\static\\uploadFile\\uploadMusics";
+        String uploadDir = "C:\\Users\\user\\IdeaProjects\\Apollon\\src\\main\\resources\\static\\uploadFile\\uploadMusics";
 
         Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
@@ -140,6 +143,7 @@ public class MusicService {
     public List<Music> getListByStudio(Studio studio) {
         return musicRepository.findByStudio(studio);
     }
+
     public void reUpload(Music music, String content, MultipartFile thumbnail, List<String> genres) {
         if (thumbnail != null && !thumbnail.isEmpty()) {
             String thumbnailFile = storeImg(thumbnail);
@@ -155,5 +159,54 @@ public class MusicService {
 
     public void delete(Music music) {
         this.musicRepository.delete(music);
+    }
+
+    public List<Music> getLatest4MusicByCreateDate() {
+        List<Music> latestMusic = this.musicRepository.findAllByOrderByCreateDateDesc();
+
+        if (latestMusic.size() <= 4) {
+            return latestMusic;
+        }
+
+        // createDate가 동일한 경우 랜덤으로 4개의 음악 선택
+        Collections.shuffle(latestMusic);
+        return latestMusic.subList(0, 4);
+    }
+
+    public List<Music> getTop4MusicByLikers() {
+        List<Music> allMusic = this.musicRepository.findAllByOrderByMusicLikersDesc();
+
+        if (allMusic.size() <= 4) {
+            return allMusic;
+        }
+
+        // 최대 4개의 음악을 선택하는 로직
+        List<Music> top4Music = new ArrayList<>();
+        int currentIndex = 0;
+
+        while (top4Music.size() < 4 && currentIndex < allMusic.size()) {
+            int nextIndex = currentIndex;
+
+            // 현재 musicLikers 수와 같은 음악들을 모음
+            List<Music> sameLikersMusic = new ArrayList<>();
+            int currentLikersSize = allMusic.get(currentIndex).getMusicLikers().size();
+
+            while (nextIndex < allMusic.size() && allMusic.get(nextIndex).getMusicLikers().size() == currentLikersSize) {
+                sameLikersMusic.add(allMusic.get(nextIndex));
+                nextIndex++;
+            }
+
+            // 같은 musicLikers 수를 가진 음악들을 섞어서 필요한 만큼 선택
+            Collections.shuffle(sameLikersMusic);
+            int remainingSlots = 4 - top4Music.size();
+            top4Music.addAll(sameLikersMusic.subList(0, Math.min(remainingSlots, sameLikersMusic.size())));
+
+            currentIndex = nextIndex;
+        }
+
+        return top4Music;
+    }
+    public List<Music> searchMusic(String keyword) {
+        return musicRepository.findByMusicTitleContainingIgnoreCase(keyword);
     }
 }

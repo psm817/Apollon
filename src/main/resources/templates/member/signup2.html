@@ -14,9 +14,7 @@
                             <input type="text" id="username" maxlength="20" name="username" placeholder="ID를 입력하세요.">
                             <!-- Add a button to check for duplicate username -->
                             <button type="button" onclick="validateForm()">중복확인</button>
-                            <div class="error-box">
-                                <div id="signupError" th:text="${signupError}" class="error"></div>
-                            </div>
+                            <div id="signupError" th:text="${signupError}" class="error"></div>
                         </div>
                     </div>
                     <div class="password-box">
@@ -41,8 +39,6 @@
                     <div class="profile-picture-box">
                         <span>프로필 사진</span>
                         <input type="file" name="profilePicture" onchange="imagecheck()">
-                    </div>
-                    <div class="error-box1">
                         <div id="profilePictureError" th:text="${profilePictureError}" class="error1"></div>
                     </div>
                     <div class="signup-btn">

@@ -48,12 +48,12 @@
                     <a th:if="${#authorization.expression('isAuthenticated()')}"
                        class="upstu"
                        th:href="@{|/chart/music/detail/${music.id}|}">
-                      <span th:text="${music.studio.member.username}"></span>
+                      <span th:text="${music.studio.member.nickname}"></span>
                     </a>
                     <a th:if="${#authorization.expression('isAnonymous()')}"
                        class="upstu"
                        onclick="alert('곡 정보를 확인하려면 로그인이 필요합니다.'); return false;">
-                      <span th:text="${music.studio.member.username}"></span>
+                      <span th:text="${music.studio.member.nickname}"></span>
                     </a>
                   </div>
                   <!-- 좋아요 개수 표시 -->
@@ -62,8 +62,8 @@
                     <span th:text="${#lists.size(music.musicLikers)}"></span>
                   </div>
                   <!-- 재생목록에 추가 -->
-                  <div class="music_imp">
-                    <form id="musicForm" onsubmit="addSongToPlaylist(event, ${music.id}); return false;">
+                  <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
                       <input type="hidden" name="impMusicPlaylist" th:value="${music.id}" />
                       <button type="submit" class="plus-icon" th:if="${#authorization.expression('isAuthenticated()')}">
                         <i class="fa-solid fa-plus"></i>
@@ -84,29 +84,6 @@
     
   </div>
   <script>
-    //재생목록에 추가
-        function addSongToPlaylist(event, musicId) {
-          event.preventDefault(); // 폼의 기본 동작을 막습니다.
-    
-          const formData = new FormData();
-          formData.append('impMusicPlaylist', musicId);
-    
-          fetch('/{username}/playlist', {
-            method: 'POST',
-            body: formData
-          })
-          .then(response => {
-            if (response.ok) {
-              alert('곡이 재생목록에 추가되었습니다!');
-            } else {
-              alert('곡을 재생목록에 추가하는데 실패했습니다.');
-            }
-          })
-          .catch(error => {
-            console.error('오류 발생:', error);
-            alert('오류가 발생했습니다.');
-          });
-        }
   </script>
 
 </html>

@@ -30,6 +30,7 @@ input: focus {
 .mainPage_container {
     /* footer에 가려지지 않기 위함 */
     height: calc(100vh - 50px);
+    overflow: auto;
 }
 
 .mainPage_slide_container {
@@ -124,6 +125,7 @@ input: focus {
     font-weight: 600;
 }
 
+/* 최신음악, 추천음악 */
 .block_track_section {
     display: flex;
     height: 250px;
@@ -135,9 +137,59 @@ input: focus {
     background-color: rgba(221, 153, 221, 0.2);
 }
 
-.block_track > a {
-    width: 235px; height: 100%;
-    display: inline-block;
+.block_track_box-2 {
+    margin-top: 20px;
+}
+
+.block_track_section > .block_track {
+    border: 0.5px solid #c9c9c9;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.block_track_section > .block_track:hover > img {
+    transform: scale(1.12);
+}
+
+.block_track_section > .block_track:hover > .background {
+    opacity: 1; visibility: visible;
+}
+
+.block_track_section > .block_track > img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: 0.3s;
+}
+
+/* 이미지 위에 검은바탕 처리 */
+.block_track_section > .block_track > .background {
+    background-color: rgba(38, 8, 64, 0.7);
+    width: 100%; height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+    opacity: 0; visibility: hidden;
+    /* display: none; */
+    transition: 0.3s;
+    display: flex; justify-content: center; align-items: center;
+}
+
+.block_track_section > .block_track > .another-color {
+    background-color: rgba(33, 84, 19, 0.7);
+}
+
+.block_track_section > .block_track > .background > .btn-box > a {
+    cursor: pointer;
+    display: block;
+}
+
+.block_track_section > .block_track > .background > .btn-box {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
+    padding-left: 10px; padding-right: 10px;
+    padding-top: 4px; padding-bottom: 4px;
+    color: #fff;
+    text-align: center;
 }
 
 /* 사이드 */

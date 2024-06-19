@@ -1,6 +1,7 @@
 package com.example.Apollon.global.security;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.service.MemberService;
+import com.example.Apollon.domain.playlist.service.PlaylistService;
 import com.example.Apollon.domain.studio.service.StudioService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -26,6 +27,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     private static final Logger log = LoggerFactory.getLogger(CustomOAuth2UserService.class);
     private final MemberService memberService;
     private final StudioService studioService;
+    private final PlaylistService playlistService;
+    public static String getUsernameFromEmail(String email) {
+        // 이메일 주소를 '@'로 분리
+        String[] parts = email.split("@");
+        // '@' 앞의 부분을 반환
+        return parts[0];
+    }
 
     @Override
     @Transactional
@@ -47,14 +55,16 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         return null;
     }
 
+
     private OAuth2User processKakaoLogin(OAuth2User oAuth2User) {
         String oauthId = oAuth2User.getName();
         Map<String, Object> attributes = oAuth2User.getAttributes();
         Map<String, Object> attributesProperties = (Map<String, Object>) attributes.get("properties");
         String nickname = (String) attributesProperties.get("nickname");
         String providerTypeCode = "KAKAO";
-        String username = providerTypeCode + "__%s".formatted(oauthId);
         String email = (String) ((Map<String, Object>) attributes.get("kakao_account")).get("email");
+        String username = providerTypeCode +"_"+getUsernameFromEmail(email)+ "_%s".formatted(oauthId.substring(0, 2));
+
 
         try {
             Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
@@ -62,6 +72,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
             // 스튜디오 자동 생성 또는 업데이트
             this.studioService.createOrUpdate(member, 0, 1);
+            // 플레이리스트 자동 생성 또는 업데이트
+            this.playlistService.PCreateOrUpdate(member);
 
             return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
         } catch (IllegalStateException e) {
@@ -71,13 +83,16 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     }
 
     private OAuth2User processNaverLogin(OAuth2User oAuth2User) {
-        String oauthId = oAuth2User.getAttribute("id");
         Map<String, Object> attributes = oAuth2User.getAttributes();
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+
+        // 네이버 OAuth2 응답에서 사용자 ID는 "id" 필드에 있습니다.
+        String oauthId = (String) response.get("id");
         String nickname = (String) response.get("nickname");
         String email = (String) response.get("email");
         String providerTypeCode = "NAVER";
-        String username = providerTypeCode + "__%s".formatted(oauthId);
+
+        String username = providerTypeCode + "_" + getUsernameFromEmail(email) + "_%s".formatted(oauthId.substring(0, 2));
 
         try {
             Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
@@ -85,6 +100,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
             // 스튜디오 자동 생성
             this.studioService.createOrUpdate(member, 0, 1);
+            // 플레이리스트 자동 생성 또는 업데이트
+            this.playlistService.PCreateOrUpdate(member);
 
             return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
         } catch (IllegalStateException e) {
@@ -92,14 +109,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             throw new OAuth2AuthenticationException("Email already exists");
         }
     }
-
     private OAuth2User processGoogleLogin(OAuth2User oAuth2User) {
         Map<String, Object> attributes = oAuth2User.getAttributes();
         String oauthId = (String) attributes.get("sub");
         String nickname = (String) attributes.get("name");
         String email = (String) attributes.get("email");
         String providerTypeCode = "GOOGLE";
-        String username = providerTypeCode + "__%s".formatted(oauthId);
+        String username = providerTypeCode + "_"+getUsernameFromEmail(email)+"_%s".formatted(oauthId.substring(0, 2));
 
         try {
             Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname, email);
@@ -107,6 +123,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
             // 스튜디오 자동 생성
             this.studioService.createOrUpdate(member, 0, 1);
+            // 플레이리스트 자동 생성 또는 업데이트
+            this.playlistService.PCreateOrUpdate(member);
 
             return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
         } catch (IllegalStateException e) {

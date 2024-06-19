@@ -140,7 +140,6 @@ input: focus {
 
 /* 목록 */
 .TOP100_list {
-    overflow-y: auto;
     height: 100%;
 }
 
@@ -214,10 +213,6 @@ input: focus {
 .TOP100_list > ul > li .music_imp i,
 .TOP100_list > ul > li .music_p i {
     color: #000;
-}
-
-.music_imp > button {
-    border: 1px solid red;
 }
 
 .fa-plus {
