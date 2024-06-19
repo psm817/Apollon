@@ -1,132 +1,132 @@
 <html layout:decorate="~{layout}">
-  <div layout:fragment="content">
-    <div class="mainPage_container">
-      <div class="mainPage_slide_container">
-        <div class="banner_inner_section">
-          <div class="banner_inner_list">
-            <!-- 슬라이드 페이지들 -->
-            <div class="inner">
-              <a href="https://wdjfest.com/" target="_blank">
-                <img th:src="@{/images/slide_img/banner-festival.png}" alt=""></a>
-            </div>
-            <div class="inner">
-              <a href="https://www.waterbombfestival.com/" target="_blank">
-                <img th:src="@{/images/slide_img/banner-waterbomb.png}" alt=""></a>
-            </div>
-            <div class="inner">
-              <a href="#" target="_blank">
-                <img th:src="@{/images/slide_img/banner-yanado.png}" alt=""></a>
-            </div>
-            <div class="inner">
-              <a href="#" target="_blank">
-                <img th:src="@{/images/slide_img/banner-beachParty.png}" alt=""></a>
-            </div>
-            <div class="inner">
-              <a href="#" target="_blank">
-                <img th:src="@{/images/slide_img/banner-employee.png}" alt=""></a>
-            </div>
-            <div class="inner">
-              <a href="#" target="_blank">
-                <img th:src="@{/images/slide_img/banner-jazzConcert.png}" alt=""></a>
-            </div>
-            <div class="inner">
-              <a href="#" target="_blank">
-                <img th:src="@{/images/slide_img/banner-musical.png}" alt=""></a>
-            </div>
+<div layout:fragment="content">
+  <div class="mainPage_container">
+    <div class="mainPage_slide_container">
+      <div class="banner_inner_section">
+        <div class="banner_inner_list">
+          <!-- 슬라이드 페이지들 -->
+          <div class="inner">
+            <a href="https://wdjfest.com/" target="_blank">
+              <img th:src="@{/images/slide_img/banner-festival.png}" alt=""></a>
           </div>
-          <!-- 슬라이드 버튼 -->
-          <div class="slide_button">
-            <button class="left_btn">&lt;</button>
-            <button class="right_btn">&gt;</button>
+          <div class="inner">
+            <a href="https://www.waterbombfestival.com/" target="_blank">
+              <img th:src="@{/images/slide_img/banner-waterbomb.png}" alt=""></a>
           </div>
+          <div class="inner">
+            <a href="#" target="_blank">
+              <img th:src="@{/images/slide_img/banner-yanado.png}" alt=""></a>
+          </div>
+          <div class="inner">
+            <a href="#" target="_blank">
+              <img th:src="@{/images/slide_img/banner-beachParty.png}" alt=""></a>
+          </div>
+          <div class="inner">
+            <a href="#" target="_blank">
+              <img th:src="@{/images/slide_img/banner-employee.png}" alt=""></a>
+          </div>
+          <div class="inner">
+            <a href="#" target="_blank">
+              <img th:src="@{/images/slide_img/banner-jazzConcert.png}" alt=""></a>
+          </div>
+          <div class="inner">
+            <a href="#" target="_blank">
+              <img th:src="@{/images/slide_img/banner-musical.png}" alt=""></a>
+          </div>
+        </div>
+        <!-- 슬라이드 버튼 -->
+        <div class="slide_button">
+          <button class="left_btn">&lt;</button>
+          <button class="right_btn">&gt;</button>
         </div>
       </div>
-  <!--  블럭, 사이드 컨테이너  -->
-      <div class="mainPage_main_container">
-        <div class="mainPage_block_container">
-          <div class="block_track_box-1">
-            <div class="block_title_link">최신 음악</div>
-            <ul class="block_track_section">
-              <li class="block_track" th:each="music, iterStat : ${latest4Music}">
-                <img th:src="@{${music.thumbnailImg}}" alt="음악이미지">
-                <div class="background">
-                  <div class="btn-box">
-                    <a th:if="${#authorization.expression('isAuthenticated()')}"
-                       th:href="@{|/chart/music/detail/${music.id}|}"
-                       th:utext="'<span>' + ${music.musicTitle} + '</span><br/><br/><span>' + '⭐곡 정보 보러가기⭐' + '</span>'">>
-                    </a>
-                    <a th:if="${#authorization.expression('isAnonymous()')}"
-                       onclick="alert('곡 정보를 확인하려면 로그인이 필요합니다.'); return false;"
-                       th:utext="'<span>' + ${music.musicTitle} + '</span><br/><br/><span>' + '⭐곡 정보 보러가기⭐' + '</span>'">>
-                    </a>
-                  </div>
+    </div>
+    <!--  블럭, 사이드 컨테이너  -->
+    <div class="mainPage_main_container">
+      <div class="mainPage_block_container">
+        <div class="block_track_box-1">
+          <div class="block_title_link">최신 음악</div>
+          <ul class="block_track_section">
+            <li class="block_track" th:each="music, iterStat : ${latest4Music}">
+              <img th:src="@{${music.thumbnailImg}}" alt="음악이미지">
+              <div class="background">
+                <div class="btn-box">
+                  <a th:if="${#authorization.expression('isAuthenticated()')}"
+                     th:href="@{|/chart/music/detail/${music.id}|}"
+                     th:utext="'<span>' + ${music.musicTitle} + '</span><br/><br/><span>' + '⭐곡 정보 보러가기⭐' + '</span>'">>
+                  </a>
+                  <a th:if="${#authorization.expression('isAnonymous()')}"
+                     onclick="alert('곡 정보를 확인하려면 로그인이 필요합니다.'); return false;"
+                     th:utext="'<span>' + ${music.musicTitle} + '</span><br/><br/><span>' + '⭐곡 정보 보러가기⭐' + '</span>'">>
+                  </a>
                 </div>
-              </li>
-            </ul>
-          </div>
-          <div class="block_track_box-2">
-            <div class="block_title_link">추천 음악</div>
-            <ul class="block_track_section">
-              <li class="block_track" th:each="musicTop, iterStat : ${top4MusicByLikers}">
-                <img th:src="@{${musicTop.thumbnailImg}}" alt="음악이미지">
-                <div class="background another-color">
-                  <div class="btn-box">
-                    <a th:if="${#authorization.expression('isAuthenticated()')}"
-                       th:href="@{|/chart/music/detail/${musicTop.id}|}"
-                       th:utext="'<span>' + ${musicTop.musicTitle} + '</span><br/><br/><span>' + '⭐곡 정보 보러가기⭐' + '</span>'">>
-                    </a>
-                    <a th:if="${#authorization.expression('isAnonymous()')}"
-                       onclick="alert('곡 정보를 확인하려면 로그인이 필요합니다.'); return false;"
-                       th:utext="'<span>' + ${musicTop.musicTitle} + '</span><br/><br/><span>' + '⭐곡 정보 보러가기⭐' + '</span>'">>
-                    </a>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
+              </div>
+            </li>
+          </ul>
         </div>
-        <div class="mainPage_side_container">
-          <div class="body_side_notice">
-            <div class="side_notice">[자주 찾는 질문 TOP5❓]</div>
-            <ul class="notice_box">
-              <li th:each="post, iterStat : ${top5NoticePosts}">
-                <a th:href="@{|/post/detail/${post.id}|}"
-                   th:text="${iterStat.index + 1} + '. ' + ${post.title}"></a>
-              </li>
-            </ul>
-          </div>
-          <div class="body_side_studio">
-            <div class="side_studio">[스튜디오 TOP5👍]</div>
-            <ul class="studio_box">
-              <li th:each="studio, iterStat : ${top5Studios}">
-                <a th:href="@{|/studio/${studio.member.username}|}"
-                   th:text="${iterStat.index + 1} + '. ' + ${studio.member.nickname} + ' - 방문자수: ' + ${studio.visit}"
-                   th:if="${#authorization.expression('isAuthenticated()')}">
-                </a>
-                <a th:text="${iterStat.index + 1} + '. ' + ${studio.member.nickname} + ' - 방문자수: ' + ${studio.visit}"
-                   th:if="${#authorization.expression('isAnonymous()')}"
-                   onclick="alert('스튜디오를 방문하시려면 로그인이 필요합니다.'); return false;">
-                </a>
-              </li>
-            </ul>
-          </div>
+        <div class="block_track_box-2">
+          <div class="block_title_link">추천 음악</div>
+          <ul class="block_track_section">
+            <li class="block_track" th:each="musicTop, iterStat : ${top4MusicByLikers}">
+              <img th:src="@{${musicTop.thumbnailImg}}" alt="음악이미지">
+              <div class="background another-color">
+                <div class="btn-box">
+                  <a th:if="${#authorization.expression('isAuthenticated()')}"
+                     th:href="@{|/chart/music/detail/${musicTop.id}|}"
+                     th:utext="'<span>' + ${musicTop.musicTitle} + '</span><br/><br/><span>' + '⭐곡 정보 보러가기⭐' + '</span>'">>
+                  </a>
+                  <a th:if="${#authorization.expression('isAnonymous()')}"
+                     onclick="alert('곡 정보를 확인하려면 로그인이 필요합니다.'); return false;"
+                     th:utext="'<span>' + ${musicTop.musicTitle} + '</span><br/><br/><span>' + '⭐곡 정보 보러가기⭐' + '</span>'">>
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
-      <div class="p_container">
-        <p>
+      <div class="mainPage_side_container">
+        <div class="body_side_notice">
+          <div class="side_notice">[자주 찾는 질문 TOP5❓]</div>
+          <ul class="notice_box">
+            <li th:each="post, iterStat : ${top5NoticePosts}">
+              <a th:href="@{|/post/detail/${post.id}|}"
+                 th:text="${iterStat.index + 1} + '. ' + ${post.title}"></a>
+            </li>
+          </ul>
+        </div>
+        <div class="body_side_studio">
+          <div class="side_studio">[스튜디오 TOP5👍]</div>
+          <ul class="studio_box">
+            <li th:each="studio, iterStat : ${top5Studios}">
+              <a th:href="@{|/studio/${studio.member.username}|}"
+                 th:text="${iterStat.index + 1} + '. ' + ${studio.member.nickname} + ' - 방문자수: ' + ${studio.visit}"
+                 th:if="${#authorization.expression('isAuthenticated()')}">
+              </a>
+              <a th:text="${iterStat.index + 1} + '. ' + ${studio.member.nickname} + ' - 방문자수: ' + ${studio.visit}"
+                 th:if="${#authorization.expression('isAnonymous()')}"
+                 onclick="alert('스튜디오를 방문하시려면 로그인이 필요합니다.'); return false;">
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="p_container">
+      <p>
           <span class="p_first">
             <strong>아폴론 코리아</strong>
             대전광역시 서구 대덕대로 179 굿모닝어학원빌딩 9층(SBS컴퓨터아카데미)
           </span>
-          <span>공동 개발자 : 박상민, 박지완, 임재원, 최아정</span>
-          <br>
-          <span class="p_first">문의전화 : 0000-0000 (평일 14:00 ~ 19:00, 유료)</span>
-          <span>저녁 메뉴 추천 받아요</span>
-        </p>
-      </div>
+        <span>공동 개발자 : 박상민, 박지완, 임재원, 최아정</span>
+        <br>
+        <span class="p_first">문의전화 : 0000-0000 (평일 14:00 ~ 19:00, 유료)</span>
+        <span>저녁 메뉴 추천 받아요</span>
+      </p>
     </div>
   </div>
-  
+</div>
+
 
 </html>
 <script>
@@ -136,49 +136,49 @@
     const slides = document.querySelectorAll('.inner');
     const leftButton = document.querySelector('.left_btn');
     const rightButton = document.querySelector('.right_btn');
-    
+
     let currentIndex = 0;
     const totalSlides = slides.length;
     const slideInterval = 5000; // 5초
     let intervalId;
-  
+
     const updateSlidePosition = () => {
       const slideContainer = document.querySelector('.banner_inner_list');
       const slideWidth = slideContainer.offsetWidth;
       slideContainer.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
     };
-  
+
     const showNextSlide = () => {
       currentIndex = (currentIndex + 1) % totalSlides;
       updateSlidePosition();
     };
-  
+
     const showPrevSlide = () => {
       currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
       updateSlidePosition();
     };
-  
+
     const startAutoSlide = () => {
       intervalId = setInterval(showNextSlide, slideInterval);
     };
-  
+
     const resetAutoSlide = () => {
       clearInterval(intervalId);
       startAutoSlide();
     };
-  
+
     rightButton.addEventListener('click', () => {
       showNextSlide();
       resetAutoSlide();
     });
-  
+
     leftButton.addEventListener('click', () => {
       showPrevSlide();
       resetAutoSlide();
     });
-  
+
     // 초기 자동 슬라이드 시작
     startAutoSlide();
   });
-  
+
 </script>

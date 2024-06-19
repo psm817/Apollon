@@ -41,6 +41,19 @@ input: focus {
     left: 0; right: 0;
     transition: bottom 0.3s ease;
 }
+.music-player {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.music-player audio {
+  display: none; /* 기본 오디오 플레이어 숨기기 */
+}
+
+.music-player audio.controls {
+  display: block; /* 재생 버튼을 제외한 나머지 컨트롤 숨기기 */
+}
 
 .footer_container.open {
   bottom: -20px;
