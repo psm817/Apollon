@@ -2,13 +2,10 @@ package com.example.Apollon.domain.playlist.service;
 
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.repository.MemberRepository;
-import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.domain.playlist.entity.Playlist;
 import com.example.Apollon.domain.playlist.repository.PlaylistRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
