@@ -10,14 +10,17 @@
 /* Board type styling */
 .board-type {
     display: flex;
-    justify-content: center;
+
     align-items: center;
     margin-bottom: 20px;
+
 }
 
 .Board-type-1 {
     font-size: 1.2em;
     font-weight: bold;
+    margin-left:330px;
+
 }
 
 /* Post write box styling */

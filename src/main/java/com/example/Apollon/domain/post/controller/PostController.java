@@ -9,12 +9,14 @@ import com.example.Apollon.domain.post.entity.PostComment;
 import com.example.Apollon.domain.post.entity.PostForm;
 import com.example.Apollon.domain.post.service.PostCommentService;
 import com.example.Apollon.domain.post.service.PostService;
+import com.example.Apollon.global.DataNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,20 +40,23 @@ public class PostController {
     public String list(Model model,
                        @RequestParam(value = "page", defaultValue = "0") int page,
                        @RequestParam(value = "boardType", required = false) BoardType boardType,
-                       Principal principal) {
+                       Authentication authentication) {
 
         Page<Post> paging;
-        List<Post> noticePosts = postService.getNoticePosts(4); // Fetch up to 4 notice posts
-        Member member = memberService.getMember(principal.getName());
-        List<Post> myPosts = postService.getPostsByMember(member);
-        List<PostComment> myComments = postCommentService.getCommentsByMember(member);
+        List<Post> noticePosts = postService.getNoticePosts(4);
+        Member member = null;
+        List<Post> myPosts = new ArrayList<>();
+        List<PostComment> myComments = new ArrayList<>();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            String username = authentication.getName();
+            member = memberService.getMember(username);
+            myPosts = postService.getPostsByMember(member);
+            myComments = postCommentService.getCommentsByMember(member);
+        }
 
         if (boardType != null) {
-            if (boardType.equals(BoardType.공지)) {
-                paging = new PageImpl<>(noticePosts); // Directly use noticePosts for notice board
-            } else {
-                paging = postService.getPostsByBoardTypeExcludeNotice(page, boardType);
-            }
+            paging = postService.getPostsByBoardType(page, boardType);
         } else {
             paging = postService.getListExcludeNotice(page);
         }
@@ -61,11 +67,12 @@ public class PostController {
         model.addAttribute("myPosts", myPosts);
         model.addAttribute("myComments", myComments);
 
-        // Fetch top 10 posts excluding notice posts
+
         List<Post> topPosts = postService.getTop10Posts().stream()
                 .filter(post -> post.getBoardType() != BoardType.공지)
                 .collect(Collectors.toList());
         model.addAttribute("topPosts", topPosts);
+        model.addAttribute("boardType", boardType);
 
         return "post/post_list";
     }
@@ -85,23 +92,38 @@ public class PostController {
         Post post = postService.getPostByView(id);  // 조회수가 증가된 Post 객체 가져오기
 
         List<PostComment> comments = postCommentService.getPostCommentsByPost(id);
-        Member member = memberService.getMember(principal.getName());
-        List<Post> myPosts = postService.getPostsByMember(member);
-        List<PostComment> myComments = postCommentService.getCommentsByMember(member);
+        Member member = null;
+        List<Post> myPosts = new ArrayList<>();
+        List<PostComment> myComments = new ArrayList<>();
+
+        if (principal != null && principal.getName() != null) {
+            member = memberService.getMember(principal.getName());
+            myPosts = postService.getPostsByMember(member);
+            myComments = postCommentService.getCommentsByMember(member);
+        }
+
         model.addAttribute("member", member);
         model.addAttribute("myPosts", myPosts);
         model.addAttribute("myComments", myComments);
 
-
-
         model.addAttribute("post", post);  // 수정된 Post 객체를 모델에 추가
         model.addAttribute("comments", comments);
 
+        try {
+            Post nextPost = postService.getNextPostByBoardType(post.getId(), post.getBoardType());
+            model.addAttribute("nextPostId", nextPost.getId());
+        } catch (DataNotFoundException e) {
+            model.addAttribute("nextPostId", null); // No next post available
+        }
 
+        try {
+            Post previousPost = postService.getPreviousPostByBoardType(post.getId(), post.getBoardType());
+            model.addAttribute("previousPostId", previousPost.getId());
+        } catch (DataNotFoundException e) {
+            model.addAttribute("previousPostId", null); // No previous post available
+        }
 
         return "post/post_detail";
-
-
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -126,9 +148,14 @@ public class PostController {
                          @RequestParam(value="boardType") BoardType boardType,
                          Principal principal,Model model) {
         Member member = memberService.getMember(principal.getName());
+        List<Post> myPosts = postService.getPostsByMember(member);
+        List<PostComment> myComments = postCommentService.getCommentsByMember(member);
 
 
         postService.create(title, content, member, boardType);
+        model.addAttribute("member", member);
+        model.addAttribute("myPosts", myPosts);
+        model.addAttribute("myComments", myComments);
         return "redirect:/post/list";
     }
 
@@ -145,29 +172,38 @@ public class PostController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
     public String postModify(PostForm postForm, @PathVariable("id") Long id, Principal principal, Model model) {
+
         Post post = this.postService.getPost(id);
         if (!post.getAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
+
         Member member = memberService.getMember(principal.getName());
         List<Post> myPosts = postService.getPostsByMember(member);
         List<PostComment> myComments = postCommentService.getCommentsByMember(member);
+
+        // Fetch top 10 posts excluding notice posts
+        List<Post> topPosts = postService.getTop10Posts().stream()
+                .filter(p -> p.getBoardType() != BoardType.공지)
+                .collect(Collectors.toList());
+
         model.addAttribute("member", member);
         model.addAttribute("myPosts", myPosts);
         model.addAttribute("myComments", myComments);
-
+        model.addAttribute("topPosts", topPosts);
 
         postForm.setTitle(post.getTitle());
         postForm.setContent(post.getContent());
         model.addAttribute("post", post);
         model.addAttribute("postForm", postForm); // Ensure the PostForm is added to the model
+
         return "post/post_modifyForm";
     }
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{id}")
     public String postModify(@Valid PostForm postForm, BindingResult bindingResult,
-                                 Principal principal, @PathVariable("id") Long id) {
+                                 Principal principal, @PathVariable("id") Long id,Model model) {
 
         if (bindingResult.hasErrors()) {
             return "post/post_form";
@@ -177,6 +213,8 @@ public class PostController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
         this.postService.modify(post, postForm.getTitle(), postForm.getContent());
+
+
         return String.format("redirect:/post/detail/%s", id);
     }
 
@@ -192,7 +230,6 @@ public class PostController {
         return "redirect:/post/list";
     }
 
-
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/profile")
     public String profile(Model model, Principal principal) {
@@ -207,6 +244,17 @@ public class PostController {
 
         return "post/post_profile";
     }
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/detail/{postId}/comment/delete/{commentId}")
+    public String deleteComment(Principal principal, @PathVariable("postId") Long postId, @PathVariable("commentId") Long commentId) {
+        // Implement authorization if needed, check if the user has rights to delete this comment
+        postCommentService.delete(commentId);
+        return "redirect:/post/detail/" + postId;
+    }
+
+
+
+
 
 
 

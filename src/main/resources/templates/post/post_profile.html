@@ -1,95 +1,114 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
 <div layout:fragment="content">
-    <div class="postMainContainer">
+    <div class="postMainContainer profileMainContainer">
 
-    <div class="header postHeader">
-        <div class="post-logo">
-            <a href="/">
-                <img src="/images/ApollonLogo_dark.png" alt="Your Logo" class="logo">
-            </a>
-        </div>
-    </div>
-
-    <div class="middle">
-        <div class="container">
-            <div class="profile-card box">
-                <div class="profile-header">
-                    <div class="profile-id-box">
-                        <img src="/images/none.png" alt="Your Logo" class="logo">
-                        <span class="profile-id" th:text="${member.username}">Username</span>
-                    </div>
-                </div>
-                <hr>
-                <div class="profile-stats">
-                    <div class="stat">
-                        <span>게시물</span>
-                        <span th:text="${myPosts.size()}">0</span>
-                    </div>
-                    <div class="stat">
-                        <span>댓글</span>
-                        <span th:text="${myComments.size()}">0</span>
-                    </div>
-                </div>
-                <div class="profile-footer">
-                    <a class="text" th:href="@{/post/profile}">+프로필</a>
-                </div>
-            </div>
-
-
-        </div>
-        <div class="container">
-            <div class="profile-content">
-                <button onclick="showPosts()">게시글</button>
-                <button onclick="showComments()">댓글</button>
-
-                <div id="posts">
-
-                    <ul>
-                        <li th:each="myPosts : ${myPosts}">
-                            <a th:href="@{'/post/detail/' + ${myPosts.id}}" th:text="${myPosts.boardType}">Post Title</a>
-                            <a th:href="@{'/post/detail/' + ${myPosts.id}}" th:text="${myPosts.title}">Post Title</a>
-                            <a th:href="@{'/post/detail/' + ${myPosts.id}}" th:text="${member.username}">Post Title</a>
-                            <a th:href="@{'/post/detail/' + ${myPosts.id}}" th:text="${myPosts.createDate}">Post Title</a>
-                            <a th:href="@{'/post/detail/' + ${myPosts.id}}" th:text="${myPosts.view}">Post Title</a>
-
-                        </li>
-                    </ul>
-                </div>
-
-                <div id="comments" style="display: none;">
-
-                    <ul>
-                        <li th:each="myComments : ${myComments}">
-                            <span th:text="${myComments.content}">myComments Content</span>
-                            <a th:href="@{'/post/detail/' + ${myComments.post.id}}">View Post</a>
-                            <a th:href="@{'/post/detail/' + ${myComments.post.id}}" th:text="${myComments.post.title}"></a>
-                            <a th:href="@{'/post/detail/' + ${myComments.post.id}}" th:text="${myComments.post.createDate}"></a>
-
-
-                        </li>
-                    </ul>
-                </div>
+        <div class="header postHeader">
+            <div class="post-logo">
+                <a href="/">
+                    <img src="/images/ApollonLogo_dark.png" alt="Your Logo" class="logo">
+                </a>
             </div>
         </div>
 
+        <div class="middle">
+            <div class="container profileContainer">
+                <div class="profile-card box">
+                    <div class="profile-header">
+                        <div class="profile-id-box">
+                            <img src="/images/none.png" alt="Your Logo" class="logo">
+                            <span class="profile-id" th:text="${member.username}">Username</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span>게시물</span>
+                            <span th:text="${myPosts.size()}">0</span>
+                        </div>
+                        <div class="stat">
+                            <span>댓글</span>
+                            <span th:text="${myComments.size()}">0</span>
+                        </div>
+                    </div>
+                    <div class="profile-footer">
+                        <a th:href="@{/post/profile}">+프로필</a>
+                    </div>
+                </div>
+            </div>
+            <div class="container profileContainer">
+                <div class="profile-content">
+                    <button id="postsButton" data-section="posts" onclick="showPosts()">게시글</button>
+                    <span th:text="${myPosts.size()}">0</span>
+                    <button id="commentsButton" data-section="comments" onclick="showComments()">댓글</button>
+                    <span th:text="${myComments.size()}">0</span>
+
+                    <div class="profileCategory-box box">
+                        <span id="categoryLabel">게시판</span>
+                        <span class="title-header">제목</span>
+                        <span class="title-header2">작성자</span>
+                        <span>작성일</span>
+                        <span>조회</span>
+                    </div>
+                    <hr>
+                    <div id="posts">
+                        <ul>
+                            <li th:each="myPosts : ${myPosts}">
+                                <a th:href="@{'/post/detail/' + ${myPosts.id}}" th:text="${myPosts.boardType}">Post Title</a>
+                                <a th:href="@{'/post/detail/' + ${myPosts.id}}" th:text="${myPosts.title}">Post Title</a>
+                                <a th:href="@{'/post/detail/' + ${myPosts.id}}" th:text="${member.username}">Post Title</a>
+                                <a th:href="@{'/post/detail/' + ${myPosts.id}}" th:text="${#temporals.format(myPosts.createDate, 'yyyy-MM-dd')}">Post Title</a>
+                                <a th:href="@{'/post/detail/' + ${myPosts.id}}" th:text="${myPosts.view}">Post Title</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="comments" style="display: none;">
+                        <ul>
+                            <li th:each="myComments : ${myComments}">
+                                <a th:href="@{'/post/detail/' + ${myComments.post.id}}" th:text="${myComments.post.title}"> </a>
+                                <a th:href="@{'/post/detail/' + ${myComments.post.id}}" th:text="${myComments.post.author.nickname}"></a>
+                                <a th:href="@{'/post/detail/' + ${myComments.post.id}}" th:text="${myComments.content}"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="container">
-
-        </div>
-    </div>
 
     </div>
-
+</div>
 </html>
 <script th:inline="javascript">
     function showPosts() {
-        document.getElementById('posts').style.display = 'block';
-        document.getElementById('comments').style.display = 'none';
-    }
+    document.getElementById('posts').style.display = 'block';
+    document.getElementById('comments').style.display = 'none';
+    document.getElementById('postsButton').classList.add('active');
+    document.getElementById('commentsButton').classList.remove('active');
+    document.getElementById('categoryLabel').textContent = '게시판';
+    document.querySelector('.title-header').textContent = '제목';
+    document.querySelector('.title-header2').textContent = '작성자';
 
-    function showComments() {
-        document.getElementById('posts').style.display = 'none';
-        document.getElementById('comments').style.display = 'block';
-    }
+    // 게시판 항목의 날짜와 조회수를 보이기
+    var categoryItems = document.querySelectorAll('.profileCategory-box span:nth-child(4), .profileCategory-box span:nth-child(5)');
+    categoryItems.forEach(function(item) {
+        item.style.display = 'inline'; // 혹은 원래의 display 속성 값으로 복원
+    });
+}
+
+function showComments() {
+    document.getElementById('posts').style.display = 'none';
+    document.getElementById('comments').style.display = 'block';
+    document.getElementById('postsButton').classList.remove('active');
+    document.getElementById('commentsButton').classList.add('active');
+    document.getElementById('categoryLabel').textContent = '제목';
+    document.querySelector('.title-header').textContent = '작성자';
+    document.querySelector('.title-header2').textContent = '나의댓글';
+
+    // 댓글 항목의 날짜와 조회수를 숨기기
+    var categoryItems = document.querySelectorAll('.profileCategory-box span:nth-child(4), .profileCategory-box span:nth-child(5)');
+    categoryItems.forEach(function(item) {
+        item.style.display = 'none';
+    });
+}
+
 </script>

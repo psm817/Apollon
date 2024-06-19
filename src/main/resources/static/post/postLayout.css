@@ -144,8 +144,8 @@ hr {
 }
 
 .profile-footer {
-  font-size: 12px;
-  color: #000;
+  font-size: 16px;
+  color: black;
   cursor: pointer;
   margin-left: auto;
   font-weight: bold;
@@ -213,6 +213,7 @@ hr {
   text-align: center;
   font-size: 20px;
   font-weight: bold;
+  margin-top:50px;
 }
 
 .todayHotPost-body {
@@ -245,4 +246,5 @@ hr {
 .todayHotPost-title {
   width: 300px;
   text-align: center;
+
 }
