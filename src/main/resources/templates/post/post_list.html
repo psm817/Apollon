@@ -2,159 +2,188 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content">
     <div class="postMainContainer">
-    <div class="header postHeader">
-        <div class="post-logo">
-            <a href="/">
-                <img src="/images/ApollonLogo_dark.png" alt="Your Logo" class="logo">
-            </a>
-        </div>
-    </div>
-    <div class="middle">
-        <div class="container">
-            <div class="profile-card box">
-                <div class="profile-header">
-                    <div class="profile-id-box">
-                        <img src="/images/none.png" alt="Your Logo" class="logo">
-                        <span class="profile-id" th:text="${member.username}">Username</span>
-                    </div>
-                </div>
-                <hr>
-                <div class="profile-stats">
-                    <div class="stat">
-                        <span>게시물</span>
-                        <span th:text="${myPosts.size()}">0</span>
-                    </div>
-                    <div class="stat">
-                        <span>댓글</span>
-                        <span th:text="${myComments.size()}">0</span>
-                    </div>
-                </div>
-                <div class="profile-footer">
-                    <a class="text" th:href="@{/post/profile}">+프로필</a>
-                </div>
-            </div>
-            <div class="post-category box">
-                <hr>
-                <div class="board-title">====== 게시판 ======</div>
-                <ul class="board-list">
-                    <li class="board-item">
-                        <span class="icon">📋</span>
-                        <a class="text" th:href="@{/post/list}">전체 게시판</a>
-                    </li>
-                    <li class="board-item">
-                        <span class="icon">❗</span>
-                        <a class="text" th:href="@{/post/list?boardType=공지}">공지 게시판</a>
-                    </li>
-                    <li class="board-item">
-                        <span class="icon">✂️</span>
-                        <a class="text" th:href="@{/post/list?boardType=자유}">자유 게시판</a>
-                    </li>
-                </ul>
+        <div class="header postHeader">
+            <div class="post-logo">
+                <a href="/">
+                    <img src="/images/ApollonLogo_dark.png" alt="Your Logo" class="logo">
+                </a>
             </div>
         </div>
-        <div class="container">
-            <!-- 공지사항 섹션 -->
-            <div class="notice-box box">
-                <div class="notice-header">
-                    <span>공지사항</span>
-                </div>
-                <div class="notice-body">
-                    <div class="post-item" th:each="post, loop : ${notices}">
-                        <div class="notice-item">
-                            <span>공지</span>
+        <div class="middle">
+            <div class="container">
+                <div class="profile-card box" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <!-- Profile card content for authenticated users -->
+                    <div class="profile-header">
+                        <div class="profile-id-box">
+                            <img src="/images/none.png" alt="Your Logo" class="logo">
+                            <span class="profile-id" th:text="${member.username}">Username</span>
                         </div>
-                        <div class="post-title">
-                            <a th:text="${post.title}" th:href="@{|/post/detail/${post.id}|}"></a>
+                    </div>
+                    <hr>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span>게시물</span>
+                            <span th:text="${myPosts.size()}">0</span>
+                        </div>
+                        <div class="stat">
+                            <span>댓글</span>
+                            <span th:text="${myComments.size()}">0</span>
+                        </div>
+                    </div>
+                    <div class="profile-footer">
+                        <a th:href="@{/post/profile}">+프로필</a>
+                    </div>
+                </div>
+                <div class="profile-card box" th:unless="${#authorization.expression('isAuthenticated()')}">
+                    <!-- Profile card content for non-authenticated users -->
+                    <div class="profile-header">
+                        <div class="profile-id-box">
+                        </div>
+                    </div>
+
+                    <div style="display:block;" class="profile-stats">
+                        <div style="margin-left:5px; margin-top:15px; border: 1px solid black; padding:20px; border-radius: 8px;"    class="profile-footer">
+                            <a th:href="@{/member/login}">로그인하기</a> <!-- Link to login page for non-authenticated users -->
+                        </div>
+                    </div>
+
+                </div>
+                <div class="post-category box">
+                    <hr>
+                    <div class="board-title">====== 게시판 ======</div>
+                    <ul class="board-list">
+                        <li class="board-item">
+                            <span class="icon">📋</span>
+                            <a class="text" th:href="@{/post/list}">전체 게시판</a>
+                        </li>
+                        <li class="board-item">
+                            <span class="icon">❗</span>
+                            <a class="text" th:href="@{/post/list?boardType=공지}">공지 게시판</a>
+                        </li>
+                        <li class="board-item">
+                            <span class="icon">✂️</span>
+                            <a class="text" th:href="@{/post/list?boardType=자유}">자유 게시판</a>
+                        </li>
+                        <li class="board-item">
+                            <span class="icon">👤️</span>
+                            <a class="text" th:href="@{/post/list?boardType=친목}">친목 게시판</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="container">
+                <!-- 공지사항 섹션 -->
+                <div class="notice-box box">
+                    <div class="notice-header">
+                        <span>공지사항</span>
+                    </div>
+                    <div class="notice-body">
+                        <div class="post-item" th:each="post, loop : ${notices}">
+                            <div class="notice-item">
+                                <span>공지</span>
+                            </div>
+                            <div class="post-title">
+                                <a th:text="${post.title}" th:href="@{|/post/detail/${post.id}|}"></a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- 일반 게시글 섹션 -->
-            <div class="category-box box">
-                <span>게시판</span>
-                <span>제목</span>
-                <span>작성자</span>
-                <span>작성일</span>
-                <span>조회</span>
-            </div>
-            <div class="postList-box box">
-                <div class="postbox-body">
-                    <div th:each="post, loop : ${paging.content}">
-                        <div class="post-item">
+                <!-- 일반 게시글 섹션 -->
+                <div class="category-box box">
+                    <span>게시판</span>
+                    <span>제목</span>
+                    <span>작성자</span>
+                    <span>작성일</span>
+                    <span>조회</span>
+                </div>
+                <div class="postList-box box">
+                    <div class="postbox-body">
+                        <div th:each="post, loop : ${paging.content}">
+                            <div class="post-item">
                             <span>
                                 <a th:text="${post.boardType}" th:href="@{|/post/detail/${post.id}|}"></a>
                             </span>
-                            <div class="post-title">
-                                <a th:text="${post.title}" th:href="@{|/post/detail/${post.id}|}"></a>
-                                <div class="comment-count"
-                                     th:if="${#lists.size(post.postCommentList) > 0}"
-                                     th:text="' (' + ${#lists.size(post.postCommentList)} + ')'"></div>
-                            </div>
-                            <div class="post-writer">
-                                <a th:text="${post.author.nickname}" th:href="@{|/post/detail/${post.id}|}"></a>
-                            </div>
-                            <div class="post-createDate">
-                                <a th:text="${#temporals.format(post.createDate, 'yyyy-MM-dd')}" th:href="@{|/post/detail/${post.id}|}"></a>
-                            </div>
-                            <div class="post-hit">
-                                <a th:text="${post.view}" th:href="@{|/post/detail/${post.id}|}"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="postList-footer">
-                    <div class="paging">
-                        <!-- 페이징처리 시작 -->
-                        <div th:if="${!paging.isEmpty()}">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
-                                    <a class="page-link" th:href="@{|?page=${paging.number-1}|}">
-                                        <span>이전</span>
-                                    </a>
-                                </li>
-                                <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
-                                    th:if="${page >= paging.number-5 and page <= paging.number+5}"
-                                    th:classappend="${page == paging.number} ? 'active'" class="page-item">
-                                    <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
-                                </li>
-                                <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
-                                    <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
-                                        <span>다음</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- 페이징처리 끝 -->
-                        <div th:if="${paging.isEmpty()}">
-                            <div class="alert alert-warning" role="alert">
-                                해당 페이지에는 게시글이 없습니다.
+                                <div class="post-title">
+                                    <a th:text="${post.title}" th:href="@{|/post/detail/${post.id}|}"></a>
+                                    <div class="comment-count"
+                                         th:if="${#lists.size(post.postCommentList) > 0}"
+                                         th:text="' (' + ${#lists.size(post.postCommentList)} + ')'"></div>
+                                </div>
+                                <div class="post-writer">
+                                    <a th:text="${post.author.nickname}" th:href="@{|/post/detail/${post.id}|}"></a>
+                                </div>
+                                <div class="post-createDate">
+                                    <a th:text="${#temporals.format(post.createDate, 'yyyy-MM-dd')}" th:href="@{|/post/detail/${post.id}|}"></a>
+                                </div>
+                                <div class="post-hit">
+                                    <a th:text="${post.view}" th:href="@{|/post/detail/${post.id}|}"></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="postList-footer2">
-                    <button onclick="location.href='/post/write'" class="postWriteButton">글 작성하기</button>
+                    <div class="postList-footer">
+                        <div class="paging">
+                            <!-- 페이징처리 시작 -->
+                            <div th:if="${!paging.isEmpty()}">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                                        <a class="page-link" th:if="${paging.hasPrevious}"
+                                           th:href="@{|/post/list?page=${paging.number - 1}${boardType != null ? '&boardType=' + boardType : ''}|}">
+                                            <span>이전</span>
+                                        </a>
+                                        <a class="page-link" th:if="${!paging.hasPrevious}">
+                                            <span>이전</span>
+                                        </a>
+                                    </li>
+                                    <li th:each="page: ${#numbers.sequence(0, paging.totalPages - 1)}"
+                                        th:if="${page >= paging.number - 5 and page <= paging.number + 5}"
+                                        th:classappend="${page == paging.number} ? 'active' : ''" class="page-item">
+                                        <a th:text="${page}"
+                                           class="page-link"
+                                           th:href="@{|/post/list?page=${page}${boardType != null ? '&boardType=' + boardType : ''}|}"></a>
+                                    </li>
+                                    <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                                        <a class="page-link" th:if="${paging.hasNext}"
+                                           th:href="@{|/post/list?page=${paging.number + 1}${boardType != null ? '&boardType=' + boardType : ''}|}">
+                                            <span>다음</span>
+                                        </a>
+                                        <a class="page-link" th:if="${!paging.hasNext}">
+                                            <span>다음</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- 페이징처리 끝 -->
+                            <div th:if="${paging.isEmpty()}">
+                                <div class="alert alert-warning" role="alert">
+                                    해당 페이지에는 게시글이 없습니다.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="postList-footer2">
+                        <button onclick="location.href='/post/write'" class="postWriteButton">글 작성하기</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="box">
-                <div id="clock" class="clock1"></div>
-            </div>
-            <div class="todayHotPost-box box">
-                <div class="todayHotPost-header">
-                    <span>오늘의 TOP10</span>
+            <div class="container">
+                <div class="box">
+                    <div id="clock" class="clock1"></div>
                 </div>
-                <div class="todayHotPost-body">
-                    <div class="todayHotPost-item" th:each="post, iterStat : ${topPosts}">
-                        <span th:text="${iterStat.count}"></span>
-                        <a class="todayHotPost-title" th:text="${post.title}" th:href="@{|/post/detail/${post.id}|}"></a>
+                <div class="todayHotPost-box box">
+                    <div class="todayHotPost-header">
+                        <span>오늘의 TOP10</span>
+                    </div>
+                    <div class="todayHotPost-body">
+                        <div class="todayHotPost-item" th:each="post, iterStat : ${topPosts}">
+                            <span th:text="${iterStat.count}"></span>
+                            <a class="todayHotPost-title" th:text="${post.title}" th:href="@{|/post/detail/${post.id}|}"></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 </html>
 <script>

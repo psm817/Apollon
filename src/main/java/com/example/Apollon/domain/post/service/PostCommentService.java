@@ -44,4 +44,9 @@ public class PostCommentService {
     }
 
 
+    public void delete(Long commentId) {
+        PostComment comment = postCommentRepository.findById(commentId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid comment id: " + commentId));
+        postCommentRepository.delete(comment);
+    }
 }
