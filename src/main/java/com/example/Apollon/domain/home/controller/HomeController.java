@@ -55,10 +55,10 @@ public class HomeController {
 
                 // 회원별 플레이리스트가져오기(만들고 모델링해주고 푸터에서 넣어보자)
                 Optional<Member> member = memberService.getMemberByUsername(principal.getName());
-                List<Music> memberMusic = this.musicService.getMusicByMember(member);
+                List<Playlist> playlistsMusic = this.playlistService.getMusicByMember(member);
 
                 model.addAttribute("studioActive", studioActive);
-                model.addAttribute("memberMusic", memberMusic);
+                model.addAttribute("playlistsMusic", playlistsMusic);
             }
         }
 

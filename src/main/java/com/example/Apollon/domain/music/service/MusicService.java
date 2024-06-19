@@ -206,8 +206,5 @@ public class MusicService {
         return top4Music;
     }
 
-    public List<Music> getMusicByMember(Optional<Member> member) {
-        return musicRepository.findByMember(member);
-    }
 
 }

@@ -2,6 +2,7 @@ package com.example.Apollon.domain.playlist.service;
 
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.repository.MemberRepository;
+import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.domain.playlist.entity.Playlist;
 import com.example.Apollon.domain.playlist.repository.PlaylistRepository;
 import jakarta.transaction.Transactional;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,5 +45,10 @@ public class PlaylistService {
 
     public void savePlaylist(Playlist playlist) {
         playlistRepository.save(playlist);
+    }
+
+
+    public List<Playlist> getMusicByMember(Optional<Member> member) {
+        return playlistRepository.findByMember(member);
     }
 }
