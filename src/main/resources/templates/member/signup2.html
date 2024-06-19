@@ -7,7 +7,7 @@
         </div>
         <div class="signup-form">
             <div class="input-box">
-                <form th:action="@{/member/signup2}" method="POST" enctype="multipart/form-data">
+                <form th:action="@{/member/signup2}" method="POST" onsubmit="submitWriteForm(this); return false;" enctype="multipart/form-data">
                     <div class="id-box">
                         <span class="font-weight">ID</span>
                         <div class="chk-id">
@@ -108,4 +108,57 @@
             reader.readAsDataURL(this.files[0]);
         });
     });
+
+    // 회원정보 입력 안하면 alert
+    function submitWriteForm(form) {
+        form.username.value = form.username.value.trim();
+
+        if ( form.username.value.length == 0 ) {
+            alert("ID를 입력해주세요.");
+            form.username.focus();
+            return;
+        }
+
+        form.password.value = form.password.value.trim();
+
+        if ( form.password.value.length == 0 ) {
+            alert("비밀번호를 입력해주세요.");
+            form.password.focus();
+            return;
+        }
+
+        form.password_confirm.value = form.password_confirm.value.trim();
+
+        if ( form.password_confirm.value.length == 0 ) {
+            alert("비밀번호를 확인해주세요.");
+            form.password_confirm.focus();
+            return;
+        }
+
+        form.nickname.value = form.nickname.value.trim();
+
+        if ( form.nickname.value.length == 0 ) {
+            alert("닉네임(스튜디오 이름)을 입력해주세요.");
+            form.nickname.focus();
+            return;
+        }
+
+        form.email.value = form.email.value.trim();
+
+        if ( form.email.value.length == 0 ) {
+            alert("이메일을 입력해주세요.");
+            form.email.focus();
+            return;
+        }
+
+        form.profilePicture.value = form.profilePicture.value.trim();
+
+        if ( form.profilePicture.value.length == 0 ) {
+            alert("프로필 사진을 선택해주세요.");
+            form.profilePicture.focus();
+            return;
+        }
+
+        form.submit();
+    }
 </script>

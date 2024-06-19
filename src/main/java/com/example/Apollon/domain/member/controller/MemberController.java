@@ -112,7 +112,7 @@ public class MemberController {
         // 이미지 저장 디렉토리 경로
 
 
-        String uploadDir = "C:\\Users\\user\\IdeaProjects\\Apollon\\src\\main\\resources\\static\\images\\uploads";
+        String uploadDir = "C:\\work\\Apollon\\src\\main\\resources\\static\\images\\uploads";
 
         // 디렉토리가 존재하지 않으면 생성합니다.
         Path uploadPath = Paths.get(uploadDir);
@@ -189,7 +189,7 @@ public class MemberController {
             imageFileName = storeProfilePicture(profilePicture);
         }
 
-        this.memberService.modify(member, signForm.getUsername(), signForm.getPassword(), signForm.getNickname(), signForm.getEmail(), imageFileName);
+        this.memberService.modify(member, signForm.getPassword(), signForm.getNickname(), signForm.getEmail(), imageFileName);
         this.studioService.createOrUpdate(member, studio.getVisit(), studio.getActive());
 
         return "redirect:/member/logout";

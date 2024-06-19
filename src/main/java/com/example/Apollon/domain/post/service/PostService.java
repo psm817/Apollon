@@ -117,4 +117,23 @@ public class PostService {
         return this.postRepository.findTop5ByBoardTypeOrderByViewDesc(boardType);
 
     }
+
+    public Post getNextPostByBoardType(Long currentPostId, BoardType boardType) {
+        Pageable pageable = PageRequest.of(0, 1, Sort.by(Sort.Direction.ASC, "id"));
+        List<Post> nextPosts = postRepository.findByBoardTypeAndIdGreaterThanOrderById(boardType, currentPostId, pageable).getContent();
+        if (nextPosts.isEmpty()) {
+            throw new DataNotFoundException("No next post found");
+        }
+        return nextPosts.get(0);
+    }
+
+
+    public Post getPreviousPostByBoardType(Long currentPostId, BoardType boardType) {
+        Pageable pageable = PageRequest.of(0, 1, Sort.by(Sort.Direction.DESC, "id"));
+        List<Post> previousPosts = postRepository.findByBoardTypeAndIdLessThanOrderByIdDesc(boardType, currentPostId, pageable).getContent();
+        if (previousPosts.isEmpty()) {
+            throw new DataNotFoundException("No previous post found");
+        }
+        return previousPosts.get(0);
+    }
 }

@@ -10,7 +10,8 @@
     </div>
     <div class="middle">
         <div class="container">
-            <div class="profile-card box">
+            <div class="profile-card box" th:if="${#authorization.expression('isAuthenticated()')}">
+                <!-- Profile card content for authenticated users -->
                 <div class="profile-header">
                     <div class="profile-id-box">
                         <img src="/images/none.png" alt="Your Logo" class="logo">
@@ -29,26 +30,42 @@
                     </div>
                 </div>
                 <div class="profile-footer">
-                    <a class="text" th:href="@{/post/profile}">+프로필</a>
+                    <a th:href="@{/post/profile}">+프로필</a>
                 </div>
+            </div>
+            <div class="profile-card box" th:unless="${#authorization.expression('isAuthenticated()')}">
+                <!-- Profile card content for non-authenticated users -->
+                <div class="profile-header">
+                    <div class="profile-id-box">
+                    </div>
+                </div>
+
+                <div style="display:block;" class="profile-stats">
+                    <div style="margin-left:5px; margin-top:15px; border: 1px solid black; padding:20px; border-radius: 8px;"    class="profile-footer">
+                        <a th:href="@{/member/login}">로그인하기</a> <!-- Link to login page for non-authenticated users -->
+                    </div>
+                </div>
+
             </div>
             <div class="post-category box">
                 <hr>
-
                 <div class="board-title">====== 게시판 ======</div>
-
                 <ul class="board-list">
                     <li class="board-item">
                         <span class="icon">📋</span>
-                        <span class="text">전체 게시판</span>
+                        <a class="text" th:href="@{/post/list}">전체 게시판</a>
                     </li>
                     <li class="board-item">
                         <span class="icon">❗</span>
-                        <span class="text">공지 게시판</span>
+                        <a class="text" th:href="@{/post/list?boardType=공지}">공지 게시판</a>
                     </li>
                     <li class="board-item">
                         <span class="icon">✂️</span>
-                        <span class="text">자유 게시판</span>
+                        <a class="text" th:href="@{/post/list?boardType=자유}">자유 게시판</a>
+                    </li>
+                    <li class="board-item">
+                        <span class="icon">👤️</span>
+                        <a class="text" th:href="@{/post/list?boardType=친목}">친목 게시판</a>
                     </li>
                 </ul>
             </div>
@@ -56,18 +73,17 @@
         <div class="container">
             <div class="board-type box detailHeader">
                 <div class="Board-type-1">
-                    <span>유저 아이디 랑 조회수</span>
+                    <img src="/images/none.png" alt="Your Logo" class="logo">
+                    <span class="profile-id" th:text="${post.author.nickname}"></span>
                 </div>
-                <div class="modifyPostButton">
+                <div class="modifyPostButton" th:if="${#authorization.expression('isAuthenticated()')}">
                     <a th:href="@{/post/modify/{id}(id=${post.id})}" class="btn btn-sm btn-outline-secondary"
-                       sec:authorize="isAuthenticated()"
-                       th:if="${post.author != null and #authentication.getPrincipal().getUsername() == post.author.username}"
                        th:text="수정"></a>
                 </div>
-                <div class="deletePostButton">
+
+                <div class="deletePostButton" th:if="${#authorization.expression('isAuthenticated()')}">
                     <a href="javascript:void(0);" th:data-uri="@{|/post/delete/${post.id}|}"
-                       class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
-                       th:if="${post.author != null and #authentication.getPrincipal().getUsername() == post.author.username}"
+                       class="delete btn btn-sm btn-outline-secondary"
                        th:text="삭제"></a>
                 </div>
 
@@ -82,22 +98,31 @@
                 </div>
 
                 <div class="postDetail-footer">
+                    <div style="display: flex; justify-content: center; align-items: center; margin-left:10px; color:#666">
+                        <span class="eye-icon">◎</span>
+                        <span style="margin-left:5px;" th:text="${post.view}"></span>
+                    </div>
                     <div class="detailPostButton-box">
                         <div>
-                            <button type="submit" class="previousPostButton" onclick="location.href='/post/list'">이전 글</button>
+                            <button type="submit" class="previousPostButton"
+                                    th:if="${previousPostId != null}"
+                                    th:onclick="|location.href='/post/detail/' + ${previousPostId}|">이전 글</button>
                         </div>
                         <div>
                             <button type="submit" class="postListButton" onclick="location.href='/post/list'">목록</button>
                         </div>
                         <div>
-                            <button type="submit" class="nextPostButton" onclick="location.href='/post/list'">다음 글</button>
+                            <button type="submit" class="nextPostButton"
+                                    th:if="${nextPostId != null}"
+                                    th:onclick="|location.href='/post/detail/' + ${nextPostId}|">다음 글</button>
                         </div>
                     </div>
+
                 </div>
             </div>
 
             <div th:if="${post.boardType.name() != '공지'}">
-                <div class="postReply-section box">
+                <div class="postReply-section box" th:if="${#authorization.expression('isAuthenticated()')}">
                     <div class="postReply-header">
                         <h3>댓글 <span th:text="${#lists.size(comments)}"></span></h3>
                     </div>
@@ -114,9 +139,18 @@
                                 <strong th:text="${comment.author.username}"></strong>
                                 <span th:text="${comment.createDate}"></span>
                                 <p th:text="${comment.content}"></p>
+                                <th:block th:if="${#authentication.principal.username == comment.author.username}">
+                                    <form th:action="@{/post/detail/{postId}/comment/delete/{commentId}(postId=${post.id}, commentId=${comment.id})}" method="post">
+                                        <button type="button" class="delete-comment-button" onclick="confirmDelete(this)">삭제</button>
+                                    </form>
+                                </th:block>
+
                             </li>
                         </ul>
                     </div>
+                </div>
+                <div class="postReply-section box" th:unless="${#authorization.expression('isAuthenticated()')}">
+                        <span style="color:#666; margin-left:300px;">로그인후 댓글을 이용해주세요.</span>
                 </div>
             </div>
         </div>
@@ -169,4 +203,9 @@
             };
         });
     });
+    function confirmDelete(button) {
+        if (confirm("정말로 삭제하시겠습니까?")) {
+            button.parentNode.submit(); // Submit the form if user confirms
+        }
+    }
 </script>

@@ -112,7 +112,10 @@ body {
 .introduce-box {
     width: 100%;
     height: 280px;
-    background-color: #36454F;
+    background-image: url("/images/studio_img.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     display: flex;
 }
 /* 개인 프로필 사진 */

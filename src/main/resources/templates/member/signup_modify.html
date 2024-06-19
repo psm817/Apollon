@@ -6,16 +6,11 @@
         </div>
         <div class="signup-form">
             <div class="input-box">
-                <form th:action="@{|/member/modify/${member.username}|}" method="POST" enctype="multipart/form-data">
+                <form th:action="@{|/member/modify/${member.username}|}" method="POST" onsubmit="submitWriteForm(this); return false;" enctype="multipart/form-data">
                     <div class="id-box">
                         <span class="font-weight">ID</span>
                         <div class="chk-id">
-                            <input type="text" id="username" maxlength="20" name="username" th:placeholder="${member.username}">
-                            <!-- Add a button to check for duplicate username -->
-                            <button type="button" onclick="validateForm()">중복확인</button>
-                            <div class="error-box">
-                                <div id="signupError" th:text="${signupError}" class="error"></div>
-                            </div>
+                            <input type="text" id="username" maxlength="20" name="username" th:placeholder="${member.username}" th:disabled="true">
                         </div>
                     </div>
                     <div class="password-box">
@@ -95,4 +90,48 @@
             reader.readAsDataURL(this.files[0]);
         });
     });
+
+    function submitWriteForm(form) {
+        form.password.value = form.password.value.trim();
+
+        if ( form.password.value.length == 0 ) {
+            alert("비밀번호를 입력해주세요.");
+            form.password.focus();
+            return;
+        }
+
+        form.password_confirm.value = form.password_confirm.value.trim();
+
+        if ( form.password_confirm.value.length == 0 ) {
+            alert("비밀번호를 확인해주세요.");
+            form.password_confirm.focus();
+            return;
+        }
+
+        form.nickname.value = form.nickname.value.trim();
+
+        if ( form.nickname.value.length == 0 ) {
+            alert("닉네임(스튜디오 이름)을 입력해주세요.");
+            form.nickname.focus();
+            return;
+        }
+
+        form.email.value = form.email.value.trim();
+
+        if ( form.email.value.length == 0 ) {
+            alert("이메일을 입력해주세요.");
+            form.email.focus();
+            return;
+        }
+
+        form.profilePicture.value = form.profilePicture.value.trim();
+
+        if ( form.profilePicture.value.length == 0 ) {
+            alert("프로필 사진을 선택해주세요.");
+            form.profilePicture.focus();
+            return;
+        }
+
+        form.submit();
+    }
 </script>

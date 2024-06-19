@@ -6,7 +6,7 @@
         </div>
         <div class="signup-form">
             <div class="input-box">
-                <form th:action="@{|/member/modify2/${member.username}|}" method="POST" enctype="multipart/form-data">
+                <form th:action="@{|/member/modify2/${member.username}|}" method="POST" onsubmit="submitWriteForm(this); return false;" enctype="multipart/form-data">
                     <div class="id-box">
                         <span class="font-weight">ID</span>
                         <div class="chk-id">
@@ -95,4 +95,24 @@
             reader.readAsDataURL(this.files[0]);
         });
     });
+
+    function submitWriteForm(form) {
+        form.nickname.value = form.nickname.value.trim();
+
+        if ( form.nickname.value.length == 0 ) {
+            alert("닉네임(스튜디오 이름)을 입력해주세요.");
+            form.nickname.focus();
+            return;
+        }
+
+        form.profilePicture.value = form.profilePicture.value.trim();
+
+        if ( form.profilePicture.value.length == 0 ) {
+            alert("프로필 사진을 선택해주세요.");
+            form.profilePicture.focus();
+            return;
+        }
+
+        form.submit();
+    }
 </script>
