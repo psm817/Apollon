@@ -1,43 +1,38 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
-<head>
-    <title>Search Results</title>
-</head>
-<body>
-<div layout:fragment="content">
-    <div class="TOP100_container">
-        <div class="TOP100_cont_sec">
-            <div class="chartList_nav">
-                <div class="chartList_nav_sec">
-                    <div class="chartList_nav_TOP100"><a href="/chart/TOP100">TOP100</a></div>
-                    <div class="chartList_nav_genreChart"><a href="/chart/genreChart">장르별 차트</a></div>
+<html layout:decorate="~{layout}">
+    <div layout:fragment="content">
+        <div class="search-container">
+            <div class="search_cont_sec">
+                <div class="result-title">
+                    <span th:text="'🔎검색 결과 총 \''+ ${#lists.size(results)} + '\' 건의 음악이 검색되었습니다🔍'"></span>
                 </div>
-            </div>
-            <div class="body_chart_container">
-                <span>Search Results</span>
-                <div class="TOP100_body">
-                    <div class="TOP100_nav">
-                        <ul>
-                            <li><span class="TOP100_Rank">순위</span></li>
-                            <li><span class="Rank_fluctuationRate"></span></li>
-                            <li><span class="music_thumbnail"></span></li>
-                            <li><span class="music_title">곡 제목</span></li>
-                            <li><span class="music_studio">스튜디오</span></li>
-                            <li><span class="musicLike">좋아요</span></li>
-                            <li><span class="music_import_myPlayList" th:if="${#authorization.expression('isAuthenticated()')}">담기</span></li>
-                            <li><span class="music_play">듣기</span></li>
-                        </ul>
-                    </div>
-                    <div class="TOP100_list">
-                        <ul>
-                            <!-- 타임리프를 사용하여 musicList 변수에 저장된 음악 데이터를 반복하여 출력 -->
-                            <li class="TOP100_list-num" th:each="music, iterStat : ${results}">
-                                <span class="TOP100_number" th:text="${iterStat.index + 1}"></span>
-                                <div class="TOP100_musicTitle">
+                <div class="body_chart_container">
+                    <div class="search_body">
+                        <div class="search_nav">
+                            <ul>
+                                <li class="number">
+                                    <span >번호</span>
+                                </li>
+                                <li class="music_thumbnail">
+                                    <span ></span>
+                                </li>
+                                <li class="music_title">
+                                    <span >곡 제목</span>
+                                </li>
+                                <li class="music_studio">
+                                    <span >스튜디오</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="search_list">
+                            <ul>
+                                <!-- 타임리프를 사용하여 musicList 변수에 저장된 음악 데이터를 반복하여 출력 -->
+                                <li class="search_list-num" th:each="music, iterStat : ${results}">
+                                    <div class="search_number">
+                                        <span th:text="${iterStat.index + 1}"></span>
+                                    </div>
                                     <div class="thumbImg">
                                         <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                                     </div>
-                                    <div class="classnull"></div>
 
                                     <a th:if="${#authorization.expression('isAuthenticated()')}"
                                        class="musicTi"
@@ -60,56 +55,12 @@
                                        onclick="alert('곡 정보를 확인하려면 로그인이 필요합니다.'); return false;">
                                         <span th:text="${music.studio.member.nickname}"></span>
                                     </a>
-                                </div>
-                                <!-- 좋아요 개수 표시 -->
-                                <div class="music_likeCount">
-                                    <span><i class="fa-regular fa-heart"></i></span>
-                                    <span th:text="${#lists.size(music.musicLikers)}"></span>
-                                </div>
-                                <!-- 재생목록에 추가 -->
-                                <div class="music_imp">
-                                    <form id="musicForm" onsubmit="addSongToPlaylist(event, ${music.id}); return false;">
-                                        <input type="hidden" name="impMusicPlaylist" th:value="${music.id}" />
-                                        <button type="submit" class="plus-icon" th:if="${#authorization.expression('isAuthenticated()')}">
-                                            <i class="fa-solid fa-plus"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                                <!-- 해당곡 재생하기 -->
-                                <div class="music_p">
-                                    <span><i class="fa-solid fa-play"></i></span>
-                                </div>
-                            </li>
-                        </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script>
-    function addSongToPlaylist(event, musicId) {
-        event.preventDefault(); // 폼의 기본 동작을 막습니다.
-
-        const formData = new FormData();
-        formData.append('impMusicPlaylist', musicId);
-
-        fetch('/{username}/playlist', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            if (response.ok) {
-                alert('곡이 재생목록에 추가되었습니다!');
-            } else {
-                alert('곡을 재생목록에 추가하는데 실패했습니다.');
-            }
-        })
-        .catch(error => {
-            console.error('오류 발생:', error);
-            alert('오류가 발생했습니다.');
-        });
-    }
-</script>
-</body>
 </html>

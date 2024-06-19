@@ -189,7 +189,7 @@ public class MemberController {
             imageFileName = storeProfilePicture(profilePicture);
         }
 
-        this.memberService.modify(member, signForm.getUsername(), signForm.getPassword(), signForm.getNickname(), signForm.getEmail(), imageFileName);
+        this.memberService.modify(member, signForm.getPassword(), signForm.getNickname(), signForm.getEmail(), imageFileName);
         this.studioService.createOrUpdate(member, studio.getVisit(), studio.getActive());
 
         return "redirect:/member/logout";
