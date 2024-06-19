@@ -201,4 +201,7 @@ public class MusicService {
         return top4Music;
     }
 
+    public List<Music> searchMusic(String keyword) {
+        return musicRepository.findByMusicTitleContainingIgnoreCase(keyword);
+    }
 }

@@ -1,11 +1,5 @@
 <nav th:fragment="footerFragment" class="footer">
   <div class="footer_container">
-    <style>******************************************************
-      .music-player {
-        display: inline-block;
-        cursor: pointer;
-      }
-    </style>******************************************************
     <div class="footer_play_box">
       <div class="music_myPlayList_box">
         <div class="myPlayList-btn_icon">
@@ -23,13 +17,10 @@
               <i class="fa-solid fa-backward-step fa-lg"></i>
             </div>
             <!-- 재생 아이콘 -->
-            <div class="music-player">******************************************************
-              <audio id="audioPlayer" controls style="display: none;">
-                <source th:src="@{${music.musicMp3}}" type="audio/mpeg">
-                Your browser does not support the audio element.
-              </audio>
-              <img class="play-icon" src="/images/login/naverlogo2.png" alt="재생 아이콘" onclick="toggleAudio()">
-            </div>******************************************************
+            <div class="growSet playMusic_icon">
+              <i class="fa-solid fa-play fa-lg" onclick="togglePlayPause(${music.id})"></i>
+              <i class="fa-solid fa-pause fa-lg" onclick="togglePlayPause(${music.id})"></i>
+            </div>
             <!-- 이후 곡 아이콘 -->
             <div class="growSet afterMusic_icon">
               <i class="fa-solid fa-forward-step fa-lg"></i>
@@ -131,21 +122,21 @@
       <!-- 내 플레이 리스트 보기 끝 -->
     </div>
   </div>
-  
+
   <!-- 재생목록 표출시 html, css로 구현 가능한데 코드가 길어져서 자바스크립트 추가 -->
   <script>
     var isShuffle = false; // 셔플 상태를 저장하는 변수
     var isLoop = false; // 반복 상태를 저장하는 변수
     var audio = new Audio(); // 오디오 객체 생성
     var currentTrackId = null; // 현재 재생 중인 트랙 ID
-    
+
     // 재생목록 열기/닫기
     function togglePlaylist() {
       var footerContainer = document.querySelector('.footer_container');
       var upIcon = document.querySelector('.fa-angle-up');
       var downIcon = document.querySelector('.fa-angle-down');
       var showMyPlayList = document.querySelector('.show_myPlayList');
-    
+
       if (footerContainer.classList.contains('open')) {
         upIcon.style.display = 'block';
         downIcon.style.display = 'none';
@@ -157,12 +148,12 @@
       }
       footerContainer.classList.toggle('open');
     }
-    
+
     // 음악 재생/일시정지
     function togglePlayPause(trackId) {
       var playIcon = document.querySelector('.fa-play');
       var pauseIcon = document.querySelector('.fa-pause');
-    
+
       if (trackId && trackId !== currentTrackId) {
         // 새로운 트랙을 재생할 때
         currentTrackId = trackId;
@@ -189,7 +180,7 @@
         }
       }
     }
-    
+
     // 셔플
     function toggleShuffle() {
       var shuffleIcon = document.querySelector('.fa-shuffle');
@@ -202,7 +193,7 @@
       }
       isShuffle = !isShuffle; // 셔플 상태를 토글
     }
-    
+
     // 반복
     function toggleLoop() {
       var loopIcon = document.querySelector('.fa-repeat');
@@ -215,7 +206,7 @@
       }
       isLoop = !isLoop; // 반복 상태를 토글
     }
-    
+
     // 페이지 로드 시 초기화
     document.addEventListener('DOMContentLoaded', function() {
       var playButton = document.querySelector('.play-button');
@@ -223,75 +214,75 @@
         var trackId = this.dataset.trackId; // 재생할 트랙 ID 가져오기
         togglePlayPause(trackId);
       });
-    
+
       var shuffleButton = document.querySelector('.shuffle-button');
       shuffleButton.addEventListener('click', toggleShuffle);
-    
+
       var loopButton = document.querySelector('.loop-button');
       loopButton.addEventListener('click', toggleLoop);
     });
-        
+
         <!-- 볼륨 조절 -->
         document.addEventListener('DOMContentLoaded', () => {
           const volumeLowIcon = document.querySelector('.fa-volume-low');
           const volumeXmarkIcon = document.querySelector('.fa-volume-xmark');
           const volumeSlider = document.querySelector('.volume-slider input[type="range"]');
-        
+
           volumeLowIcon.addEventListener('mouseover', () => {
             volumeSlider.parentElement.style.display = 'block';
           });
-        
+
           volumeLowIcon.addEventListener('mouseout', () => {
             volumeSlider.parentElement.style.display = 'none';
           });
-        
+
           volumeLowIcon.addEventListener('click', () => {
             volumeLowIcon.style.display = 'none';
             volumeXmarkIcon.style.display = 'block';
             volumeSlider.value = 0; // 음량을 0으로 설정
           });
-        
+
           volumeXmarkIcon.addEventListener('click', () => {
             volumeXmarkIcon.style.display = 'none';
             volumeLowIcon.style.display = 'block';
             volumeSlider.value = 50; // 음량을 50으로 설정
           });
         });
-        
+
         <!-- 음량 조절 -->
         document.addEventListener("DOMContentLoaded", function() {
           const volumeIcon = document.querySelector(".volume");
           const volumeSlider = document.querySelector(".volume-slider");
           const sliderHandle = document.querySelector(".volume-slider-handle");
-        
+
           let isDragging = false;
-        
+
           volumeIcon.addEventListener("mouseenter", function() {
             volumeSlider.style.display = "block";
           });
-        
+
           volumeIcon.addEventListener("mouseleave", function() {
             if (!isDragging) {
               volumeSlider.style.display = "none";
             }
           });
-        
+
           sliderHandle.addEventListener("mousedown", function(event) {
             isDragging = true;
             document.addEventListener("mousemove", handleDrag);
             document.addEventListener("mouseup", handleDragEnd);
           });
-        
+
           function handleDrag(event) {
             const sliderRect = volumeSlider.getBoundingClientRect();
             const newPosition = sliderRect.bottom - event.clientY; // 아래로 드래그할수록 값이 증가하도록 변경
             const newPositionPercent = (newPosition / volumeSlider.offsetHeight) * 100;
-        
+
             if (newPositionPercent >= 0 && newPositionPercent <= 100) {
               sliderHandle.style.top = `${newPositionPercent}%`; // 위치 조절을 top으로 변경
             }
           }
-        
+
           function handleDragEnd(event) {
             isDragging = false;
             document.removeEventListener("mousemove", handleDrag);
@@ -299,27 +290,27 @@
             volumeSlider.style.display = "none";
           }
         });
-        
+
         // 플레이리스트에 담기, 빼기
              document.addEventListener('DOMContentLoaded', function () {
               const toggleIcon = document.getElementById('toggleIcon');
               const musicPlayList = [];
-        
+
               // plus 아이콘 클릭 시
               toggleIcon.addEventListener('click', async function () {
                 const songId = toggleIcon.getAttribute('data-id');
-        
+
                 try {
                   const response = await fetch(`/api/music/${songId}`);
                   if (!response.ok) throw new Error('Network response was not ok');
-                  
+
                   const music = await response.json();
-        
+
                   if (toggleIcon.classList.contains('fa-plus')) {
                     toggleIcon.classList.remove('fa-plus');
                     toggleIcon.classList.add('fa-times');
                     toggleIcon.style.color = 'red';
-        
+
                     // 음악을 musicPlayList에 추가
                     if (!musicPlayList.includes(songId)) {
                       musicPlayList.push(songId);
@@ -329,7 +320,7 @@
                     toggleIcon.classList.remove('fa-times');
                     toggleIcon.classList.add('fa-plus');
                     toggleIcon.style.color = '#FFF';
-        
+
                     // 음악을 musicPlayList에서 제거
                     const index = musicPlayList.indexOf(songId);
                     if (index > -1) {
@@ -342,12 +333,12 @@
                 }
               });
             });
-        
-        
+
+
         // 좋아요 클릭시
         document.addEventListener('DOMContentLoaded', function () {
           const toggleHit = document.getElementById('toggleHit');
-        
+
           toggleHit.addEventListener('click', function () {
             if (toggleHit.style.color === 'rgb(255, 164, 179)') { // 현재 색상이 #ffa4b3인 경우
               toggleHit.style.color = '#FFF'; // #FFF로 변경
@@ -356,17 +347,7 @@
             }
           });
         });
-        ******************************************************
-function toggleAudio() {
-  var audio = document.getElementById('audioPlayer');
 
-  if (audio.paused) {
-    audio.play();
-  } else {
-    audio.pause();
-  }
-}
-    ******************************************************
 
   </script>
   <!-- 재생목록 표출시 html, css로 구현 가능한데 코드가 길어져서 자바스크립트 추가 -->

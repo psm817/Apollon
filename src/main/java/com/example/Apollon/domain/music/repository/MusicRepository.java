@@ -18,4 +18,6 @@ public interface MusicRepository extends JpaRepository<Music, Long> {
 
     @Query("SELECT m FROM Music m ORDER BY SIZE(m.musicLikers) DESC")
     List<Music> findAllByOrderByMusicLikersDesc();
+
+    List<Music> findByMusicTitleContainingIgnoreCase(String keyword);
 }
