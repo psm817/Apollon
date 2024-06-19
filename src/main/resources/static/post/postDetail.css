@@ -18,6 +18,7 @@
         padding: 20px;
         margin: 20px 0;
         background-color: #f9f9f9;
+
     }
 
     .postDetail-box {
@@ -69,7 +70,7 @@
 
     .postDetail-footer {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         margin-bottom: 10px;
         text-align: center;
         padding: 10px;
@@ -105,7 +106,7 @@
         background-color: #e9ecef;
         border-radius: 5px;
         width: 300px;
-        margin-left: 550px;
+        margin-left: 500px;
     }
 
     .postReply-header {
@@ -184,13 +185,33 @@
 
     .modifyPostButton,
     .deletePostButton {
-
-        color: #000;
+        color: #FFFFFF;
         border: none;
         padding: 8px 16px;
         cursor: pointer;
         margin-left: 10px;
+        background-color: #36454F;
+        border-radius: 8px;
     }
+
+    .modifyPostButton,
+        .deletePostButton {
+
+            color: #FFFFFF;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            margin-left: 10px;
+            background-color:#36454F;
+            border-radius: 8px;
+
+        }
+    .modifyPostButton {
+
+
+            margin-left: 250px;
+
+        }
 
         .postReply-list {
             margin-top: 20px; /* Adjust margin as needed */
@@ -218,6 +239,12 @@
             font-size: 1.1em;
             line-height: 1.4; /* Line height for better readability */
         }
+.Board-type-1 >img {
+  width: 40px;
+  height: 40px;
+  margin-left: 30px;
+
+}
 
 
 

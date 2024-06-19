@@ -18,5 +18,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findTop10ByOrderByViewDesc();
     List<Post> findByAuthor(Member member);
     List<Post> findTop5ByBoardTypeOrderByViewDesc(BoardType boardType);
+    Page<Post> findByBoardTypeAndIdGreaterThanOrderById(BoardType boardType, Long id, Pageable pageable);
+    Page<Post> findByBoardTypeAndIdLessThanOrderByIdDesc(BoardType boardType, Long id, Pageable pageable);
 
 }

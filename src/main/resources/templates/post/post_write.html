@@ -30,26 +30,28 @@
                     </div>
                 </div>
                 <div class="profile-footer">
-                    <a class="text" th:href="@{/post/profile}">+프로필</a>
+                    <a th:href="@{/post/profile}">+프로필</a>
                 </div>
             </div>
             <div class="post-category box">
                 <hr>
-
                 <div class="board-title">====== 게시판 ======</div>
-
                 <ul class="board-list">
                     <li class="board-item">
                         <span class="icon">📋</span>
-                        <span class="text">전체 게시판</span>
+                        <a class="text" th:href="@{/post/list}">전체 게시판</a>
                     </li>
                     <li class="board-item">
                         <span class="icon">❗</span>
-                        <span class="text">공지 게시판</span>
+                        <a class="text" th:href="@{/post/list?boardType=공지}">공지 게시판</a>
                     </li>
                     <li class="board-item">
                         <span class="icon">✂️</span>
-                        <span class="text">자유 게시판</span>
+                        <a class="text" th:href="@{/post/list?boardType=자유}">자유 게시판</a>
+                    </li>
+                    <li class="board-item">
+                        <span class="icon">👤️</span>
+                        <a class="text" th:href="@{/post/list?boardType=친목}">친목 게시판</a>
                     </li>
                 </ul>
             </div>
@@ -69,6 +71,7 @@
                                 </div>
 
                                 <option value="자유">자유 게시판</option>
+                                <option value="친목">친목 게시판</option>
                             </select>
                         </div>
                     </div>
@@ -106,52 +109,20 @@
         </div>
 
         <div class="container">
-
             <div class="box">
                 <div id="clock" class="clock1"></div>
             </div>
-
-            <div class="todayHotpost-box box">
-                <div class="todayHotpost-header">
+            <div class="todayHotPost-box box">
+                <div class="todayHotPost-header">
                     <span>오늘의 TOP10</span>
                 </div>
-                <div class="todayHotpost-body">
-                    <div class="todayHotpost-item">
-                        <span>1</span>
+                <div class="todayHotPost-body">
+                    <div class="todayHotPost-item" th:each="post, iterStat : ${topPosts}">
+                        <span th:text="${iterStat.count}"></span>
+                        <a class="todayHotPost-title" th:text="${post.title}" th:href="@{|/post/detail/${post.id}|}"></a>
                     </div>
-                    <div class="todayHotpost-item">
-                        <span>2</span>
-                    </div>
-                    <div class="todayHotpost-item">
-                        <span>3</span>
-                    </div>
-                    <div class="todayHotpost-item">
-                        <span>4</span>
-                        <div class="todayHotpost-title">지리네dsafsadfdsafsda</div>
-                    </div>
-                    <div class="todayHotpost-item">
-                        <span>5</span>
-                    </div>
-                    <div class="todayHotpost-item">
-                        <span>6</span>
-                    </div>
-                    <div class="todayHotpost-item">
-                        <span>7</span>
-                    </div>
-                    <div class="todayHotpost-item">
-                        <span>8</span>
-                    </div>
-                    <div class="todayHotpost-item">
-                        <span>9</span>
-                    </div>
-                    <div class="todayHotpost-item">
-                        <span>10</span>
-                    </div>
-
                 </div>
-
             </div>
-
         </div>
     </div>
 
