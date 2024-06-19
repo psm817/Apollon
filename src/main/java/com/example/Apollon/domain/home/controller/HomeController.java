@@ -1,7 +1,11 @@
 package com.example.Apollon.domain.home.controller;
 
+import com.example.Apollon.domain.member.entity.Member;
+import com.example.Apollon.domain.member.service.MemberService;
 import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.domain.music.service.MusicService;
+import com.example.Apollon.domain.playlist.entity.Playlist;
+import com.example.Apollon.domain.playlist.service.PlaylistService;
 import com.example.Apollon.domain.post.entity.BoardType;
 import com.example.Apollon.domain.post.entity.Post;
 import com.example.Apollon.domain.post.entity.PostComment;
@@ -9,6 +13,7 @@ import com.example.Apollon.domain.post.service.PostCommentService;
 import com.example.Apollon.domain.post.service.PostService;
 import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.domain.studio.service.StudioService;
+import com.example.Apollon.global.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,6 +30,8 @@ public class HomeController {
     private final StudioService studioService;
     private final PostService postService;
     private final MusicService musicService;
+    private final MemberService memberService;
+    private final PlaylistService playlistService;
 
     @GetMapping("/")
     public String goMain(Model model, Principal principal) {
@@ -45,7 +53,12 @@ public class HomeController {
             if(studio != null) {
                 Integer studioActive = studio.getActive();
 
+                // 회원별 플레이리스트가져오기(만들고 모델링해주고 푸터에서 넣어보자)
+                Optional<Member> member = memberService.getMemberByUsername(principal.getName());
+                List<Playlist> playlistsMusic = this.playlistService.getMusicByMember(member);
+
                 model.addAttribute("studioActive", studioActive);
+                model.addAttribute("playlistsMusic", playlistsMusic);
             }
         }
 
