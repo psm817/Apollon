@@ -31,7 +31,6 @@ public class MusicController {
     private final MemberService memberService;
     private final StudioService studioService;
     private final CommentService commentService;
-
     @GetMapping("/TOP100")
     public String getTop100Music(Model model) {
         List<Music> musicList = musicService.getTop100MusicByPlayCount();
