@@ -90,11 +90,11 @@
         <div class="show_myPlayList_list">
           <ul>
             <!-- 타임리프를 사용하여 musicList라는 변수에 저장된 음악 데이터를 반복하여 출력 -->
-            <li sec:authorize="!isAuthenticated()" class="show_myPlayList_list-num" th:each="playlist, inerStat : ${musicPlayList}">
+            <li sec:authorize="!isAuthenticated()" class="show_myPlayList_list-num" th:each="playlist, inerStat : ${playlist}">
               <span class="myPlayList_number" th:text="${inerStat.index + 1}"></span>
               <div class="myPlayList_musicTitle">
                 <div class="myPlayList-thumbImg">
-                  <img th:src="@{/uploadImgs/{filename}(filename=${music.thumbnailImg})}" alt="사진X"></div>
+                  <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="사진X"></div>
                 <a class="myPlayList-musicTi" th:href="@{/music/detail/{id}(id=${music.id})}">
                   <span th:text="${music.musicTitle}"></span>
                 </a>
@@ -104,7 +104,6 @@
               </div>
               <div class="music_like">
                 <span><i class="fa-regular fa-heart"></i></span>
-                <!--                    <span th:text="${music.musicLikers != null ? music.musicLikers : 0}"></span>-->
               </div>
               <div class="music_del">
                 <span><i class="fa-solid fa-xmark"></i></span>
@@ -334,7 +333,6 @@
               });
             });
 
-
         // 좋아요 클릭시
         document.addEventListener('DOMContentLoaded', function () {
           const toggleHit = document.getElementById('toggleHit');
@@ -350,5 +348,4 @@
 
 
   </script>
-  <!-- 재생목록 표출시 html, css로 구현 가능한데 코드가 길어져서 자바스크립트 추가 -->
 </nav>

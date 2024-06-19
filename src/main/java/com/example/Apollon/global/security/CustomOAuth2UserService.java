@@ -1,6 +1,7 @@
 package com.example.Apollon.global.security;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.service.MemberService;
+import com.example.Apollon.domain.playlist.service.PlaylistService;
 import com.example.Apollon.domain.studio.service.StudioService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

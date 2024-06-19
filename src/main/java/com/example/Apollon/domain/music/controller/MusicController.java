@@ -8,7 +8,6 @@ import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.domain.music.service.MusicService;
 import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.domain.studio.service.StudioService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

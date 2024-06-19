@@ -393,14 +393,33 @@ input: focus {
     color: #FFF;
     display: none;
     font-size: 24px;
-    height: 380px;
-    background-color: #D9D9D9;
+    height: 340px;
+    background-color: #111111;
+    overflow-y: auto;
 }
 
 .show_myPlayList_list {
     border: 1px solid red;
     width: 1600px;
     margin-left: auto; margin-right: auto;
+    padding: 10px;
+    border: 1px solid #3D3D3D;
+    background-color: #222222;
+    height: 340px;
+    list-style: none;
+    overflow-y: auto;
+}
+
+.show_myPlayList_list li {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #444444;
+    display: flex;
+    align-items: center;
+}
+
+.show_myPlayList_list li:last-child {
+    border-bottom: none;
 }
 
 .notLogin_m {
@@ -413,4 +432,46 @@ input: focus {
     color: #3D3D3D;
     font-size: 80px;
     font-weight: 600;
+}
+
+.myPlayList_number {
+    width: 100px;
+    text-align: center;
+}
+
+.myPlayList_musicTitle {
+        display: flex;
+        align-items: center;
+}
+
+.myPlayList_musicTitle > .myPlayList-thumbImg {
+     width: 50px;
+ }
+
+ .thumbImg > img {
+     margin: 5px;
+     height: 50px;
+ }
+
+.TOP100_musicTitle > .myPlayList-musicTi {
+    width: 660px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.music_like,
+.music_del,
+.music_play {
+    width: 100px;
+    text-align: center;
+}
+
+.music_like i {
+    color: #ffa4b3;
+}
+
+.music_del i,
+.music_play i {
+    color: #FFF;
 }
