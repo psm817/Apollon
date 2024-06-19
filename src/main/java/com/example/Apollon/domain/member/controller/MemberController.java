@@ -5,6 +5,8 @@ import com.example.Apollon.domain.email.EmailService;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.repository.MemberRepository;
 import com.example.Apollon.domain.member.service.MemberService;
+import com.example.Apollon.domain.playlist.entity.Playlist;
+import com.example.Apollon.domain.playlist.service.PlaylistService;
 import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.domain.studio.service.StudioService;
 import jakarta.validation.Valid;
@@ -45,6 +47,7 @@ public class MemberController {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final CommentService commentService;
+    private final PlaylistService playlistService;
 
     @PreAuthorize("isAnonymous()")
     @GetMapping("/login")
@@ -94,7 +97,7 @@ public class MemberController {
 
             emailService.send(signForm.getEmail(), "Apollon 사이트에 오신 것을 환영합니다!", textContent);
             studioService.createOrUpdate(member, 0, 1);
-
+            playlistService.PCreateOrUpdate(member);
 
         } catch (IllegalStateException e) {
             model.addAttribute("signupError", "이미 중복된 이메일 또는 아이디입니다");

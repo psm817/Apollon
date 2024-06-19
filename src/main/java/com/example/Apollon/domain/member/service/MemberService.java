@@ -2,15 +2,12 @@ package com.example.Apollon.domain.member.service;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.repository.MemberRepository;
 import com.example.Apollon.global.DataNotFoundException;
-import com.example.Apollon.global.security.CustomOAuth2UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,6 +19,10 @@ public class MemberService {
     public MemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
         this.memberRepository = memberRepository;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    public Optional<Member> getMemberByUsername(String username) {
+        return memberRepository.findByUsername(username);
     }
 
     public boolean usernameExists(String username) {
@@ -61,7 +62,7 @@ public class MemberService {
         return signup(username, "", nickname, email,"/images/none.png"); // 최초 로그인 시 딱 한번 실행
     }
 
-    private Optional<Member> findByUsername(String username) {
+    public Optional<Member> findByUsername(String username) {
         return memberRepository.findByUsername(username);
     }
 

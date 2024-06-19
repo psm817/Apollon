@@ -8,7 +8,6 @@ import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.domain.music.service.MusicService;
 import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.domain.studio.service.StudioService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,25 +20,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.List;
-
-@Controller
-@RequestMapping("/chart")
-@RequiredArgsConstructor
-public class MusicController {
-    @Autowired
-    private final MusicService musicService;
-    private final MemberService memberService;
-    private final StudioService studioService;
-    private final CommentService commentService;
-
-    @GetMapping("/TOP100")
-    public String getTop100Music(Model model) {
-        List<Music> musicList = musicService.getTop100MusicByPlayCount();
-
-        model.addAttribute("musicList", musicList);
-        return "chart/TOP100";
+    @Controller
+    @RequestMapping("/chart")
+    @RequiredArgsConstructor
+    public class MusicController {
+        @Autowired
+        private final MusicService musicService;
+        private final MemberService memberService;
+        private final StudioService studioService;
+        private final CommentService commentService;
+        @GetMapping("/TOP100")
+        public String getTop100Music(Model model) {
+            List<Music> musicList = musicService.getTop100MusicByPlayCount();
+            model.addAttribute("musicList", musicList);
+            return "chart/TOP100";
     }
-
 
     // 곡 정보 상세보기
     @GetMapping("/music/detail/{id}")
@@ -67,7 +62,6 @@ public class MusicController {
         model.addAttribute("results", searchResults);
         return "search_list";
     }
-
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/music/{id}/like")
