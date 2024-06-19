@@ -487,11 +487,24 @@ input[type="range"] {
     text-overflow: ellipsis;
 }
 
+<<<<<<< HEAD
+=======
+.music_like,
+.music_del,
+>>>>>>> 94bbc9d (재ã생목록 플러스 í클릭시 정상적으로 ëª함수는 실행됨)
 .music_play {
     width: 100px;
     text-align: center;
 }
 
+<<<<<<< HEAD
+=======
+.music_like i {
+    color: #ffa4b3;
+}
+
+.music_del i,
+>>>>>>> 94bbc9d (재ã생목록 플러스 í클릭시 정상적으로 ëª함수는 실행됨)
 .music_play i {
     color: #FFF;
 }
