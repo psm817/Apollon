@@ -28,7 +28,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     private final MemberService memberService;
     private final StudioService studioService;
     private final PlaylistService playlistService;
-
     public static String getUsernameFromEmail(String email) {
         // 이메일 주소를 '@'로 분리
         String[] parts = email.split("@");
