@@ -4,6 +4,8 @@ import com.example.Apollon.domain.comment.service.CommentService;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.service.MemberService;
 import com.example.Apollon.domain.music.service.MusicService;
+import com.example.Apollon.domain.playlist.entity.Playlist;
+import com.example.Apollon.domain.playlist.service.PlaylistService;
 import com.example.Apollon.domain.post.entity.BoardType;
 import com.example.Apollon.domain.post.service.PostService;
 import com.example.Apollon.domain.studio.entity.Studio;
@@ -27,6 +29,9 @@ public class Dev {
     MusicService musicService;
 
     @Autowired
+    PlaylistService playlistService;
+
+    @Autowired
     TestFileUtils testFileUtils;
 
     @Autowired
@@ -38,7 +43,8 @@ public class Dev {
         // 테스트 음악 데이터 추가를 하기 전에 폴더에 쌓이는 데이터 삭제
         DataFileUtils.deleteFilesExcept("C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadImgs", "와보2.png");
         DataFileUtils.deleteFilesExcept("C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadMusics", "Zedd & Alessia Cara - Stay.mp3");
-
+        DataFileUtils.deleteFilesExcept("C:/work/Apollon/src/main/resources/static/uploadFile/uploadImgs", "와보2.png");
+        DataFileUtils.deleteFilesExcept("C:/work/Apollon/src/main/resources/static/uploadFile/uploadMusics", "Zedd & Alessia Cara - Stay.mp3");
         return args -> {
             Member m1 = memberService.signup("admin", "admin", "admin", "admin@test.com","/images/none.png");
             Member m2 = memberService.signup("5004pp", "5004pp", "5004pp", "5004pp@test.com","/images/none.png");
@@ -51,6 +57,12 @@ public class Dev {
             Studio s3 = studioService.createOrUpdate(m3, 172, 1);
             Studio s4 = studioService.createOrUpdate(m4, 58, 1);
             Studio s5 = studioService.createOrUpdate(m5, 17, 1);
+
+            Playlist p1 = playlistService.PCreateOrUpdate(m1);
+            Playlist p2 = playlistService.PCreateOrUpdate(m2);
+            Playlist p3 = playlistService.PCreateOrUpdate(m3);
+            Playlist p4 = playlistService.PCreateOrUpdate(m4);
+            Playlist p5 = playlistService.PCreateOrUpdate(m5);
 
             commentService.create(m2, s3, "테스트입니다.1", "테스트입니다.1");
             commentService.create(m2, s3, "테스트입니다.2", "테스트입니다.2");
