@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
@@ -39,10 +40,10 @@ public class HomeController {
         model.addAttribute("top4MusicByLikers", top4MusicByLikers);
 
         // 스튜디오 진입 시 로그인된 회원 스튜디외의 차단 상태 판단을 위해 작성
-        if(principal != null) {
+        if (principal != null) {
             Studio studio = this.studioService.getStudioByMemberUsername(principal.getName());
 
-            if(studio != null) {
+            if (studio != null) {
                 Integer studioActive = studio.getActive();
 
                 model.addAttribute("studioActive", studioActive);
@@ -50,5 +51,14 @@ public class HomeController {
         }
 
         return "mainPage";
+    }
+
+    @GetMapping("/search_list")
+    public String searchList(Model model, @RequestParam(value = "keyword", defaultValue = "") String keyword) {
+        if (!keyword.isEmpty()) {
+            List<Music> searchResults = musicService.searchMusic(keyword);
+            model.addAttribute("results", searchResults);
+        }
+        return "search_list";
     }
 }
