@@ -74,8 +74,7 @@ public class MemberService {
             throw new DataNotFoundException("Member not found");
         }
     }
-    public void modify(Member member, String username, String password, String nickname, String email,String imageFileName) {
-        member.setUsername(username);
+    public void modify(Member member,String password, String nickname, String email,String imageFileName) {
         member.setPassword(passwordEncoder.encode(password));
         member.setNickname(nickname);
         member.setEmail(email);
