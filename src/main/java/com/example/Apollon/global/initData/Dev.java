@@ -64,10 +64,6 @@ public class Dev {
             Playlist p4 = playlistService.PCreateOrUpdate(m4);
             Playlist p5 = playlistService.PCreateOrUpdate(m5);
 
-            Playlist p1 = playlistService.PCreateOrUpdate(m1);
-            Playlist p2 = playlistService.PCreateOrUpdate(m2);
-            Playlist p3 = playlistService.PCreateOrUpdate(m3);
-
             commentService.create(m2, s3, "테스트입니다.1", "테스트입니다.1");
             commentService.create(m2, s3, "테스트입니다.2", "테스트입니다.2");
             commentService.create(m2, s3, "테스트입니다.3", "테스트입니다.3");
