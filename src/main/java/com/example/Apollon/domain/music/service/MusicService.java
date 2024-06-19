@@ -143,6 +143,7 @@ public class MusicService {
     public List<Music> getListByStudio(Studio studio) {
         return musicRepository.findByStudio(studio);
     }
+
     public void reUpload(Music music, String content, MultipartFile thumbnail, List<String> genres) {
         if (thumbnail != null && !thumbnail.isEmpty()) {
             String thumbnailFile = storeImg(thumbnail);

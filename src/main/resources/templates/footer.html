@@ -95,7 +95,6 @@
       <nav class="show_myPlayList" id="myPlayList">
         <div class="show_myPlayList_list">
           <ul>
-<<<<<<< HEAD
             <!-- 타임리프를 사용하여 memberMusic 변수에 저장된 음악 데이터를 반복하여 출력 -->
             <!--            <li sec:authorize="isAuthenticated()" class="show_myPlayList_list-num"-->
             <!--                th:each="playlist, iterStat : ${playlistsMusic}">-->
@@ -113,31 +112,6 @@
             <!--                <span><i class="fa-solid fa-play"></i></span>-->
             <!--              </div>-->
             <!--            </li>-->
-=======
-            <!-- 타임리프를 사용하여 musicList라는 변수에 저장된 음악 데이터를 반복하여 출력 -->
-            <li sec:authorize="!isAuthenticated()" class="show_myPlayList_list-num" th:each="playlist, inerStat : ${playlist}">
-              <span class="myPlayList_number" th:text="${inerStat.index + 1}"></span>
-              <div class="myPlayList_musicTitle">
-                <div class="myPlayList-thumbImg">
-                  <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="사진X"></div>
-                <a class="myPlayList-musicTi" th:href="@{/music/detail/{id}(id=${music.id})}">
-                  <span th:text="${music.musicTitle}"></span>
-                </a>
-                <a class="myPlayList-upstu" th:href="@{/studio/{id}(id=${music.id})}">
-                  <span th:text="${studio.member.username}"></span>
-                </a>
-              </div>
-              <div class="music_like">
-                <span><i class="fa-regular fa-heart"></i></span>
-              </div>
-              <div class="music_del">
-                <span><i class="fa-solid fa-xmark"></i></span>
-              </div>
-              <div class="music_play">
-                <span><i class="fa-solid fa-play"></i></span>
-              </div>
-            </li>
->>>>>>> 94bbc9d (재ã생목록 플러스 í클릭시 정상적으로 ëª함수는 실행됨)
             <li sec:authorize="!isAuthenticated()" class="notLogin_m">
               <span class="notLogin_message">로그인 후 이용해주세요</span>
             </li>
@@ -178,10 +152,6 @@
       }
       footerContainer.classList.toggle('open');
     }
-<<<<<<< HEAD
-=======
-    
->>>>>>> 94bbc9d (재ã생목록 플러스 í클릭시 정상적으로 ëª함수는 실행됨)
     // 셔플
     function toggleShuffle() {
       var shuffleIcon = document.querySelector('.fa-shuffle');
@@ -222,7 +192,6 @@
         volBox.classList.toggle('active')
     }
     
-<<<<<<< HEAD
     volumeDown.addEventListener('click', handleVolumeDown);
     volumeUp.addEventListener('click', handleVolumeUp);
     
@@ -272,26 +241,3 @@
   
   </script>
 </nav>
-=======
-      var loopButton = document.querySelector('.loop-button');
-      loopButton.addEventListener('click', toggleLoop);
-    });
-        
-        
-        // 좋아요 클릭시
-        document.addEventListener('DOMContentLoaded', function () {
-          const toggleHit = document.getElementById('toggleHit');
-        
-          toggleHit.addEventListener('click', function () {
-            if (toggleHit.style.color === 'rgb(255, 164, 179)') { // 현재 색상이 #ffa4b3인 경우
-              toggleHit.style.color = '#FFF'; // #FFF로 변경
-            } else {
-              toggleHit.style.color = '#ffa4b3'; // 그 외의 경우 #ffa4b3로 변경
-            }
-          });
-        });
-
-
-  </script>
-</nav>
->>>>>>> 94bbc9d (재ã생목록 플러스 í클릭시 정상적으로 ëª함수는 실행됨)

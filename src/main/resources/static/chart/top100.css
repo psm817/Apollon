@@ -140,7 +140,6 @@ input: focus {
 
 /* 목록 */
 .TOP100_list {
-    overflow-y: auto;
     height: 100%;
 }
 
