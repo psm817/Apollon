@@ -30,7 +30,7 @@ import java.util.List;
         private final StudioService studioService;
         private final CommentService commentService;
         @GetMapping("/TOP100")
-        public String getTop100Music(Model model) {
+        public String getTop100Music(Model model, Principal principal) {
             List<Music> musicList = musicService.getTop100MusicByPlayCount();
             model.addAttribute("musicList", musicList);
             return "chart/TOP100";
