@@ -1,9 +1,7 @@
 package com.example.Apollon.domain.playlist.repository;
 
 import com.example.Apollon.domain.member.entity.Member;
-import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.domain.playlist.entity.Playlist;
-import com.example.Apollon.domain.studio.entity.Studio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -19,7 +19,11 @@
             <!-- 재생 아이콘 -->
             <div class="growSet playMusic_icon">
               <audio preload="auto" id="audio" controls type="audio/mpeg">
+<<<<<<< HEAD
                 <!--                <source src="@{${/static/uploadFile/uploadMusics/music.musicMp3}}">-->
+=======
+<!--                <source src="@{${/static/uploadFile/uploadMusics/music.musicMp3}}">-->
+>>>>>>> daa54fdf8b2f566b0e4cb70cab5b35ee72a9a8b8
               </audio>
               <span class="play" onclick="handlePlay()">
                     <i class="material-icons fa-solid fa-play fa-lg"></i>
@@ -52,7 +56,11 @@
                   <span class="current-time"></span>
                   <input type="range" step="1" class="seekbar" value="0" min="0" max="100" oninput="handleSeekBar()">
                   <audio class="music-element">
+<<<<<<< HEAD
                     <!--                    <source src="${/static/uploadFile/uploadMusics/music.musicMp3}}" type="audio/mp3">-->
+=======
+<!--                    <source src="${/static/uploadFile/uploadMusics/music.musicMp3}}" type="audio/mp3">-->
+>>>>>>> daa54fdf8b2f566b0e4cb70cab5b35ee72a9a8b8
                   </audio>
                   <span class="duration"></span>
                 </div>
@@ -96,6 +104,7 @@
         <div class="show_myPlayList_list">
           <ul>
             <!-- 타임리프를 사용하여 memberMusic 변수에 저장된 음악 데이터를 반복하여 출력 -->
+<<<<<<< HEAD
             <!--            <li sec:authorize="isAuthenticated()" class="show_myPlayList_list-num"-->
             <!--                th:each="playlist, iterStat : ${playlistsMusic}">-->
             <!--              <span class="myPlayList_number" th:text="${iterStat.index + 1}"></span>-->
@@ -112,6 +121,24 @@
             <!--                <span><i class="fa-solid fa-play"></i></span>-->
             <!--              </div>-->
             <!--            </li>-->
+=======
+<!--            <li sec:authorize="isAuthenticated()" class="show_myPlayList_list-num"-->
+<!--                th:each="playlist, iterStat : ${playlistsMusic}">-->
+<!--              <span class="myPlayList_number" th:text="${iterStat.index + 1}"></span>-->
+<!--              <div class="myPlayList_musicTitle">-->
+<!--                <div class="myPlayList-thumbImg">-->
+<!--                  <img style="width: 50px;" th:src="${playlist.musicPlayList.thumbnailImg}" alt="사진 없음">-->
+<!--                </div>-->
+<!--                <a class="myPlayList-musicTi" th:href="@{/music/detail/{id}(id=${playlist.id})}"-->
+<!--                   th:text="${playlist.musicPlayList.musicTitle}"></a>-->
+<!--                <a class="myPlayList-upstu" th:href="@{/studio/{id}(id=${playlist.studio.id})}"-->
+<!--                   th:text="${playlist.musicPlayList.studio.member.username}"></a>-->
+<!--              </div>-->
+<!--              <div class="music_play">-->
+<!--                <span><i class="fa-solid fa-play"></i></span>-->
+<!--              </div>-->
+<!--            </li>-->
+>>>>>>> daa54fdf8b2f566b0e4cb70cab5b35ee72a9a8b8
             <li sec:authorize="!isAuthenticated()" class="notLogin_m">
               <span class="notLogin_message">로그인 후 이용해주세요</span>
             </li>
@@ -238,6 +265,12 @@
     }, false)
     
     // 이전곡, 이후곡
+<<<<<<< HEAD
   
   </script>
 </nav>
+=======
+    
+  </script>
+</nav>
+>>>>>>> daa54fdf8b2f566b0e4cb70cab5b35ee72a9a8b8

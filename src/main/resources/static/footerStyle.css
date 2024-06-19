@@ -1,3 +1,4 @@
+
 /* 노멀라이즈 */
 body, ul, li {
     margin: 0; padding: 0;
@@ -44,19 +45,6 @@ audio{
     bottom: -400px;
     left: 0; right: 0;
     transition: bottom 0.3s ease;
-}
-.music-player {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.music-player audio {
-  display: none; /* 기본 오디오 플레이어 숨기기 */
-}
-
-.music-player audio.controls {
-  display: block; /* 재생 버튼을 제외한 나머지 컨트롤 숨기기 */
 }
 
 .footer_container.open {
@@ -487,24 +475,11 @@ input[type="range"] {
     text-overflow: ellipsis;
 }
 
-<<<<<<< HEAD
-=======
-.music_like,
-.music_del,
->>>>>>> 94bbc9d (재ã생목록 플러스 í클릭시 정상적으로 ëª함수는 실행됨)
 .music_play {
     width: 100px;
     text-align: center;
 }
 
-<<<<<<< HEAD
-=======
-.music_like i {
-    color: #ffa4b3;
-}
-
-.music_del i,
->>>>>>> 94bbc9d (재ã생목록 플러스 í클릭시 정상적으로 ëª함수는 실행됨)
 .music_play i {
     color: #FFF;
 }
