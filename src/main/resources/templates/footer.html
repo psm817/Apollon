@@ -96,22 +96,22 @@
         <div class="show_myPlayList_list">
           <ul>
             <!-- 타임리프를 사용하여 memberMusic 변수에 저장된 음악 데이터를 반복하여 출력 -->
-            <!--            <li sec:authorize="isAuthenticated()" class="show_myPlayList_list-num"-->
-            <!--                th:each="playlist, iterStat : ${playlistsMusic}">-->
-            <!--              <span class="myPlayList_number" th:text="${iterStat.index + 1}"></span>-->
-            <!--              <div class="myPlayList_musicTitle">-->
-            <!--                <div class="myPlayList-thumbImg">-->
-            <!--                  <img style="width: 50px;" th:src="${playlist.musicPlayList.thumbnailImg}" alt="사진 없음">-->
-            <!--                </div>-->
-            <!--                <a class="myPlayList-musicTi" th:href="@{/music/detail/{id}(id=${playlist.id})}"-->
-            <!--                   th:text="${playlist.musicPlayList.musicTitle}"></a>-->
-            <!--                <a class="myPlayList-upstu" th:href="@{/studio/{id}(id=${playlist.studio.id})}"-->
-            <!--                   th:text="${playlist.musicPlayList.studio.member.username}"></a>-->
-            <!--              </div>-->
-            <!--              <div class="music_play">-->
-            <!--                <span><i class="fa-solid fa-play"></i></span>-->
-            <!--              </div>-->
-            <!--            </li>-->
+                        <li sec:authorize="isAuthenticated()" class="show_myPlayList_list-num"
+                            th:each="playlist, iterStat : ${playlistsMusic}">
+                          <span class="myPlayList_number" th:text="${iterStat.index + 1}"></span>
+                          <div class="myPlayList_musicTitle">
+                            <div class="myPlayList-thumbImg">
+                              <img style="width: 50px;" th:src="${playlist.musicPlayList.thumbnailImg}" alt="사진 없음">
+                            </div>
+                            <a class="myPlayList-musicTi" th:href="@{/music/detail/{id}(id=${playlist.id})}"
+                               th:text="${playlist.musicPlayList.musicTitle}"></a>
+                            <a class="myPlayList-upstu" th:href="@{/studio/{id}(id=${playlist.studio.id})}"
+                               th:text="${playlist.musicPlayList.studio.member.username}"></a>
+                          </div>
+                          <div class="music_play">
+                            <span><i class="fa-solid fa-play"></i></span>
+                          </div>
+                        </li>
             <li sec:authorize="!isAuthenticated()" class="notLogin_m">
               <span class="notLogin_message">로그인 후 이용해주세요</span>
             </li>
