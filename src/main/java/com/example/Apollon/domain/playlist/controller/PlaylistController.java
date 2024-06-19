@@ -1,3 +1,4 @@
+
 package com.example.Apollon.domain.playlist.controller;
 
 import com.example.Apollon.domain.member.entity.Member;
@@ -6,25 +7,17 @@ import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.domain.music.service.MusicService;
 import com.example.Apollon.domain.playlist.entity.Playlist;
 import com.example.Apollon.domain.playlist.service.PlaylistService;
-import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.domain.studio.service.StudioService;
-import com.example.Apollon.global.DataNotFoundException;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.IOException;
 import java.security.Principal;
-import java.text.ParseException;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -73,5 +66,3 @@ public class PlaylistController {
         return "redirect:/playlist/view?playlistId=" + playlistId;
     }
 }
-
-
