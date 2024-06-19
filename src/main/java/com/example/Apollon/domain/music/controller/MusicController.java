@@ -21,19 +21,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.List;
-
-@Controller
-@RequestMapping("/chart")
-@RequiredArgsConstructor
-public class MusicController {
-    @Autowired
-    private final MusicService musicService;
-    private final MemberService memberService;
-    private final StudioService studioService;
-    private final CommentService commentService;
-    @GetMapping("/TOP100")
-    public String getTop100Music(Model model) {
-        List<Music> musicList = musicService.getTop100MusicByPlayCount();
+    @Controller
+    @RequestMapping("/chart")
+    @RequiredArgsConstructor
+    public class MusicController {
+        @Autowired
+        private final MusicService musicService;
+        private final MemberService memberService;
+        private final StudioService studioService;
+        private final CommentService commentService;
+        @GetMapping("/TOP100")
+        public String getTop100Music(Model model) {
+            List<Music> musicList = musicService.getTop100MusicByPlayCount();
 
             model.addAttribute("musicList", musicList);
             return "chart/TOP100";
