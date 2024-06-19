@@ -67,7 +67,7 @@
 
 |                                                               **박상민**                                                               |                                                                **박지완**                                                                |                                                               **임재원**                                                                |                                                               **최아정**                                                                |
 |:-----------------------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------:|
-| [<img src="" height=150 width=150> <br/> @psm817](https://github.com/psm817) | [<img src="" height=150 width=150> <br/> @tron0318](https://github.com/tron0318) | [<img src="" height=150 width=150> <br/> @maegon](https://github.com/maegon) | [<img src="" height=150 width=150> <br/> @ilmong06](https://github.com/ilmong06) |
+| [<img src="https://avatars.githubusercontent.com/u/150203036?v=4" height=150 width=150> <br/> @psm817](https://github.com/psm817) | [<img src="https://avatars.githubusercontent.com/u/52211840?v=4" height=150 width=150> <br/> @tron0318](https://github.com/tron0318) | [<img src="https://avatars.githubusercontent.com/u/30003447?v=4" height=150 width=150> <br/> @maegon](https://github.com/maegon) | [<img src="https://avatars.githubusercontent.com/u/161570008?v=4" height=150 width=150> <br/> @ilmong06](https://github.com/ilmong06) |
 
 </div>
 
@@ -109,10 +109,8 @@
 - **기능**
   - 메인페이지 상단 메뉴바와 하단 플레이바 고정
   - 하단 플레이바를 통한 음악 재생, 일시정지, 좋아요 기능
-  - 최신 및 추천 음악, 필수 공지사항 게시
-  - 조회수가 가장 많은 순서로 스튜디오 나열
   - 차트 목록에서 TOP100, 장르별 음악 리스팅
-  - 차트 목록에서 선택한 음악 플레이리스트에 담아두기 기능
+  - 차트 목록에서 선택한 음악 개인 플레이리스트에 담아두기 기능
 
 <br>
 
@@ -125,6 +123,7 @@
   - 비밀번호 분실 시, 임시 비밀번호 이메일로 발송
   - 아이디 기억하기 기능
   - 회원가입 전 약관동의 및 저작권 법률 고지 안내
+  - 메인 헤더에서 전체 음악 검색 기능
 
 <br>
 
@@ -175,6 +174,7 @@
                         ├── entity.BoardType.java
                         ├── entity.Post.java
                         ├── entity.PostComment.java
+                        ├── entity.PostForm.java
                         ├── repository.PostCommnetRepository.java
                         ├── repository.PostRepository.java
                         ├── service.PostCommentService.java
@@ -188,7 +188,10 @@
                   ├── config
                           ├── WebMvcConfig.java
                   ├── initData
+                          ├── DataFileUtils.java
                           ├── Dev.java
+                          ├── TestFileUtils.java
+                          ├── TestFileUtilsConfig.java
                   ├── jpa
                        ├── BaseEntity.java
                   ├── security
@@ -205,13 +208,14 @@
                           ├── comment.css
                           ├── comment_detail.css
                    ├── images
-                          ├── login (소셜로그인 관련 이미지)
-                          ├── slide_img (슬라이드 배너 관련 이미지)
-                          ├── uploads (프로필사진, 음악파일)
+                          ├── login
+                          ├── slide_img
+                          ├── uploads
                           ├── ApollonLogo.png
                           ├── ApollonLogo_dark.png
                           ├── My project.png
                           ├── none.png
+                          ├── studio_img.png
                    ├── member
                          ├── login.css
                          ├── myPage.css
@@ -225,6 +229,7 @@
                          ├── postDetail.css
                          ├── postLayout.css
                          ├── postList.css
+                         ├── postProfile1.css
                          ├── postWrite.css
                    ├── footerStyle.css
                    ├── headerStyle.css
@@ -240,13 +245,23 @@
                             ├── comment_form.html
                     ├── member
                            ├── login.html
+                           ├── myPage.html
+                           ├── reset-password.html
                            ├── signup.html
                            ├── signup2.html
+                           ├── signup_modify.html
+                           ├── signup_modify2.html
                     ├── music
+                          ├── modify_form.html
+                          ├── musicDetail.html
+                          ├── musicDetail_form.html
                           ├── upload_form.html
                     ├── post
                           ├── post_detail.html
                           ├── post_list.html
+                          ├── post_modifyForm.html
+                          ├── post_profile.html
+                          ├── post_write.html
                     ├── sendmail
                             ├── password.html
                     ├── studio
@@ -265,20 +280,20 @@
 ## 작업 관리 방법
 
 - GitHub Projects와 Issues를 사용하여 진행 상황을 공유했습니다.
-- 매일 본인의 작업 양을 소화하고 각자 구현한 기능을 서로 테스트하며 프로그램의 신뢰성을 쌓았습니다.
+- 매일 본인의 작업 양을 소화하고 각자 구현한 기능을 서로 테스트하며 프로그램의 신뢰성을 높였습니다.
 
 
 ## 페이지별 기능 소개
 
-### [초기화면]
+### [메인화면]
 - 서비스 접속 초기화면으로 splash 화면이 잠시 나온 뒤 다음 페이지가 나타납니다.
   - 로그인이 되어 있지 않은 경우 : SNS 로그인 페이지
   - 로그인이 되어 있는 경우 : README 홈 화면
 - SNS(카카오톡, 구글, 페이스북) 로그인 기능은 구현되어 있지 않습니다.
 
-| 초기화면 |
-|----------|
-|![splash](https://user-images.githubusercontent.com/112460466/210172920-aef402ed-5aef-4d4a-94b9-2b7147fd8389.gif)|
+| 메인화면                                                                                                              |
+|-------------------------------------------------------------------------------------------------------------------|
+| ![splash](https://user-images.githubusercontent.com/112460466/210172920-aef402ed-5aef-4d4a-94b9-2b7147fd8389.gif) |
 
 <br>
 
@@ -293,16 +308,16 @@
 
 <br>
 
-### [프로필 설정]
+### [마이페이지]
 - 회원가입 페이지의 유효성 검사를 통과해야 진입할 수 있습니다.
 - 프로필 설정에 필요한 프로필 사진, 사용자 이름, 계정 ID, 소개를 입력받습니다.
 - 사용자 이름과 계정 ID는 필수 입력사항입니다.
 - 계정 ID에는 형식 및 중복 검사가 진행됩니다.
 - 프로필 사진은 등록하지 않을 경우 기본 이미지가 등록됩니다.
 
-| 프로필 설정 |
-|----------|
-|![setProfile](https://user-images.githubusercontent.com/112460466/210173749-2da6c9af-eb93-4eea-9663-1a03e19299ec.gif)|
+| 마이페이지                                                                                                                 |
+|-----------------------------------------------------------------------------------------------------------------------|
+| ![setProfile](https://user-images.githubusercontent.com/112460466/210173749-2da6c9af-eb93-4eea-9663-1a03e19299ec.gif) |
 
 <br>
 
@@ -328,7 +343,7 @@
 
 <br>
 
-### [상하단 배너]
+### [Header, Footer]
 - 상단 배너 : 각 페이지별로 다른 종류의 버튼을 가지고 있습니다.
   - 뒤로가기 : 브라우저 상에 기록된 이전 페이지로 돌아갑니다.
   - 검색 : 사용자 검색 페이지로 이동합니다.
@@ -338,9 +353,9 @@
     - 사용자 프로필 페이지 - 설정 및 사용자 정보, 로그아웃
 - 하단 탭 메뉴 : 홈, 채팅, 게시물 작성, 프로필 아이콘을 클릭하면 각각 홈 피드, 채팅 목록, 게시글 작성 페이지, 내 프로필 페이지로 이동합니다.
 
-| 상하단 배너 |
-|----------|
-|![tab](https://user-images.githubusercontent.com/112460466/210178028-3185f944-6ac1-468a-94ba-b32cdc5e380e.gif)|
+| Header, Footer                                                                                                 |
+|----------------------------------------------------------------------------------------------------------------|
+| ![tab](https://user-images.githubusercontent.com/112460466/210178028-3185f944-6ac1-468a-94ba-b32cdc5e380e.gif) |
 
 <br>
 
