@@ -54,7 +54,7 @@ public class PlaylistController {
         // 재생목록 저장
         playlistService.savePlaylist(playlist);
 
-        return "redirect:/";
+        return "redirect:/chart/TOP100";
     }
 
     @GetMapping("/play")
