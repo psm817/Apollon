@@ -70,6 +70,9 @@
             <i class="material-icons fa-solid fa-volume-low fa-lg volume" onclick="handleVolume()"></i>
           </div>
         </div>
+        <div class="footer_play_musicRight">
+            <img th:src="@{/images/ApollonLogo.png}" alt="로고사진">
+        </div>
       </div>
       <!-- 내 플레이 리스트 보기 -->
       <div class="show_myPlayList" id="myPlayList">
@@ -93,7 +96,7 @@
               </div>
             </li>
             <li sec:authorize="!isAuthenticated()" class="notLogin_m">
-              <span class="notLogin_message">플레이리스트에 음악 추가는 로그인 후 이용가능합니다.<br/><br/>로그인 후 차트목록 메뉴를 통해 음악을 추가해주세요.</span>
+              <span class="notLogin_message">플레이리스트에 음악 추가는 로그인 후 이용가능합니다.<br/><br/>로그인 후 '차트 목록' 메뉴를 통해 음악을 추가해주세요.</span>
             </li>
           </ul>
         </div>
