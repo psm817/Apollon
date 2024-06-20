@@ -18,6 +18,10 @@
         padding: 20px;
         margin: 20px 0;
         background-color: #f9f9f9;
+        display: flex;
+          align-items: center;
+
+
 
     }
 
@@ -153,10 +157,17 @@
         cursor: pointer;
     }
 
-    .upload-button img {
+    .detailHeaderProfile > img {
         width: 20px;
         height: 20px;
+        margin-left: 260px;
     }
+    .modifyImg{
+    width: 20px;
+            height: 20px;
+            margin-left: 330px;
+    }
+
 
     .submit-button {
         background-color: #333;
@@ -185,6 +196,7 @@
 
     .modifyPostButton,
     .deletePostButton {
+
         color: #FFFFFF;
         border: none;
         padding: 8px 16px;
@@ -194,22 +206,11 @@
         border-radius: 8px;
     }
 
-    .modifyPostButton,
-        .deletePostButton {
 
-            color: #FFFFFF;
-            border: none;
-            padding: 8px 16px;
-            cursor: pointer;
-            margin-left: 10px;
-            background-color:#36454F;
-            border-radius: 8px;
-
-        }
     .modifyPostButton {
 
 
-            margin-left: 250px;
+
 
         }
 
@@ -239,18 +240,27 @@
             font-size: 1.1em;
             line-height: 1.4; /* Line height for better readability */
         }
-.Board-type-1 >img {
-  width: 40px;
-  height: 40px;
-  margin-left: 280px;
 
-}
 .detailPostBoardType {
     border: 1px solid grey;
     padding: 10px;
     border-radius: 8px;
 
 }
+.detailHeaderProfile{
+
+flex:3;
+}
+.detailHeaderButtonBox{
+display: flex;
+
+}
+.postDetailBodyTitle h1,
+    .postDetailBodyContent span {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
 
 
 

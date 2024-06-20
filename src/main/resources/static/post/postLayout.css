@@ -245,5 +245,7 @@ hr {
 .todayHotPost-title {
   width: 300px;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
 }

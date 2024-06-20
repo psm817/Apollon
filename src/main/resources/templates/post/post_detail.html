@@ -74,19 +74,24 @@
             <div class="board-type box detailHeader">
                 <div class="Board-type-1">
                     <span class="detailPostBoardType" th:text="${post.boardType}"></span>
+                </div>
+                <div class="detailHeaderProfile">
                     <img src="/images/none.png" alt="Your Logo" class="logo">
                     <span class="profile-id" th:text="${post.author.nickname}"></span>
                 </div>
-                <div class="modifyPostButton" th:if="${#authorization.expression('isAuthenticated()')}">
-                    <a th:href="@{/post/modify/{id}(id=${post.id})}" class="btn btn-sm btn-outline-secondary"
-                       th:text="수정"></a>
+
+                <div class="detailHeaderButtonBox">
+                    <div class="modifyPostButton" th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.username == post.author.username}">
+                        <a th:href="@{/post/modify/{id}(id=${post.id})}" class="btn btn-sm btn-outline-secondary" th:text="수정"></a>
+                    </div>
                 </div>
 
-                <div class="deletePostButton" th:if="${#authorization.expression('isAuthenticated()')}">
-                    <a href="javascript:void(0);" th:data-uri="@{|/post/delete/${post.id}|}"
-                       class="delete btn btn-sm btn-outline-secondary"
-                       th:text="삭제"></a>
+                <div class="detailHeaderButtonBox">
+                    <div class="deletePostButton" th:if="${#authorization.expression('isAuthenticated()') and (#authentication.principal.username == post.author.username or #authentication.principal.username == 'admin')}">
+                        <a href="javascript:void(0);" th:data-uri="@{|/post/delete/${post.id}|}" class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a>
+                    </div>
                 </div>
+
 
             </div>
             <div class="postDetail-box box detailBox">
@@ -94,8 +99,13 @@
 
 
                 <div class="postDetail-body">
-                    <h1 th:text="${post.title}"></h1>
-                    <div th:text="${post.content}"></div>
+                    <div class="postDetailBodyTitle">
+                        <h1 th:text="${post.title}"></h1>
+                    </div>
+                    <div class="postDetailBodyContent">
+                        <span th:text="${post.content}"></span>
+                    </div>
+
                 </div>
 
                 <div class="postDetail-footer">
@@ -140,7 +150,7 @@
                                 <strong th:text="${comment.author.username}"></strong>
                                 <span th:text="${comment.createDate}"></span>
                                 <p th:text="${comment.content}"></p>
-                                <th:block th:if="${#authentication.principal.username == comment.author.username}">
+                                <th:block th:if="${(#authentication.principal.username == comment.author.username) or #authentication.principal.username == 'admin'}">
                                     <form th:action="@{/post/detail/{postId}/comment/delete/{commentId}(postId=${post.id}, commentId=${comment.id})}" method="post">
                                         <button type="button" class="delete-comment-button" onclick="confirmDelete(this)">삭제</button>
                                     </form>
