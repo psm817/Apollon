@@ -4,8 +4,6 @@ import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.domain.music.service.MusicService;
 import com.example.Apollon.domain.post.entity.BoardType;
 import com.example.Apollon.domain.post.entity.Post;
-import com.example.Apollon.domain.post.entity.PostComment;
-import com.example.Apollon.domain.post.service.PostCommentService;
 import com.example.Apollon.domain.post.service.PostService;
 import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.domain.studio.service.StudioService;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
 import java.util.List;

@@ -54,7 +54,7 @@ public class MusicService {
 
     public String storeImg(MultipartFile profilePicture) {
 
-        String uploadDir = "C:\\work\\Apollon\\src\\main\\resources\\static\\uploadFile\\uploadImgs";
+        String uploadDir = "C:\\Users\\user\\IdeaProjects\\Apollon\\src\\main\\resources\\static\\uploadFile\\uploadImgs";
 
         Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
@@ -77,7 +77,7 @@ public class MusicService {
 
     public String storeMp3(MultipartFile profilePicture) {
 
-        String uploadDir = "C:\\work\\Apollon\\src\\main\\resources\\static\\uploadFile\\uploadMusics";
+        String uploadDir = "C:\\Users\\user\\IdeaProjects\\Apollon\\src\\main\\resources\\static\\uploadFile\\uploadMusics";
 
         Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
@@ -109,6 +109,11 @@ public class MusicService {
         Member member = getMemberId(memberId);
         music.getMusicLikers().remove(member);
         musicRepository.save(music);
+    }
+
+    public void playCountMusic(Music music, Member member) {
+        music.addMusicPlayCount(member);
+        this.musicRepository.save(music);
     }
 
     // 원하는 음악을 가져오는데 음악 없으면 찾을 수 없다고 표시
@@ -208,5 +213,9 @@ public class MusicService {
     }
     public List<Music> searchMusic(String keyword) {
         return musicRepository.findByMusicTitleContainingIgnoreCase(keyword);
+    }
+
+    public List<Music> getGenreChartByGenres() {
+        return musicRepository.findByGenreChartByGenres();
     }
 }
