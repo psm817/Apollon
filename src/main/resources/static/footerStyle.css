@@ -38,7 +38,7 @@ audio{
 /* 푸터 컨테이너 커스텀 */
 .footer_container {
     margin-left: auto; margin-right: auto;
-    width: 1800px; height: 480px;
+    width: 1500px; height: 480px;
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -53,7 +53,7 @@ audio{
 
 /* 음악 플레이바 */
 .footer_play_box {
-    background-color: #111111;
+    background-color: rgba(17, 17, 17, 0.85);
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     display: flex;
@@ -69,7 +69,7 @@ audio{
 .music_myPlayList_box {
     width: 30px; height: 25px;
     display: flex;
-    margin-left: 900px;
+    margin-left: 750px;
 }
 
 /* 확장버튼 */
@@ -285,7 +285,7 @@ input[type="range"] {
 
 .music_timeLine {
     height: 20px;
-    margin-top: 10px;
+    margin-top: 15px;
     width: 840px;
     display: flex; justify-content: center;
 }
@@ -294,7 +294,7 @@ input[type="range"] {
 .volume-box {
     display: none;
     position: absolute;
-    left: 65%;
+    left: 78%;
     top: 10px;
     transform: translateX(-50%);
     z-index: 1;
@@ -347,12 +347,9 @@ input[type="range"] {
 }
 
 /* 음악 플레이바 오른쪽 */
-
-.footer_play_musicInformation {
-    width: 630px; height: 60px;
-    margin-right: 50px;
-    display:flex;
-    justify-content: flex-end;
+.footer_play_musicRight {
+    margin-right: 25px;
+    margin-top: -10px;
 }
 
 .btn-box {
@@ -362,45 +359,7 @@ input[type="range"] {
 }
 
 .btn-box > .volume {
-    margin-left: 60px;
-}
-
-.footer_play_musicInfo {
-    display: flex;
-    align-items: center;
-}
-
-/* 플레이바 오른쪽 곡 썸네일 */
-.info_thumbnail {
-    width: 170px; height: 60px;
-    display: flex;
-    justify-content: center;
-}
-.info_info_thumbnail_frame {
-    width: 120px; height: 50px;
-    margin-bottom: 10px;
-    border: 1px solid red;
-}
-
-
-/* 플레이바 오른쪽 곡 정보 */
-.info_box {
-    width: 300px; height: 50px;
-    border: 1px solid orange;
-    display: flex; flex-direction: column;
-    margin-bottom: 10px;
-}
-.info_uploadUser {
-    height: 20px;
-}
-
-.info_musicTitle {
-    height: 30px;
-}
-
-.info_uploadUser a,
-.info_musicTitle a {
-    color: #FFF;
+    margin-left: 30px;
 }
 
 /* 내 재생 목록 */
@@ -408,16 +367,16 @@ input[type="range"] {
     color: #FFF;
     display: none;
     font-size: 24px;
-    height: 340px;
+    height: 390px;
     background-color: #111111;
 }
 
 .show_myPlayList_list {
-    width: 1650px;
+    width: 1400px;
     margin-left: auto; margin-right: auto;
     padding: 15px;
     border: 1px solid #3D3D3D;
-    height: 340px;
+    height: 360px;
     list-style: none;
     overflow-y: auto;
 }
