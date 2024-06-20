@@ -70,6 +70,7 @@
                       </button>
                     </form>
                   </div>
+                  <div class="music_imp" th:if="${#authorization.expression('isAnonymous()')}"></div>
                   <!-- 해당곡 재생하기 -->
                   <div class="music_p">
                     <span><i class="fa-solid fa-play"></i></span>
@@ -81,9 +82,5 @@
         </div>
       </div>
     </div>
-    
   </div>
-  <script>
-  </script>
-
 </html>
