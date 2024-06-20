@@ -39,7 +39,7 @@ public class PlaylistService {
     }
 
     public Playlist getPlaylist(long memberId) {
-        return playlistRepository.findAllById(memberId);
+        return playlistRepository.findByMemberId(memberId);
     }
 
     public void savePlaylist(Playlist playlist) {

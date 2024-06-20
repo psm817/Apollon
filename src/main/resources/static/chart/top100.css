@@ -32,11 +32,6 @@ input: focus {
     overflow-y: auto;
 }
 
-.TOP100_cont_sec {
-    overflow: hidden;
-    overflow-y: auto;
-}
-
 /* 상단 nav 추가 */
 .chartList_nav {
     height: 48px;
@@ -120,12 +115,12 @@ input: focus {
 }
 
 .TOP100_nav > ul > li:nth-child(4) {
-    width: 660px;
+    width: 653px;
     text-align: left;
 }
 
 .TOP100_nav > ul > li:nth-child(5) {
-    width: 265px;
+    width: 270px;
     text-align: left;
 }
 

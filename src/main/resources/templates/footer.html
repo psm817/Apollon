@@ -70,77 +70,56 @@
             <i class="material-icons fa-solid fa-volume-low fa-lg volume" onclick="handleVolume()"></i>
           </div>
         </div>
-        <!-- 플레이바 오른쪽 박스 -->
-        <div class="footer_play_musicInformation">
-          <div class="footer_play_musicInfo">
-            <!-- 곡 정보 썸네일 이미지 -->
-            <div class="info_thumbnail">
-              <div class="info_info_thumbnail_frame">
-                <!--                 <img th:src="@{|${music.thumnailImg}}" alt="">-->
-              </div>
-            </div>
-            <!-- 곡 정보 제목, 올린 사람 -->
-            <div class="info_box">
-              <div class="info_uploadUser">
-                <a href="#" th:each="music : ${playlist}" th:text="${music.user}"></a>
-              </div>
-              <div class="info_musicTitle">
-                <a href="#" th:each="music : ${playlist}" th:text="${music.title}"></a>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <!-- 내 플레이 리스트 보기 -->
-      <nav class="show_myPlayList" id="myPlayList">
+      <div class="show_myPlayList" id="myPlayList">
         <div class="show_myPlayList_list">
           <ul>
             <!-- 타임리프를 사용하여 memberMusic 변수에 저장된 음악 데이터를 반복하여 출력 -->
             <li sec:authorize="isAuthenticated()" class="show_myPlayList_list-num"
-                th:each="playlist, iterStat : ${playlistsMusic}">
-              <span class="myPlayList_number" th:text="${iterStat.index + 1}"></span>
-              <div class="myPlayList_musicTitle">
-                <div class="myPlayList-thumbImg">
-                  <img style="width: 50px;" th:src="${playlist.musicPlayList.thumbnailImg}" alt="사진 없음">
+                th:each="playlist : ${playList}">
+              <div class="myPlayList_musicTitle" th:each="music, iterStat : ${playlist.musicPlayList}">
+                <div class="number">
+                  <span th:text="${iterStat.index + 1}"></span>
                 </div>
-                <a class="myPlayList-musicTi" th:href="@{/music/detail/{id}(id=${playlist.id})}"
-                   th:text="${playlist.musicPlayList.musicTitle}"></a>
-                <a class="myPlayList-upstu" th:href="@{/studio/{id}(id=${playlist.studio.id})}"
-                   th:text="${playlist.musicPlayList.studio.member.username}"></a>
-              </div>
-              <div class="music_play">
-                <span><i class="fa-solid fa-play"></i></span>
+                <div class="myPlayList-thumbImg">
+                  <img th:src="${music.thumbnailImg}" alt="사진 없음">
+                </div>
+                <a class="myPlayList-musicTi" th:href="@{/chart/music/detail/{id}(id=${music.id})}"
+                   th:text="${music.musicTitle}"></a>
+                <div class="music_play">
+                  <span><i class="fa-solid fa-play"></i></span>
+                </div>
               </div>
             </li>
             <li sec:authorize="!isAuthenticated()" class="notLogin_m">
-              <span class="notLogin_message">로그인 후 이용해주세요</span>
+              <span class="notLogin_message">플레이리스트에 음악 추가는 로그인 후 이용가능합니다.<br/><br/>로그인 후 차트목록 메뉴를 통해 음악을 추가해주세요.</span>
             </li>
           </ul>
         </div>
-      </nav>
-      <!-- 내 플레이 리스트 보기 끝 -->
+      </div>
     </div>
   </div>
-  
+
   <!-- 재생목록 표출시 html, css로 구현 가능한데 코드가 길어져서 자바스크립트 추가 -->
   <script>
     var audio = new Audio(); // 오디오 객체 생성
     var currentTrackId = null; // 현재 재생 중인 트랙 ID
-    
+
     var music = document.querySelector('.music-element')
     var playBtn = document.querySelector('.play')
     var seekbar = document.querySelector('.seekbar')
     var currentTime = document.querySelector('.current-time')
     var duration = document.querySelector('.duration')
 
-  
+
     // 재생목록 열기/닫기
     function togglePlaylist() {
       var footerContainer = document.querySelector('.footer_container');
       var upIcon = document.querySelector('.fa-angle-up');
       var downIcon = document.querySelector('.fa-angle-down');
       var showMyPlayList = document.querySelector('.show_myPlayList');
-  
+
       if (footerContainer.classList.contains('open')) {
         upIcon.style.display = 'block';
         downIcon.style.display = 'none';
@@ -164,7 +143,7 @@
       }
       isShuffle = !isShuffle; // 셔플 상태를 토글
     }
-  
+
     // 반복
     var repIcon = document.querySelector('.repeat')
     function handleRepeat() {
@@ -179,22 +158,22 @@
             repIcon.classList.toggle('active')
         }
     }
-    
+
     // 볼륨 조절
     var volIcon = document.querySelector('.volume')
     var volBox = document.querySelector('.volume-box')
     var volumeRange = document.querySelector('.volume-range')
     var volumeDown = document.querySelector('.volume-down')
     var volumeUp = document.querySelector('.volume-up')
-    
+
     function handleVolume() {
         volIcon.classList.toggle('active')
         volBox.classList.toggle('active')
     }
-    
+
     volumeDown.addEventListener('click', handleVolumeDown);
     volumeUp.addEventListener('click', handleVolumeUp);
-    
+
     function handleVolumeDown() {
         volumeRange.value = Number(volumeRange.value) - 20
         music.volume = volumeRange.value / 100
@@ -203,8 +182,8 @@
         volumeRange.value = Number(volumeRange.value) + 20
         music.volume = volumeRange.value / 100
     }
-  
-  
+
+
     // 재생, 일시정지
     function handlePlay() {
         if (music.paused) {
@@ -222,7 +201,7 @@
             music.currentTime = 0
         });
     }
-    
+
     music.onloadeddata = function () {
         seekbar.max = music.duration
         var ds = parseInt(music.duration % 60)
@@ -236,8 +215,8 @@
         var cm = parseInt((music.currentTime / 60) % 60)
         currentTime.innerHTML = cm + ':' + cs
     }, false)
-    
+
     // 이전곡, 이후곡
-  
+
   </script>
 </nav>
