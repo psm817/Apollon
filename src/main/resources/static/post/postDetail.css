@@ -160,12 +160,11 @@
     .detailHeaderProfile > img {
         width: 20px;
         height: 20px;
-        margin-left: 260px;
+        margin-left: 280px;
     }
-    .modifyImg{
-    width: 20px;
-            height: 20px;
-            margin-left: 330px;
+    .detailHeaderProfile > span:nth-child(1){
+
+            margin-left: 280px;
     }
 
 
