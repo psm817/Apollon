@@ -17,10 +17,14 @@
 }
 
 .Board-type-1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
     font-size: 1.2em;
     font-weight: bold;
-    margin-left:330px;
-
+    margin-left: 20px;
 }
 
 /* Post write box styling */
