@@ -16,15 +16,6 @@
             <div class="growSet BeforeMusic_icon">
               <i class="fa-solid fa-backward-step fa-lg"></i>
             </div>
-            <!-- 재생 아이콘 -->
-            <div class="growSet playMusic_icon">
-              <audio preload="auto" id="audio" controls type="audio/mpeg">
-                <!--                <source src="@{${/static/uploadFile/uploadMusics/music.musicMp3}}">-->
-              </audio>
-              <span class="play" onclick="handlePlay()">
-                    <i class="material-icons fa-solid fa-play fa-lg"></i>
-                  </span>
-            </div>
             <!-- 이후 곡 아이콘 -->
             <div class="growSet afterMusic_icon">
               <i class="fa-solid fa-forward-step fa-lg"></i>
@@ -48,10 +39,12 @@
             <div class="music_timeLine">
               <div class="timeLine_bar">
                 <div class="music-box">
-                  <!-- 곡이 재생되고 있는 타이머(?) -->
-                  <span class="current-time"></span>
+                  <!-- 재생 중인 시간 -->
+                  <span class="current-time">0:00</span>
+                  <!-- 타임라인 seekbar -->
                   <input type="range" step="1" class="seekbar" value="0" min="0" max="100" oninput="handleSeekBar()">
-                  <span class="duration"></span>
+                  <!-- 전체 재생 시간 -->
+                  <span class="duration">0:00</span>
                 </div>
               </div>
             </div>
@@ -115,14 +108,14 @@
     var audio = new Audio(); // 오디오 객체 생성
     var currentTrackId = null; // 현재 재생 중인 트랙 ID
 
-    var music = document.querySelector('.music-element')
-    var playBtn = document.querySelector('.play')
-    var seekbar = document.querySelector('.seekbar')
-    var currentTime = document.querySelector('.current-time')
-    var duration = document.querySelector('.duration')
+    // DOM 요소들 가져오기
+    var music = document.querySelector('.music-element');
+    var playBtn = document.querySelector('.play');
+    var seekbar = document.querySelector('.seekbar');
+    var currentTime = document.querySelector('.current-time');
+    var duration = document.querySelector('.duration');
 
-
-    // 재생목록 열기/닫기
+    // 재생목록 열기/닫기 함수
     function togglePlaylist() {
       var footerContainer = document.querySelector('.footer_container');
       var upIcon = document.querySelector('.fa-angle-up');
@@ -140,35 +133,63 @@
       }
       footerContainer.classList.toggle('open');
     }
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.music_play').forEach(playButton => {
-    playButton.addEventListener('click', () => {
-      const audioPlayer = playButton.querySelector('audio');
-      const playPauseBtn = playButton.querySelector('.play-pause');
 
-      if (audioPlayer) {
-        // 현재 재생 중인 다른 오디오가 있다면 정지합니다.
-        document.querySelectorAll('audio').forEach(audio => {
-          if (audio !== audioPlayer) {
-            audio.pause();
-            audio.currentTime = 0;
+    // 음악 재생 버튼 클릭 시 처리
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.music_play').forEach(playButton => {
+        playButton.addEventListener('click', () => {
+          const audioPlayer = playButton.querySelector('audio');
+          const playPauseBtn = playButton.querySelector('.play-pause');
+
+          if (audioPlayer) {
+            // 현재 재생 중인 다른 오디오가 있다면 정지합니다.
+            document.querySelectorAll('audio').forEach(audio => {
+              if (audio !== audioPlayer) {
+                audio.pause();
+                audio.currentTime = 0;
+              }
+            });
+
+            if (audioPlayer.paused) {
+              audioPlayer.style.display = 'block';
+              audioPlayer.play();
+              playPauseBtn.querySelector('.fa-play').style.display = 'none';
+              playPauseBtn.querySelector('.fa-pause').style.display = 'inline-block';
+
+              // 재생 시 seekbar 업데이트
+              audioPlayer.addEventListener('timeupdate', () => {
+                updateSeekBar(audioPlayer);
+              });
+            } else {
+              audioPlayer.pause();
+              audioPlayer.style.display = 'none';
+              playPauseBtn.querySelector('.fa-play').style.display = 'inline-block';
+              playPauseBtn.querySelector('.fa-pause').style.display = 'none';
+            }
           }
         });
-
-        if (audioPlayer.paused) {
-          audioPlayer.style.display = 'block';
-          audioPlayer.play();
-          playPauseBtn.querySelector('.fa-play').style.display = 'none';
-          playPauseBtn.querySelector('.fa-pause').style.display = 'inline-block';
-        } else {
-          audioPlayer.pause();
-          audioPlayer.style.display = 'none';
-          playPauseBtn.querySelector('.fa-play').style.display = 'inline-block';
-          playPauseBtn.querySelector('.fa-pause').style.display = 'none';
-        }
-      }
+      });
     });
-  });
-});
+
+    // seekbar 업데이트 함수
+    function updateSeekBar(audio) {
+      seekbar.value = (audio.currentTime / audio.duration) * 100;
+      currentTime.textContent = formatTime(audio.currentTime);
+      duration.textContent = formatTime(audio.duration);
+    }
+
+    // seekbar 조작 시간 변경 함수
+    function handleSeekBar() {
+      const newTime = audio.duration * (seekbar.value / 100);
+      audio.currentTime = newTime;
+      currentTime.textContent = formatTime(newTime);
+    }
+
+    // 시간 포맷 함수 (분:초)
+    function formatTime(time) {
+      const minutes = Math.floor(time / 60);
+      const seconds = Math.floor(time % 60);
+      return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    }
   </script>
 </nav>

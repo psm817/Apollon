@@ -283,12 +283,37 @@ input[type="range"] {
     border-radius: 100%;
   }
 
+/* 타임라인 바 스타일 */
 .music_timeLine {
-    height: 20px;
-    margin-top: 10px;
-    width: 840px;
-    display: flex; justify-content: center;
+  margin-top: 10px;
+  width: 840px;
+  display: flex;
+  justify-content: center;
 }
+
+.timeLine_bar {
+  width: 100%;
+}
+
+.music-box {
+  display: flex;
+  align-items: center;
+}
+
+.current-time,
+.duration {
+  width: 60px;
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  margin: 0 10px;
+}
+
+.seekbar {
+  width: 100%;
+  margin: 0 10px;
+}
+
 
 /* 볼륨 */
 .volume-box {
