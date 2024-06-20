@@ -141,6 +141,9 @@ public class MemberController {
     @GetMapping("/myPage")
     public String myPage(Principal principal, Model model) {
         Member member = this.memberService.getMember(principal.getName());
+        Playlist playList = this.playlistService.getPlaylist(member.getId());
+
+        model.addAttribute("playList", playList);
 
         model.addAttribute("member", member);
 
@@ -157,6 +160,10 @@ public class MemberController {
         } else {
             // 일반 가입 사용자인 경우 modify 페이지로 이동
             model.addAttribute("member", member);
+
+            Playlist playList = this.playlistService.getPlaylist(member.getId());
+            model.addAttribute("playList", playList);
+
             return "member/signup_modify";
         }
     }
@@ -167,6 +174,10 @@ public class MemberController {
         if (principal.getName().startsWith("KAKAO") || principal.getName().startsWith("NAVER") || principal.getName().startsWith("GOOGLE")) {
             // 소셜 로그인 사용자인 경우 modify2 페이지로 이동
             model.addAttribute("member", member);
+
+            Playlist playList = this.playlistService.getPlaylist(member.getId());
+            model.addAttribute("playList", playList);
+
             return "member/signup_modify2";
         } else {
             // 일반 가입 사용자인 경우 modify 페이지로 이동

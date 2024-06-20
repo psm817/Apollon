@@ -7,6 +7,8 @@
     import com.example.Apollon.domain.member.service.MemberService;
     import com.example.Apollon.domain.music.entity.Music;
     import com.example.Apollon.domain.music.service.MusicService;
+    import com.example.Apollon.domain.playlist.entity.Playlist;
+    import com.example.Apollon.domain.playlist.service.PlaylistService;
     import com.example.Apollon.domain.studio.entity.Studio;
     import com.example.Apollon.domain.studio.service.StudioService;
     import lombok.RequiredArgsConstructor;
@@ -29,6 +31,7 @@
         private final MemberService memberService;
         private final MusicService musicService;
         private final CommentService commentService;
+        private final PlaylistService playlistService;
 
         @PreAuthorize("isAuthenticated()")
         @GetMapping("/{username}")
@@ -50,6 +53,11 @@
                 model.addAttribute("kw", kw);
                 model.addAttribute("commentList", commentList);
                 model.addAttribute("musicList", musicList);
+
+                Member member = memberService.getMember(principal.getName());
+                Playlist playList = this.playlistService.getPlaylist(member.getId());
+
+                model.addAttribute("playList", playList);
 
                 if(username.equals(loginedUsername) && studio.getActive() == 0) {
                     return "redirect:/";
@@ -139,6 +147,15 @@
 
             model.addAttribute("studio", studio);
 
+
+            if (studio != null) {
+                // 회원별 플레이리스트가져오기(만들고 모델링해주고 푸터에서 넣어보자)
+                Member member = memberService.getMember(principal.getName());
+                Playlist playList = this.playlistService.getPlaylist(member.getId());
+
+                model.addAttribute("playList", playList);
+            }
+
             return "music/upload_form";
         }
 
@@ -166,6 +183,14 @@
 
             model.addAttribute("studio", studio);
             model.addAttribute("music", music);
+
+            if (studio != null) {
+                // 회원별 플레이리스트가져오기(만들고 모델링해주고 푸터에서 넣어보자)
+                Member member = memberService.getMember(principal.getName());
+                Playlist playList = this.playlistService.getPlaylist(member.getId());
+
+                model.addAttribute("playList", playList);
+            }
 
             return "music/modify_form";
         }

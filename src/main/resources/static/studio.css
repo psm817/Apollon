@@ -211,6 +211,14 @@ body {
     width: 100%;
 }
 
+.detail-box > .myMusic-box > form > .music-list > li > .like {
+    width: 15%;
+}
+
+.detail-box > .myMusic-box > form > .music-list > li > .create-date {
+    width: 27%;
+}
+
 .detail-box > .myMusic-box > form > .music-list-detail {
     padding-left: 180px;
     box-sizing: border-box;
