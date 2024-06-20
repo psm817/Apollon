@@ -11,6 +11,8 @@ import java.util.List;
 
 @Repository
 public interface MusicRepository extends JpaRepository<Music, Long> {
+
+    @Query("SELECT m FROM Music m ORDER BY SIZE(m.musicPlayCounts) DESC")
     List<Music> findTop100ByOrderByMusicPlayCountDesc();
 
     List<Music> findByStudio(Studio studio);
@@ -21,4 +23,7 @@ public interface MusicRepository extends JpaRepository<Music, Long> {
     List<Music> findAllByOrderByMusicLikersDesc();
 
     List<Music> findByMusicTitleContainingIgnoreCase(String keyword);
+
+    @Query("SELECT m FROM Music m ORDER BY SIZE(m.genres) DESC")
+    List<Music> findByGenreChartByGenres();
 }

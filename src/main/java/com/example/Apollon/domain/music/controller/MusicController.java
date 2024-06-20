@@ -34,7 +34,14 @@ import java.util.List;
             List<Music> musicList = musicService.getTop100MusicByPlayCount();
             model.addAttribute("musicList", musicList);
             return "chart/TOP100";
-    }
+        }
+
+        @GetMapping("/genreChart")
+        public String getGenreChart(Model model) {
+            List<Music> genreMusicList = musicService.getGenreChartByGenres();
+            model.addAttribute("genreMusicList", genreMusicList);
+            return "chart/genreChart";
+        }
 
     // 곡 정보 상세보기
     @GetMapping("/music/detail/{id}")

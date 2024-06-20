@@ -35,9 +35,10 @@ public class Music extends BaseEntity {
 
     private String musicMp3;
 
+    @ElementCollection
+    @CollectionTable(name = "music_genres", joinColumns = @JoinColumn(name = "music_id"))
+    @Column(name = "genre")
     private List<String> genres;
-
-    private Long musicPlayCount = 0L;
 
     @OneToOne
     private Member member;
@@ -54,6 +55,8 @@ public class Music extends BaseEntity {
     @ManyToMany
     Set<Member> musicLikers = new LinkedHashSet<>();
 
+    @ManyToMany
+    Set<Member> musicPlayCounts = new LinkedHashSet<>();
 
     public void addMusicLike(Member liker) {
         if (this.musicLikers == null) {
@@ -61,6 +64,14 @@ public class Music extends BaseEntity {
         }
 
         this.musicLikers.add(liker);
+    }
+
+    public void addMusicPlayCount(Member member) {
+        if (this.musicPlayCounts == null) {
+            this.musicPlayCounts = new HashSet<>();
+        }
+
+        this.musicPlayCounts.add(member);
     }
     public String getMusicMp3FullPath() {
         return "/uploadFile/uploadMusics/" + this.musicMp3;

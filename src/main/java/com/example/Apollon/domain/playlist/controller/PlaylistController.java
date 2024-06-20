@@ -7,6 +7,7 @@ import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.domain.music.service.MusicService;
 import com.example.Apollon.domain.playlist.entity.Playlist;
 import com.example.Apollon.domain.playlist.service.PlaylistService;
+import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.domain.studio.service.StudioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -64,5 +65,16 @@ public class PlaylistController {
         musicService.playPlaylist((Playlist) playlist);
 
         return "redirect:/playlist/view?playlistId=" + playlistId;
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/play/{id}")
+    public String likeOrUnlikeMusic(Principal principal, @PathVariable("id") Long id) {
+        Music music = this.musicService.getMusic(id);
+        Member member = this.memberService.getMember(principal.getName());
+
+        this.musicService.playCountMusic(music, member);
+
+        return "redirect:/";
     }
 }
