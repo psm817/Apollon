@@ -3,12 +3,16 @@ package com.example.Apollon.domain.post.controller;
 import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.service.MemberService;
 
+import com.example.Apollon.domain.playlist.entity.Playlist;
+import com.example.Apollon.domain.playlist.service.PlaylistService;
 import com.example.Apollon.domain.post.entity.BoardType;
 import com.example.Apollon.domain.post.entity.Post;
 import com.example.Apollon.domain.post.entity.PostComment;
 import com.example.Apollon.domain.post.entity.PostForm;
 import com.example.Apollon.domain.post.service.PostCommentService;
 import com.example.Apollon.domain.post.service.PostService;
+import com.example.Apollon.domain.studio.entity.Studio;
+import com.example.Apollon.domain.studio.service.StudioService;
 import com.example.Apollon.global.DataNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -35,12 +39,14 @@ public class PostController {
     private final PostService postService;
     private final MemberService memberService;
     private final PostCommentService postCommentService;
+    private final StudioService studioService;
+    private final PlaylistService playlistService;
 
     @GetMapping("/list")
     public String list(Model model,
                        @RequestParam(value = "page", defaultValue = "0") int page,
                        @RequestParam(value = "boardType", required = false) BoardType boardType,
-                       Authentication authentication) {
+                       Authentication authentication, Principal principal) {
 
         Page<Post> paging;
         List<Post> noticePosts = postService.getNoticePosts(4);
@@ -73,6 +79,19 @@ public class PostController {
                 .collect(Collectors.toList());
         model.addAttribute("topPosts", topPosts);
         model.addAttribute("boardType", boardType);
+
+        // 스튜디오 진입 시 로그인된 회원 스튜디외의 차단 상태 판단을 위해 작성
+        if (principal != null) {
+            Studio studio = this.studioService.getStudioByMemberUsername(principal.getName());
+
+            if (studio != null) {
+                // 회원별 플레이리스트가져오기(만들고 모델링해주고 푸터에서 넣어보자)
+                Member member2 = memberService.getMember(principal.getName());
+                Playlist playList = this.playlistService.getPlaylist(member2.getId());
+
+                model.addAttribute("playList", playList);
+            }
+        }
 
         return "post/post_list";
     }
@@ -109,6 +128,19 @@ public class PostController {
         model.addAttribute("post", post);  // 수정된 Post 객체를 모델에 추가
         model.addAttribute("comments", comments);
 
+        // 스튜디오 진입 시 로그인된 회원 스튜디외의 차단 상태 판단을 위해 작성
+        if (principal != null) {
+            Studio studio = this.studioService.getStudioByMemberUsername(principal.getName());
+
+            if (studio != null) {
+                // 회원별 플레이리스트가져오기(만들고 모델링해주고 푸터에서 넣어보자)
+                Member member2 = memberService.getMember(principal.getName());
+                Playlist playList = this.playlistService.getPlaylist(member2.getId());
+
+                model.addAttribute("playList", playList);
+            }
+        }
+
         try {
             Post nextPost = postService.getNextPostByBoardType(post.getId(), post.getBoardType());
             model.addAttribute("nextPostId", nextPost.getId());
@@ -138,6 +170,18 @@ public class PostController {
         model.addAttribute("myPosts", myPosts);
         model.addAttribute("myComments", myComments);
         model.addAttribute("boardTypes", BoardType.values());
+
+        // 스튜디오 진입 시 로그인된 회원 스튜디외의 차단 상태 판단을 위해 작성
+        Studio studio = this.studioService.getStudioByMemberUsername(principal.getName());
+
+        if (studio != null) {
+            // 회원별 플레이리스트가져오기(만들고 모델링해주고 푸터에서 넣어보자)
+            Member member2 = memberService.getMember(principal.getName());
+            Playlist playList = this.playlistService.getPlaylist(member2.getId());
+
+            model.addAttribute("playList", playList);
+        }
+
         return "post/post_write";
     }
 
@@ -197,6 +241,17 @@ public class PostController {
         model.addAttribute("post", post);
         model.addAttribute("postForm", postForm); // Ensure the PostForm is added to the model
 
+        // 스튜디오 진입 시 로그인된 회원 스튜디외의 차단 상태 판단을 위해 작성
+        Studio studio = this.studioService.getStudioByMemberUsername(principal.getName());
+
+        if (studio != null) {
+            // 회원별 플레이리스트가져오기(만들고 모델링해주고 푸터에서 넣어보자)
+            Member member2 = memberService.getMember(principal.getName());
+            Playlist playList = this.playlistService.getPlaylist(member2.getId());
+
+            model.addAttribute("playList", playList);
+        }
+
         return "post/post_modifyForm";
     }
 
@@ -238,6 +293,18 @@ public class PostController {
         model.addAttribute("member", member);
         model.addAttribute("myPosts", myPosts);
         model.addAttribute("myComments", myComments);
+
+        // 스튜디오 진입 시 로그인된 회원 스튜디외의 차단 상태 판단을 위해 작성
+        Studio studio = this.studioService.getStudioByMemberUsername(principal.getName());
+
+        if (studio != null) {
+            // 회원별 플레이리스트가져오기(만들고 모델링해주고 푸터에서 넣어보자)
+            Member member2 = memberService.getMember(principal.getName());
+            Playlist playList = this.playlistService.getPlaylist(member2.getId());
+
+            model.addAttribute("playList", playList);
+        }
+
 
         return "post/post_profile";
     }

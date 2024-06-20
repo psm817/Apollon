@@ -6,6 +6,8 @@ import com.example.Apollon.domain.member.entity.Member;
 import com.example.Apollon.domain.member.service.MemberService;
 import com.example.Apollon.domain.music.entity.Music;
 import com.example.Apollon.domain.music.service.MusicService;
+import com.example.Apollon.domain.playlist.entity.Playlist;
+import com.example.Apollon.domain.playlist.service.PlaylistService;
 import com.example.Apollon.domain.studio.entity.Studio;
 import com.example.Apollon.domain.studio.service.StudioService;
 import lombok.RequiredArgsConstructor;
@@ -20,28 +22,47 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.List;
-    @Controller
-    @RequestMapping("/chart")
-    @RequiredArgsConstructor
-    public class MusicController {
-        @Autowired
-        private final MusicService musicService;
-        private final MemberService memberService;
-        private final StudioService studioService;
-        private final CommentService commentService;
-        @GetMapping("/TOP100")
-        public String getTop100Music(Model model) {
-            List<Music> musicList = musicService.getTop100MusicByPlayCount();
-            model.addAttribute("musicList", musicList);
-            return "chart/TOP100";
+
+@Controller
+@RequestMapping("/chart")
+@RequiredArgsConstructor
+public class MusicController {
+    @Autowired
+    private final MusicService musicService;
+    private final MemberService memberService;
+    private final StudioService studioService;
+    private final CommentService commentService;
+    private final PlaylistService playlistService;
+
+    @GetMapping("/TOP100")
+    public String getTop100Music(Model model, Principal principal) {
+        List<Music> musicList = musicService.getTop100MusicByPlayCount();
+        model.addAttribute("musicList", musicList);
+
+        if (principal != null) {
+            Studio studio = this.studioService.getStudioByMemberUsername(principal.getName());
+
+            if (studio != null) {
+                Integer studioActive = studio.getActive();
+
+                // 회원별 플레이리스트가져오기(만들고 모델링해주고 푸터에서 넣어보자)
+                Member member = memberService.getMember(principal.getName());
+                Playlist playList = this.playlistService.getPlaylist(member.getId());
+
+                model.addAttribute("studioActive", studioActive);
+                model.addAttribute("playList", playList);
+            }
         }
 
-        @GetMapping("/genreChart")
-        public String getGenreChart(Model model) {
-            List<Music> genreMusicList = musicService.getGenreChartByGenres();
-            model.addAttribute("genreMusicList", genreMusicList);
-            return "chart/genreChart";
-        }
+        return "chart/TOP100";
+    }
+
+    @GetMapping("/genreChart")
+    public String getGenreChart(Model model) {
+        List<Music> genreMusicList = musicService.getGenreChartByGenres();
+        model.addAttribute("genreMusicList", genreMusicList);
+        return "chart/genreChart";
+    }
 
     // 곡 정보 상세보기
     @GetMapping("/music/detail/{id}")
@@ -57,6 +78,17 @@ import java.util.List;
         model.addAttribute("studio", studio);
         model.addAttribute("commentList", commentList);
         model.addAttribute("musicList", musicList);
+
+
+        if (principal != null) {
+            if (studio != null) {
+                // 회원별 플레이리스트가져오기(만들고 모델링해주고 푸터에서 넣어보자)
+                Member member2 = memberService.getMember(principal.getName());
+                Playlist playList = this.playlistService.getPlaylist(member2.getId());
+
+                model.addAttribute("playList", playList);
+            }
+        }
 
         return "music/musicDetail";
     }
