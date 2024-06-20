@@ -247,7 +247,7 @@ input: focus {
     height: 60px;
     font-size: 24px;
     text-align: center;
-    color: #FFF;
+    color: #F4F4F4;
     background-color: #36454F;
     display: flex;
     align-items: center;
@@ -256,13 +256,13 @@ input: focus {
 }
 
 /* 2차 메뉴 호버 */
-.genres_nav > nav > ul
-> .g_list:hover {
-    background-color: #fff;
+.g_list:hover > .g_s {
+    background-color: #F4F4F4;
+    color: #36454F;
+    border: none;
 }
 
-.genres_nav > nav > ul
-> .g_list:hover > .genreChart_nav {
+.g_list:visited > .genreChart_nav {
     display: block;
 }
 
@@ -270,7 +270,7 @@ input: focus {
 /* 3차 메뉴 */
 .genreChart_nav {
   position: absolute;
-  background-color: #FFF;
+  background-color: #F4F4F4;
   left: 100%; top: 0;
   width: 1056px; height: 100%;
   display: flex; flex-direction: column;
