@@ -51,9 +51,6 @@
                   <!-- 곡이 재생되고 있는 타이머(?) -->
                   <span class="current-time"></span>
                   <input type="range" step="1" class="seekbar" value="0" min="0" max="100" oninput="handleSeekBar()">
-                  <audio class="music-element">
-                    <!--                    <source src="${/static/uploadFile/uploadMusics/music.musicMp3}}" type="audio/mp3">-->
-                  </audio>
                   <span class="duration"></span>
                 </div>
               </div>
@@ -69,6 +66,9 @@
           <div class="btn-box">
             <i class="material-icons fa-solid fa-volume-low fa-lg volume" onclick="handleVolume()"></i>
           </div>
+        </div>
+        <div class="footer_play_musicRight">
+          <img th:src="@{/images/ApollonLogo.png}" alt="로고사진">
         </div>
       </div>
       <!-- 내 플레이 리스트 보기 -->
@@ -87,13 +87,22 @@
                 </div>
                 <a class="myPlayList-musicTi" th:href="@{/chart/music/detail/{id}(id=${music.id})}"
                    th:text="${music.musicTitle}"></a>
-                <div class="music_play">
-                  <span><i class="fa-solid fa-play"></i></span>
+                <button class="music-delete-btn" data-music-id="${music.id}">
+                  <span>삭제</span>
+                </button>
+                <div class="music_play" data-music-src="${music.musicMp3}">
+                  <span class="play-pause">
+                    <i class="fa-solid fa-play"></i>
+                    <i class="fa-solid fa-pause fa-lg" style="display: none;"></i>
+                  </span>
+                  <audio style="display: none;">
+                    <source th:src="${music.musicMp3}" type="audio/mp3">
+                  </audio>
                 </div>
               </div>
             </li>
             <li sec:authorize="!isAuthenticated()" class="notLogin_m">
-              <span class="notLogin_message">플레이리스트에 음악 추가는 로그인 후 이용가능합니다.<br/><br/>로그인 후 차트목록 메뉴를 통해 음악을 추가해주세요.</span>
+              <span class="notLogin_message">플레이리스트에 음악 추가는 로그인 후 이용가능합니다.<br/><br/>로그인 후 '차트 목록' 메뉴를 통해 음악을 추가해주세요.</span>
             </li>
           </ul>
         </div>
@@ -131,92 +140,35 @@
       }
       footerContainer.classList.toggle('open');
     }
-    // 셔플
-    function toggleShuffle() {
-      var shuffleIcon = document.querySelector('.fa-shuffle');
-      if (!isShuffle) {
-        shuffleIcon.style.color = 'orange'; // 연한 보라색으로 변경
-        shuffle(playlist);
-      } else {
-        shuffleIcon.style.color = 'white'; // 원래 색상으로 변경
-        // 이전에 재배치된 순서로 재생되도록 하는 코드를 여기에 추가
-      }
-      isShuffle = !isShuffle; // 셔플 상태를 토글
-    }
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.music_play').forEach(playButton => {
+    playButton.addEventListener('click', () => {
+      const audioPlayer = playButton.querySelector('audio');
+      const playPauseBtn = playButton.querySelector('.play-pause');
 
-    // 반복
-    var repIcon = document.querySelector('.repeat')
-    function handleRepeat() {
-        if (music.loop == true) {
-            music.loop = false
-            repIcon.style.color = 'white'
-            repIcon.classList.toggle('active')
-        }
-        else {
-            music.loop = true
-            repIcon.style.color = 'skyblue'
-            repIcon.classList.toggle('active')
-        }
-    }
-
-    // 볼륨 조절
-    var volIcon = document.querySelector('.volume')
-    var volBox = document.querySelector('.volume-box')
-    var volumeRange = document.querySelector('.volume-range')
-    var volumeDown = document.querySelector('.volume-down')
-    var volumeUp = document.querySelector('.volume-up')
-
-    function handleVolume() {
-        volIcon.classList.toggle('active')
-        volBox.classList.toggle('active')
-    }
-
-    volumeDown.addEventListener('click', handleVolumeDown);
-    volumeUp.addEventListener('click', handleVolumeUp);
-
-    function handleVolumeDown() {
-        volumeRange.value = Number(volumeRange.value) - 20
-        music.volume = volumeRange.value / 100
-    }
-    function handleVolumeUp() {
-        volumeRange.value = Number(volumeRange.value) + 20
-        music.volume = volumeRange.value / 100
-    }
-
-
-    // 재생, 일시정지
-    function handlePlay() {
-        if (music.paused) {
-            music.play();
-            playBtn.className = 'pause'
-            playBtn.innerHTML = '<i class="material-icons fa-solid fa-pause fa-lg"></i>'
-        } else {
-            music.pause();
-            playBtn.className = 'play'
-            playBtn.innerHTML = '<i class="material-icons fa-solid fa-play fa-lg"></i>'
-        }
-        music.addEventListener('ended', function () {
-            playBtn.className = 'play'
-            playBtn.innerHTML = '<i class="material-icons fa-solid fa-play fa-lg"></i>'
-            music.currentTime = 0
+      if (audioPlayer) {
+        // 현재 재생 중인 다른 오디오가 있다면 정지합니다.
+        document.querySelectorAll('audio').forEach(audio => {
+          if (audio !== audioPlayer) {
+            audio.pause();
+            audio.currentTime = 0;
+          }
         });
-    }
 
-    music.onloadeddata = function () {
-        seekbar.max = music.duration
-        var ds = parseInt(music.duration % 60)
-        var dm = parseInt((music.duration / 60) % 60)
-        duration.innerHTML = dm + ':' + ds
-    }
-    music.ontimeupdate = function () { seekbar.value = music.currentTime }
-    handleSeekBar = function () { music.currentTime = seekbar.value }
-    music.addEventListener('timeupdate', function () {
-        var cs = parseInt(music.currentTime % 60)
-        var cm = parseInt((music.currentTime / 60) % 60)
-        currentTime.innerHTML = cm + ':' + cs
-    }, false)
-
-    // 이전곡, 이후곡
-
+        if (audioPlayer.paused) {
+          audioPlayer.style.display = 'block';
+          audioPlayer.play();
+          playPauseBtn.querySelector('.fa-play').style.display = 'none';
+          playPauseBtn.querySelector('.fa-pause').style.display = 'inline-block';
+        } else {
+          audioPlayer.pause();
+          audioPlayer.style.display = 'none';
+          playPauseBtn.querySelector('.fa-play').style.display = 'inline-block';
+          playPauseBtn.querySelector('.fa-pause').style.display = 'none';
+        }
+      }
+    });
+  });
+});
   </script>
 </nav>
