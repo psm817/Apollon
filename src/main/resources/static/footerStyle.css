@@ -410,76 +410,62 @@ input[type="range"] {
     font-size: 24px;
     height: 340px;
     background-color: #111111;
-    overflow-y: auto;
 }
 
 .show_myPlayList_list {
-    border: 1px solid red;
-    width: 1600px;
+    width: 1650px;
     margin-left: auto; margin-right: auto;
-    padding: 10px;
+    padding: 15px;
     border: 1px solid #3D3D3D;
-    background-color: #222222;
     height: 340px;
     list-style: none;
     overflow-y: auto;
 }
 
-.show_myPlayList_list li {
-    padding: 10px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #444444;
+.show_myPlayList_list > ul > li > .myPlayList_musicTitle {
     display: flex;
     align-items: center;
+    margin-bottom: 15px;
 }
 
-.show_myPlayList_list li:last-child {
-    border-bottom: none;
+.show_myPlayList_list > ul > li > .myPlayList_musicTitle > .number {
+    padding: 0px 10px 0px 10px;
+    margin-right: 20px;
 }
 
-.notLogin_m {
+.show_myPlayList_list > ul > li > .myPlayList_musicTitle > .number > span {
+    padding: 0px 10px 0px 10px;
+    margin-right: 20px;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.show_myPlayList_list > ul > li > .myPlayList_musicTitle > .myPlayList-thumbImg {
+    width: 60px;
+    height: 60px;
+    margin-right: 60px;
+}
+
+.show_myPlayList_list > ul > li > .myPlayList_musicTitle > .myPlayList-thumbImg > img {
+    width: 100%;
+    height: 100%;
+}
+
+.show_myPlayList_list > ul > li > .myPlayList_musicTitle > .myPlayList-musicTi {
+    width: 1400px;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.show_myPlayList_list > ul > .notLogin_m {
     display: flex;
     justify-content: center;
-    margin-top: 50px;
-}
-
-.notLogin_message {
-    color: #3D3D3D;
-    font-size: 80px;
-    font-weight: 600;
-}
-
-.myPlayList_number {
-    width: 100px;
+    margin-top: 70px;
     text-align: center;
 }
 
-.myPlayList_musicTitle {
-        display: flex;
-        align-items: center;
-}
-
-.myPlayList_musicTitle > .myPlayList-thumbImg {
-     width: 50px;
- }
-
- .thumbImg > img {
-     margin: 5px;
-     height: 50px;
- }
-
-.TOP100_musicTitle > .myPlayList-musicTi {
-    width: 660px;
-    text-align: left;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.music_play {
-    width: 100px;
-    text-align: center;
-}
-
-.music_play i {
-    color: #FFF;
+.show_myPlayList_list > ul > .notLogin_m > .notLogin_message {
+    color: #c7dcff;
+    font-size: 50px;
+    font-weight: 700;
 }
