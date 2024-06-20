@@ -82,8 +82,8 @@
                             </div>
                             <span class="number">번호</span>
                             <span class="music-title">곡 제목</span>
-                            <span class="like">좋아요</span>
-                            <span class="create-date">등록날짜</span>
+                            <span class="like">추천 수</span>
+                            <span class="create-date">등록 날짜</span>
                         </li>
                     </ul>
                     <ul class="music-list-detail">
@@ -94,7 +94,7 @@
                             </div>
                             <span class="number" th:text="${iterStat2.index + 1}"></span>
                             <a class="music-title" th:href="@{|/chart/music/detail/${music.id}|}">
-                                <img th:src="@{/uploadImgs/{filename}(filename=${music.thumbnailImg})}" alt="사진">
+                                <img th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                                 <span th:text="${music.musicTitle}"></span>
                             </a>
                             <div class="like">

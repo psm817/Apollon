@@ -58,9 +58,25 @@ public class MusicController {
     }
 
     @GetMapping("/genreChart")
-    public String getGenreChart(Model model) {
+    public String getGenreChart(Model model, Principal principal) {
         List<Music> genreMusicList = musicService.getGenreChartByGenres();
         model.addAttribute("genreMusicList", genreMusicList);
+
+        if (principal != null) {
+            Studio studio = this.studioService.getStudioByMemberUsername(principal.getName());
+
+            if (studio != null) {
+                Integer studioActive = studio.getActive();
+
+                // 회원별 플레이리스트가져오기(만들고 모델링해주고 푸터에서 넣어보자)
+                Member member = memberService.getMember(principal.getName());
+                Playlist playList = this.playlistService.getPlaylist(member.getId());
+
+                model.addAttribute("studioActive", studioActive);
+                model.addAttribute("playList", playList);
+            }
+        }
+
         return "chart/genreChart";
     }
 
