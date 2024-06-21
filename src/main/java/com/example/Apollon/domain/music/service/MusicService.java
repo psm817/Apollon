@@ -141,10 +141,6 @@ public class MusicService {
         }
     }
 
-    public List<Music> getTop100MusicByPlayCount() {
-        return musicRepository.findTop100ByOrderByMusicPlayCountDesc();
-    }
-
     public List<Music> getListByStudio(Studio studio) {
         return musicRepository.findByStudio(studio);
     }
@@ -211,11 +207,46 @@ public class MusicService {
 
         return top4Music;
     }
+
     public List<Music> searchMusic(String keyword) {
         return musicRepository.findByMusicTitleContainingIgnoreCase(keyword);
     }
 
     public List<Music> getGenreChartByGenres() {
         return musicRepository.findByGenreChartByGenres();
+    }
+
+    public List<Music> getTop100MusicByLikers() {
+        List<Music> allMusic = this.musicRepository.findAllByOrderByMusicLikersDesc();
+
+        if (allMusic.size() <= 100) {
+            return allMusic;
+        }
+
+        // 최대 4개의 음악을 선택하는 로직
+        List<Music> top100Music = new ArrayList<>();
+        int currentIndex = 0;
+
+        while (top100Music.size() < 100 && currentIndex < allMusic.size()) {
+            int nextIndex = currentIndex;
+
+            // 현재 musicLikers 수와 같은 음악들을 모음
+            List<Music> sameLikersMusic = new ArrayList<>();
+            int currentLikersSize = allMusic.get(currentIndex).getMusicLikers().size();
+
+            while (nextIndex < allMusic.size() && allMusic.get(nextIndex).getMusicLikers().size() == currentLikersSize) {
+                sameLikersMusic.add(allMusic.get(nextIndex));
+                nextIndex++;
+            }
+
+            // 같은 musicLikers 수를 가진 음악들을 섞어서 필요한 만큼 선택
+            Collections.shuffle(sameLikersMusic);
+            int remainingSlots = 100 - top100Music.size();
+            top100Music.addAll(sameLikersMusic.subList(0, Math.min(remainingSlots, sameLikersMusic.size())));
+
+            currentIndex = nextIndex;
+        }
+
+        return top100Music;
     }
 }

@@ -6,96 +6,100 @@ background: linear-gradient(to bottom, #cccccc 0%, #ffffff 20%, #ffffff 100%);
 
 .middle .profileContainer:nth-child(1) {
   width:300px;
-
 }
 
 .middle .profileContainer:nth-child(2) {
-margin-left:60px;
-  width:1200px;
+    margin-left:60px;
+    width:1200px;
+}
+
+.profile-content {
+    margin-top:100px;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.profile-content button {
+    height:70px;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 32px;
+    font-weight: 900;
+    border-radius: 5px;
+    background-color: transparent; /* 기본 배경색을 투명하게 설정 */
+}
+
+.profile-content button.active {
+    background-color: #d3d3d3; /* Active 상태에서 배경색을 지정 */
+    color: #fff;
+}
+
+.profileCategory-box {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+    background-color: #36454F;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.profileCategory-box span {
+    text-align: center;
+}
+
+#posts,
+#comments {
+    margin-top: 10px;
+}
+
+#posts ul,
+#comments ul {
+    list-style-type: none;
+    padding: 0;
 
 }
 
+#posts li,
+#comments li {
+    margin-bottom:20px;
+    padding-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+    align-items: center;
+    border-bottom: 1px solid #d3d3d3;
 
+}
 
-.profile-content {
-            margin-top:100px;
+#posts a,
+#comments a {
+    color: gray;
+    text-decoration: none;
+    text-align: center;
+}
 
-            border-radius: 8px;
-            padding: 20px;
-        }
+#posts a:hover,
+#comments a:hover {
+    text-decoration: underline;
+}
 
-        .profile-content button {
-            height:70px;
-            border: none;
-            padding: 10px 20px;
-            margin: 5px;
-            cursor: pointer;
-            font-size: 32px;
-            font-weight: 900;
-            border-radius: 5px;
-            background-color: transparent; /* 기본 배경색을 투명하게 설정 */
-        }
+.profile-content> span {
+    font-size:30px;
+    color:red;
+}
 
-        .profile-content button.active {
-            background-color: #d3d3d3; /* Active 상태에서 배경색을 지정 */
-            color: #fff;
-        }
+.postHeader {
+    height: 80px;
+}
 
-        .profileCategory-box {
-                    display: grid;
-                    grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
-                    background-color: #36454F;
-                    color: #fff;
-                    font-weight: bold;
-                    padding: 10px;
-                    border-radius: 8px;
-                    margin-bottom: 20px;
-                }
-
-                .profileCategory-box span {
-                    text-align: center;
-                }
-
-                #posts,
-                #comments {
-                    margin-top: 10px;
-                }
-
-                #posts ul,
-                #comments ul {
-                    list-style-type: none;
-                    padding: 0;
-
-                }
-
-                #posts li,
-                #comments li {
-                    margin-bottom:20px;
-                    padding-bottom: 20px;
-                    display: grid;
-                    grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
-                    align-items: center;
-                    border-bottom: 1px solid #d3d3d3;
-
-                }
-
-                #posts a,
-                #comments a {
-                    color: gray;
-                    text-decoration: none;
-                    text-align: center;
-
-
-
-                }
-
-                #posts a:hover,
-                #comments a:hover {
-                    text-decoration: underline;
-
-                }
-
-                .profile-content> span{
-                font-size:30px;
-                color:red;
-                }
+.postHeader > .post-logo {
+    height: 100%;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}

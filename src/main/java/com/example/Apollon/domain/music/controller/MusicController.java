@@ -36,8 +36,8 @@ public class MusicController {
 
     @GetMapping("/TOP100")
     public String getTop100Music(Model model, Principal principal) {
-        List<Music> musicList = musicService.getTop100MusicByPlayCount();
-        model.addAttribute("musicList", musicList);
+        List<Music> top100MusicByLikers = this.musicService.getTop100MusicByLikers();
+        model.addAttribute("top100MusicByLikers", top100MusicByLikers);
 
         if (principal != null) {
             Studio studio = this.studioService.getStudioByMemberUsername(principal.getName());
