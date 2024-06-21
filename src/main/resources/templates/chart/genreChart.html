@@ -30,7 +30,7 @@
                   <div class="genreChart_list">
                     <ul>
                       <!-- 타임리프를 사용하여 musicList라는 변수에 저장된 음악 데이터를 반복하여 출력 -->
-                      <li class="genreChart_list-num" th:each="music, iterStat : ${balladList}">
+                      <li class="genreChart_list-num" th:each="music, iterStat : ${etcList}">
                         <span class="genreChart_number" th:text="${iterStat.index + 1}"></span>
                         <div class="genreChart_musicTitle">
                           <div class="thumbImg">
@@ -572,6 +572,8 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
+
+
 
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"

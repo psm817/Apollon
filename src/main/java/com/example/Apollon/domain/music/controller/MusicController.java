@@ -69,8 +69,10 @@ public class MusicController {
         List<Music> ostList = musicService.getMusicListByGenresContaining("OST");
         List<Music> jpopList = musicService.getMusicListByGenresContaining("JPOP");
         List<Music> indieList = musicService.getMusicListByGenresContaining("indie");
+        List<Music> etcList = musicService.getMusicListByGenresContaining("etc");
 
         model.addAttribute("balladList", balladList);
+        model.addAttribute("etcList", etcList);
         model.addAttribute("danceList", danceList);
         model.addAttribute("rapAndHipHopList", rapAndHipHopList);
         model.addAttribute("rAndBAndSoulList", rAndBAndSoulList);
