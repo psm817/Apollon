@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
 
 /* 노멀라이즈 */
 body, ul, li {
@@ -412,9 +418,17 @@ input[type="range"] {
 }
 
 .show_myPlayList_list > ul > li > .myPlayList_musicTitle > .myPlayList-musicTi {
-    width: 1100px;
+    width: 1000px;
     font-weight: 700;
     font-size: 20px;
+}
+
+.show_myPlayList_list > ul > li > .myPlayList_musicTitle > .music-delete-btn {
+    color: #fff;
+    font-size: 17px;
+    font-family: 'Pretendard-Regular';
+    margin-right: 40px;
+    cursor: pointer;
 }
 
 .show_myPlayList_list > ul > .notLogin_m {
