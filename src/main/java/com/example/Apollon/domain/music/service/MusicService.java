@@ -7,6 +7,7 @@ import com.example.Apollon.domain.music.repository.MusicRepository;
 import com.example.Apollon.domain.playlist.entity.Playlist;
 import com.example.Apollon.domain.playlist.repository.PlaylistRepository;
 import com.example.Apollon.domain.studio.entity.Studio;
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -54,7 +55,7 @@ public class MusicService {
 
     public String storeImg(MultipartFile profilePicture) {
 
-        String uploadDir = "C:\\work\\Apollon\\src\\main\\resources\\static\\uploadFile\\uploadImgs";
+        String uploadDir = "C:\\Users\\user\\IdeaProjects\\Apollon\\src\\main\\resources\\static\\uploadFile\\uploadImgs";
 
         Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
@@ -212,8 +213,8 @@ public class MusicService {
         return musicRepository.findByMusicTitleContainingIgnoreCase(keyword);
     }
 
-    public List<Music> getGenreChartByGenres() {
-        return musicRepository.findByGenreChartByGenres();
+    public List<Music> getMusicListByGenresContaining(String genre) {
+        return musicRepository.findByGenresContaining(genre);
     }
 
     public List<Music> getTop100MusicByLikers() {

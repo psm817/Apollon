@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -59,8 +60,25 @@ public class MusicController {
 
     @GetMapping("/genreChart")
     public String getGenreChart(Model model, Principal principal) {
-        List<Music> genreMusicList = musicService.getGenreChartByGenres();
-        model.addAttribute("genreMusicList", genreMusicList);
+        List<Music> balladList = musicService.getMusicListByGenresContaining("Ballad");
+        List<Music> danceList = musicService.getMusicListByGenresContaining("Dance");
+        List<Music> rapAndHipHopList = musicService.getMusicListByGenresContaining("Rap/HipHop");
+        List<Music> rAndBAndSoulList = musicService.getMusicListByGenresContaining("R&B/Soul");
+        List<Music> rockAndMetalList = musicService.getMusicListByGenresContaining("Rock/Metal");
+        List<Music> electronicaList = musicService.getMusicListByGenresContaining("Electronica");
+        List<Music> ostList = musicService.getMusicListByGenresContaining("OST");
+        List<Music> jpopList = musicService.getMusicListByGenresContaining("JPOP");
+        List<Music> indieList = musicService.getMusicListByGenresContaining("indie");
+
+        model.addAttribute("balladList", balladList);
+        model.addAttribute("danceList", danceList);
+        model.addAttribute("rapAndHipHopList", rapAndHipHopList);
+        model.addAttribute("rAndBAndSoulList", rAndBAndSoulList);
+        model.addAttribute("rockAndMetalList", rockAndMetalList);
+        model.addAttribute("electronicaList", electronicaList);
+        model.addAttribute("ostList", ostList);
+        model.addAttribute("jpopList", jpopList);
+        model.addAttribute("indieList", indieList);
 
         if (principal != null) {
             Studio studio = this.studioService.getStudioByMemberUsername(principal.getName());
@@ -76,7 +94,6 @@ public class MusicController {
                 model.addAttribute("playList", playList);
             }
         }
-
         return "chart/genreChart";
     }
 
