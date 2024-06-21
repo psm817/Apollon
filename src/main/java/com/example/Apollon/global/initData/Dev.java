@@ -102,6 +102,7 @@ public class Dev {
                         testFileUtils.createMockThumbnail4(),  testFileUtils.createMockSong4(), Arrays.asList("OST, indie, etc"));
             }
 
+
             postService.create("비밀번호를 분실했을 경우", "비밀번호를 분실하셨다면 '로그인' 페이지로 이동하셔서 비밀번호 찾기를 통해 임시비밀번호를 발급받으세요", m1, BoardType.공지);
             postService.create("음악 업로드하는 방법", "음악 업로드 방법은 로그인 후 개인 스튜디오로 이동하셔서 등록 버튼을 클릭하시면 됩니다.", m1, BoardType.공지);
             postService.create("회원 탈퇴 시 불이익", "회원 탈퇴를 하시면 개인이 업로드했던 음악과 작성한 모든 커뮤니티 및 방명록 게시글 사라집니다.", m1, BoardType.공지);
@@ -113,6 +114,7 @@ public class Dev {
                 Member author = m3;
                 postService.create("자유 게시글 " + i, "내용 " + i, author, BoardType.자유);
             }
+
 
             for (int i = 1; i <= 10; i++) {
                 Member author = m4;
