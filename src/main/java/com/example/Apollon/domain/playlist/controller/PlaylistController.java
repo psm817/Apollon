@@ -58,6 +58,28 @@ public class PlaylistController {
         return "redirect:/chart/TOP100";
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/playlist/delete/{playListId}/{musicId}")
+    public String deletePlayListMusic(Principal principal, @PathVariable("playListId") Long playListId, @PathVariable("musicId") Long musicId) {
+        Member member = this.memberService.getMember(principal.getName());
+        Playlist playlist = this.playlistService.getPlaylist(playListId);
+
+        if (!playlist.getMember().equals(member)) {
+            throw new IllegalArgumentException("회원님의 플레이리스트가 아닙니다.");
+        }
+
+        Music music = this.musicService.getMusic(musicId);
+
+        if (!playlist.getMusicPlayList().contains(music)) {
+            throw new IllegalArgumentException("플레이리스트에 존재하지 않는 음악입니다.");
+        }
+
+        playlist.getMusicPlayList().remove(music);
+        this.playlistService.savePlaylist(playlist); // 플레이리스트 갱신을 저장
+
+        return "redirect:/";
+    }
+
     @GetMapping("/play")
     public String playPlaylist(@RequestParam Long playlistId) {
         Playlist playlist = playlistService.getPlaylist(playlistId);
