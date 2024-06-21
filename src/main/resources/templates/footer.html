@@ -50,15 +50,21 @@
             </div>
           </div>
           <!-- 볼륨 -->
-          <div class="volume-box">
-            <span class="volume-down" onclick="handleVolumeDown()"><i class="material-icons fa-solid fa-minus fa-lg"></i></span>
-            <input type="range" class="volume-range" step="1" value="80" min="0" max="100" oninput="handleVolume()">
-            <span class="volume-up" onclick="handleVolumeUp()"><i class="material-icons fa-solid fa-plus fa-lg"></i></span>
-          </div>
-          <div class="btn-box">
-            <i class="material-icons fa-solid fa-volume-low fa-lg volume" onclick="toggleVolume()"></i>
-          </div>
+        <div class="volume-box">
+          <span class="volume-down" onclick="handleVolumeDown()"><i class="material-icons fa-solid fa-minus fa-lg"></i></span>
+          <input type="range" class="volume-range" step="1" value="80" min="0" max="100" oninput="handleVolume()">
+                oninput="music.volume = this.value/100">
+          <span class="volume-up" onclick="handleVolumeUp()"><i class="material-icons fa-solid fa-plus fa-lg"></i></span>
         </div>
+        <div class="btn-box">
+          <i class="material-icons fa-solid fa-volume-low fa-lg volume" onclick="toggleVolume()"></i>
+        </div>
+      </div>
+        <------>
+        <div class="footer_play_musicRight">
+          <img th:src="@{/images/ApollonLogo.png}" alt="로고사진">
+        </div>
+      </div>
       <!-- 내 플레이 리스트 보기 -->
       <div class="show_myPlayList" id="myPlayList">
         <div class="show_myPlayList_list">
@@ -83,7 +89,7 @@
                     <i class="fa-solid fa-play"></i>
                     <i class="fa-solid fa-pause fa-lg" style="display: none;"></i>
                   </span>
-                  <audio style="display: none;">
+                  <audio id="audio" style="display: none;">
                     <source th:src="${music.musicMp3}" type="audio/mp3">
                   </audio>
                 </div>
@@ -128,56 +134,6 @@
       }
       footerContainer.classList.toggle('open');
     }
-
-     // 볼륨 조절
-      var audio = document.getElementById('audio'); // 오디오 요소 가져오기
-    var volumeRange = document.querySelector('.volume-range'); // 볼륨 조절 input 요소 가져오기
-    var volumeIcon = document.querySelector('.volume'); // 볼륨 아이콘 요소 가져오기
-
-    function handleVolume() {
-      audio.volume = volumeRange.value / 100; // 볼륨 조절
-      updateVolumeIcon(); // 볼륨 아이콘 업데이트
-    }
-
-    function handleVolumeDown() {
-      var currentVolume = parseFloat(volumeRange.value); // 현재 볼륨 값 가져오기
-      if (currentVolume >= 10) {
-        volumeRange.value = currentVolume - 20; // 볼륨 감소
-        audio.volume = volumeRange.value / 100; // 볼륨 조절
-        updateVolumeIcon(); // 볼륨 아이콘 업데이트
-      }
-    }
-
-    function handleVolumeUp() {
-      var currentVolume = parseFloat(volumeRange.value); // 현재 볼륨 값 가져오기
-      if (currentVolume <= 90) {
-        volumeRange.value = currentVolume + 20; // 볼륨 증가
-        audio.volume = volumeRange.value / 100; // 볼륨 조절
-        updateVolumeIcon(); // 볼륨 아이콘 업데이트
-      }
-    }
-
-    function toggleVolume() {
-      var volumeBox = document.querySelector('.volume-box');
-      volumeBox.classList.toggle('active'); // 볼륨 조절 박스 활성화/비활성화 토글
-    }
-
-    // 볼륨 아이콘 업데이트 함수
-    function updateVolumeIcon() {
-      if (audio.volume === 0) {
-        volumeIcon.classList.add('muted'); // 음소거 상태일 때 아이콘 변경
-      } else {
-        volumeIcon.classList.remove('muted'); // 음소거가 아닐 때 기본 아이콘 유지
-      }
-    }
-
-    // 초기화 함수
-    document.addEventListener('DOMContentLoaded', function() {
-      // 초기 볼륨 설정 (예시: 80%)
-      audio.volume = volumeRange.value / 100;
-      updateVolumeIcon(); // 볼륨 아이콘 초기 설정
-    });
-
 
     // 음악 재생 버튼 클릭 시 처리
     document.addEventListener('DOMContentLoaded', () => {
@@ -236,5 +192,55 @@
       const seconds = Math.floor(time % 60);
       return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     }
+
+    // 볼륨 조절
+      var audio = document.getElementById('audio'); // 오디오 요소 가져오기
+    var volumeRange = document.querySelector('.volume-range'); // 볼륨 조절 input 요소 가져오기
+    var volumeIcon = document.querySelector('.volume'); // 볼륨 아이콘 요소 가져오기
+
+    function handleVolume() {
+      audio.volume = volumeRange.value / 100; // 볼륨 조절
+      updateVolumeIcon(); // 볼륨 아이콘 업데이트
+    }
+
+    function handleVolumeDown() {
+      var currentVolume = parseFloat(volumeRange.value); // 현재 볼륨 값 가져오기
+      if (currentVolume >= 10) {
+        volumeRange.value = currentVolume - 20; // 볼륨 감소
+        audio.volume = volumeRange.value / 100; // 볼륨 조절
+        updateVolumeIcon(); // 볼륨 아이콘 업데이트
+      }
+    }
+
+    function handleVolumeUp() {
+      var currentVolume = parseFloat(volumeRange.value); // 현재 볼륨 값 가져오기
+      if (currentVolume <= 90) {
+        volumeRange.value = currentVolume + 20; // 볼륨 증가
+        audio.volume = volumeRange.value / 100; // 볼륨 조절
+        updateVolumeIcon(); // 볼륨 아이콘 업데이트
+      }
+    }
+
+    function toggleVolume() {
+      var volumeBox = document.querySelector('.volume-box');
+      volumeBox.classList.toggle('active'); // 볼륨 조절 박스 활성화/비활성화 토글
+    }
+
+    // 볼륨 아이콘 업데이트 함수
+    function updateVolumeIcon() {
+      if (audio.volume === 0) {
+        volumeIcon.classList.add('muted'); // 음소거 상태일 때 아이콘 변경
+      } else {
+        volumeIcon.classList.remove('muted'); // 음소거가 아닐 때 기본 아이콘 유지
+      }
+    }
+
+    // 초기화 함수
+    document.addEventListener('DOMContentLoaded', function() {
+      // 초기 볼륨 설정 (예시: 80%)
+      audio.volume = volumeRange.value / 100;
+      updateVolumeIcon(); // 볼륨 아이콘 초기 설정
+    });
+
   </script>
 </nav>
