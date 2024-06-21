@@ -573,6 +573,8 @@
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
 
+
+
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
                              th:href="@{|/chart/music/detail/${music.id}|}">
@@ -639,6 +641,8 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
+
+
 
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
