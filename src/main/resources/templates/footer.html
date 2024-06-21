@@ -16,15 +16,6 @@
             <div class="growSet BeforeMusic_icon">
               <i class="fa-solid fa-backward-step fa-lg"></i>
             </div>
-            <!-- 재생 아이콘 -->
-            <div class="growSet playMusic_icon">
-              <audio preload="auto" id="audio" controls type="audio/mpeg">
-                <!--                <source src="@{${/static/uploadFile/uploadMusics/music.musicMp3}}">-->
-              </audio>
-              <span class="play" onclick="handlePlay()">
-                    <i class="material-icons fa-solid fa-play fa-lg"></i>
-                  </span>
-            </div>
             <!-- 이후 곡 아이콘 -->
             <div class="growSet afterMusic_icon">
               <i class="fa-solid fa-forward-step fa-lg"></i>
@@ -48,13 +39,12 @@
             <div class="music_timeLine">
               <div class="timeLine_bar">
                 <div class="music-box">
-                  <!-- 곡이 재생되고 있는 타이머(?) -->
-                  <span class="current-time"></span>
+                  <!-- 재생 중인 시간 -->
+                  <span class="current-time">0:00</span>
+                  <!-- 타임라인 seekbar -->
                   <input type="range" step="1" class="seekbar" value="0" min="0" max="100" oninput="handleSeekBar()">
-                  <audio class="music-element">
-                    <!--                    <source src="${/static/uploadFile/uploadMusics/music.musicMp3}}" type="audio/mp3">-->
-                  </audio>
-                  <span class="duration"></span>
+                  <!-- 전체 재생 시간 -->
+                  <span class="duration">0:00</span>
                 </div>
               </div>
             </div>
@@ -71,7 +61,7 @@
           </div>
         </div>
         <div class="footer_play_musicRight">
-            <img th:src="@{/images/ApollonLogo.png}" alt="로고사진">
+          <img th:src="@{/images/ApollonLogo.png}" alt="로고사진">
         </div>
       </div>
       <!-- 내 플레이 리스트 보기 -->
@@ -94,8 +84,11 @@
                   <span>삭제</span>
                 </button>
                 <div class="music_play" data-music-src="${music.musicMp3}">
-                  <span><i class="fa-solid fa-play"></i></span>
-                  <audio style="display:none;">
+                  <span class="play-pause">
+                    <i class="fa-solid fa-play"></i>
+                    <i class="fa-solid fa-pause fa-lg" style="display: none;"></i>
+                  </span>
+                  <audio style="display: none;">
                     <source th:src="${music.musicMp3}" type="audio/mp3">
                   </audio>
                 </div>
@@ -115,14 +108,14 @@
     var audio = new Audio(); // 오디오 객체 생성
     var currentTrackId = null; // 현재 재생 중인 트랙 ID
 
-    var music = document.querySelector('.music-element')
-    var playBtn = document.querySelector('.play')
-    var seekbar = document.querySelector('.seekbar')
-    var currentTime = document.querySelector('.current-time')
-    var duration = document.querySelector('.duration')
+    // DOM 요소들 가져오기
+    var music = document.querySelector('.music-element');
+    var playBtn = document.querySelector('.play');
+    var seekbar = document.querySelector('.seekbar');
+    var currentTime = document.querySelector('.current-time');
+    var duration = document.querySelector('.duration');
 
-
-    // 재생목록 열기/닫기
+    // 재생목록 열기/닫기 함수
     function togglePlaylist() {
       var footerContainer = document.querySelector('.footer_container');
       var upIcon = document.querySelector('.fa-angle-up');
@@ -140,117 +133,63 @@
       }
       footerContainer.classList.toggle('open');
     }
-    // 셔플
-    function toggleShuffle() {
-      var shuffleIcon = document.querySelector('.fa-shuffle');
-      if (!isShuffle) {
-        shuffleIcon.style.color = 'orange'; // 연한 보라색으로 변경
-        shuffle(playlist);
-      } else {
-        shuffleIcon.style.color = 'white'; // 원래 색상으로 변경
-        // 이전에 재배치된 순서로 재생되도록 하는 코드를 여기에 추가
-      }
-      isShuffle = !isShuffle; // 셔플 상태를 토글
-    }
 
-    // 반복
-    var repIcon = document.querySelector('.repeat')
-    function handleRepeat() {
-        if (music.loop == true) {
-            music.loop = false
-            repIcon.style.color = 'white'
-            repIcon.classList.toggle('active')
-        }
-        else {
-            music.loop = true
-            repIcon.style.color = 'skyblue'
-            repIcon.classList.toggle('active')
-        }
-    }
+    // 음악 재생 버튼 클릭 시 처리
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.music_play').forEach(playButton => {
+        playButton.addEventListener('click', () => {
+          const audioPlayer = playButton.querySelector('audio');
+          const playPauseBtn = playButton.querySelector('.play-pause');
 
-    // 볼륨 조절
-    var volIcon = document.querySelector('.volume')
-    var volBox = document.querySelector('.volume-box')
-    var volumeRange = document.querySelector('.volume-range')
-    var volumeDown = document.querySelector('.volume-down')
-    var volumeUp = document.querySelector('.volume-up')
+          if (audioPlayer) {
+            // 현재 재생 중인 다른 오디오가 있다면 정지합니다.
+            document.querySelectorAll('audio').forEach(audio => {
+              if (audio !== audioPlayer) {
+                audio.pause();
+                audio.currentTime = 0;
+              }
+            });
 
-    function handleVolume() {
-        volIcon.classList.toggle('active')
-        volBox.classList.toggle('active')
-    }
+            if (audioPlayer.paused) {
+              audioPlayer.style.display = 'block';
+              audioPlayer.play();
+              playPauseBtn.querySelector('.fa-play').style.display = 'none';
+              playPauseBtn.querySelector('.fa-pause').style.display = 'inline-block';
 
-    volumeDown.addEventListener('click', handleVolumeDown);
-    volumeUp.addEventListener('click', handleVolumeUp);
-
-    function handleVolumeDown() {
-        volumeRange.value = Number(volumeRange.value) - 20
-        music.volume = volumeRange.value / 100
-    }
-    function handleVolumeUp() {
-        volumeRange.value = Number(volumeRange.value) + 20
-        music.volume = volumeRange.value / 100
-    }
-
-
-    // 재생, 일시정지
-    function handlePlay() {
-        if (music.paused) {
-            music.play();
-            playBtn.className = 'pause'
-            playBtn.innerHTML = '<i class="material-icons fa-solid fa-pause fa-lg"></i>'
-        } else {
-            music.pause();
-            playBtn.className = 'play'
-            playBtn.innerHTML = '<i class="material-icons fa-solid fa-play fa-lg"></i>'
-        }
-        music.addEventListener('ended', function () {
-            playBtn.className = 'play'
-            playBtn.innerHTML = '<i class="material-icons fa-solid fa-play fa-lg"></i>'
-            music.currentTime = 0
-        });
-    }
-
-    music.onloadeddata = function () {
-        seekbar.max = music.duration
-        var ds = parseInt(music.duration % 60)
-        var dm = parseInt((music.duration / 60) % 60)
-        duration.innerHTML = dm + ':' + ds
-    }
-    music.ontimeupdate = function () { seekbar.value = music.currentTime }
-    handleSeekBar = function () { music.currentTime = seekbar.value }
-    music.addEventListener('timeupdate', function () {
-        var cs = parseInt(music.currentTime % 60)
-        var cm = parseInt((music.currentTime / 60) % 60)
-        currentTime.innerHTML = cm + ':' + cs
-    }, false)
-
-  // 음악 재생 - psm
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.music_play').forEach(playButton => {
-      playButton.addEventListener('click', () => {
-        const audioPlayer = playButton.querySelector('audio');
-
-        if (audioPlayer) {
-          // 현재 재생 중인 다른 오디오가 있다면 정지합니다.
-          document.querySelectorAll('audio').forEach(audio => {
-            if (audio !== audioPlayer) {
-              audio.pause();
-              audio.currentTime = 0;
+              // 재생 시 seekbar 업데이트
+              audioPlayer.addEventListener('timeupdate', () => {
+                updateSeekBar(audioPlayer);
+              });
+            } else {
+              audioPlayer.pause();
+              audioPlayer.style.display = 'none';
+              playPauseBtn.querySelector('.fa-play').style.display = 'inline-block';
+              playPauseBtn.querySelector('.fa-pause').style.display = 'none';
             }
-          });
-
-          if (audioPlayer.paused) {
-            audioPlayer.style.display = 'block';
-            audioPlayer.play();
-          } else {
-            audioPlayer.pause();
-            audioPlayer.style.display = 'none';
           }
-        }
+        });
       });
     });
-  });
 
+    // seekbar 업데이트 함수
+    function updateSeekBar(audio) {
+      seekbar.value = (audio.currentTime / audio.duration) * 100;
+      currentTime.textContent = formatTime(audio.currentTime);
+      duration.textContent = formatTime(audio.duration);
+    }
+
+    // seekbar 조작 시간 변경 함수
+    function handleSeekBar() {
+      const newTime = audio.duration * (seekbar.value / 100);
+      audio.currentTime = newTime;
+      currentTime.textContent = formatTime(newTime);
+    }
+
+    // 시간 포맷 함수 (분:초)
+    function formatTime(time) {
+      const minutes = Math.floor(time / 60);
+      const seconds = Math.floor(time % 60);
+      return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    }
   </script>
 </nav>
