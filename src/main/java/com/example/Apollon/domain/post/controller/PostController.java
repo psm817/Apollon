@@ -166,6 +166,11 @@ public class PostController {
         Member member = memberService.getMember(principal.getName());
         List<Post> myPosts = postService.getPostsByMember(member);
         List<PostComment> myComments = postCommentService.getCommentsByMember(member);
+        List<Post> topPosts = postService.getTop10Posts();
+        topPosts = topPosts.stream()
+                .filter(post -> post.getBoardType() != BoardType.공지)
+                .collect(Collectors.toList());
+        model.addAttribute("topPosts", topPosts);
 
         model.addAttribute("member", member);
         model.addAttribute("myPosts", myPosts);
