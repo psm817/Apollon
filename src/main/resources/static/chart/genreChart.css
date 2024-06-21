@@ -112,29 +112,29 @@ input: focus {
 }
 
 .genreChart_nav > ul > li:nth-child(2) {
-    width: 60px;
+    width: 35px;
 }
 
 .genreChart_nav > ul > li:nth-child(3) {
-    width: 0px;
+    width: 55px;
 }
 
 .genreChart_nav > ul > li:nth-child(4) {
-    width: 540px;
+    width: 535px;
     text-align: left;
 }
 
 .genreChart_nav > ul > li:nth-child(5) {
-    width: 165px;
+    width: 170px;
     text-align: left;
 }
 
 .genreChart_nav > ul > li:nth-child(6) {
-    width: 100px;
+    width: 110px;
 }
 
 .genreChart_nav > ul > li:nth-child(7) {
-    width: 100px;
+    width: 35px;
 }
 
 .genreChart_nav > ul > li:nth-child(8) {
@@ -180,24 +180,28 @@ input: focus {
     width: 60px;
 }
 
+.genreChart_list > ul > li > .classnull {
+    width: 70px;
+}
+
 .thumbImg > img {
     margin: 5px;
     height: 50px;
 }
 
 .genreChart_list > ul .genreChart_musicTitle > .classnull {
-    width: 50px;
+    width: 30px;
 }
 
 .genreChart_list > ul .genreChart_musicTitle > .musicTi {
-    width: 540px;
+    width: 537px;
     text-align: left;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .genreChart_list > ul .genreChart_musicTitle > .upstu {
-    width: 165px;
+    width: 190px;
     text-align: left;
     white-space: nowrap;
     overflow: hidden;
@@ -207,7 +211,7 @@ input: focus {
 .genreChart_list > ul > li .music_likeCount,
 .genreChart_list > ul > li .music_imp,
 .genreChart_list > ul > li .music_p {
-    width: 100px;
+    width: 70px;
     text-align: center;
 }
 
