@@ -30,13 +30,13 @@
                   <div class="genreChart_list">
                     <ul>
                       <!-- 타임리프를 사용하여 musicList라는 변수에 저장된 음악 데이터를 반복하여 출력 -->
-                      <li class="genreChart_list-num" th:each="music, iterStat : ${balladList}">
+                      <li class="genreChart_list-num" th:each="music, iterStat : ${etcList}">
                         <span class="genreChart_number" th:text="${iterStat.index + 1}"></span>
                         <div class="genreChart_musicTitle">
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
-                          
+
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
                              th:href="@{|/chart/music/detail/${music.id}|}">
@@ -103,7 +103,7 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
-                          
+
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
                              th:href="@{|/chart/music/detail/${music.id}|}">
@@ -170,7 +170,7 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
-                          
+
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
                              th:href="@{|/chart/music/detail/${music.id}|}">
@@ -237,7 +237,7 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
-                          
+
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
                              th:href="@{|/chart/music/detail/${music.id}|}">
@@ -304,7 +304,7 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
-                          
+
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
                              th:href="@{|/chart/music/detail/${music.id}|}">
@@ -371,7 +371,7 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
-                          
+
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
                              th:href="@{|/chart/music/detail/${music.id}|}">
@@ -438,7 +438,7 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
-                          
+
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
                              th:href="@{|/chart/music/detail/${music.id}|}">
@@ -505,7 +505,7 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
-                          
+
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
                              th:href="@{|/chart/music/detail/${music.id}|}">
@@ -572,7 +572,74 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
-                          
+
+                          <a th:if="${#authorization.expression('isAuthenticated()')}"
+                             class="musicTi"
+                             th:href="@{|/chart/music/detail/${music.id}|}">
+                            <span th:text="${music.musicTitle}"></span>
+                          </a>
+                          <a th:if="${#authorization.expression('isAnonymous()')}"
+                             class="musicTi"
+                             onclick="alert('곡 정보를 확인하려면 로그인이 필요합니다.'); return false;">
+                            <span th:text="${music.musicTitle}"></span>
+                          </a>
+                          <a th:if="${#authorization.expression('isAuthenticated()')}"
+                             class="upstu"
+                             th:href="@{|/chart/music/detail/${music.id}|}">
+                            <span th:text="${music.studio.member.nickname}"></span>
+                          </a>
+                          <a th:if="${#authorization.expression('isAnonymous()')}"
+                             class="upstu"
+                             onclick="alert('곡 정보를 확인하려면 로그인이 필요합니다.'); return false;">
+                            <span th:text="${music.studio.member.nickname}"></span>
+                          </a>
+                        </div>
+                        <!-- 좋아요 개수 표시 -->
+                        <div class="music_likeCount">
+                          <span><i class="fa-regular fa-heart"></i></span>
+                          <span th:text="${#lists.size(music.musicLikers)}"></span>
+                        </div>
+                        <!-- 재생목록에 추가 -->
+                        <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
+                          <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
+                            <input type="hidden" name="impMusicPlaylist" th:value="${music.id}" />
+                            <button type="submit" class="plus-icon" th:if="${#authorization.expression('isAuthenticated()')}">
+                              <i class="fa-solid fa-plus"></i>
+                            </button>
+                          </form>
+                        </div>
+                        <!-- 해당곡 재생하기 -->
+                        <div class="music_p">
+                          <span><i class="fa-solid fa-play"></i></span>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li class="g_list">
+                <span class="g_s">전체</span>
+                <div class="genreChart_nav">
+                  <ul>
+                    <li><span class="genreChart_Number">번호</span></li>
+                    <li><span class="Rank_fluctuationRate"></span></li>
+                    <li><span class="music_thumbnail"></span></li>
+                    <li><span class="music_title">곡 제목</span></li>
+                    <li><span class="music_studio">스튜디오</span></li>
+                    <li><span class="musicLike">좋아요</span></li>
+                    <li><span class="music_import_myPlayList" th:if="${#authorization.expression('isAuthenticated()')}">담기</span></li>
+                    <li><span class="music_play">듣기</span></li>
+                  </ul>
+                  <div class="genreChart_list">
+                    <ul>
+                      <!-- 타임리프를 사용하여 musicList라는 변수에 저장된 음악 데이터를 반복하여 출력 -->
+                      <li class="genreChart_list-num" th:each="music, iterStat : ${etcList}">
+                        <span class="genreChart_number" th:text="${iterStat.index + 1}"></span>
+                        <div class="genreChart_musicTitle">
+                          <div class="thumbImg">
+                            <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
+                          </div>
+
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
                              th:href="@{|/chart/music/detail/${music.id}|}">
