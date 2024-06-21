@@ -10,13 +10,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/uploads/**")
-                .addResourceLocations("file:///C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/images/uploads/");
+                .addResourceLocations("file:///C:/work/Apollon/src/main/resources/static/images/uploads/");
 
                 // 아정님, 재원
                 // C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/images/uploads/");
 
         registry.addResourceHandler("/uploadFile/uploadImgs/**")
-                .addResourceLocations("file:///C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/images/uploads/");
+                .addResourceLocations("file:///C:/work/Apollon/src/main/resources/static/images/uploads/");
 
                 // 아정님, 재원
                 // C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/images/uploads/
@@ -24,7 +24,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 // C:/work/Apollon/src/main/resources/static/images/uploads/
 
         registry.addResourceHandler("/uploadFile/uploadImgs/**")
-                .addResourceLocations("file:///C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadImgs/");
+                .addResourceLocations("file:///C:/work/Apollon/src/main/resources/static/uploadFile/uploadImgs/");
 
                 // 아정님, 재원
                 // C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadImgs/
@@ -32,7 +32,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 // C:/work/Apollon/src/main/resources/static/uploadFile/uploadImgs/
 
         registry.addResourceHandler("/uploadFile/uploadMusics/**")
-                .addResourceLocations("file:///C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadMusics/");
+                .addResourceLocations("file:///C:/work/Apollon/src/main/resources/static/uploadFile/uploadMusics/");
 
                 // 아정님, 재원
                 // C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadMusics/
