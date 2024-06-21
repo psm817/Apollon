@@ -24,6 +24,6 @@ public interface MusicRepository extends JpaRepository<Music, Long> {
 
     List<Music> findByMusicTitleContainingIgnoreCase(String keyword);
 
-    @Query("SELECT m FROM Music m ORDER BY SIZE(m.genres) DESC")
-    List<Music> findByGenreChartByGenres();
+    @Query("SELECT m FROM Music m JOIN m.genres g WHERE g LIKE %:genres%")
+    List<Music> findByGenresContaining(@Param("genres")String genres);
 }

@@ -1,7 +1,6 @@
     package com.example.Apollon.domain.studio.controller;
 
     import com.example.Apollon.domain.comment.entity.Comment;
-    import com.example.Apollon.domain.comment.form.CommentForm;
     import com.example.Apollon.domain.comment.service.CommentService;
     import com.example.Apollon.domain.member.entity.Member;
     import com.example.Apollon.domain.member.service.MemberService;
@@ -12,9 +11,7 @@
     import com.example.Apollon.domain.studio.entity.Studio;
     import com.example.Apollon.domain.studio.service.StudioService;
     import lombok.RequiredArgsConstructor;
-    import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
     import org.springframework.security.access.prepost.PreAuthorize;
-    import org.springframework.security.core.userdetails.UserDetails;
     import org.springframework.stereotype.Controller;
     import org.springframework.ui.Model;
     import org.springframework.web.bind.annotation.*;
