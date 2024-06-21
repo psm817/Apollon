@@ -36,7 +36,7 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
-                          
+
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
                              th:href="@{|/chart/music/detail/${music.id}|}">
@@ -83,45 +83,40 @@
               </li>
               <li class="g_list">
                 <span class="g_s">댄스</span>
-                
+
               </li>
               <li class="g_list">
                 <span class="g_s">랩/힙합</span>
-                
+
               </li>
               <li class="g_list">
                 <span class="g_s">R&B/Soul</span>
-                
+
               </li>
               <li class="g_list">
                 <span class="g_s">록/메탈</span>
-                
+
               </li>
               <li class="g_list">
                 <span class="g_s">일렉트로니카</span>
-                
+
               </li>
               <li class="g_list">
                 <span class="g_s">OST</span>
-                
+
               </li>
               <li class="g_list">
                 <span class="g_s">JPOP</span>
-                
+
               </li>
               <li class="g_list">
                 <span class="g_s">인디음악</span>
-                
+
               </li>
             </ul>
           </nav>
         </div>
       </div>
-
-    </div>
-    <div class="body_chart_container">
-
-
     </div>
   </div>
 
