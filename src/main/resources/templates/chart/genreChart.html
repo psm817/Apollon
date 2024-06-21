@@ -36,6 +36,7 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
+                          <div class="classnull"></div>
 
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
@@ -63,6 +64,7 @@
                           <span><i class="fa-regular fa-heart"></i></span>
                           <span th:text="${#lists.size(music.musicLikers)}"></span>
                         </div>
+                        <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
                           <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
@@ -103,7 +105,7 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
-
+                          <div class="classnull"></div>
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
                              th:href="@{|/chart/music/detail/${music.id}|}">
@@ -130,6 +132,7 @@
                           <span><i class="fa-regular fa-heart"></i></span>
                           <span th:text="${#lists.size(music.musicLikers)}"></span>
                         </div>
+                        <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
                           <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
@@ -170,7 +173,7 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
-
+                          <div class="classnull"></div>
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
                              th:href="@{|/chart/music/detail/${music.id}|}">
@@ -197,6 +200,7 @@
                           <span><i class="fa-regular fa-heart"></i></span>
                           <span th:text="${#lists.size(music.musicLikers)}"></span>
                         </div>
+                        <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
                           <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
@@ -237,7 +241,7 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
-
+                          <div class="classnull"></div>
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
                              th:href="@{|/chart/music/detail/${music.id}|}">
@@ -264,6 +268,7 @@
                           <span><i class="fa-regular fa-heart"></i></span>
                           <span th:text="${#lists.size(music.musicLikers)}"></span>
                         </div>
+                        <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
                           <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
@@ -304,7 +309,7 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
-
+                          <div class="classnull"></div>
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
                              th:href="@{|/chart/music/detail/${music.id}|}">
@@ -331,6 +336,7 @@
                           <span><i class="fa-regular fa-heart"></i></span>
                           <span th:text="${#lists.size(music.musicLikers)}"></span>
                         </div>
+                        <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
                           <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
@@ -371,7 +377,7 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
-
+                          <div class="classnull"></div>
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
                              th:href="@{|/chart/music/detail/${music.id}|}">
@@ -398,6 +404,7 @@
                           <span><i class="fa-regular fa-heart"></i></span>
                           <span th:text="${#lists.size(music.musicLikers)}"></span>
                         </div>
+                        <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
                           <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
@@ -438,7 +445,7 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
-
+                          <div class="classnull"></div>
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
                              th:href="@{|/chart/music/detail/${music.id}|}">
@@ -465,6 +472,7 @@
                           <span><i class="fa-regular fa-heart"></i></span>
                           <span th:text="${#lists.size(music.musicLikers)}"></span>
                         </div>
+                        <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
                           <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
@@ -505,7 +513,7 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
-
+                          <div class="classnull"></div>
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
                              th:href="@{|/chart/music/detail/${music.id}|}">
@@ -532,6 +540,7 @@
                           <span><i class="fa-regular fa-heart"></i></span>
                           <span th:text="${#lists.size(music.musicLikers)}"></span>
                         </div>
+                        <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
                           <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
@@ -572,7 +581,7 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
-
+                          <div class="classnull"></div>
 
 
 
@@ -602,6 +611,7 @@
                           <span><i class="fa-regular fa-heart"></i></span>
                           <span th:text="${#lists.size(music.musicLikers)}"></span>
                         </div>
+                        <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
                           <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
@@ -642,7 +652,7 @@
                           <div class="thumbImg">
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
-
+                          <div class="classnull"></div>
 
 
 
@@ -672,6 +682,7 @@
                           <span><i class="fa-regular fa-heart"></i></span>
                           <span th:text="${#lists.size(music.musicLikers)}"></span>
                         </div>
+                        <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
                           <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
