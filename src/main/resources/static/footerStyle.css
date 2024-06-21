@@ -37,20 +37,26 @@ audio{
 
 /* 푸터 컨테이너 커스텀 */
 .footer_container {
-    margin-left: auto; margin-right: auto;
-    width: 1500px; height: 480px;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    bottom: -400px;
-    left: 0; right: 0;
-    transition: bottom 0.3s ease;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1500px;
+  height: 80px; /* Initial height */
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: height 0.3s ease, bottom 0.3s ease;
 }
 
 .footer_container.open {
-  bottom: -20px;
-  }
+  height: 480px; /* Height when opened */
+}
 
+.footer_container.closed {
+  height: 30px; /* Height when closed */
+}
 /* 음악 플레이바 */
 .footer_play_box {
     background-color: rgba(17, 17, 17, 0.85);
