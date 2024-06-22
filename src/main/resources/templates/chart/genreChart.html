@@ -67,7 +67,7 @@
                         <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
-                          <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
+                          <form id="musicForm" method="POST" th:action="@{|/playlist/import2/${music.id}|}">
                             <input type="hidden" name="impMusicPlaylist" th:value="${music.id}" />
                             <button type="submit" class="plus-icon" th:if="${#authorization.expression('isAuthenticated()')}">
                               <i class="fa-solid fa-plus"></i>
@@ -135,7 +135,7 @@
                         <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
-                          <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
+                          <form id="musicForm" method="POST" th:action="@{|/playlist/import2/${music.id}|}">
                             <input type="hidden" name="impMusicPlaylist" th:value="${music.id}" />
                             <button type="submit" class="plus-icon" th:if="${#authorization.expression('isAuthenticated()')}">
                               <i class="fa-solid fa-plus"></i>
@@ -203,7 +203,7 @@
                         <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
-                          <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
+                          <form id="musicForm" method="POST" th:action="@{|/playlist/import2/${music.id}|}">
                             <input type="hidden" name="impMusicPlaylist" th:value="${music.id}" />
                             <button type="submit" class="plus-icon" th:if="${#authorization.expression('isAuthenticated()')}">
                               <i class="fa-solid fa-plus"></i>
@@ -271,7 +271,7 @@
                         <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
-                          <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
+                          <form id="musicForm" method="POST" th:action="@{|/playlist/import2/${music.id}|}">
                             <input type="hidden" name="impMusicPlaylist" th:value="${music.id}" />
                             <button type="submit" class="plus-icon" th:if="${#authorization.expression('isAuthenticated()')}">
                               <i class="fa-solid fa-plus"></i>
@@ -339,7 +339,7 @@
                         <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
-                          <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
+                          <form id="musicForm" method="POST" th:action="@{|/playlist/import2/${music.id}|}">
                             <input type="hidden" name="impMusicPlaylist" th:value="${music.id}" />
                             <button type="submit" class="plus-icon" th:if="${#authorization.expression('isAuthenticated()')}">
                               <i class="fa-solid fa-plus"></i>
@@ -407,7 +407,7 @@
                         <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
-                          <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
+                          <form id="musicForm" method="POST" th:action="@{|/playlist/import2/${music.id}|}">
                             <input type="hidden" name="impMusicPlaylist" th:value="${music.id}" />
                             <button type="submit" class="plus-icon" th:if="${#authorization.expression('isAuthenticated()')}">
                               <i class="fa-solid fa-plus"></i>
@@ -475,7 +475,7 @@
                         <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
-                          <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
+                          <form id="musicForm" method="POST" th:action="@{|/playlist/import2/${music.id}|}">
                             <input type="hidden" name="impMusicPlaylist" th:value="${music.id}" />
                             <button type="submit" class="plus-icon" th:if="${#authorization.expression('isAuthenticated()')}">
                               <i class="fa-solid fa-plus"></i>
@@ -543,7 +543,7 @@
                         <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
-                          <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
+                          <form id="musicForm" method="POST" th:action="@{|/playlist/import2/${music.id}|}">
                             <input type="hidden" name="impMusicPlaylist" th:value="${music.id}" />
                             <button type="submit" class="plus-icon" th:if="${#authorization.expression('isAuthenticated()')}">
                               <i class="fa-solid fa-plus"></i>
@@ -614,7 +614,7 @@
                         <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
-                          <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
+                          <form id="musicForm" method="POST" th:action="@{|/playlist/import2/${music.id}|}">
                             <input type="hidden" name="impMusicPlaylist" th:value="${music.id}" />
                             <button type="submit" class="plus-icon" th:if="${#authorization.expression('isAuthenticated()')}">
                               <i class="fa-solid fa-plus"></i>
@@ -685,7 +685,7 @@
                         <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
                         <!-- 재생목록에 추가 -->
                         <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
-                          <form id="musicForm" method="POST" th:action="@{|/playlist/import/${music.id}|}">
+                          <form id="musicForm" method="POST" th:action="@{|/playlist/import2/${music.id}|}">
                             <input type="hidden" name="impMusicPlaylist" th:value="${music.id}" />
                             <button type="submit" class="plus-icon" th:if="${#authorization.expression('isAuthenticated()')}">
                               <i class="fa-solid fa-plus"></i>

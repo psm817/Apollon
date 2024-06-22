@@ -59,6 +59,36 @@ public class PlaylistController {
     }
 
     @PreAuthorize("isAuthenticated()")
+    @PostMapping("/playlist/import2/{id}")
+    public String addSongToPlaylistInGenre(@PathVariable("id") Long id, Principal principal) {
+        String username = principal.getName();
+        // 회원 정보 가져오기
+        Member member = memberService.getMember(username);
+        long memberId = member.getId();
+
+        // 재생목록 가져오거나 생성
+        Playlist playlist = playlistService.getPlaylist(memberId);
+
+        if (playlist == null) {
+            // 재생목록이 없으면 생성
+            playlist = Playlist.builder()
+                    .member(member)
+                    .createDate(LocalDateTime.now())
+                    .modifyDate(LocalDateTime.now())
+                    .build();
+        }
+
+        // 노래 추가 예시
+        Music music = musicService.getMusicById(id); // id를 사용해 음악 객체 가져오기
+        playlist.addMusic(music);
+
+        // 재생목록 저장
+        playlistService.savePlaylist(playlist);
+
+        return "redirect:/chart/genreChart";
+    }
+
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/playlist/delete/{playListId}/{musicId}")
     public String deletePlayListMusic(Principal principal, @PathVariable("playListId") Long playListId, @PathVariable("musicId") Long musicId) {
         Member member = this.memberService.getMember(principal.getName());
