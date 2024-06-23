@@ -448,6 +448,14 @@ input[type="range"] {
     font-size: 20px;
 }
 
+.show_myPlayList_list > ul > li > .myPlayList_musicTitle > .music-delete-btn {
+    color: #fff;
+    font-size: 17px;
+    font-family: 'Pretendard-Regular';
+    margin-right: 40px;
+    cursor: pointer;
+}
+
 .show_myPlayList_list > ul > .notLogin_m {
     display: flex;
     justify-content: center;
