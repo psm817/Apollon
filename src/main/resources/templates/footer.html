@@ -291,9 +291,18 @@
     }
     }
 
-    function playNextTrack() {
+   function playNextTrack() {
     const playlist = document.querySelectorAll('.music_play audio');
     if (currentPlaylistIndex < playlist.length - 1) {
+        // 현재 재생 중인 오디오 정지 및 초기화
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+            const playPauseBtn = currentAudio.parentElement.querySelector('.play-pause');
+            playPauseBtn.querySelector('.fa-play').style.display = 'inline-block';
+            playPauseBtn.querySelector('.fa-pause').style.display = 'none';
+        }
+
         currentPlaylistIndex++;
         playTrackAtIndex(currentPlaylistIndex);
     } else {
@@ -301,7 +310,7 @@
         currentPlaylistIndex = 0;
         playTrackAtIndex(currentPlaylistIndex);
     }
-    }
+}
 
         function playTrackAtIndex(index) {
             const playlist = document.querySelectorAll('.music_play audio');
