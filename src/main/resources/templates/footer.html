@@ -27,7 +27,7 @@
                         <!-- 반복 아이콘 -->
                         <div class="growSet loopMusic_icon">
                             <div class="btn-box">
-                                <i class="material-icons fa-solid fa-repeat fa-lg repeat" onclick="handleRepeat()"></i>
+                                <i class="material-icons fa-solid fa-repeat fa-lg repeat" onclick="handleRepeat(this)"></i>
                             </div>
                         </div>
                     </div>
@@ -163,43 +163,59 @@
 
        var currentAudio = null; // 현재 재생 중인 오디오 요소를 저장할 변수
 
-  // 음악 재생 버튼 클릭 시 처리
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.music_play').forEach(playButton => {
-      playButton.addEventListener('click', () => {
-        const audioPlayer = playButton.querySelector('audio');
-        const playPauseBtn = playButton.querySelector('.play-pause');
 
-        if (audioPlayer) {
-          // 현재 재생 중인 오디오를 정지합니다.
-          if (currentAudio && currentAudio !== audioPlayer) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-          }
+    var currentAudio = null; // 현재 재생 중인 오디오 요소를 저장할 변수
 
-          // 선택한 오디오를 현재 재생 중인 오디오로 설정합니다.
-          currentAudio = audioPlayer;
+    // 음악 재생 버튼 클릭 시 처리
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.music_play').forEach(playButton => {
+            playButton.addEventListener('click', () => {
+                const audioPlayer = playButton.querySelector('audio');
+                const playPauseBtn = playButton.querySelector('.play-pause');
 
-          if (audioPlayer.paused) {
-            audioPlayer.style.display = 'block';
-            audioPlayer.play();
-            playPauseBtn.querySelector('.fa-play').style.display = 'none';
-            playPauseBtn.querySelector('.fa-pause').style.display = 'inline-block';
+                if (audioPlayer) {
+                    // 현재 재생 중인 오디오를 정지합니다.
+                    if (currentAudio && currentAudio !== audioPlayer) {
+                        currentAudio.pause();
+                        currentAudio.currentTime = 0;
+                    }
 
-            // 재생 시 seekbar 업데이트
-            audioPlayer.addEventListener('timeupdate', () => {
-              updateSeekBar(audioPlayer);
+                    // 선택한 오디오를 현재 재생 중인 오디오로 설정합니다.
+                    currentAudio = audioPlayer;
+
+                    if (audioPlayer.paused) {
+                        audioPlayer.style.display = 'block';
+                        audioPlayer.play();
+                        playPauseBtn.querySelector('.fa-play').style.display = 'none';
+                        playPauseBtn.querySelector('.fa-pause').style.display = 'inline-block';
+
+                        // 재생 시 seekbar 업데이트
+                        audioPlayer.addEventListener('timeupdate', () => {
+                            updateSeekBar(audioPlayer);
+                        });
+                    } else {
+                        audioPlayer.pause();
+                        audioPlayer.style.display = 'none';
+                        playPauseBtn.querySelector('.fa-play').style.display = 'inline-block';
+                        playPauseBtn.querySelector('.fa-pause').style.display = 'none';
+                    }
+                }
             });
-          } else {
-            audioPlayer.pause();
-            audioPlayer.style.display = 'none';
-            playPauseBtn.querySelector('.fa-play').style.display = 'inline-block';
-            playPauseBtn.querySelector('.fa-pause').style.display = 'none';
-          }
-        }
-      });
+        });
     });
-  });
+
+//반복
+    function handleRepeat(repIcon) {
+        if (currentAudio) {
+            if (currentAudio.loop) {
+                currentAudio.loop = false;
+                repIcon.style.color = 'white';
+            } else {
+                currentAudio.loop = true;
+                repIcon.style.color = 'skyblue';
+            }
+        }
+    }
 
   // Function to play the next track
 function playNextTrack() {
@@ -386,6 +402,5 @@ function handleVolume() {
       updateVolumeIcon(); // 볼륨 아이콘 초기 설정
     }
   });
-
     </script>
 </nav>
