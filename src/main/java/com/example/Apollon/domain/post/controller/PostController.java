@@ -29,6 +29,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -165,6 +166,11 @@ public class PostController {
         Member member = memberService.getMember(principal.getName());
         List<Post> myPosts = postService.getPostsByMember(member);
         List<PostComment> myComments = postCommentService.getCommentsByMember(member);
+        List<Post> topPosts = postService.getTop10Posts();
+        topPosts = topPosts.stream()
+                .filter(post -> post.getBoardType() != BoardType.공지)
+                .collect(Collectors.toList());
+        model.addAttribute("topPosts", topPosts);
 
         model.addAttribute("member", member);
         model.addAttribute("myPosts", myPosts);
@@ -288,6 +294,8 @@ public class PostController {
         Member member = memberService.getMember(principal.getName());
         List<Post> myPosts = postService.getPostsByMember(member);
         List<PostComment> myComments = postCommentService.getCommentsByMember(member);
+        Collections.reverse(myPosts);
+        Collections.reverse(myComments);
 
 
         model.addAttribute("member", member);
@@ -296,6 +304,7 @@ public class PostController {
 
         // 스튜디오 진입 시 로그인된 회원 스튜디외의 차단 상태 판단을 위해 작성
         Studio studio = this.studioService.getStudioByMemberUsername(principal.getName());
+
 
         if (studio != null) {
             // 회원별 플레이리스트가져오기(만들고 모델링해주고 푸터에서 넣어보자)

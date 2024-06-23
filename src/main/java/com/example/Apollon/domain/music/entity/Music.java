@@ -37,7 +37,7 @@ public class Music extends BaseEntity {
 
     @ElementCollection
     @CollectionTable(name = "music_genres", joinColumns = @JoinColumn(name = "music_id"))
-    @Column(name = "genre")
+    @Column(name = "genres")
     private List<String> genres;
 
     @OneToOne

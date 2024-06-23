@@ -27,7 +27,7 @@ public class Post extends BaseEntity {
 
     private String title;
     private String content;
-    private String writer;
+
 
     @CreatedDate
     private LocalDateTime createDate;
@@ -36,7 +36,7 @@ public class Post extends BaseEntity {
     private LocalDateTime modifyDate;
 
     @Column(nullable = false)
-    private int view = 0; // 초기값 설정
+    private int view = 0; // 초기값 설정F
 
     @ManyToOne
     private Member author;
