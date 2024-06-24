@@ -15,11 +15,12 @@
                     </div>
                     <div class="password-box">
                         <span>비밀번호</span>
-                        <input type="password" name="password" maxlength="20" placeholder="비밀번호를 입력하세요.">
+                        <input type="password" id="password" name="password" maxlength="20" placeholder="비밀번호를 입력하세요." oninput="checkPasswords()">
                     </div>
                     <div class="password-confirm-box">
                         <span>비밀번호 확인</span>
-                        <input type="password" name="password_confirm" maxlength="20" placeholder="비밀번호를 한번 더 입력하세요.">
+                        <input type="password" id="password_confirm" name="password_confirm" maxlength="20" placeholder="비밀번호를 한번 더 입력하세요." oninput="checkPasswords()">
+                        <div id="passwordMatchError" class="error"></div>
                     </div>
                     <div class="nickname-box">
                         <div class="nickname-info">
@@ -79,6 +80,29 @@
                 });
         }
     }
+    function checkPasswords() {
+        const password = document.getElementById("password").value;
+        const passwordConfirm = document.getElementById("password_confirm").value;
+        const passwordMatchError = document.getElementById("passwordMatchError");
+        const submitButton = document.getElementById("submitButton");
+
+        if (password && passwordConfirm) {
+            if (password !== passwordConfirm) {
+                passwordMatchError.innerText = "비밀번호가 일치하지 않습니다.";
+                passwordMatchError.classList.remove("success");
+                passwordMatchError.classList.add("error");
+                submitButton.disabled = true;
+            } else {
+                passwordMatchError.innerText = "비밀번호가 일치합니다.";
+                passwordMatchError.classList.remove("error");
+                passwordMatchError.classList.add("success");
+                submitButton.disabled = false;
+            }
+        } else {
+            passwordMatchError.innerText = "";
+        }
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
         validateForm();
         document.querySelector('input[type="file"]').addEventListener('change', function () {
