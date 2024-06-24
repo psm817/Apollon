@@ -78,7 +78,7 @@
         <!--                        Your browser does not support the audio element.-->
         <!--                    </audio>-->
         <div class="music-info-box">
-          <h2 class="info" th:text="${music.musicTitle}"></h2>
+          <span class="info title-name" th:text="${music.musicTitle}"></span>
           <div class="info margin studio-name">
             <span th:text="'소속 스튜디오 : #' + ${music.studio.member.username}"></span>
           </div>

@@ -72,8 +72,14 @@
                   </div>
                   <div class="music_imp" th:if="${#authorization.expression('isAnonymous()')}"></div>
                   <!-- 해당곡 재생하기 -->
-                  <div class="music_p">
-                    <span><i class="fa-solid fa-play"></i></span>
+                  <div class="music_p" data-music-id="${music.id}">
+                    <span class="play-pause">
+                      <i class="fa-solid fa-play"></i>
+                      <i class="fa-solid fa-pause fa-lg" style="display: none;"></i>
+                    </span>
+                    <audio preload="none">
+                      <source th:src="${music.musicMp3}" type="audio/mp3">
+                    </audio>
                   </div>
                 </li>
               </ul>
@@ -84,3 +90,48 @@
     </div>
   </div>
 </html>
+
+<script>
+  // 음악 재생 (1분 미리듣기)
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.music_p').forEach(playButton => {
+      playButton.addEventListener('click', () => {
+        const audioPlayer = playButton.querySelector('audio');
+        const playPauseBtn = playButton.querySelector('.play-pause');
+
+        if (audioPlayer) {
+          // 현재 재생 중인 다른 오디오가 있다면 정지합니다.
+          document.querySelectorAll('audio').forEach(audio => {
+            if (audio !== audioPlayer) {
+              audio.pause();
+              audio.currentTime = 0;
+            }
+          });
+
+          if (audioPlayer.paused) {
+            audioPlayer.style.display = 'block';
+            audioPlayer.play();
+            playPauseBtn.querySelector('.fa-play').style.display = 'none';
+            playPauseBtn.querySelector('.fa-pause').style.display = 'inline-block';
+
+            // 60초 이후에 오디오를 멈추는 이벤트 핸들러 추가
+            audioPlayer.ontimeupdate = () => {
+              if (audioPlayer.currentTime >= 60) {
+                audioPlayer.pause();
+                audioPlayer.currentTime = 0; // 필요에 따라 초기화
+                audioPlayer.style.display = 'none';
+                playPauseBtn.querySelector('.fa-play').style.display = 'inline-block';
+                playPauseBtn.querySelector('.fa-pause').style.display = 'none';
+              }
+            };
+          } else {
+            audioPlayer.pause();
+            audioPlayer.style.display = 'none';
+            playPauseBtn.querySelector('.fa-play').style.display = 'inline-block';
+            playPauseBtn.querySelector('.fa-pause').style.display = 'none';
+          }
+        }
+      });
+    });
+  });
+</script>
