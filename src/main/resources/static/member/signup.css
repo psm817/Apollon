@@ -10,6 +10,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #f4f4f4;
 }
 
 ul, li {
@@ -49,7 +50,7 @@ ul, li {
     height: 62%;
     overflow: auto;
     padding: 10px;
-    background-color: #F4F4F5;
+    background-color: #fff;
 }
 
 .signup-check-box > ul > .check01 > .text-box > span {
@@ -67,7 +68,7 @@ ul, li {
     height: 62%;
     overflow: auto;
     padding: 10px;
-    background-color: #F4F4F5;
+    background-color: #fff;
 }
 
 .signup-check-box > ul > .check02 > .text-box > span {

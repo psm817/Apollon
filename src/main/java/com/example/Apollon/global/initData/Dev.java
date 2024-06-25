@@ -40,6 +40,27 @@ public class Dev {
     @Bean
     public ApplicationRunner init(MemberService memberService, StudioService studioService, CommentService commentService) {
 
+        DataFileUtils.deleteFilesExcept("C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadImgs", "clarity.png");
+        DataFileUtils.deleteFilesExcept("C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadMusics", "Zedd - Clarity.mp3");
+        DataFileUtils.deleteFilesExcept("C:/work/Apollon/src/main/resources/static/uploadFile/uploadImgs", "clarity.png");
+        DataFileUtils.deleteFilesExcept("C:/work/Apollon/src/main/resources/static/uploadFile/uploadMusics", "Zedd - Clarity.mp3");
+
+        DataFileUtils.deleteFilesExcept("C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadImgs", "rose.png");
+        DataFileUtils.deleteFilesExcept("C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadMusics", "The Chainsmokers - Roses.mp3");
+        DataFileUtils.deleteFilesExcept("C:/work/Apollon/src/main/resources/static/uploadFile/uploadImgs", "rose.png");
+        DataFileUtils.deleteFilesExcept("C:/work/Apollon/src/main/resources/static/uploadFile/uploadMusics", "The Chainsmokers - Roses.mp3");
+
+        DataFileUtils.deleteFilesExcept("C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadImgs", "stay.png");
+        DataFileUtils.deleteFilesExcept("C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadMusics", "Zedd & Alessia Cara - Stay.mp3");
+        DataFileUtils.deleteFilesExcept("C:/work/Apollon/src/main/resources/static/uploadFile/uploadImgs", "stay.png");
+        DataFileUtils.deleteFilesExcept("C:/work/Apollon/src/main/resources/static/uploadFile/uploadMusics", "Zedd & Alessia Cara - Stay.mp3");
+
+        DataFileUtils.deleteFilesExcept("C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadImgs", "closer.png");
+        DataFileUtils.deleteFilesExcept("C:/Users/user/IdeaProjects/Apollon/src/main/resources/static/uploadFile/uploadMusics", "The Chainsmokers Feat Halsey - Closer (JayKode Remix).mp3");
+        DataFileUtils.deleteFilesExcept("C:/work/Apollon/src/main/resources/static/uploadFile/uploadImgs", "closer.png");
+        DataFileUtils.deleteFilesExcept("C:/work/Apollon/src/main/resources/static/uploadFile/uploadMusics", "The Chainsmokers Feat Halsey - Closer (JayKode Remix).mp3");
+
+
         return args -> {
             Member m1 = memberService.signup("admin", "admin", "admin", "admin@test.com","/images/none.png");
             Member m2 = memberService.signup("5004pp", "5004pp", "5004pp", "5004pp@test.com","/images/none.png");

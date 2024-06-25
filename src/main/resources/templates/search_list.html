@@ -21,6 +21,9 @@
                                 <li class="music_studio">
                                     <span >스튜디오</span>
                                 </li>
+                                <li>
+                                    <span class="music_import_myPlayList" th:if="${#authorization.expression('isAuthenticated()')}">담기</span>
+                                </li>
                             </ul>
                         </div>
                         <div class="search_list">
@@ -55,6 +58,14 @@
                                        onclick="alert('곡 정보를 확인하려면 로그인이 필요합니다.'); return false;">
                                         <span th:text="${music.studio.member.nickname}"></span>
                                     </a>
+                                    <div class="music_imp" th:if="${#authorization.expression('isAuthenticated()')}">
+                                        <form id="musicForm" method="POST" th:action="@{|/playlist/import_search/${music.id}|}">
+                                            <input type="hidden" name="impMusicPlaylist" th:value="${music.id}" />
+                                            <button type="submit" class="plus-icon" th:if="${#authorization.expression('isAuthenticated()')}">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </li>
                             </ul>
                         </div>

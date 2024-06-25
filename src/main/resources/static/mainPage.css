@@ -238,6 +238,11 @@ input: focus {
     cursor: pointer;
 }
 
+.notice_box > li > a:hover {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
 /* 방문자 TOP5 */
 .body_side_studio {
     width: 270px; height: 240px;
@@ -277,6 +282,11 @@ input: focus {
 
 .studio_box > li > a {
     cursor: pointer;
+}
+
+.studio_box > li > a:hover {
+    font-size: 1.1rem;
+    font-weight: 700;
 }
 
 /* 추가 내용 */

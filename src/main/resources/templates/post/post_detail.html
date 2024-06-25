@@ -146,7 +146,7 @@
                         <ul>
                             <li th:each="comment : ${comments}">
                                 <strong th:text="${comment.author.username}"></strong>
-                                <span th:text="${comment.createDate}"></span>
+                                <span th:text="${#temporals.format(comment.createDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
                                 <p th:text="${comment.content}"></p>
                                 <th:block th:if="${(#authentication.principal.username == comment.author.username) or #authentication.principal.username == 'admin'}">
                                     <form th:action="@{/post/detail/{postId}/comment/delete/{commentId}(postId=${post.id}, commentId=${comment.id})}" method="post">

@@ -58,7 +58,17 @@
                   </div>
                   <!-- 좋아요 개수 표시 -->
                   <div class="music_likeCount">
-                    <span><i class="fa-regular fa-heart"></i></span>
+                    <a onclick="alert('음악 추천은 로그인 후 이용 가능합니다.'); return false;"
+                       th:if="${#authorization.expression('isAnonymous()')}"
+                       class="btn like-plus-btn">
+                      <i class="fa-regular fa-heart"></i>
+                    </a>
+                    <a onclick="return confirm('음악을 추천하시겠습니까?');"
+                       th:if="${#authorization.expression('isAuthenticated()')}"
+                       class="btn like-plus-btn"
+                       th:href="@{|/chart/music/${music.id}/like_top100|}">
+                      <i class="fa-regular fa-heart"></i>
+                    </a>
                     <span th:text="${#lists.size(music.musicLikers)}"></span>
                   </div>
                   <!-- 재생목록에 추가 -->

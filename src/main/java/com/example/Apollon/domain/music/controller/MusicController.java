@@ -13,6 +13,7 @@ import com.example.Apollon.domain.studio.service.StudioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -153,5 +154,35 @@ public class MusicController {
         this.musicService.likeMusic(music, member);
 
         return "redirect:/studio/%s".formatted(studio.getMember().getUsername());
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/music/{id}/like_top100")
+    public String likeOrUnlikeMusicOnTop100(Principal principal, @PathVariable("id") Long id) {
+        if(principal != null && principal.getName() != null) {
+            Music music = this.musicService.getMusic(id);
+            Member member = this.memberService.getMember(principal.getName());
+            this.musicService.likeMusic(music, member);
+
+            return "redirect:/chart/TOP100";
+        }
+        else {
+            return "redirect:/member/login";
+        }
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/music/{id}/like_genre")
+    public String likeOrUnlikeMusicOnGenre(Principal principal, @PathVariable("id") Long id) {
+        if(principal != null && principal.getName() != null) {
+            Music music = this.musicService.getMusic(id);
+            Member member = this.memberService.getMember(principal.getName());
+            this.musicService.likeMusic(music, member);
+
+            return "redirect:/chart/genreChart";
+        }
+        else {
+            return "redirect:/member/login";
+        }
     }
 }

@@ -120,8 +120,8 @@ button {
 }
 
 .header_search_box {
-    margin-left: 24px;
-    width: 400px;
+    margin-left: auto; margin-right: 5px;
+    width: 420px;
 }
 
 .header_search_input-group {
@@ -138,7 +138,7 @@ button {
     color: #999999;
     border-width: 0;
     background-color: #D9D9D9;
-    width: 380px; height: 30px;
+    width: 400px; height: 32px;
     border-radius: 6px;
 }
 
@@ -161,18 +161,18 @@ button {
 .header_profile_box {
     display: flex;
     align-items: center;
-    width: 100%;
+    width: 292px;
     height: 100%;
 }
 
 /* 로그인/회원가입, 로그아웃/마이페이지 */
 .header_userName {
-    width: 400px;
+    width: 120px;
     color: #fff;
 }
 
 .header_profile_box > .header_member {
-    width: 100%;
+    width: 172px;
 }
 
 .header_profile_box > .header_member > .text {
@@ -214,4 +214,3 @@ button {
 .header_profile_box > .header_member > .header_isAuthenticated > .header_mypage:hover {
     background-color: #151c21;
 }
-

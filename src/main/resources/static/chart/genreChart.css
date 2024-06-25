@@ -29,7 +29,7 @@ input: focus {
 .genreChart_container {
     cursor: default;
     height: calc(100vh - 150px);
-    overflow-y: auto;
+    /* overflow-y: auto; */
 }
 
 .genreChart_cont_sec {
@@ -46,11 +46,17 @@ input: focus {
 
 .chartList_nav_sec2 {
     display: flex;
-    margin-left: 430px;
+    margin-left: 385px;
     width: 650px;
     height: 100%;
     text-align: center;
     align-items: center;
+}
+
+.chartList_nav_sec2 > div:nth-child(1):hover {
+    height: 100%;
+    background-color: #f4f4f4;
+    line-height: 48px;
 }
 
 .chartList_nav_TOP1002 {
@@ -89,7 +95,6 @@ input: focus {
 
 .genreChart_body {
     display: flex;
-    flex-direction: column;
 }
 
 .genreChart_nav {
@@ -145,6 +150,8 @@ input: focus {
 .genreChart_list {
     height: 100%;
     width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .genreChart_list-num {
@@ -162,7 +169,7 @@ input: focus {
     height: 60px;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    border-top: 1px solid rgba(0, 0, 0, .2);
     box-sizing: border-box;
 }
 
@@ -242,7 +249,7 @@ input: focus {
 }
 
 .genres_nav > ul {
-    width: 200px;, height: 60px;
+    width: 200px;
     position : relative;
 }
 
@@ -254,7 +261,8 @@ input: focus {
 .g_list > .g_s {
     width: 200px;
     height: 60px;
-    font-size: 24px;
+    font-size: 22px;
+    font-weight: 700;
     text-align: center;
     color: #F4F4F4;
     background-color: #36454F;
@@ -268,7 +276,8 @@ input: focus {
 .g_list:hover > .g_s {
     background-color: #F4F4F4;
     color: #36454F;
-    /* border: none; */
+    border: none;
+    cursor: pointer;
 }
 
 .g_list:hover > .genreChart_nav {
@@ -285,3 +294,37 @@ input: focus {
   display: flex; flex-direction: column;
   display: none;
 }
+
+/* 이퀄라이저 사운드 서클웨이브 */
+/* !!!! */
+body {
+    overflow: hidden;
+}
+
+#snail {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    z-index: -1;
+}
+
+#snail path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: animatePath 10s ease-in-out infinite;
+}
+@keyframes animatePath {
+    0% {
+    stroke-dashoffset: 1000;
+    }
+    50% {
+    stroke-dashoffset: -1000;
+    }
+    100% {
+    stroke-dashoffset: 1000;
+    }
+}
+
+
