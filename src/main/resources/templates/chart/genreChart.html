@@ -30,7 +30,7 @@
                   <div class="genreChart_list">
                     <ul>
                       <!-- 타임리프를 사용하여 musicList라는 변수에 저장된 음악 데이터를 반복하여 출력 -->
-                      <li class="genreChart_list-num" th:each="music, iterStat : ${etcList}">
+                      <li class="genreChart_list-num" th:each="music, iterStat : ${balladList}">
                         <span class="genreChart_number" th:text="${iterStat.index + 1}"></span>
                         <div class="genreChart_musicTitle">
                           <div class="thumbImg">
@@ -61,7 +61,17 @@
                         </div>
                         <!-- 좋아요 개수 표시 -->
                         <div class="music_likeCount">
-                          <span><i class="fa-regular fa-heart"></i></span>
+                          <a onclick="alert('음악 추천은 로그인 후 이용 가능합니다.'); return false;"
+                             th:if="${#authorization.expression('isAnonymous()')}"
+                             class="btn like-plus-btn">
+                            <i class="fa-regular fa-heart"></i>
+                          </a>
+                          <a onclick="return confirm('음악을 추천하시겠습니까?');"
+                             th:if="${#authorization.expression('isAuthenticated()')}"
+                             class="btn like-plus-btn"
+                             th:href="@{|/chart/music/${music.id}/like_genre|}">
+                            <i class="fa-regular fa-heart"></i>
+                          </a>
                           <span th:text="${#lists.size(music.musicLikers)}"></span>
                         </div>
                         <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
@@ -135,7 +145,17 @@
                         </div>
                         <!-- 좋아요 개수 표시 -->
                         <div class="music_likeCount">
-                          <span><i class="fa-regular fa-heart"></i></span>
+                          <a onclick="alert('음악 추천은 로그인 후 이용 가능합니다.'); return false;"
+                             th:if="${#authorization.expression('isAnonymous()')}"
+                             class="btn like-plus-btn">
+                            <i class="fa-regular fa-heart"></i>
+                          </a>
+                          <a onclick="return confirm('음악을 추천하시겠습니까?');"
+                             th:if="${#authorization.expression('isAuthenticated()')}"
+                             class="btn like-plus-btn"
+                             th:href="@{|/chart/music/${music.id}/like_genre|}">
+                            <i class="fa-regular fa-heart"></i>
+                          </a>
                           <span th:text="${#lists.size(music.musicLikers)}"></span>
                         </div>
                         <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
@@ -209,7 +229,17 @@
                         </div>
                         <!-- 좋아요 개수 표시 -->
                         <div class="music_likeCount">
-                          <span><i class="fa-regular fa-heart"></i></span>
+                          <a onclick="alert('음악 추천은 로그인 후 이용 가능합니다.'); return false;"
+                             th:if="${#authorization.expression('isAnonymous()')}"
+                             class="btn like-plus-btn">
+                            <i class="fa-regular fa-heart"></i>
+                          </a>
+                          <a onclick="return confirm('음악을 추천하시겠습니까?');"
+                             th:if="${#authorization.expression('isAuthenticated()')}"
+                             class="btn like-plus-btn"
+                             th:href="@{|/chart/music/${music.id}/like_genre|}">
+                            <i class="fa-regular fa-heart"></i>
+                          </a>
                           <span th:text="${#lists.size(music.musicLikers)}"></span>
                         </div>
                         <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
@@ -283,7 +313,17 @@
                         </div>
                         <!-- 좋아요 개수 표시 -->
                         <div class="music_likeCount">
-                          <span><i class="fa-regular fa-heart"></i></span>
+                          <a onclick="alert('음악 추천은 로그인 후 이용 가능합니다.'); return false;"
+                             th:if="${#authorization.expression('isAnonymous()')}"
+                             class="btn like-plus-btn">
+                            <i class="fa-regular fa-heart"></i>
+                          </a>
+                          <a onclick="return confirm('음악을 추천하시겠습니까?');"
+                             th:if="${#authorization.expression('isAuthenticated()')}"
+                             class="btn like-plus-btn"
+                             th:href="@{|/chart/music/${music.id}/like_genre|}">
+                            <i class="fa-regular fa-heart"></i>
+                          </a>
                           <span th:text="${#lists.size(music.musicLikers)}"></span>
                         </div>
                         <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
@@ -357,7 +397,17 @@
                         </div>
                         <!-- 좋아요 개수 표시 -->
                         <div class="music_likeCount">
-                          <span><i class="fa-regular fa-heart"></i></span>
+                          <a onclick="alert('음악 추천은 로그인 후 이용 가능합니다.'); return false;"
+                             th:if="${#authorization.expression('isAnonymous()')}"
+                             class="btn like-plus-btn">
+                            <i class="fa-regular fa-heart"></i>
+                          </a>
+                          <a onclick="return confirm('음악을 추천하시겠습니까?');"
+                             th:if="${#authorization.expression('isAuthenticated()')}"
+                             class="btn like-plus-btn"
+                             th:href="@{|/chart/music/${music.id}/like_genre|}">
+                            <i class="fa-regular fa-heart"></i>
+                          </a>
                           <span th:text="${#lists.size(music.musicLikers)}"></span>
                         </div>
                         <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
@@ -431,7 +481,17 @@
                         </div>
                         <!-- 좋아요 개수 표시 -->
                         <div class="music_likeCount">
-                          <span><i class="fa-regular fa-heart"></i></span>
+                          <a onclick="alert('음악 추천은 로그인 후 이용 가능합니다.'); return false;"
+                             th:if="${#authorization.expression('isAnonymous()')}"
+                             class="btn like-plus-btn">
+                            <i class="fa-regular fa-heart"></i>
+                          </a>
+                          <a onclick="return confirm('음악을 추천하시겠습니까?');"
+                             th:if="${#authorization.expression('isAuthenticated()')}"
+                             class="btn like-plus-btn"
+                             th:href="@{|/chart/music/${music.id}/like_genre|}">
+                            <i class="fa-regular fa-heart"></i>
+                          </a>
                           <span th:text="${#lists.size(music.musicLikers)}"></span>
                         </div>
                         <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
@@ -505,7 +565,17 @@
                         </div>
                         <!-- 좋아요 개수 표시 -->
                         <div class="music_likeCount">
-                          <span><i class="fa-regular fa-heart"></i></span>
+                          <a onclick="alert('음악 추천은 로그인 후 이용 가능합니다.'); return false;"
+                             th:if="${#authorization.expression('isAnonymous()')}"
+                             class="btn like-plus-btn">
+                            <i class="fa-regular fa-heart"></i>
+                          </a>
+                          <a onclick="return confirm('음악을 추천하시겠습니까?');"
+                             th:if="${#authorization.expression('isAuthenticated()')}"
+                             class="btn like-plus-btn"
+                             th:href="@{|/chart/music/${music.id}/like_genre|}">
+                            <i class="fa-regular fa-heart"></i>
+                          </a>
                           <span th:text="${#lists.size(music.musicLikers)}"></span>
                         </div>
                         <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
@@ -579,7 +649,17 @@
                         </div>
                         <!-- 좋아요 개수 표시 -->
                         <div class="music_likeCount">
-                          <span><i class="fa-regular fa-heart"></i></span>
+                          <a onclick="alert('음악 추천은 로그인 후 이용 가능합니다.'); return false;"
+                             th:if="${#authorization.expression('isAnonymous()')}"
+                             class="btn like-plus-btn">
+                            <i class="fa-regular fa-heart"></i>
+                          </a>
+                          <a onclick="return confirm('음악을 추천하시겠습니까?');"
+                             th:if="${#authorization.expression('isAuthenticated()')}"
+                             class="btn like-plus-btn"
+                             th:href="@{|/chart/music/${music.id}/like_genre|}">
+                            <i class="fa-regular fa-heart"></i>
+                          </a>
                           <span th:text="${#lists.size(music.musicLikers)}"></span>
                         </div>
                         <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
@@ -630,9 +710,6 @@
                             <img style="width: 50px;" th:src="@{${music.thumbnailImg}}" alt="썸네일이미지">
                           </div>
                           <div class="classnull"></div>
-
-
-
                           <a th:if="${#authorization.expression('isAuthenticated()')}"
                              class="musicTi"
                              th:href="@{|/chart/music/detail/${music.id}|}">
@@ -656,7 +733,17 @@
                         </div>
                         <!-- 좋아요 개수 표시 -->
                         <div class="music_likeCount">
-                          <span><i class="fa-regular fa-heart"></i></span>
+                          <a onclick="alert('음악 추천은 로그인 후 이용 가능합니다.'); return false;"
+                             th:if="${#authorization.expression('isAnonymous()')}"
+                             class="btn like-plus-btn">
+                            <i class="fa-regular fa-heart"></i>
+                          </a>
+                          <a onclick="return confirm('음악을 추천하시겠습니까?');"
+                             th:if="${#authorization.expression('isAuthenticated()')}"
+                             class="btn like-plus-btn"
+                             th:href="@{|/chart/music/${music.id}/like_genre|}">
+                            <i class="fa-regular fa-heart"></i>
+                          </a>
                           <span th:text="${#lists.size(music.musicLikers)}"></span>
                         </div>
                         <div class="classnull" th:if="${#authorization.expression('isAnonymous()')}"></div>
@@ -686,6 +773,19 @@
               </li>
             </ul>
           </nav>
+          <svg id="snail" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 496.07 269.85"><defs><style>.cls-1{fill:none;stroke:url(#gradient);stroke-miterlimit:10;stroke-width:2;}</style>
+            <lineargradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="red"></stop>
+              <stop offset="20%" stop-color="yellow"></stop>
+              <stop offset="40%" stop-color="green"></stop>
+              <stop offset="60%" stop-color="cyan"></stop>
+              <stop offset="80%" stop-color="blue"></stop>
+              <stop offset="100%" stop-color="magenta"></stop>
+            </lineargradient></defs><path class="cls-1" d="M416.48,101.23s-2.22-62.5,8.45-87.83c0,0-6.22-11.56,5.33-12.89,0,0,11.56,2.66,0,12.89,0,0-12.89,58.33,1.78,87.83,0,0,8-1.17,12.89,3.72,0,0,29.78-70.22,38.67-77.78,0,0-4-16,8.88-12.44,0,0,9.34,8-4.44,13.33,0,0-36,62.22-28.44,93.34,0,0,18.22,36.88-31.12,74.66s-25.27,54.22-12.19,59.56-14.92,19.55-36.69,11.11-34.67-10.22-62.67-5.78-39.11,2.22-63.11-3.11-23.56,7.56-44.45,7.56-43.55-4.45-56.89-10.67c0,0-19.11-2.22-41.33,6.67,0,0-25.33,0-43.11-9.34,0,0-15.56-1.78-29.33,6.22,0,0-30.23-.88-37.78-25.77,0,0-8.89-11.11,54.22-7.11,0,0,80-14.67,117.78-39.56s92.44-11.11,100.44-10.67S327.6,173,340,163.62s26.67-22.22,37.33-23.56S392.54,100.31,416.48,101.23Z"/>
+            <path class="cls-1" d="M456.72,164.49s15.1,1.78,19.3,5.41,7.73,8.15,11.57,3.66-1.76-7.57-7.4-6.83-18.74-6.83-19.43-10.62"/><path class="cls-1" d="M430.26,187s-4-15-29-3.86S368.93,221.62,343.6,235s-40.89,27.39-60.78,28"/>
+          </svg>
+          <canvas id="canvas1"></canvas>
         </div>
       </div>
     </div>
@@ -736,4 +836,151 @@
       });
     });
   });
+
+    // !!!!
+  // 이퀄라이저 서클웨이브(달팽이 모양)
+  document.addEventListener('DOMContentLoaded', () => {
+  const canvas = document.getElementById('canvas1');
+  const ctx = canvas.getContext('2d');
+  const snail = document.getElementById('snail');
+
+  canvas.width = window.innerWidth * 0.6;
+  canvas.height = window.innerHeight * 0.6;
+
+  class Bar {
+    constructor(x, y, width, height, color, index) {
+      this.x = x;
+      this.y = y;
+      this.width = width;
+      this.height = height;
+      this.color = color;
+      this.index = index;
+    }
+    update(audioInput) {
+      const sound = audioInput * 1000;
+      if (sound > this.height) {
+        this.height = sound;
+      } else {
+        this.height -= this.height * 0.05; // 늘어나는 속도를 조절 (0.03 ~ 0.05 적당)
+      }
+    }
+    draw(context) {
+      context.strokeStyle = this.color;
+      context.lineWidth = this.width * 2;
+      context.save();
+
+      // 서클의 사이즈(?) 나선형 모양 조절
+      // this.index 에 곱해지는(*)로 숫자로 모양 조절
+      // 곱하는 숫자가 커질 수록 모양이 생김(나선형이 확실해짐)
+      context.rotate(this.index * 12);
+      context.beginPath();
+
+      // 선의 곡선(굴곡) 표현 조절 빼기(-) 부분의 숫자만 조절
+      context.bezierCurveTo(this.x/2, this.y/2, this.height * -0.5 +170, this.height - 50, this.x*0.5, this.y*0.5);
+      context.stroke();  // 주석 처리하면 노래 꺼도 민달팽이됨
+
+      if(this.index > 50) {
+        context.beginPath();
+        context.arc(this.x, this.y + 10 + this.height/2, this.height * 0.1, this.height * 0.05, 0, Math.PI * 2);
+        context.stroke();
+        context.beginPath();
+        context.moveTo(this.x, this.y + 10);
+        context.lineTo(this.x, this.y + 10 + this.height/2);
+        context.stroke();
+      }
+      context.restore();
+    }
+  }
+
+  class AudioAnalyser {
+    constructor(audioElement, fftSize) {
+      this.audioElement = audioElement;
+      this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      this.source = this.audioContext.createMediaElementSource(audioElement);
+      this.analyser = this.audioContext.createAnalyser();
+      this.analyser.fftSize = fftSize;
+      this.bufferLength = this.analyser.frequencyBinCount;
+      this.dataArray = new Uint8Array(this.bufferLength);
+      this.source.connect(this.analyser);
+      this.analyser.connect(this.audioContext.destination);
+      this.initialized = true;
+    }
+    getSamples() {
+      this.analyser.getByteTimeDomainData(this.dataArray);
+      let normSamples = [...this.dataArray].map(e => e/128-1);
+      return normSamples;
+    }
+    getVolume() {
+      this.analyser.getByteTimeDomainData(this.dataArray);
+      let normSamples = [...this.dataArray].map(e => e/128-1);
+      let sum = 0;
+      for(let i = 0; i < normSamples.length; i++) {
+        sum += normSamples[i] * normSamples[i];
+      }
+      let softVolume = Math.sqrt(sum/normSamples.length);
+      return softVolume;
+    }
+  }
+
+  let fftSize = 256;
+  // 지정된 숫자가 512 또는 256 이여야함
+  // 512로 적용하면 범위가 넓어지고 색이 다양해짐
+  // 256으로 적용하면 범위는 줄어들고 색이 깔끔해보임
+  // 다른 숫자면 재생안됨
+  // 해당 숫자는 색을 표현할 수 있는 개수를 뜻함
+
+  let bars = [];
+  function createBars() {
+    for(let i = 0; i < (fftSize/2); i++) {
+
+      // 숫자%가 아닌 i에 계산되는 숫자만 변경하여 서클의 색상 변경
+      // 'hsl(' + x + i * y + ',100%, 50%)' 라고 가정하면 x, y 부분에 숫자를 지정
+      // 전체적인 색상만 바꾸고 싶다면 x 부분에 숫자 지정
+      // fftSize 를 256으로 지정했는데 색이 다채롭고 싶다면 y 부분에 숫자를 높게 지정
+      let color = 'hsl(' + 1300 + i * 25 + ',100%, 50%)';
+
+      // 선들 간의 간격 조절은 new Bar(x, y, z, a, b, c); 중 y 번째로 조절
+      // 선의 길이 조절은 new Bar(x, y, z, a, b); 중 a 번째로 조절
+      bars.push(new Bar(10, i * 1.2, 1, 20, color, i));
+    }
+  }
+  createBars();
+
+  function animate(audioAnalyser) {
+    if(audioAnalyser.initialized) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const samples = audioAnalyser.getSamples();
+      const volume = audioAnalyser.getVolume();
+      ctx.save();
+      ctx.translate(canvas.width/2 - 70, canvas.height/2 + 50);
+      bars.forEach(function(bar, i) {
+        bar.update(samples[i]);
+        bar.draw(ctx);
+      });
+      ctx.restore();
+      snail.style.transform = 'translate(-50%, -50%) scale(' + (1 + volume * 0.4) + ')';
+    }
+    requestAnimationFrame(() => animate(audioAnalyser));
+  }
+
+  // 재생 버튼을 클릭하면 해당 오디오 요소에 대한 이퀄라이저 애니메이션을 시작합니다.
+  document.querySelectorAll('.music_p audio').forEach(audioElement => {
+    audioElement.addEventListener('play', () => {
+      const audioAnalyser = new AudioAnalyser(audioElement, fftSize);
+      animate(audioAnalyser);
+    });
+
+    audioElement.addEventListener('pause', () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // 캔버스 초기화
+    });
+  });
+
+  window.addEventListener('resize', function() {
+    canvas.width = window.innerWidth * 0.6;
+    canvas.height = window.innerHeight * 0.6;
+  });
+
+  // 페이지 로드 시 바로 그리기
+  draw();
+});
 </script>

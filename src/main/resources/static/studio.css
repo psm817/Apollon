@@ -48,19 +48,28 @@ body {
     padding: 10px;
 }
 
-/* 돌아가기 버튼 */
-.top-section > .myHome-btn {
-    display: flex;
-    align-items: center;
+.top-section > .welcome-box > a:hover {
+    background-color: #0056b3;
 }
 
-.top-section > .myHome-btn > a {
+/* 돌아가기 버튼 */
+.top-section > .welcome-box > .myHome-btn {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.top-section > .welcome-box > .myHome-btn > a {
     display: block;
     border-radius: 5px;
     background-color: #36454F;
     color: #fff;
     font-weight: 700;
     padding: 10px;
+}
+
+.top-section > .welcome-box > .myHome-btn > a:hover {
+    background-color: #0056b3;
 }
 
 /* 검색창 */
@@ -181,7 +190,7 @@ body {
 }
 
 .detail-box > .myMusic-box > .top-box > .title > span {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: bold;
     line-height: 50px;
 }
@@ -302,7 +311,7 @@ body {
 }
 
 .detail-box > .comment-box > .top-box > .title > span {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: bold;
     line-height: 50px;
 }

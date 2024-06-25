@@ -85,6 +85,9 @@
             </li>
           </ul>
         </div>
+        <div class="footer_visualizer">
+          <canvas id="audio-visualizer" width="1500" height="200"></canvas>
+        </div>
       </div>
     </div>
   </div>
@@ -376,5 +379,78 @@ if (currentPlaylistIndex < playlist.length - 1) {
             downIcon.style.display = 'none';
         }
     }
+document.addEventListener('DOMContentLoaded', function() {
+var audioPlayers = document.querySelectorAll('.music_play audio'); // 모든 오디오 요소 가져오기
+
+var drawVisuals = []; // 모든 오디오에 대한 drawVisual 변수 배열
+
+// Canvas 요소와 초기 시각화 설정 함수
+var canvas = document.getElementById('audio-visualizer');
+var canvasCtx = canvas.getContext('2d');
+var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+var analyser = audioCtx.createAnalyser();
+analyser.fftSize = 1024; // FFT 크기 설정 (주파수 해상도)
+var bufferLength = analyser.frequencyBinCount;
+var dataArray = new Uint8Array(bufferLength);
+var drawVisual; // requestAnimationFrame 식별자 변수
+
+// Canvas 초기 설정
+canvas.width = window.innerWidth;
+canvas.height = 200; // 적절한 높이로 설정하세요.
+
+function draw() {
+    drawVisual = requestAnimationFrame(draw);
+
+    analyser.getByteFrequencyData(dataArray);
+
+    canvasCtx.clearRect(0, 0, canvas.width, canvas.height); // 기존 캔버스 지우기
+
+    var barWidth = (canvas.width / bufferLength) * 1.5; // 막대 그래프 너비를 좁혀서 촘촘하게 표현
+    var barHeight;
+    var x = 0;
+
+    for (var i = 0; i < bufferLength; i++) {
+        barHeight = dataArray[i];
+
+        canvasCtx.fillStyle = 'rgba(255, 255, 255, 0.2)'; // 막대 그래프 색상과 투명도 설정
+        canvasCtx.fillRect(x, canvas.height - barHeight / 2, barWidth, barHeight / 2);
+
+        x += barWidth + 1;
+    }
+}
+
+// 오디오 소스와 분석기 연결
+analyser.connect(audioCtx.destination);
+
+audioPlayers.forEach(function(audioPlayer) {
+    var source = audioCtx.createMediaElementSource(audioPlayer); // 오디오 소스 생성
+
+    audioPlayer.addEventListener('play', function() {
+        if (!drawVisual) {
+            draw(); // 최초 재생 시 시각화 함수 호출
+        }
+        drawVisuals.push({ audio: audioPlayer, drawVisual: drawVisual }); // 배열에 추가
+    });
+
+    audioPlayer.addEventListener('pause', function() {
+        // 해당 오디오 요소에 대한 drawVisual 식별자 찾기
+        var index = drawVisuals.findIndex(function(item) {
+            return item.audio === audioPlayer;
+        });
+
+        if (index !== -1) {
+            drawVisuals.splice(index, 1); // 배열에서 제거
+        }
+
+        if (drawVisuals.length === 0) {
+            cancelAnimationFrame(drawVisual); // 모든 오디오가 정지되면 시각화 멈춤
+            drawVisual = null;
+        }
+    });
+
+    // 오디오 소스와 분석기 연결
+    source.connect(analyser);
+});
+});
   </script>
 </nav>

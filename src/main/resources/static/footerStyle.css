@@ -468,3 +468,13 @@ input[type="range"] {
     font-size: 50px;
     font-weight: 700;
 }
+.footer_visualizer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0); /* 적절한 배경색 */
+    box-sizing: border-box;
+    text-align: center; /* 가운데 정렬 추가 */
+    pointer-events: none; /* 막대그래프 영역을 클릭이나 터치 이벤트를 통과시킴 */
+}
