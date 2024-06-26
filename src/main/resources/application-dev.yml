@@ -15,4 +15,4 @@ spring:
     password:
   jpa:
     hibernate:
-      ddl-auto: create  # 테스트 데이터가 있다면 create일 때는 매번 테스트를 생성해야함 -> 나중에 update로 변경 필요
+      ddl-auto: update  # 테스트 데이터가 있다면 create일 때는 매번 테스트를 생성해야함 -> 나중에 update로 변경 필요
